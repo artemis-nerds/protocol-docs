@@ -1,0 +1,85 @@
+#sidebar {
+  position: fixed;
+}
+nav {
+  padding-left: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+nav .nav > li > a {
+  color: #999;
+  padding: 0 20px;
+  font-size: 13px;
+  font-weight: 400;
+  border-left: solid transparent 2px;
+}
+nav .nav .nav > li > a {
+  padding: 0 20px 0 30px;
+  font-size: 11px;
+}
+nav .nav > .active > a,
+nav .nav > li > a:hover,
+nav .nav > li > a:focus {
+  color: #090;
+  text-decoration: none;
+  background-color: #efe;
+  border-left: solid #090 2px;
+  font-weight: 700;
+}
+nav .nav .nav > .active > a,
+nav .nav .nav > li > a:hover,
+nav .nav .nav > li > a:focus {
+  font-weight: 500;
+}
+nav .nav ul.nav {
+  display: none;
+}
+nav .nav > .active > ul.nav {
+  display: block;
+}
+#packet-types > section > h3 {
+  display: none;
+}
+body {
+  color: #555;
+}
+h1 {
+  color: #000;
+}
+h2 {
+  color: #333;
+  border-bottom: solid #555 2px;
+}
+h3 {
+  color: #555;
+}
+.pkt-props {
+  margin: -0.5em 0 1em 2em;
+  font-variant: small-caps;
+}
+.pkt-props code {
+  font-variant: normal;
+}
+table {
+  margin-left: 1em;
+  margin-bottom: 2em;
+}
+table thead th {
+  color: #999;
+  border-bottom: solid #999 1px;
+  font-size: 9pt;
+  font-weight: normal;
+  font-style: italic;
+  vertical-align: bottom;
+}
+table td {
+  padding: 0.1em 0.3em;
+  vertical-align: top;
+}
+code {
+  color: #090;
+  background-color: #efe;
+}
+dd {
+  margin-left: 2.5em;
+}
