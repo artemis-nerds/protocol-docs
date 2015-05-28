@@ -1,2 +1,1 @@
-# protocol-docs
-Unofficial documentation for the Artemis network protocol, written by the Artemis community
+View the documentation at [https://artemis-nerds.github.io/protocol-docs/](https://artemis-nerds.github.io/protocol-docs/).
