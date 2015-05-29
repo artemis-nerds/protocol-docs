@@ -1372,6 +1372,56 @@
               </tr>
             </tbody>
           </table>
+          <p>
+            Below is a list of packets whose purpose is unknown:
+          </p>
+          <table class="table-striped">
+            <thead>
+              <tr>
+                <th>Origin</th>
+                <th>Type</th>
+                <th>Subtype(s)</th>
+                <th>Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>server</td>
+                <td><code>0x80803df9</code></td>
+                <td><code>0x00</code></td>
+                <td>
+                  No further information known
+                </td>
+              </tr>
+              <tr>
+                <td>server</td>
+                <td><code>0xf5821226</code></td>
+                <td></td>
+                <td>
+                  Emitted frequently, but no apparent purpose and contains no additional data.
+                  Heartbeat packet, perhaps?
+                </td>
+              </tr>
+              <tr>
+                <td>server</td>
+                <td><code>0xf754c8fe</code></td>
+                <td><code>0x07</code></td>
+                <td>
+                  Contains three floats which seem to correspond to map coordinates of ships with
+                  special abilities. Could relate to cloak/decloak graphical effects.
+                </td>
+              </tr>
+              <tr>
+                <td>server</td>
+                <td><code>0xf754c8fe</code></td>
+                <td><code>0x08</code></td>
+                <td>
+                  Contains a single float value, typically values of 0.0, 50.0 or 100.0. Seems to
+                  relate to <a href="#soundeffectpacket">SoundEffectPacket</a>.
+                </td>
+              </tr>
+            </tbody>
+          </table>
           <section id="pkt-a">
             <h3>A</h3>
             <section id="allshipsettingspacket">
