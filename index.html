@@ -602,8 +602,8 @@
               <tbody>
                 <tr>
                   <td><code>0x00</code></td>
-                  <td>seige</td>
-                  <td>seige</td>
+                  <td>siege</td>
+                  <td>siege</td>
                 </tr>
                 <tr>
                   <td><code>0x01</code></td>
@@ -671,73 +671,102 @@
           <section id="enum-object-type">
             <h3>Object Type</h3>
             <table>
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>&lt; v2.1</th>
+                  <th>&ge; v2.1</th>
+                </tr>
+              </thead>
               <tbody>
                 <tr>
                   <td><code>0x00</code></td>
+                  <td><em>unused</em></td>
                   <td><em>unused</em></td>
                 </tr>
                 <tr>
                   <td><code>0x01</code></td>
                   <td>player ship</td>
+                  <td>player ship</td>
                 </tr>
                 <tr>
                   <td><code>0x02</code></td>
+                  <td>weapons console</td>
                   <td>weapons console</td>
                 </tr>
                 <tr>
                   <td><code>0x03</code></td>
                   <td>engineering console</td>
+                  <td>engineering console</td>
                 </tr>
                 <tr>
                   <td><code>0x04</code></td>
                   <td>NPC ship (enemy or civilian)</td>
+                  <td>player ship upgrades</td>
                 </tr>
                 <tr>
                   <td><code>0x05</code></td>
                   <td>base</td>
+                  <td>NPC ship (enemy or civilian)</td>
                 </tr>
                 <tr>
                   <td><code>0x06</code></td>
                   <td>mine</td>
+                  <td>base</td>
                 </tr>
                 <tr>
                   <td><code>0x07</code></td>
                   <td>anomaly</td>
+                  <td>mine</td>
                 </tr>
                 <tr>
                   <td><code>0x08</code></td>
                   <td><em>unused</em></td>
+                  <td>anomaly</td>
                 </tr>
                 <tr>
                   <td><code>0x09</code></td>
                   <td>nebula</td>
+                  <td><em>unused</em></td>
                 </tr>
                 <tr>
                   <td><code>0x0a</code></td>
                   <td>torpedo</td>
+                  <td>nebula</td>
                 </tr>
                 <tr>
                   <td><code>0x0b</code></td>
                   <td>black hole</td>
+                  <td>torpedo</td>
                 </tr>
                 <tr>
                   <td><code>0x0c</code></td>
                   <td>asteroid</td>
+                  <td>black hole</td>
                 </tr>
                 <tr>
                   <td><code>0x0d</code></td>
                   <td>generic mesh</td>
+                  <td>asteroid</td>
                 </tr>
                 <tr>
                   <td><code>0x0e</code></td>
                   <td>monster</td>
+                  <td>generic mesh</td>
                 </tr>
                 <tr>
                   <td><code>0x0f</code></td>
                   <td>whale</td>
+                  <td>monster</td>
                 </tr>
                 <tr>
                   <td><code>0x10</code></td>
+                  <td>drone</td>
+                  <td>whale</td>
+                </tr>
+                <tr>
+                  <td><code>0x11</code></td>
+                  <td><em>unused</em></td>
                   <td>drone</td>
                 </tr>
               </tbody>
@@ -911,6 +940,38 @@
               The remaining bytes in the packet after the preamble constitute the payload. Its
               format will vary depending on the packet type. Refer to the next section to see what
               packet types exist and the formats of their payloads.
+            </p>
+          </section>
+          <section id="packet-structure-chained-payload">
+            <h3>Chained payloads</h3>
+            <p>
+              Packets with a subtype (specifically <code>0x80803df9</code>) can chain the data
+              from several packets in the same payload. This is done by using the same header and
+              concatenating the payloads, which include the packet subtype.
+            </p>
+            <p>
+              An example would be the game server sending a few dozen asteroids at once in the same
+              packet. Instead of a dozen separate packets, the server sends something like the following:
+            </p>
+            <table>
+                <tbody>
+                <tr><td><code>0xdeadbeef</code></td></tr>
+                <tr><td>(packet length)</td></tr>
+                <tr><td><code>0x80803df9</code> (game object update)</td></tr>
+                <tr><td><code>0x0d</code> (asteroid)</td></tr>
+                <tr><td>(asteroid payload: id, coordinates)</td></tr>
+                <tr><td><code>0x0d</code> (asteroid)</td></tr>
+                <tr><td>(asteroid payload: id, coordinates)</td></tr>
+                <tr><td><code>0x0d</code> (asteroid)</td></tr>
+                <tr><td>(asteroid payload: id, coordinates)</td></tr>
+                </tbody>
+            </table>
+            </p>
+            <p>
+              Optionally, the packet might have one to three bytes (all zeroes) for padding the payload to 4-byte words.
+            </p>
+            <p>
+              It is possible to chain packets of the same type but different subtype. Only packets of type <code>0x80803df9</code> make use of chained payloads (as far as it has been observed).
             </p>
           </section>
         </section>
