@@ -83,3 +83,6 @@ code {
 dd {
   margin-left: 2.5em;
 }
+.removed {
+  text-decoration: line-through;
+}
