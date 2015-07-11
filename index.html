@@ -520,6 +520,9 @@
           </section>
           <section id="enum-creature-type">
             <h3>Creature Type</h3>
+            <p>
+              New as of v2.1.5.
+            </p>
             <table>
               <tbody>
                 <tr>
@@ -713,8 +716,8 @@
               <thead>
                 <tr>
                   <th></th>
-                  <th>&lt; v2.1</th>
-                  <th>&ge; v2.1</th>
+                  <th>&lt; v2.1.5</th>
+                  <th>&ge; v2.1.5</th>
                 </tr>
               </thead>
               <tbody>
@@ -809,22 +812,38 @@
           <section id="enum-ordnance-type">
             <h3>Ordnance Type</h3>
             <table>
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>&lt; v2.1.5</th>
+                  <th>&ge; v2.1.5</th>
+                </tr>
+              </thead>
               <tbody>
                 <tr>
                   <td><code>0x00</code></td>
+                  <td>homing missile</td>
                   <td>homing missile</td>
                 </tr>
                 <tr>
                   <td><code>0x01</code></td>
                   <td>nuke</td>
+                  <td>nuke</td>
                 </tr>
                 </tr>
                   <td><code>0x02</code></td>
+                  <td>mine</td>
                   <td>mine</td>
                 </tr>
                 <tr>
                   <td><code>0x03</code></td>
                   <td>EMP</td>
+                  <td>EMP</td>
+                </tr>
+                <tr>
+                  <td><code>0x04</code></td>
+                  <td><em>unused</em></td>
+                  <td>plasma shock</td>
                 </tr>
               </tbody>
             </table>
@@ -923,6 +942,9 @@
           </section>
           <section id="enum-upgrade">
             <h3>Upgrade</h3>
+            <p>
+              New as of v.2.1.5.
+            </p>
             <table>
               <tbody>
                 <tr>
@@ -3454,6 +3476,10 @@
 
           <section id="object-anomaly">
             <h3>Anomaly</h3>
+            <p>
+              New as of v.2.1.5. Previously, anomalies were handled by the
+              <a href="#object-other">&ldquo;other&rdquo;</a> property structure.
+            </p>
             <dl>
               <dt>Bit field (1 byte)</dt>
               <dt>X coordinate (byte 1.1, float)</dt>
@@ -3538,7 +3564,10 @@
           <section id="object-creature">
             <h3>Creature</h3>
             <p>
-              Note that wrecks are also considered creatures, for some reason.
+              Note that wrecks are also considered creatures, for some reason. This structure is new
+              as of v2.1.5. Previously, the only type of creature was the classic space monster,
+              which was handled by the <a href="#object-other">&ldquo;other&rdquo;</a> property
+              structure, and <a href="#object-whale">space whales</a> had their own structure.
             </p>
             <dl>
               <dt>Bit field (2 bytes)</dt>
@@ -4102,6 +4131,9 @@
 
           <section id="object-player-ship-upgrades">
             <h3>Player Ship Upgrades</h3>
+            <p>
+              New as of v2.1.5.
+            </p>
             <dl>
               <dt>Bit field (11 bytes)</dt>
               <dd>
@@ -4160,18 +4192,23 @@
 
           <section id="object-weapons-console">
             <h3>Weapons Console</h3>
+            <p>
+              Note: The plasma shock torpedo type was added in v.2.1.5. It was inserted at bit 1.5,
+              and all subsequent bits were shifted by one bit. Before this addition, the bit field
+              was only three bytes long instead of four.
+            </p>
             <dl>
-              <dt>Bit field (3 bytes)</dt>
-              <dt>Ordnance counts (bits 1.1-1.4, array)</dt>
+              <dt>Bit field (4 bytes)</dt>
+              <dt>Ordnance counts (bits 1.1-1.5, byte array)</dt>
               <dd>
                 <p>
-                  This array contains up to four byte elements. Each element gives how many of a
+                  This array contains up to five byte elements. Each element gives how many of a
                   particular ordinance are stored on the ship, in the following order: homing
-                  missiles, nukes, mines, EMPs.
+                  missiles, nukes, mines, EMPs, plasma shocks.
                 </p>
               </dd>
-              <dt>Unknown (bit 1.5, byte)</dt>
-              <dt>Tube (un)load times (bits 1.6-2.3, array)</dt>
+              <dt>Unknown (bit 1.6, byte)</dt>
+              <dt>Tube (un)load times (bits 1.7-2.4, float array)</dt>
               <dd>
                 <p>
                   This array contains up to six float elements. Each element gives the (un)load
@@ -4179,19 +4216,65 @@
                   present) if the tube's status is not loading or unloading.
                 </p>
               </dd>
-              <dt><a href="#enum-tube-status">Tube status</a> (bits 2.4-3.1, array)</dt>
+              <dt><a href="#enum-tube-status">Tube status</a> (bits 2.5-3.2, byte array)</dt>
               <dd>
                 <p>
                   This array contains up to six byte elements. Each element indicates the
                   occupation status of each tube.
                 </p>
               </dd>
-              <dt><a href="#enum-ordnance-type">Ordnance type</a> (bits 3.2-3.7, array)
+              <dt><a href="#enum-ordnance-type">Ordnance type</a> (bits 3.3-3.8, byte array)
               <dd>
                 <p>
                   This array contains up to six byte elements. Each element indicates the type of
                   ordnance in each tube. If the tube's status is unloaded, the tube is empty, and
                   this field should be ignored even when present.
+                </p>
+              </dd>
+              <dt>Unused (bits 4.1-4.8)</dt>
+            </dl>
+          </section>
+
+          <section id="object-whale">
+            <h3><del>Whale</del></h3>
+            <p>
+              This type became obsolete starting v2.1.5, when whales were folded into the new
+              creature object type.
+            </p>
+            <dl>
+              <dt>Bit field (2 bytes)</dt>
+              <dt>Name (bit 1.1, string)</dt>
+              <dd>
+                <p>
+                  Always &ldquo;WHALE&rdquo; in non-custom missions.
+                </p>
+              </dd>
+              <dt>Unknown (bit 1.2, int)</dt>
+              <dt>Unknown (bit 1.3, int)</dt>
+              <dt>X coordinate (bit 1.4, float)</dt>
+              <dt>Y coordinate (bit 1.5, float)</dt>
+              <dt>Z coordinate (bit 1.6, float)</dt>
+              <dt>Pitch (bit 1.7, float)</dt>
+              <dt>Roll (bit 1.8, float)</dt>
+              <dt>Heading (bit 2.1, float)</dt>
+              <dt>Unknown (bit 2.2, float)</dt>
+              <dt>Unknown (bit 2.3, float)</dt>
+              <dd>
+                <p>
+                  Values range from 0.0 to 1.0.
+                </p>
+              </dd>
+              <dt>Unknown (bit 2.4, float)</dt>
+              <dd>
+                <p>
+                  Values range up to 1.0. Lowest value seen so far is approximately 0.855, minimum
+                  <em>might</em> be 0.0.
+                </p>
+              </dd>
+              <dt>Unknown (bit 2.5, float)</dt>
+              <dd>
+                <p>
+                  Observed ranges have been from about 0.5 to 1.36.
                 </p>
               </dd>
             </dl>
