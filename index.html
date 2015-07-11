@@ -518,6 +518,45 @@
               </tbody>
             </table>
           </section>
+          <section id="enum-creature-type">
+            <h3>Creature Type</h3>
+            <table>
+              <tbody>
+                <tr>
+                  <td><code>0x00</code></td>
+                  <td>classic monster</td>
+                </tr>
+                <tr>
+                  <td><code>0x01</code></td>
+                  <td>whale</td>
+                </tr>
+                <tr>
+                  <td><code>0x02</code></td>
+                  <td>shark</td>
+                </tr>
+                <tr>
+                  <td><code>0x03</code></td>
+                  <td>dragon</td>
+                </tr>
+                <tr>
+                  <td><code>0x04</code></td>
+                  <td>piranha</td>
+                </tr>
+                <tr>
+                  <td><code>0x05</code></td>
+                  <td>charybdis</td>
+                </tr>
+                <tr>
+                  <td><code>0x06</code></td>
+                  <td>insect</td>
+                </tr>
+                <tr>
+                  <td><code>0x07</code></td>
+                  <td>wreck</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
           <section id="enum-drive-type">
             <h3>Drive Type</h3>
             <table>
@@ -751,22 +790,17 @@
                 </tr>
                 <tr>
                   <td><code>0x0e</code></td>
-                  <td>monster</td>
+                  <td>creature</td>
                   <td>generic mesh</td>
                 </tr>
                 <tr>
                   <td><code>0x0f</code></td>
                   <td>whale</td>
-                  <td>monster</td>
+                  <td>creature</td>
                 </tr>
                 <tr>
                   <td><code>0x10</code></td>
                   <td>drone</td>
-                  <td>whale</td>
-                </tr>
-                <tr>
-                  <td><code>0x11</code></td>
-                  <td><em>unused</em></td>
                   <td>drone</td>
                 </tr>
               </tbody>
@@ -887,6 +921,49 @@
               </tbody>
             </table>
           </section>
+          <section id="enum-upgrade">
+            <h3>Upgrade</h3>
+            <table>
+              <tbody>
+                <tr>
+                  <td><code>0x00</code></td>
+                  <td>energy boost</td>
+                </tr>
+                <tr>
+                  <td><code>0x01</code></td>
+                  <td>vigoranium nodule</td>
+                </tr>
+                <tr>
+                  <td><code>0x02</code></td>
+                  <td>cetrocite crystal</td>
+                </tr>
+                <tr>
+                  <td><code>0x03</code></td>
+                  <td>lateral array</td>
+                </tr>
+                <tr>
+                  <td><code>0x04</code></td>
+                  <td>tauron focuser</td>
+                </tr>
+                <tr>
+                  <td><code>0x05</code></td>
+                  <td>infusion p-coils</td>
+                </tr>
+                <tr>
+                  <td><code>0x06</code></td>
+                  <td>carapaction coils</td>
+                </tr>
+                <tr>
+                  <td><code>0x07</code></td>
+                  <td>secret code case</td>
+                </tr>
+                <tr>
+                  <td><code>0x08</code>-<code>0x28</code></td>
+                  <td>unknown at this time</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
         </section>
 
         <section id="packet-structure">
@@ -942,38 +1019,6 @@
               packet types exist and the formats of their payloads.
             </p>
           </section>
-          <section id="packet-structure-chained-payload">
-            <h3>Chained payloads</h3>
-            <p>
-              Packets with a subtype (specifically <code>0x80803df9</code>) can chain the data
-              from several packets in the same payload. This is done by using the same header and
-              concatenating the payloads, which include the packet subtype.
-            </p>
-            <p>
-              An example would be the game server sending a few dozen asteroids at once in the same
-              packet. Instead of a dozen separate packets, the server sends something like the following:
-            </p>
-            <table>
-                <tbody>
-                <tr><td><code>0xdeadbeef</code></td></tr>
-                <tr><td>(packet length)</td></tr>
-                <tr><td><code>0x80803df9</code> (game object update)</td></tr>
-                <tr><td><code>0x0d</code> (asteroid)</td></tr>
-                <tr><td>(asteroid payload: id, coordinates)</td></tr>
-                <tr><td><code>0x0d</code> (asteroid)</td></tr>
-                <tr><td>(asteroid payload: id, coordinates)</td></tr>
-                <tr><td><code>0x0d</code> (asteroid)</td></tr>
-                <tr><td>(asteroid payload: id, coordinates)</td></tr>
-                </tbody>
-            </table>
-            </p>
-            <p>
-              Optionally, the packet might have one to three bytes (all zeroes) for padding the payload to 4-byte words.
-            </p>
-            <p>
-              It is possible to chain packets of the same type but different subtype. Only packets of type <code>0x80803df9</code> make use of chained payloads (as far as it has been observed).
-            </p>
-          </section>
         </section>
 
         <section id="packet-types">
@@ -1004,12 +1049,6 @@
                 <td>client</td>
                 <td><code>0x6aadc57f</code></td>
                 <td></td>
-              </tr>
-              <tr>
-                <td><a href="#baseupdatepacket">BaseUpdatePacket</a></td>
-                <td>server</td>
-                <td><code>0x80803df9</code></td>
-                <td><code>0x06</code></td>
               </tr>
               <tr>
                 <td><a href="#beamfiredpacket">BeamFiredPacket</a></td>
@@ -1066,12 +1105,6 @@
                 <td></td>
               </tr>
               <tr>
-                <td><a href="#droneupdatepacket">DroneUpdatePacket</a></td>
-                <td>server</td>
-                <td><code>0x80803df9</code></td>
-                <td><code>0x10</code></td>
-              </tr>
-              <tr>
                 <td><a href="#dmxmessagepacket">DmxMessagePacket</a></td>
                 <td>server</td>
                 <td><code>0xf754c8fe</code></td>
@@ -1088,12 +1121,6 @@
                 <td>server</td>
                 <td><code>0x077e9f3c</code></td>
                 <td></td>
-              </tr>
-              <tr>
-                <td><a href="#engplayerupdatepacket">EngPlayerUpdatePacket</a></td>
-                <td>server</td>
-                <td><code>0x80803df9</code></td>
-                <td><code>0x10</code></td>
               </tr>
               <tr>
                 <td><a href="#engsenddamconpacket">EngSendDamconPacket</a></td>
@@ -1174,18 +1201,6 @@
                 <td><code>0x00</code></td>
               </tr>
               <tr>
-                <td><a href="#genericmeshpacket">GenericMeshPacket</a></td>
-                <td>server</td>
-                <td><code>0x80803df9</code></td>
-                <td><code>0x0d</code></td>
-              </tr>
-              <tr>
-                <td><a href="#genericupdatepacket">GenericUpdatePacket</a></td>
-                <td>server</td>
-                <td><code>0x80803df9</code></td>
-                <td><code>0x06</code>-<code>07</code>, <code>0x0a</code>-<code>0c</code>, <code>0x0e</code></td>
-              </tr>
-              <tr>
                 <td><a href="#helmjumppacket">HelmJumpPacket</a></td>
                 <td>client</td>
                 <td><code>0x0351a5ac</code></td>
@@ -1264,22 +1279,9 @@
                 <td><code>0x02</code></td>
               </tr>
               <tr>
-                <td><a href="#mainplayerupdatepacket">MainPlayerUpdatePacket</a></td>
+                <td><a href="#objectupdatepacket">ObjectUpdatePacket</a></td>
                 <td>server</td>
                 <td><code>0x80803df9</code></td>
-                <td><code>0x01</code></td>
-              </tr>
-              <tr>
-                <td><a href="#nebulaupdatepacket">NebulaUpdatePacket</a></td>
-                <td>server</td>
-                <td><code>0x80803df9</code></td>
-                <td><code>0x09</code></td>
-              </tr>
-              <tr>
-                <td><a href="#npcupdatepacket">NpcUpdatePacket</a></td>
-                <td>server</td>
-                <td><code>0x80803df9</code></td>
-                <td><code>0x05</code></td>
               </tr>
               <tr>
                 <td><a href="#pausepacket">PausePacket</a></td>
@@ -1414,22 +1416,10 @@
                 <td></td>
               </tr>
               <tr>
-                <td><a href="#weapplayerupdatepacket">WeapPlayerUpdatePacket</a></td>
-                <td>server</td>
-                <td><code>0x80803df9</code></td>
-                <td><code>0x02</code></td>
-              </tr>
-              <tr>
                 <td><a href="#welcomepacket">WelcomePacket</a></td>
                 <td>server</td>
                 <td><code>0x6d04b3da</code></td>
                 <td></td>
-              </tr>
-              <tr>
-                <td><a href="#whaleupdatepacket">WhaleUpdatePacket</a></td>
-                <td>server</td>
-                <td><code>0x80803df9</code></td>
-                <td><code>0x0f</code></td>
               </tr>
             </tbody>
           </table>
@@ -1446,14 +1436,6 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>server</td>
-                <td><code>0x80803df9</code></td>
-                <td><code>0x00</code></td>
-                <td>
-                  No further information known
-                </td>
-              </tr>
               <tr>
                 <td>server</td>
                 <td><code>0xf5821226</code></td>
@@ -1541,104 +1523,6 @@
           </section>
           <section id="pkt-b">
             <h3>B</h3>
-            <section id="baseupdatepacket">
-              <h3>BaseUpdatePacket</h3>
-              <div class="pkt-props">
-                Type: <code>0x80803df9</code>:<code>0x06</code> [from client]<br/>
-                (was subtype <code>0x05</code> prior to v2.1.5)
-              </div>
-              <p>
-                Provides an update on the status of bases.
-              </p>
-              <h4>Payload</h4>
-              <p>
-                The payload consists of an array of base entries. Parsing continues in a loop until
-                the end of the packet is reached, or the object type byte is <code>0x00</code>. The
-                fields for each base entry are in the following order:
-              </p>
-              <dl>
-                <dt><a href="#enum-object-type">Object type</a> (int, enumeration)</dt>
-                <dd>
-                  <p>
-                    Always indicates a base. If you get <code>0x00</code> for this field, there are no
-                    more bases in the array.
-                  </p>
-                </dd>
-                <dt>Object ID (int)</dt>
-                <dd>
-                  <p>
-                    A unique identifier assigned to the base.
-                  </p>
-                </dd>
-                <dt>Bit field (2 bytes)</dt>
-                <dd>
-                  <p>
-                    This bit field indicates what field values present for this base. This allows
-                    packets to be shorter by only including the values to be updated rather than all
-                    of them every time. If a bit is set to 1, that data value is included. (Each
-                    subsequent field indicates the bit in this bit field to which it corresponds.)
-                  </p>
-                </dd>
-                <dt>Name (bit 1.1, string)</dt>
-                <dd>
-                  <p>
-                    The name assigned to this base. In standard, non-custom scenarios, base names will
-                    be unique, but there is no guarantee that the same will be true in custom
-                    scenarios.
-                  </p>
-                </dd>
-                <dt>Shields (bit 1.2, float)</dt>
-                <dd>
-                  <p>
-                    The current strength of the base's shields.
-                  </p>
-                </dd>
-                <dt>Aft shields (unused) (bit 1.3, float)</dt>
-                <dd>
-                  <p>
-                    Bases only have one shield, but all shielded objects in Artemis are encoded with
-                    fore and aft shields. This value is therefore meaningless and should be ignored.
-                  </p>
-                </dd>
-                <dt>Index (bit 1.4, int)</dt>
-                <dd>
-                  <p>
-                    The index of this base. Each base will have a unique index from 0 to (<em>number
-                    of bases</em>-1). In a standard solo game, DS1 is 0, DS2 is 1, etc.
-                  </p>
-                </dd>
-                <dt>Vessel type (bit 1.5, int)</dt>
-                <dd>
-                  <p>
-                    The vessel type ID, as found in <code>vesselData.xml</code>.
-                  </p>
-                </dd>
-                <dt>X coordinate (bit 1.6, float)</dt>
-                <dd>
-                  <p>
-                    The base's location along the X-axis.
-                  </p>
-                </dd>
-                <dt>Y coordinate (bit 1.7, float)</dt>
-                <dd>
-                  <p>
-                    The base's location along the Y-axis.
-                  </p>
-                </dd>
-                <dt>Z coordinate (bit 1.8, float)</dt>
-                <dd>
-                  <p>
-                    The base's location along the Z-axis.
-                  </p>
-                </dd>
-              </dl>
-              <dt>Unknown (bit 2.1, 4 bytes)</dt>
-              <dt>Unknown (bit 2.2, 4 bytes)</dt>
-              <dt>Unknown (bit 2.3, 4 bytes)</dt>
-              <dt>Unknown (bit 2.4, 4 bytes)</dt>
-              <dt>Unknown (bit 2.5, byte)</dt>
-              <dt>Unknown (bit 2.6, byte)</dt>
-            </section>
             <section id="beamfiredpacket">
               <h3>BeamFiredPacket</h3>
               <div class="pkt-props">Type: <code>0xb83fd2c4</code> [from server]</div>
@@ -1974,65 +1858,6 @@
                 </dd>
               </dl>
             </section>
-            <section id="droneupdatepacket">
-              <h3>DroneUpdatePacket</h3>
-              <div class="pkt-props">Type: <code>0x80803df9</code>:<code>0x10</code> [from server]</div>
-              <p>
-                Provides status updates for Torgoth drones.
-              </p>
-              <h4>Payload</h4>
-              <p>
-                The payload consists of an array of drones, with each drone having the fields listed
-                below. The array ends when you encounter <code>0x00</code> for the
-                <a href="#enum-object-type">object type</a> field, or the end of the packet is
-                reached.
-              </p>
-              <dl>
-                <dt><a href="#enum-object-type">Object type</a> (int, enumeration)</dt>
-                <dd>
-                  <p>
-                    Always <code>0x10</code>.
-                  </p>
-                </dd>
-                <dt>Object ID (int)</dt>
-                <dd>
-                  <p>
-                    A unique identifier assigned to this drone.
-                  </p>
-                </dd>
-                <dt>Bit field (2 bytes)</dt>
-                <dd>
-                  <p>
-                    This bit field indicates what field values are present for this drone. This
-                    allows packets to be shorter by only including the values to be updated rather
-                    than all of them every time. If a bit is set to 1, that data value is included.
-                    (Each subsequent field indicates the bit in this bit field to which it
-                    corresponds.)
-                  </p>
-                </dd>
-                <dt>Unknown (bit 1.1, int)</dt>
-                <dt>X coordinate (bit 1.2, float)</dt>
-                <dt>Unknown (bit 1.3 float)</dt>
-                <dd>
-                  <p>
-                    Values observed range from approximately -0.01 to 53.7. Might be related to
-                    pitch/yaw.
-                  </p>
-                </dd>
-                <dt>Z coordinate (bit 1.4, float)</dt>
-                <dt>Unknown (bit 1.5 float)</dt>
-                <dd>
-                  <p>
-                    Perhaps related to pitch/yaw.
-                  </p>
-                </dd>
-                <dt>Y coordinate (bit 1.6, float)</dt>
-                <dt>Heading (bit 1.7, float)</dt>
-                <dt>Unknown (bit 1.8, int)</dt>
-                <dt>Unknown (bit 2.1, float?, v2.1.5+)</dt>
-                <dt>Unused? (bits 2.2-2.8)</dt>
-              </dl>
-            </section>
             <section id="dmxmessagepacket">
               <h3>DmxMessagePacket</h3>
               <div class="pkt-props">Type: <code>0xf754c8fe</code>:<code>0x10</code> [from server]</div>
@@ -2185,62 +2010,6 @@
                         </p>
                       </dd>
                   </dl>
-                </dd>
-              </dl>
-            </section>
-            <section id="engplayerupdatepacket">
-              <h3>EngPlayerUpdatePacket</h3>
-              <div class="pkt-props">Type: <code>0x80803df9</code>:<code>0x03</code> [from server]</div>
-              <p>
-                Engineering-related player status updates. Only the engineering console receives this
-                packet.
-              </p>
-              <h4>Payload</h4>
-              <dl>
-                <dt><a href="#enum-object-type">Object type</a> (byte)</dt>
-                <dd>
-                  <p>
-                    Always <code>0x03</code>.
-                  </p>
-                </dd>
-                <dt>Object ID (int)</dt>
-                <dd>
-                  <p>
-                    The ID of the ship to which this update pertains.
-                  </p>
-                </dd>
-                <dt>Bit fields (3 bytes)</dt>
-                <dd>
-                  <p>
-                    The next three bytes are bit fields showing which values are included in this
-                    packet. Each bit field is one byte and represents a category of values:
-                  </p>
-                  <ol>
-                    <li>Heat levels</li>
-                    <li>Energy allocations</li>
-                    <li>Coolan allocations</li>
-                  </ol>
-                  <p>
-                    The bits in each bit field represent the ship systems, in the order specified in
-                    the <a href="#enum-ship-system">ship system enumeration</a>. So for example, if
-                    the first bit field is <code>0x01</code>, it means that this packet will contain
-                    a heat level value for beams only.
-                  </p>
-                </dd>
-                <dt>Unknown (byte)</dt>
-                <dd>
-                  <p>
-                    This value always seems to be <code>0x00</code>. This might be a reserved bit
-                    field for future engineering settings.
-                  </p>
-                </dd>
-                <dt>Values (array)</dt>
-                <dd>
-                  <p>
-                    The rest of the packet contains the values that were declared as being included in
-                    the packet by the three bit fields mentioned above, in the order that their
-                    corresponding bits are encountered in the bit fields.
-                  </p>
                 </dd>
               </dl>
             </section>
@@ -2646,185 +2415,6 @@
                 </dd>
               </dl>
             </section>
-            <section id="genericmeshpacket">
-              <h3>GenericMeshPacket</h3>
-              <div class="pkt-props">Type: <code>0x80803df9</code>:<code>0x0d</code> [from server]</div>
-              <p>
-                Updates the status of arbitrary 3D objects to display in the sector. Players and
-                enemies don't interact with these objects; they are just decoration.
-              </p>
-              <h4>Payload</h4>
-              <p>
-                The payload consists of an array of object entries. Parsing continues in a loop
-                until the end of the packet is reached, or the object type byte is
-                <code>0x00</code>. The fields for each entry are as follows:
-              </p>
-              <dl>
-                <dt><a href="#enum-object-type">Object type</a> (int, enumeration)</dt>
-                <dd>
-                  <p>
-                    Always indicates a generic mesh. If you get <code>0x00</code> for this field,
-                    there are no more objects in the array.
-                  </p>
-                </dd>
-                <dt>Object ID (int)</dt>
-                <dd>
-                  <p>
-                    A unique identifier assigned to this object.
-                  </p>
-                </dd>
-                <dt>Bit field (4 bytes)</dt>
-                <dd>
-                  <p>
-                    This bit field indicates what field values are provided for this mesh. This
-                    allows packets to be shorter by only including the values to be updated rather
-                    than all of them every time. If a bit is set to 1, that data value is included.
-                    (Each subsequent field indicates the bit in this bit field to which it
-                    corresponds.)
-                  </p>
-                </dd>
-                <dt>X coordinate (bit 1.1, float)</dt>
-                <dd>
-                  <p>
-                    The object's location on the X axis.
-                  </p>
-                </dd>
-                <dt>Y coordinate (bit 1.2, float)</dt>
-                <dd>
-                  <p>
-                    The object's location on the Y axis.
-                  </p>
-                </dd>
-                <dt>Z coordinate (bit 1.3, float)</dt>
-                <dd>
-                  <p>
-                    The object's location on the Z axis.
-                  </p>
-                </dd>
-                <dt>Unknown (bit 1.4, int)</dt>
-                <dt>Unknown (bit 1.5, int)</dt>
-                <dt>Unknown (bit 1.6, long)</dt>
-                <dt>Unknown (bit 1.7, int)</dt>
-                <dt>Unknown (bit 1.8, int)</dt>
-                <dt>Unknown (bit 2.1, int)</dt>
-                <dt>Unknown (bit 2.2, long)</dt>
-                <dt>Name (bit 2.3, string)</dt>
-                <dd>
-                  <p>
-                    The name of this object.
-                  </p>
-                </dd>
-                <dt>Mesh file (bit 2.4, string)</dt>
-                <dd>
-                  <p>
-                    The name of the file containing the 3D mesh data.
-                  </p>
-                </dd>
-                <dt>Texture file (bit 2.4, string)</dt>
-                <dd>
-                  <p>
-                    The name of the file containing the texture to apply to the mesh. Note that this
-                    uses the same bit as the mesh name, and that bit 2.5 is unused.
-                  </p>
-                </dd>
-                <dt>Unknown (bit 2.6, int)</dt>
-                <dt>Unknown (bit 2.7, short)</dt>
-                <dt>Unknown (bit 2.8, byte)</dt>
-                <dt>Red color channel (bit 3.1, float)</dt>
-                <dt>Green color channel (bit 3.2, float)</dt>
-                <dt>Blue color channel (bit 3.3, float)</dt>
-                <dt>Fore shields (bit 3.4, float)</dt>
-                <dt>Aft shields (bit 3.5, float)</dt>
-                <dt>Unknown (bit 3.6, int)</dt>
-                <dt>Unknown (bit 3.7, int)</dt>
-                <dt>Unknown (bit 3.8, int)</dt>
-                <dt>Unknown (bit 4.1, int)</dt>
-                <dt>Unknown (bit 4.2, int)</dt>
-              </dl>
-            </section>
-            <section id="genericupdatepacket">
-              <h3>GenericUpdatePacket</h3>
-              <div class="pkt-props">
-                Type: <code>0x80803df9</code>:<code>0x06</code>-<code>07</code>,
-                <code>0x0a</code>-<code>0c</code>, <code>0x0e</code> [from server]
-              </div>
-              <p>
-                Provides status updates for objects which are not updated by other packet types:
-                mines, anomalies, torpedoes, black holes, asteroids and monsters.
-              </p>
-              <h4>Payload</h4>
-              <p>
-                The payload consists of an array of object entries. Parsing continues in a loop
-                until the end of the packet is reached, or the object type byte is
-                <code>0x00</code>. The fields for each entry are as follows:
-              </p>
-              <dl>
-                <dt><a href="#enum-object-type">Object type</a> (int, enumeration)</dt>
-                <dd>
-                  <p>
-                    The type of object being updated. Only mines, anomalies, torpedoes, black holes,
-                    asteroids and monsters are updated by this packet type. If you get
-                    <code>0x00</code> for this field, there are no more objects in the array.
-                  </p>
-                </dd>
-                <dt>Object ID (int)</dt>
-                <dd>
-                  <p>
-                    A unique identifier assigned to this object.
-                  </p>
-                </dd>
-                <dt>Bit field (1 byte)</dt>
-                <dd>
-                  <p>
-                    This bit field indicates what field values are provided for this mesh. This
-                    allows packets to be shorter by only including the values to be updated rather
-                    than all of them every time. If a bit is set to 1, that data value is included.
-                    (Each subsequent field indicates the bit in this bit field to which it
-                    corresponds.)
-                  </p>
-                </dd>
-                <dt>Unknown (byte, torpedoes only)</dt>
-                <dd>
-                  <p>
-                    The object's location on the X axis.
-                  </p>
-                </dd>
-                <dt>X coordinate (bit 1.1, float)</dt>
-                <dd>
-                  <p>
-                    The object's location on the X axis.
-                  </p>
-                </dd>
-                <dt>Y coordinate (bit 1.2, float)</dt>
-                <dd>
-                  <p>
-                    The object's location on the Y axis.
-                  </p>
-                </dd>
-                <dt>Z coordinate (bit 1.3, float)</dt>
-                <dd>
-                  <p>
-                    The object's location on the Z axis.
-                  </p>
-                </dd>
-                <dt>Name (bit 1.4, string, anomalies and monsters only)</dt>
-                <dd>
-                  <p>
-                    The object's name.
-                  </p>
-                </dd>
-                <dt>Unknown (bit 1.4, float?, all objects except anomalies and monsters)</dt>
-                <dd>
-                  <p>
-                    Appears to range from -1.0 to 1.0 for torpedoes.
-                  </p>
-                </dd>
-                <dt>Unknown (bit 1.5, float)</dt>
-                <dt>Unknown (bit 1.6, float)</dt>
-                <dt>Unknown (bit 1.7, int)</dt>
-                <dt>Unknown (bit 1.8, int)</dt>
-              </dl>
-            </section>
           </section>
           <section id="pkt-h">
             <h3>H</h3>
@@ -3195,459 +2785,61 @@
               </dl>
             </section>
           </section>
-          <section id="pkt-m">
-            <h3>M</h3>
-            <section id="mainplayerupdatepacket">
-              <h3>MainPlayerUpdatePacket</h3>
-              <div class="pkt-props">Type: <code>0x80803df9</code>:<code>0x01</code> [from server]</div>
+          <section id="pkt-o">
+            <h3>O</h3>
+            <section id="objectupdatepacket">
+              <h3>ObjectUpdatePacket</h3>
+              <div class="pkt-props">Type: <code>0x80803df9</code> [from server]</div>
               <p>
-                Provides updates on the status of the player ships.
+                Updates the status of one or more objects in the game world.
               </p>
               <h4>Payload</h4>
               <p>
-                The payload consists of an array of ship entries. Parsing continues in a loop until
-                the end of the packet is reached, or the object type byte is <code>0x00</code>. The
-                fields for each ship entry are as follows:
+                The payload consists of an array of object entries. Parsing continues in a loop
+                until the end of the packet is reached, or the object type byte is
+                <code>0x00</code>. Note that the array may be empty. All objects in the array are of
+                the same type; if other types of objects need to be updated, they'll be transmitted
+                in separate packets. Each entry in the array is structured as follows:
               </p>
               <dl>
                 <dt><a href="#enum-object-type">Object type</a> (int, enumeration)</dt>
                 <dd>
                   <p>
-                    Always indicates a player ship. If you get <code>0x00</code> for this field,
-                    there are no more ships in the array.
+                    The type of object represented by this entry. All objects in the same array will
+                    be of the same type. If you get <code>0x00</code> for this field, there are no
+                    more objects in the array.
                   </p>
                 </dd>
                 <dt>Object ID (int)</dt>
                 <dd>
                   <p>
-                    A unique identifier assigned to this ship.
+                    A unique identifier assigned to this object.
                   </p>
                 </dd>
-                <dt>Bit field (5 bytes)</dt>
+                <dt>Bit field (variable length)</dt>
                 <dd>
                   <p>
-                    This bit field indicates what field values are present for this ship. This
-                    allows packets to be shorter by only including the values to be updated rather
-                    than all of them every time. If a bit is set to 1, that data value is included.
-                    (Each subsequent field indicates the bit in this bit field to which it
-                    corresponds.)
+                    In order to minimize the amount of data that has to be transmitted, the server
+                    typically only sends the properties that have changed instead of the entire
+                    object every time. This bit field indicates which properties are included in the
+                    update. Each bit represents a single property; if a bit is set to
+                    <code>1</code>, that property is included. The length of the bit field depends
+                    the number of properties the object has.
                   </p>
                 </dd>
-                <dt>Unknown (bit 1.1, int)</dt>
+                <dt>Properties (variable length)</dt>
                 <dd>
                   <p>
-                    This might be the ship targeted by the weapons console.
-                  </p>
-                </dd>
-                <dt>Impulse (bit 1.2, float)</dt>
-                <dd>
-                  <p>
-                    Current impulse power for this ship. Values range from 0.0 (all stop) to 1.0
-                    (full speed) inclusive.
-                  </p>
-                </dd>
-                <dt>Rudder (bit 1.3, float)</dt>
-                <dd>
-                  <p>
-                    Values range from 0.0 to 1.0 inclusive, with 0.0 meaning hard to port (left),
-                    0.5 meaning rudder amidships (straight), and 1.0 meaning hard to starboard
-                    (right).
-                  </p>
-                </dd>
-                <dt>Top speed (bit 1.4, float)</dt>
-                <dt>Turn rate (bit 1.5, float)</dt>
-                <dt>Auto beams (bit 1.6, boolean, 1 byte)</dt>
-                <dt>Warp factor (bit 1.7, byte)</dt>
-                <dt>Energy reserves (bit 1.8, float)</dt>
-                <dt>Shields up/down (bit 2.1, boolean, 2 bytes)</dt>
-                <dt>Ship number (bit 2.2, int)</dt>
-                <dt>Ship type? (bit 2.3, int)</dt>
-                <dt>X coordinate (bit 2.4, float)</dt>
-                <dd>
-                  <p>
-                    The ship's location on the X axis.
-                  </p>
-                </dd>
-                <dt>Y coordinate (bit 2.5, float)</dt>
-                <dd>
-                  <p>
-                    The ship's location on the Y axis.
-                  </p>
-                </dd>
-                <dt>Z coordinate (bit 2.6, float)</dt>
-                <dd>
-                  <p>
-                    The ship's location on the Z axis.
-                  </p>
-                </dd>
-                <dt>Pitch (bit 2.7, float)</dt>
-                <dd>
-                  <p>
-                    (values still uncertain) Values range from -1.0 to 1.0 inclusive, where -1.0
-                    means the port (left) side points straight &ldquo;up&rdquo; and 1.0 means it
-                    points straight &ldquo;down.&rdquo;
-                  </p>
-                </dd>
-                <dt>Roll (bit 2.8, float)</dt>
-                <dd>
-                  <p>
-                    (values still uncertain) Values range from -1.0 to 1.0 inclusive, where -1.0
-                    means straight &ldquo;up&rdquo; and 1.0 means straight &ldquo;down.&rdquo;
-                  </p>
-                </dd>
-                <dt>Heading (bit 3.1, float)</dt>
-                <dd>
-                  <p>
-                    A value from pi to negative pi. A value of pi corresponds to a heading of 0&deg;
-                    (or &ldquo;north&rdquo;). The ship turns to port (left) as the value decreases.
-                    A value of 0.0 corresponds to a heading of 180&deg; (or &ldquo;south&rdquo;).
-                  </p>
-                </dd>
-                <dt>Velocity (bit 3.2, float)</dt>
-                <dd>
-                  <p>
-                    A value from pi to negative pi. A value of pi corresponds to a heading of 0&deg;
-                    (or &ldquo;north&rdquo;). The ship turns to port (left) as the value decreases.
-                    A value of 0.0 corresponds to a heading of 180&deg; (or &ldquo;south&rdquo;).
-                  </p>
-                </dd>
-                <dt>Unknown (bit 3.3, short)</dt>
-                <dt>Ship name (bit 3.4, string)</dt>
-                <dt>Forward shields (bit 3.5, float)</dt>
-                <dd>
-                  <p>
-                    Current strength of forward shield. A value greater than 0.0 indicates that this
-                    shield is up, while a value of 0.0 or less means it's down. If enemy fire
-                    penetrates the shield, this value can go negative; it will climb back towards
-                    0.0 as the shield recovers.
-                  </p>
-                </dd>
-                <dt>Forward shields max (bit 3.6, float)</dt>
-                <dd>
-                  <p>
-                    The maximum strength of the forward shield.
-                  </p>
-                </dd>
-                <dt>Aft shields (bit 3.7, float)</dt>
-                <dd>
-                  <p>
-                    Current strength of aft shield. A value greater than 0.0 indicates that this
-                    shield is up, while a value of 0.0 or less means it's down. If enemy fire
-                    penetrates the shield, this value can go negative; it will climb back towards
-                    0.0 as the shield recovers.
-                  </p>
-                </dd>
-                <dt>Aft shields max (bit 3.8, float)</dt>
-                <dd>
-                  <p>
-                    The maximum strength of the aft shield.
-                  </p>
-                </dd>
-                <dt>Last docked base (bit 4.1, int)</dt>
-                <dd>
-                  <p>
-                    The ID of the base that most recently initiated docking with the ship. This
-                    field updates when a base's tractor beam latches onto the ship. Undocking does
-                    not change this field; to detect undocking, watch for the ship's impulse (bit
-                    1.2) or warp factor (bit 1.7) fields to go above zero.
-                  </p>
-                </dd>
-                <dt><a href="#enum-alert-status">Alert status</a> (bit 4.2, byte, enumeration)</dt>
-                <dt>Unknown (bit 4.3, float)</dt>
-                <dt><a href="#enum-main-screen-view">Main screen view</a> (bit 4.4, byte, enumeration)</dt>
-                <dd>
-                  <p>
-                    The view currently displayed on the ship's main screen.
-                  </p>
-                </dd>
-                <dt><a href="#enum-beam-frequency">Beam frequency</a> (bit 4.5, byte, enumeration)</dt>
-                <dd>
-                  <p>
-                    The frequency to which the beams are currently tuned.
-                  </p>
-                </dd>
-                <dt>Available coolant (bit 4.6, byte)</dt>
-                <dd>
-                  <p>
-                    The total amount of coolant on the ship.
-                  </p>
-                </dd>
-                <dt>Science target (bit 4.7, int)</dt>
-                <dd>
-                  <p>
-                    The ID of the object selected by the science officer, or 1 if the selection was
-                    cleared.
-                  </p>
-                </dd>
-                <dt>Captain target (bit 4.8, int)</dt>
-                <dd>
-                  <p>
-                    The ID of the object selected by the science officer, or 1 if the selection was
-                    cleared.
-                  </p>
-                </dd>
-                <dt><a href="#enum-drive-type">Drive type</a> (bit 5.1, byte, enumeration)</dt>
-                <dd>
-                  <p>
-                    The type of drive system the ship has.
-                  </p>
-                </dd>
-                <dt>Scanning ID (bit 5.2, int)</dt>
-                <dd>
-                  <p>
-                    The ID of the object currently being scanned by the science officer.
-                  </p>
-                </dd>
-                <dt>Scanning ID (bit 5.3, float)</dt>
-                <dd>
-                  <p>
-                    A value from 0.0 to 1.0 inclusive indicating the current progress of the active
-                    science scan.
-                  </p>
-                </dd>
-                <dt>Reverse (bit 5.4, boolean, 1 byte)</dt>
-                <dd>
-                  <p>
-                    True if the impulse drive is in reverse; false otherwise.
-                  </p>
-                </dd>
-                <dt>Unknown (bit 5.5, float)</dt>
-                <dd>
-                  <p>
-                    Usually 0.0, though -1.0 has been observed.
-                  </p>
-                </dd>
-                <dt>Unknown (bit 5.6, byte)</dt>
-                <dd>
-                  <p>
-                    <code>0x02</code> has been observed.
-                  </p>
-                </dd>
-                <dt>Unknown (bit 5.7, byte)</dt>
-                <dd>
-                  <p>
-                    -1 has been observed.
+                    The rest of the entry consists of the updated values for the properties
+                    indicated in the bit field.
                   </p>
                 </dd>
               </dl>
-            </section>
-          </section>
-          <section id="pkt-n">
-            <h3>N</h3>
-            <section id="nebulaupdatepacket">
-              <h3>NebulaUpdatePacket</h3>
-              <div class="pkt-props">Type: <code>0x80803df9</code>:<code>0x09</code> [from server]</div>
               <p>
-                Provides status updates for nebulae.
+                For details about the properties of the various object types which may be included
+                in the array entries, see the
+                <a href="#object-properties">Object Properties</a> section.
               </p>
-              <h4>Payload</h4>
-              <p>
-                The payload consists of an array of nebulae, with each nebula having the fields
-                listed below. The array ends when you encounter <code>0x00</code> for the
-                <a href="#enum-object-type">object type</a> field, or the end of the packet is
-                reached.
-              </p>
-              <dl>
-                <dt><a href="#enum-object-type">Object type</a> (int, enumeration)</dt>
-                <dd>
-                  <p>
-                    Always <code>0x09</code>.
-                  </p>
-                </dd>
-                <dt>Object ID (int)</dt>
-                <dd>
-                  <p>
-                    A unique identifier assigned to this nebula.
-                  </p>
-                </dd>
-                <dt>Bit field (1 bytes)</dt>
-                <dd>
-                  <p>
-                    This bit field indicates what field values are present for this nebula. This
-                    allows packets to be shorter by only including the values to be updated rather
-                    than all of them every time. If a bit is set to 1, that data value is included.
-                    (Each subsequent field indicates the bit in this bit field to which it
-                    corresponds.)
-                  </p>
-                </dd>
-                <dt>X coordinate (bit 1.1, float)</dt>
-                <dt>Y coordinate (bit 1.2, float)</dt>
-                <dt>Z coordinate (bit 1.3, float)</dt>
-                <dt>Red color channel (bit 1.4, float)</dt>
-                <dt>Green color channel (bit 1.5, float)</dt>
-                <dt>Blue color channel (bit 1.6, float)</dt>
-                <dt>Unused? (bit 1.7, int)</dt>
-                <dt>Unused? (bit 1.8, int)</dt>
-              </dl>
-            </section>
-            <section id="npcupdatepacket">
-              <h3>NpcUpdatePacket</h3>
-              <div class="pkt-props">Type: <code>0x80803df9</code>:<code>0x05</code> [from server]</div>
-              <p>
-                Provides status updates for non-player ships (both allies and enemies). Note that
-                this packet's subtype was <code>0x04</code> prior to v2.1.5.
-              </p>
-              <h4>Payload</h4>
-              <p>
-                The payload consists of an array of ships, followed by four null (<code>0x00</code>)
-                bytes, with each ship having the fields listed below. So you will know the array has
-                ended when you encounter <code>0x00</code> for the
-                <a href="#enum-object-type">object type</a> field, or the end of the packet is
-                reached.
-              </p>
-              <dl>
-                <dt><a href="#enum-object-type">Object type</a> (int, enumeration)</dt>
-                <dd>
-                  <p>
-                    Always <code>0x05</code> (<code>0x04</code> prior to v2.1.5).
-                  </p>
-                </dd>
-                <dt>Object ID (int)</dt>
-                <dd>
-                  <p>
-                    A unique identifier assigned to this ship.
-                  </p>
-                </dd>
-                <dt>Bit field (6 bytes)</dt>
-                <dd>
-                  <p>
-                    This bit field indicates what field values are present for this ship. This
-                    allows packets to be shorter by only including the values to be updated rather
-                    than all of them every time. If a bit is set to 1, that data value is included.
-                    (Each subsequent field indicates the bit in this bit field to which it
-                    corresponds.)
-                  </p>
-                </dd>
-                <dt>Name (bit 1.1, string)</dt>
-                <dd>
-                  <p>
-                    The ship's name.
-                  </p>
-                </dd>
-                <dt>Throttle (bit 1.2, float)</dt>
-                <dd>
-                  <p>
-                    Values range from 0.0 for all stop to 1.0 for full speed.
-                  </p>
-                </dd>
-                <dt>Rudder (bit 1.3, float)</dt>
-                <dd>
-                  <p>
-                    Values range from 0.0 for hard to port (left), to 1.0 for hard to starboard
-                    (right).
-                  </p>
-                </dd>
-                <dt>Max impulse (bit 1.4, float)</dt>
-                <dd>
-                  <p>
-                    The ship's maximum possible speed at impulse.
-                  </p>
-                </dd>
-                <dt>Max turn rate (bit 1.5, float)</dt>
-                <dd>
-                  <p>
-                    The ship's maximum possible turning speed.
-                  </p>
-                </dd>
-                <dt>Enemy? (bit 1.6, boolean, 4 bytes)</dt>
-                <dd>
-                  <p>
-                    In single-bridge games, as well as multi-bridge co-op games, this value will be
-                    true if the ship is hostile and false if it is friendly. In PvP and scripted
-                    games, this field is always true, regardless of whether the NPC is hostile or
-                    not.
-                  </p>
-                </dd>
-                <dt>Vessel type (bit 1.7, int)</dt>
-                <dd>
-                  <p>
-                    The ID corresponding to the <code>&lt;vessel&gt;</code> entry in
-                    <code>vesselData.xml</code> that describes the vessel type for this ship.
-                  </p>
-                </dd>
-                <dt>X coordinate (bit 1.8, float)</dt>
-                <dt>Y coordinate (bit 2.1, float)</dt>
-                <dt>Z coordinate (bit 2.2, float)</dt>
-                <dt>Pitch (bit 2.3, float)</dt>
-                <dt>Roll (bit 2.4, float)</dt>
-                <dt>Heading (bit 2.5, float)</dt>
-                <dt>Velocity (bit 2.6, float)</dt>
-                <dt>Surrendered (bit 2.7, boolean, 1 byte)</dt>
-                <dd>
-                  <p>
-                    True if this ship has surrendered; false otherwise.
-                  </p>
-                </dd>
-                <dt>Unknown (bit 2.8, short)</dt>
-                <dt>Forward shields (bit 3.1, float)</dt>
-                <dt>Forward shields max (bit 3.2, float)</dt>
-                <dt>Aft shields (bit 3.3, float)</dt>
-                <dt>Aft shields (bit 3.4, float)</dt>
-                <dt>Unknown (bit 3.5, short)</dt>
-                <dt>Fleet number (bit 3.6, byte)</dt>
-                <dd>
-                  <p>
-                    The number of the fleet to which this ship belongs. For custom missions, this is
-                    specified in the mission file.
-                  </p>
-                </dd>
-                <dt><a href="#enum-elite-ability">Elite abilities</a> (bit 3.7, bit field, 4 bytes)</dt>
-                <dd>
-                  <p>
-                    The elite abilites posessed by this ship. The value in this field is only
-                    meaningful if the ship's faction has the &ldquo;elite&rdquo; attribute, as
-                    specified in <code>vesselData.xml</code>. Other ships should ignore this value
-                    even if it is present, as they cannot have elite abilities.
-                  </p>
-                </dd>
-                <dt>Active <a href="#enum-elite-ability">elite abilities</a> (bit 3.8, bit field, 4 bytes)</dt>
-                <dd>
-                  <p>
-                    The elite abilites posessed by this ship that are currently in use. As with the
-                    previous field, this field should be ignored if the ship can't have elite
-                    abilities, even if it is present.
-                  </p>
-                </dd>
-                <dt>Scan level? (bit 4.1, int)</dt>
-                <dt>Side? (bit 4.2, int)</dt>
-                <dd>
-                  <p>
-                    This field appears to contain a different value for each side in the conflict.
-                    Ships with the same value will presumably be friendly to each other.
-                  </p>
-                </dd>
-              </dl>
-              <dt>Unknown (bit 4.3, int)</dt>
-              <dt>Unknown (bit 4.4, byte)</dt>
-              <dt>Unknown (bit 4.5, byte)</dt>
-              <dt>Unknown (bit 4.6, byte)</dt>
-              <dt>Unknown (bit 4.7, byte)</dt>
-              <dt>Unknown (bit 4.8, float)</dt>
-              <dd>
-                <p>
-                  Values of 0.0 and -100000.0 have been observed.
-                </p>
-              </dd>
-              <dt>Unknown (bit 5.1, int)</dt>
-              <dt>Unknown (bit 5.2, int)</dt>
-              <dt><a href="#enum-ship-system">Ship system</a> damage (bit 5.3 - 6.2, float array)</dt>
-              <dd>
-                <p>
-                  Damage to various ship systems, in the order specified in the enumeration. A
-                  system with a damage value of 0.0 is undamaged; a higher value (up to 1.0) means
-                  the system is damaged. In the stock client, damaged systems on NPC vessels can be
-                  seen via the science console. Barring further damage or actions by a custom
-                  script, damage values gradually decrease as the ship is repaired, until they
-                  return to 0.0.
-                </p>
-              </dd>
-              <dt><a href="#enum-beam-frequency">Beam frequency</a> resistance (bit 6.3 - 6.7, float array)</dt>
-              <dd>
-                <p>
-                  The ship's resistance to the five beam frequencies. Higher values indicate greater
-                  resistance to beams tuned to the corresponding frequency.
-                </p>
-              </dd>
             </section>
           </section>
           <section id="pkt-p">
@@ -4226,64 +3418,6 @@
           </section>
           <section id="pkt-w">
             <h3>W</h3>
-            <section id="weapplayerupdatepacket">
-              <h3>WeapPlayerUpdatePacket</h3>
-              <div class="pkt-props">Type: <code>0x80803df9</code>:<code>0x02</code> [from server]</div>
-              <p>
-                Weapons-related player status updates. This packet is received only at the weapons
-                console.
-              </p>
-              <h4>Payload</h4>
-              <dl>
-                <dt>Subtype (int)</dt>
-                <dd>
-                  <p>
-                    Always <code>0x02</code>.
-                  </p>
-                </dd>
-                <dt>Bit field (3 bytes)</dt>
-                <dd>
-                  <p>
-                    This bit field indicates what field values are in this packet. This allows
-                    packets to be shorter by only including the values to be updated rather than all
-                    of them every time. If a bit is set to 1, that data value is included. (Each
-                    subsequent field indicates the bits in this bit field to which it corresponds.)
-                  </p>
-                </dd>
-                <dt>Ordnance counts (bits 1.1-1.4, array)</dt>
-                <dd>
-                  <p>
-                    This array contains up to four byte elements. Each element gives how many of a
-                    particular ordinance are stored on the ship, in the following order: homing
-                    missiles, nukes, mines, EMPs.
-                  </p>
-                </dd>
-                <dt>Unknown (bit 1.5, byte)</dt>
-                <dt>Tube (un)load times (bits 1.6-2.3, array)</dt>
-                <dd>
-                  <p>
-                    This array contains up to six float elements. Each element gives the (un)load
-                    time for the corresponding tube. This field should be ignored (even when
-                    present) if the tube's status is not loading or unloading.
-                  </p>
-                </dd>
-                <dt><a href="#enum-tube-status">Tube status</a> (bits 2.4-3.1, array)</dt>
-                <dd>
-                  <p>
-                    This array contains up to six byte elements. Each element indicates the
-                    occupation status of each tube.
-                  </p>
-                </dd>
-                <dt><a href="#enum-ordnance-type">Ordnance type</a> (bits 3.2-3.7, array)
-                <dd>
-                  <p>
-                    This array contains up to six byte elements. Each element indicates the type of
-                    ordnance in each tube. If the tube's status is unloaded, the tube is empty, and
-                    this field should be ignored even when present.
-                  </p>
-                </dd>
-              </dl>
-            </section>
             <section id="welcomepacket">
               <h3>WelcomePacket</h3>
               <div class="pkt-props">Type: <code>0x6d04b3da</code> [from server]</div>
@@ -4305,78 +3439,808 @@
                 </dd>
               </dl>
             </section>
-            <section id="whaleupdatepacket">
-              <h3>WhaleUpdatePacket</h3>
-              <div class="pkt-props">Type: <code>0x80803df9</code>:<code>0x0f</code> [from server]</div>
+          </section>
+        </section>
+
+        <section id="object-properties">
+          <h2>Object Properties</h2>
+          <p>
+            This section documents the bit fields and properties for each of the
+            <a href="#enum-object-type">object types</a>.
+            See
+            <a href="#objectupdatepacket">ObjectUpdatePacket</a> for how these objects are updated
+            by the Artemis server.
+          </p>
+
+          <section id="object-anomaly">
+            <h3>Anomaly</h3>
+            <dl>
+              <dt>Bit field (1 byte)</dt>
+              <dt>X coordinate (byte 1.1, float)</dt>
+              <dt>Y coordinate (byte 1.2, float)</dt>
+              <dt>Z coordinate (byte 1.3, float)</dt>
+              <dt><a href="#enum-upgrade">Upgrade</a> (byte 1.4, enum, int)</dt>
+              <dd>
+                <p>
+                  Note that only the values <code>0x00</code> through <code>0x07</code> have been
+                  observed, as the built-in mission types do not put other upgrade types in anomaly
+                  pickups.
+                </p>
+              </dd>
+            </dl>
+          </section>
+
+          <section id="object-base">
+            <h3>Base</h3>
+            <dl>
+              <dt>Bit field (2 bytes)</dt>
+              <dt>Name (bit 1.1, string)</dt>
+              <dd>
+                <p>
+                  The name assigned to this base. In standard, non-custom scenarios, base names will
+                  be unique, but there is no guarantee that the same will be true in custom
+                  scenarios.
+                </p>
+              </dd>
+              <dt>Shields (bit 1.2, float)</dt>
+              <dd>
+                <p>
+                  The current strength of the base's shields.
+                </p>
+              </dd>
+              <dt>Aft shields (unused) (bit 1.3, float)</dt>
+              <dd>
+                <p>
+                  Bases only have one shield, but all shielded objects in Artemis are encoded with
+                  fore and aft shields. This value is therefore meaningless and should be ignored.
+                </p>
+              </dd>
+              <dt>Index (bit 1.4, int)</dt>
+              <dd>
+                <p>
+                  The index of this base. Each base will have a unique index from 0 to (<em>number
+                  of bases</em>-1). In a standard solo game, DS1 is 0, DS2 is 1, etc.
+                </p>
+              </dd>
+              <dt>Vessel type (bit 1.5, int)</dt>
+              <dd>
+                <p>
+                  The vessel type ID, as found in <code>vesselData.xml</code>.
+                </p>
+              </dd>
+              <dt>X coordinate (bit 1.6, float)</dt>
+              <dd>
+                <p>
+                  The base's location along the X-axis.
+                </p>
+              </dd>
+              <dt>Y coordinate (bit 1.7, float)</dt>
+              <dd>
+                <p>
+                  The base's location along the Y-axis.
+                </p>
+              </dd>
+              <dt>Z coordinate (bit 1.8, float)</dt>
+              <dd>
+                <p>
+                  The base's location along the Z-axis.
+                </p>
+              </dd>
+            </dl>
+            <dt>Unknown (bit 2.1, 4 bytes)</dt>
+            <dt>Unknown (bit 2.2, 4 bytes)</dt>
+            <dt>Unknown (bit 2.3, 4 bytes)</dt>
+            <dt>Unknown (bit 2.4, 4 bytes)</dt>
+            <dt>Unknown (bit 2.5, byte)</dt>
+            <dt>Unknown (bit 2.6, byte)</dt>
+          </section>
+
+          <section id="object-creature">
+            <h3>Creature</h3>
+            <p>
+              Note that wrecks are also considered creatures, for some reason.
+            </p>
+            <dl>
+              <dt>Bit field (2 bytes)</dt>
+              <dt>X (bit 1.1, float)</dt>
+              <dd>
+                <p>
+                  The X coordinate of this creature.
+                </p>
+              </dd>
+              <dt>Y (bit 1.2, float)</dt>
+              <dd>
+                <p>
+                  The Y coordinate of this creature.
+                </p>
+              </dd>
+              <dt>Z (bit 1.3, float)</dt>
+              <dd>
+                <p>
+                  The Z coordinate of this creature.
+                </p>
+              </dd>
+              <dt>Name (bit 1.4, string)</dt>
+              <dd>
+                <p>
+                  The Z coordinate of this creature.
+                </p>
+              </dd>
+              <dt>Heading (bit 1.5, float)</dt>
+              <dd>
+                <p>
+                  The creature's current heading.
+                </p>
+              </dd>
+              <dt>Pitch (bit 1.6, float)</dt>
+              <dd>
+                <p>
+                  The creature's current pitch.
+                </p>
+              </dd>
+              <dt>Roll (bit 1.7, float)</dt>
+              <dd>
+                <p>
+                  The creature's current roll.
+                </p>
+              </dd>
+              <dt><a href="#enum-creature-type">Creature type</a> (bit 1.8, enum)</dt>
+              <dd>
+                <p>
+                  The type of creature.
+                </p>
+              </dd>
+              <dt>Unknown (bit 2.1, 4 bytes)</dt>
+              <dt>Unknown (bit 2.2, 4 bytes)</dt>
+              <dt>Unknown (bit 2.3, 4 bytes)</dt>
+              <dt>Unknown (bit 2.4, 4 bytes)</dt>
+              <dt>Unknown (bit 2.5, 4 bytes)</dt>
+              <dt>Unknown (bit 2.6, 4 bytes)</dt>
+            </dl>
+          </section>
+
+          <section id="object-drone">
+            <h3>Drone</h3>
+            <dl>
+              <dt>Bit field (2 bytes)</dt>
+              <dt>Unknown (bit 1.1, int)</dt>
+              <dt>X coordinate (bit 1.2, float)</dt>
+              <dt>Unknown (bit 1.3 float)</dt>
+              <dd>
+                <p>
+                  Values observed range from approximately -0.01 to 53.7. Might be related to
+                  pitch/yaw.
+                </p>
+              </dd>
+              <dt>Z coordinate (bit 1.4, float)</dt>
+              <dt>Unknown (bit 1.5 float)</dt>
+              <dd>
+                <p>
+                  Perhaps related to pitch/yaw.
+                </p>
+              </dd>
+              <dt>Y coordinate (bit 1.6, float)</dt>
+              <dt>Heading (bit 1.7, float)</dt>
+              <dt>Unknown (bit 1.8, int)</dt>
+              <dt>Unknown (bit 2.1, float?, v2.1.5+)</dt>
+              <dt>Unused? (bits 2.2-2.8)</dt>
+            </dl>
+          </section>
+
+          <section id="object-engineering-console">
+            <h3>Engineering Console</h3>
+            <dl>
+              <dt>Bit fields (3 bytes)</dt>
+              <dd>
+                <p>
+                  Each byte of the field represents a category of values:
+                </p>
+                <ol>
+                  <li>Heat levels</li>
+                  <li>Energy allocations</li>
+                  <li>Coolant allocations</li>
+                </ol>
+                <p>
+                  The bits in each byte represent the ship systems, in the order specified in the
+                  <a href="#enum-ship-system">ship system enumeration</a>. So for example, if the
+                  first bit field is <code>0x01</code>, it means that this packet will contain a
+                  single heat level value (beams).
+                </p>
+              </dd>
+              <dt>Unknown (byte)</dt>
+              <dd>
+                <p>
+                  This value always seems to be <code>0x00</code>. This might be a reserved bit
+                  field byte for future engineering settings.
+                </p>
+              </dd>
+              <dt>Heat levels (bits 1.1-1.8, float array)</dt>
+              <dd>
+                <p>
+                  The heat level for each system, as a value between 0 (no heat) and 1 (maximum
+                  heat). Reaching maximum heat for a system will cause an explosion, which will
+                  damage a system node of that type and release some of the heat.
+                </p>
+              </dd>
+              <dt>Energy allocations (bits 2.1-2.8, float array)</dt>
+              <dd>
+                <p>
+                  The energy allocation for each system, as a value between 0 (no energy allocated)
+                  and 1 (maximum possible energy allocation). In the UI, this is expressed as a
+                  percentage between 0% and 300%, so the nominal allocation level (100%) is
+                  represented by a value of 0.3333....
+                </p>
+              </dd>
+              <dt>Coolant allocations (bits 3.1-3.8, float array)</dt>
+              <dd>
+                <p>
+                  The units of coolant allocated to each system.
+                </p>
+              </dd>
+            </dl>
+          </section>
+
+          <section id="object-generic-mesh">
+            <h3>Generic Mesh</h3>
+            <p>
+              These are arbitrary 3D objects to display in the game world. Players and enemies don't
+              interact with these objects; they are just decoration.
+            </p>
+            <dl>
+              <dt>Bit field (4 bytes)</dt>
+              <dt>X coordinate (bit 1.1, float)</dt>
+              <dd>
+                <p>
+                  The object's location on the X axis.
+                </p>
+              </dd>
+              <dt>Y coordinate (bit 1.2, float)</dt>
+              <dd>
+                <p>
+                  The object's location on the Y axis.
+                </p>
+              </dd>
+              <dt>Z coordinate (bit 1.3, float)</dt>
+              <dd>
+                <p>
+                  The object's location on the Z axis.
+                </p>
+              </dd>
+              <dt>Unknown (bit 1.4, int)</dt>
+              <dt>Unknown (bit 1.5, int)</dt>
+              <dt>Unknown (bit 1.6, long)</dt>
+              <dt>Unknown (bit 1.7, int)</dt>
+              <dt>Unknown (bit 1.8, int)</dt>
+              <dt>Unknown (bit 2.1, int)</dt>
+              <dt>Unknown (bit 2.2, long)</dt>
+              <dt>Name (bit 2.3, string)</dt>
+              <dd>
+                <p>
+                  The name of this object.
+                </p>
+              </dd>
+              <dt>Mesh file (bit 2.4, string)</dt>
+              <dd>
+                <p>
+                  The name of the file containing the 3D mesh data.
+                </p>
+              </dd>
+              <dt>Texture file (bit 2.4, string)</dt>
+              <dd>
+                <p>
+                  The name of the file containing the texture to apply to the mesh. Note that this
+                  uses the same bit as the mesh name, and that bit 2.5 is unused.
+                </p>
+              </dd>
+              <dt>Unknown (bit 2.6, int)</dt>
+              <dt>Unknown (bit 2.7, short)</dt>
+              <dt>Unknown (bit 2.8, byte)</dt>
+              <dt>Red color channel (bit 3.1, float)</dt>
+              <dt>Green color channel (bit 3.2, float)</dt>
+              <dt>Blue color channel (bit 3.3, float)</dt>
+              <dt>Fore shields (bit 3.4, float)</dt>
+              <dt>Aft shields (bit 3.5, float)</dt>
+              <dt>Unknown (bit 3.6, int)</dt>
+              <dt>Unknown (bit 3.7, int)</dt>
+              <dt>Unknown (bit 3.8, int)</dt>
+              <dt>Unknown (bit 4.1, int)</dt>
+              <dt>Unknown (bit 4.2, int)</dt>
+            </dl>
+          </section>
+
+          <section id="object-nebula">
+            <h3>Nebula</h3>
+            <dl>
+              <dt>Bit field (1 bytes)</dt>
+              <dt>X coordinate (bit 1.1, float)</dt>
+              <dt>Y coordinate (bit 1.2, float)</dt>
+              <dt>Z coordinate (bit 1.3, float)</dt>
+              <dt>Red color channel (bit 1.4, float)</dt>
+              <dt>Green color channel (bit 1.5, float)</dt>
+              <dt>Blue color channel (bit 1.6, float)</dt>
+              <dt>Unused? (bit 1.7, int)</dt>
+              <dt>Unused? (bit 1.8, int)</dt>
+            </dl>
+          </section>
+
+          <section id="object-npc-ship">
+            <h3>NPC Ship</h3>
+            <dl>
+              <dt>Bit field (6 bytes)</dt>
+              <dt>Name (bit 1.1, string)</dt>
+              <dd>
+                <p>
+                  The ship's name.
+                </p>
+              </dd>
+              <dt>Throttle (bit 1.2, float)</dt>
+              <dd>
+                <p>
+                  Values range from 0.0 for all stop to 1.0 for full speed.
+                </p>
+              </dd>
+              <dt>Rudder (bit 1.3, float)</dt>
+              <dd>
+                <p>
+                  Values range from 0.0 for hard to port (left), to 1.0 for hard to starboard
+                  (right).
+                </p>
+              </dd>
+              <dt>Max impulse (bit 1.4, float)</dt>
+              <dd>
+                <p>
+                  The ship's maximum possible speed at impulse.
+                </p>
+              </dd>
+              <dt>Max turn rate (bit 1.5, float)</dt>
+              <dd>
+                <p>
+                  The ship's maximum possible turning speed.
+                </p>
+              </dd>
+              <dt>Enemy? (bit 1.6, boolean, 4 bytes)</dt>
+              <dd>
+                <p>
+                  In single-bridge games, as well as multi-bridge co-op games, this value will be
+                  true if the ship is hostile and false if it is friendly. In PvP and scripted
+                  games, this field is always true, regardless of whether the NPC is hostile or
+                  not.
+                </p>
+              </dd>
+              <dt>Vessel type (bit 1.7, int)</dt>
+              <dd>
+                <p>
+                  The ID corresponding to the <code>&lt;vessel&gt;</code> entry in
+                  <code>vesselData.xml</code> that describes the vessel type for this ship.
+                </p>
+              </dd>
+              <dt>X coordinate (bit 1.8, float)</dt>
+              <dt>Y coordinate (bit 2.1, float)</dt>
+              <dt>Z coordinate (bit 2.2, float)</dt>
+              <dt>Pitch (bit 2.3, float)</dt>
+              <dt>Roll (bit 2.4, float)</dt>
+              <dt>Heading (bit 2.5, float)</dt>
+              <dt>Velocity (bit 2.6, float)</dt>
+              <dt>Surrendered (bit 2.7, boolean, 1 byte)</dt>
+              <dd>
+                <p>
+                  True if this ship has surrendered; false otherwise.
+                </p>
+              </dd>
+              <dt>Unknown (bit 2.8, short)</dt>
+              <dt>Forward shields (bit 3.1, float)</dt>
+              <dt>Forward shields max (bit 3.2, float)</dt>
+              <dt>Aft shields (bit 3.3, float)</dt>
+              <dt>Aft shields (bit 3.4, float)</dt>
+              <dt>Unknown (bit 3.5, short)</dt>
+              <dt>Fleet number (bit 3.6, byte)</dt>
+              <dd>
+                <p>
+                  The number of the fleet to which this ship belongs. For custom missions, this is
+                  specified in the mission file.
+                </p>
+              </dd>
+              <dt><a href="#enum-elite-ability">Elite abilities</a> (bit 3.7, bit field, 4 bytes)</dt>
+              <dd>
+                <p>
+                  The elite abilites posessed by this ship. The value in this field is only
+                  meaningful if the ship's faction has the &ldquo;elite&rdquo; attribute, as
+                  specified in <code>vesselData.xml</code>. Other ships should ignore this value
+                  even if it is present, as they cannot have elite abilities.
+                </p>
+              </dd>
+              <dt>Active <a href="#enum-elite-ability">elite abilities</a> (bit 3.8, bit field, 4 bytes)</dt>
+              <dd>
+                <p>
+                  The elite abilites posessed by this ship that are currently in use. As with the
+                  previous field, this field should be ignored if the ship can't have elite
+                  abilities, even if it is present.
+                </p>
+              </dd>
+              <dt>Scan level? (bit 4.1, int)</dt>
+              <dt>Side? (bit 4.2, int)</dt>
+              <dd>
+                <p>
+                  This field appears to contain a different value for each side in the conflict.
+                  Ships with the same value will presumably be friendly to each other.
+                </p>
+              </dd>
+            </dl>
+            <dt>Unknown (bit 4.3, int)</dt>
+            <dt>Unknown (bit 4.4, byte)</dt>
+            <dt>Unknown (bit 4.5, byte)</dt>
+            <dt>Unknown (bit 4.6, byte)</dt>
+            <dt>Unknown (bit 4.7, byte)</dt>
+            <dt>Unknown (bit 4.8, float)</dt>
+            <dd>
               <p>
-                Provides updates on the status of space whales.
+                Values of 0.0 and -100000.0 have been observed.
               </p>
-              <h4>Payload</h4>
+            </dd>
+            <dt>Unknown (bit 5.1, int)</dt>
+            <dt>Unknown (bit 5.2, int)</dt>
+            <dt><a href="#enum-ship-system">Ship system</a> damage (bit 5.3 - 6.2, float array)</dt>
+            <dd>
               <p>
-                The payload consists of an array of ship entries. Parsing continues in a loop until
-                the end of the packet is reached, or the object type byte is <code>0x00</code>. The
-                fields for each ship entry are as follows:
+                Damage to various ship systems, in the order specified in the enumeration. A
+                system with a damage value of 0.0 is undamaged; a higher value (up to 1.0) means
+                the system is damaged. In the stock client, damaged systems on NPC vessels can be
+                seen via the science console. Barring further damage or actions by a custom
+                script, damage values gradually decrease as the ship is repaired, until they
+                return to 0.0.
               </p>
-              <dl>
-                <dt><a href="#enum-object-type">Object type</a> (byte, enumeration)</dt>
-                <dd>
-                  <p>
-                    Always indicates a space whale. If you get <code>0x00</code> for this field,
-                    there are no more whales in the array.
-                  </p>
-                </dd>
-                <dt>Object ID (int)</dt>
-                <dd>
-                  <p>
-                    A unique identifier assigned to this whale.
-                  </p>
-                </dd>
-                <dt>Bit field (2 bytes)</dt>
-                <dd>
-                  <p>
-                    This bit field indicates what field values are present for this whale. This
-                    allows packets to be shorter by only including the values to be updated rather
-                    than all of them every time. If a bit is set to 1, that data value is included.
-                    (Each subsequent field indicates the bit in this bit field to which it
-                    corresponds.)
-                  </p>
-                </dd>
-                <dt>Name (bit 1.1, string)</dt>
-                <dd>
-                  <p>
-                    Always "WHALE" in non-custom missions.
-                  </p>
-                </dd>
-                <dt>Unknown (bit 1.2, int)</dt>
-                <dt>Unknown (bit 1.3, int)</dt>
-                <dt>X coordinate (bit 1.4, float)</dt>
-                <dt>Y coordinate (bit 1.5, float)</dt>
-                <dt>Z coordinate (bit 1.6, float)</dt>
-                <dt>Pitch (bit 1.7, float)</dt>
-                <dt>Roll (bit 1.8, float)</dt>
-                <dt>Heading (bit 2.1, float)</dt>
-                <dt>Unknown (bit 2.2, float)</dt>
-                <dt>Unknown (bit 2.3, float)</dt>
-                <dd>
-                  <p>
-                    Values range from 0.0 to 1.0.
-                  </p>
-                </dd>
-                <dt>Unknown (bit 2.4, float)</dt>
-                <dd>
-                  <p>
-                    Values range up to 1.0. Lowest value seen so far is approximately 0.855, minimum
-                    <em>might</em> be 0.0.
-                  </p>
-                </dd>
-                <dt>Unknown (bit 2.5, float)</dt>
-                <dd>
-                  <p>
-                    Observed ranges have been from about 0.5 to 1.36.
-                  </p>
-                </dd>
-              </dl>
-            </section>
+            </dd>
+            <dt><a href="#enum-beam-frequency">Beam frequency</a> resistance (bit 6.3 - 6.7, float array)</dt>
+            <dd>
+              <p>
+                The ship's resistance to the five beam frequencies. Higher values indicate greater
+                resistance to beams tuned to the corresponding frequency.
+              </p>
+            </dd>
+          </section>
+
+          <section id="object-player-ship">
+            <h3>Player Ship</h3>
+            <dt>Bit field (5 bytes)</dt>
+            <dt>Unknown (bit 1.1, int)</dt>
+            <dd>
+              <p>
+                This might be the ship targeted by the weapons console.
+              </p>
+            </dd>
+            <dt>Impulse (bit 1.2, float)</dt>
+            <dd>
+              <p>
+                Current impulse power for this ship. Values range from 0.0 (all stop) to 1.0
+                (full speed) inclusive.
+              </p>
+            </dd>
+            <dt>Rudder (bit 1.3, float)</dt>
+            <dd>
+              <p>
+                Values range from 0.0 to 1.0 inclusive, with 0.0 meaning hard to port (left),
+                0.5 meaning rudder amidships (straight), and 1.0 meaning hard to starboard
+                (right).
+              </p>
+            </dd>
+            <dt>Top speed (bit 1.4, float)</dt>
+            <dt>Turn rate (bit 1.5, float)</dt>
+            <dt>Auto beams (bit 1.6, boolean, 1 byte)</dt>
+            <dt>Warp factor (bit 1.7, byte)</dt>
+            <dt>Energy reserves (bit 1.8, float)</dt>
+            <dt>Shields up/down (bit 2.1, boolean, 2 bytes)</dt>
+            <dt>Ship number (bit 2.2, int)</dt>
+            <dt>Ship type? (bit 2.3, int)</dt>
+            <dt>X coordinate (bit 2.4, float)</dt>
+            <dd>
+              <p>
+                The ship's location on the X axis.
+              </p>
+            </dd>
+            <dt>Y coordinate (bit 2.5, float)</dt>
+            <dd>
+              <p>
+                The ship's location on the Y axis.
+              </p>
+            </dd>
+            <dt>Z coordinate (bit 2.6, float)</dt>
+            <dd>
+              <p>
+                The ship's location on the Z axis.
+              </p>
+            </dd>
+            <dt>Pitch (bit 2.7, float)</dt>
+            <dd>
+              <p>
+                (values still uncertain) Values range from -1.0 to 1.0 inclusive, where -1.0
+                means the port (left) side points straight &ldquo;up&rdquo; and 1.0 means it
+                points straight &ldquo;down.&rdquo;
+              </p>
+            </dd>
+            <dt>Roll (bit 2.8, float)</dt>
+            <dd>
+              <p>
+                (values still uncertain) Values range from -1.0 to 1.0 inclusive, where -1.0
+                means straight &ldquo;up&rdquo; and 1.0 means straight &ldquo;down.&rdquo;
+              </p>
+            </dd>
+            <dt>Heading (bit 3.1, float)</dt>
+            <dd>
+              <p>
+                A value from pi to negative pi. A value of pi corresponds to a heading of 0&deg;
+                (or &ldquo;north&rdquo;). The ship turns to port (left) as the value decreases.
+                A value of 0.0 corresponds to a heading of 180&deg; (or &ldquo;south&rdquo;).
+              </p>
+            </dd>
+            <dt>Velocity (bit 3.2, float)</dt>
+            <dd>
+              <p>
+                A value from pi to negative pi. A value of pi corresponds to a heading of 0&deg;
+                (or &ldquo;north&rdquo;). The ship turns to port (left) as the value decreases.
+                A value of 0.0 corresponds to a heading of 180&deg; (or &ldquo;south&rdquo;).
+              </p>
+            </dd>
+            <dt>Unknown (bit 3.3, short)</dt>
+            <dt>Ship name (bit 3.4, string)</dt>
+            <dt>Forward shields (bit 3.5, float)</dt>
+            <dd>
+              <p>
+                Current strength of forward shield. A value greater than 0.0 indicates that this
+                shield is up, while a value of 0.0 or less means it's down. If enemy fire
+                penetrates the shield, this value can go negative; it will climb back towards
+                0.0 as the shield recovers.
+              </p>
+            </dd>
+            <dt>Forward shields max (bit 3.6, float)</dt>
+            <dd>
+              <p>
+                The maximum strength of the forward shield.
+              </p>
+            </dd>
+            <dt>Aft shields (bit 3.7, float)</dt>
+            <dd>
+              <p>
+                Current strength of aft shield. A value greater than 0.0 indicates that this
+                shield is up, while a value of 0.0 or less means it's down. If enemy fire
+                penetrates the shield, this value can go negative; it will climb back towards
+                0.0 as the shield recovers.
+              </p>
+            </dd>
+            <dt>Aft shields max (bit 3.8, float)</dt>
+            <dd>
+              <p>
+                The maximum strength of the aft shield.
+              </p>
+            </dd>
+            <dt>Last docked base (bit 4.1, int)</dt>
+            <dd>
+              <p>
+                The ID of the base that most recently initiated docking with the ship. This
+                field updates when a base's tractor beam latches onto the ship. Undocking does
+                not change this field; to detect undocking, watch for the ship's impulse (bit
+                1.2) or warp factor (bit 1.7) fields to go above zero.
+              </p>
+            </dd>
+            <dt><a href="#enum-alert-status">Alert status</a> (bit 4.2, byte, enumeration)</dt>
+            <dt>Unknown (bit 4.3, float)</dt>
+            <dt><a href="#enum-main-screen-view">Main screen view</a> (bit 4.4, byte, enumeration)</dt>
+            <dd>
+              <p>
+                The view currently displayed on the ship's main screen.
+              </p>
+            </dd>
+            <dt><a href="#enum-beam-frequency">Beam frequency</a> (bit 4.5, byte, enumeration)</dt>
+            <dd>
+              <p>
+                The frequency to which the beams are currently tuned.
+              </p>
+            </dd>
+            <dt>Available coolant (bit 4.6, byte)</dt>
+            <dd>
+              <p>
+                The total amount of coolant on the ship.
+              </p>
+            </dd>
+            <dt>Science target (bit 4.7, int)</dt>
+            <dd>
+              <p>
+                The ID of the object selected by the science officer, or 1 if the selection was
+                cleared.
+              </p>
+            </dd>
+            <dt>Captain target (bit 4.8, int)</dt>
+            <dd>
+              <p>
+                The ID of the object selected by the science officer, or 1 if the selection was
+                cleared.
+              </p>
+            </dd>
+            <dt><a href="#enum-drive-type">Drive type</a> (bit 5.1, byte, enumeration)</dt>
+            <dd>
+              <p>
+                The type of drive system the ship has.
+              </p>
+            </dd>
+            <dt>Scanning ID (bit 5.2, int)</dt>
+            <dd>
+              <p>
+                The ID of the object currently being scanned by the science officer.
+              </p>
+            </dd>
+            <dt>Scanning ID (bit 5.3, float)</dt>
+            <dd>
+              <p>
+                A value from 0.0 to 1.0 inclusive indicating the current progress of the active
+                science scan.
+              </p>
+            </dd>
+            <dt>Reverse (bit 5.4, boolean, 1 byte)</dt>
+            <dd>
+              <p>
+                True if the impulse drive is in reverse; false otherwise.
+              </p>
+            </dd>
+            <dt>Unknown (bit 5.5, float)</dt>
+            <dd>
+              <p>
+                Usually 0.0, though -1.0 has been observed.
+              </p>
+            </dd>
+            <dt>Unknown (bit 5.6, byte)</dt>
+            <dd>
+              <p>
+                <code>0x02</code> has been observed.
+              </p>
+            </dd>
+            <dt>Unknown (bit 5.7, byte)</dt>
+            <dd>
+              <p>
+                -1 has been observed.
+              </p>
+            </dd>
+          </section>
+
+          <section id="object-player-ship-upgrades">
+            <h3>Player Ship Upgrades</h3>
+            <dl>
+              <dt>Bit field (11 bytes)</dt>
+              <dd>
+                Note that only 29 bits are needed for the available upgrades; it is unknown at this
+                time what the remaining bits are used for, if anything. Setting them does not seem
+                to add any more properties to the object entry.
+              </dd>
+              <dt>Upgrade count (bits 1.1-4.5, int array)</dt>
+              <dd>
+                The number of each type of <a href="#enum-upgrade">upgrade</a> held by the player
+                ship.
+              </dd>
+            </dl>
+          </section>
+
+          <section id="object-torpedo">
+            <h3>Torpedo</h3>
+            <dl>
+              <dt>Bit field (1 byte)</dt>
+              <dt>Unknown (byte)</dt>
+              <dd>
+                <p>
+                  The torpedo's location on the X axis.
+                </p>
+              </dd>
+              <dt>X coordinate (bit 1.1, float)</dt>
+              <dd>
+                <p>
+                  The torpedo's location on the X axis.
+                </p>
+              </dd>
+              <dt>Y coordinate (bit 1.2, float)</dt>
+              <dd>
+                <p>
+                  The torpedo's location on the Y axis.
+                </p>
+              </dd>
+              <dt>Z coordinate (bit 1.3, float)</dt>
+              <dd>
+                <p>
+                  The torpedo's location on the Z axis.
+                </p>
+              </dd>
+              <dt>Unknown (bit 1.4, float?)</dt>
+              <dd>
+                <p>
+                  Appears to range from -1.0 to 1.0.
+                </p>
+              </dd>
+              <dt>Unknown (bit 1.5, float)</dt>
+              <dt>Unknown (bit 1.6, float)</dt>
+              <dt>Unknown (bit 1.7, int)</dt>
+              <dt>Unknown (bit 1.8, int)</dt>
+            </dl>
+          </section>
+
+          <section id="object-weapons-console">
+            <h3>Weapons Console</h3>
+            <dl>
+              <dt>Bit field (3 bytes)</dt>
+              <dt>Ordnance counts (bits 1.1-1.4, array)</dt>
+              <dd>
+                <p>
+                  This array contains up to four byte elements. Each element gives how many of a
+                  particular ordinance are stored on the ship, in the following order: homing
+                  missiles, nukes, mines, EMPs.
+                </p>
+              </dd>
+              <dt>Unknown (bit 1.5, byte)</dt>
+              <dt>Tube (un)load times (bits 1.6-2.3, array)</dt>
+              <dd>
+                <p>
+                  This array contains up to six float elements. Each element gives the (un)load
+                  time for the corresponding tube. This field should be ignored (even when
+                  present) if the tube's status is not loading or unloading.
+                </p>
+              </dd>
+              <dt><a href="#enum-tube-status">Tube status</a> (bits 2.4-3.1, array)</dt>
+              <dd>
+                <p>
+                  This array contains up to six byte elements. Each element indicates the
+                  occupation status of each tube.
+                </p>
+              </dd>
+              <dt><a href="#enum-ordnance-type">Ordnance type</a> (bits 3.2-3.7, array)
+              <dd>
+                <p>
+                  This array contains up to six byte elements. Each element indicates the type of
+                  ordnance in each tube. If the tube's status is unloaded, the tube is empty, and
+                  this field should be ignored even when present.
+                </p>
+              </dd>
+            </dl>
+          </section>
+
+          <section id="object-other">
+            <h3>Other Objects</h3>
+            <p>
+              The remaining object types (asteroids, black holes and mines) all use the same
+              properties:
+            </p>
+            <dl>
+              <dt>Bit field (1 byte)</dt>
+              <dd>
+                <p>
+                  The object's location on the X axis.
+                </p>
+              </dd>
+              <dt>X coordinate (bit 1.1, float)</dt>
+              <dd>
+                <p>
+                  The object's location on the X axis.
+                </p>
+              </dd>
+              <dt>Y coordinate (bit 1.2, float)</dt>
+              <dd>
+                <p>
+                  The object's location on the Y axis.
+                </p>
+              </dd>
+              <dt>Z coordinate (bit 1.3, float)</dt>
+              <dd>
+                <p>
+                  The object's location on the Z axis.
+                </p>
+              </dd>
+              <dt>Name (bit 1.4, string)</dt>
+              <dd>
+                <p>
+                  The object's name. In standard missions, this property is never used, but there
+                  may be named asteroids, black holes or mines in custom missions.
+                </p>
+              </dd>
+              <dt>Unknown (bit 1.4, float?)</dt>
+              <dt>Unknown (bit 1.5, float)</dt>
+              <dt>Unknown (bit 1.6, float)</dt>
+              <dt>Unknown (bit 1.7, int)</dt>
+              <dt>Unknown (bit 1.8, int)</dt>
+            </dl>
           </section>
         </section>
 
