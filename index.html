@@ -2824,12 +2824,15 @@
                 in separate packets. Each entry in the array is structured as follows:
               </p>
               <dl>
-                <dt><a href="#enum-object-type">Object type</a> (int, enumeration)</dt>
+                <dt><a href="#enum-object-type">Object type</a> (byte, enumeration)</dt>
                 <dd>
                   <p>
                     The type of object represented by this entry. All objects in the same array will
                     be of the same type. If you get <code>0x00</code> for this field, there are no
                     more objects in the array.
+                  </p>
+                  <p>
+                    Prior to v2.1.5, this property was transmitted as an int rather than a byte.
                   </p>
                 </dd>
                 <dt>Object ID (int)</dt>
