@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
   <head>
-    <title>Artemis Network Protocol</title>
+    <title>Artemis Protocols</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"></link>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css"></link>
     <link rel="stylesheet" href="style.css"></link>
@@ -10,20 +10,19 @@
     <script src="script.js"></script>
   </head>
   <body class="container">
-    <title>Artemis Network Protocol</title>
     <div class="row">
       <nav class="navsidebar col-xs-3">
         <ul id="sidebar" class="nav nav-stacked"></ul>
       </nav>
       <content class="col-xs-9">
-        <h1>Artemis Network Protocol</h1>
+        <h1>Artemis Protocols</h1>
         <section id="intro">
           <h2>Introduction</h2>
           <p>
-            This is unoffical documentation of the network protocol used by
+            This is unoffical documentation of the network and file protocols used by
             <a href="http://www.artemis.eochu.com/" target="_new"><cite>Artemis Spaceship Bridge Simulator</cite></a>.
             No official documentation exists, so the information in this document has been obtained
-            through community reverse-engineering efforts. There will be parts of the protocol that
+            through community reverse-engineering efforts. There will be parts of the protocols that
             are not completely documented because their purpose has not been determined, and some
             parts may not be accurate. Contributions to this documentation are welcome.
           </p>
@@ -32,7 +31,7 @@
         <section id="data-types">
           <h2>Data Types</h2>
           <p>
-            The Artemis protocol uses the following data types:
+            The Artemis protocols use the following data types:
             <ul>
               <li>byte</li>
               <li>short (2 bytes)</li>
@@ -46,7 +45,7 @@
           <section id="endianness">
             <h3>Endianness</h3>
             <p>
-              All multi-byte data types are transmitted in
+              All multi-byte data types are represented in
               <a href="https://en.wikipedia.org/wiki/Endianness" target="_new">little-endian</a>
               order (least-significant byte first). Numeric literals in this documentation, in order
               to follow the existing convention for many programming languages, are prefixed with
@@ -127,8 +126,8 @@
         <section id="enums">
           <h2>Enumerations</h2>
           <p>
-            When the protocol needs to refer to an item from a static list (enumeration), it will
-            use a predefined value to represent it. This section documents these enumerations.
+            When <em>Artemis</em> needs to refer to an item from a static list (enumeration), it
+            will use a predefined value to represent it. This section documents these enumerations.
           </p>
           <section id="enum-alert-status">
             <h3>Alert Status</h3>
@@ -4364,6 +4363,39 @@
               <li><a href="#keycapturetogglepacket">KeyCaptureTogglePacket</a></li>
             </ol>
           </section>
+        </section>
+
+        <section id="ship-internals">
+          <h2>Ship Internals</h2>
+          <p>
+            The layout of system nodes in a vessel is stored in an .snt file referenced by the
+            vessel's entry in vesselData.xml. This section documents the file format used by these
+            files.
+          </p>
+          <p>
+            A vessel's internal system grid is laid out in a 5 &times; 5 &times; 10 matrix: X (port
+            to starboard), Y (dorsal to ventral), then Z (fore to aft). An .snt file contains 250
+            blocks of data, with each block representing one node in the system grid. The nodes are
+            iterated first in the X axis, then Y, then Z. So the first ten nodes are (0,0,0) through
+            (0,0,9), followed by (0,1,0) through (0,1,9), etc.
+          </p>
+          <p>
+            Each block is 32 bytes long. The first 12 bytes contain the node's position in the
+            vessel's 3D coordinate system. (This is separate from its system grid coordinates.) The
+            coordinates are stored as three floats: X, Y, then Z.
+          </p>
+          <p>
+            Next is an int value which describes what kind of node it is. A value from 0 to 7
+            indicates that the node contains vital equipment for one of the ship systems; you can
+            tell which system by looking up the corresponding value in the
+            <a href="#enum-ship-system">ship system enumeration</a>. A value of -1 indicates a
+            hallway; it contains no ship systems but is still accessible to DAMCON teams. A value of
+            -2 indicates an empty node; it contains no ship systems and is not accessible to DAMCON
+            teams. This is typically for nodes that would fall outside the vessel's hull.
+          </p>
+          <p>
+            The remaining 16 bytes in the block appear to be reserved for future use.
+          </p>
         </section>
       </content>
     </div>
