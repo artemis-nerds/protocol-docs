@@ -3702,7 +3702,7 @@
                   represented by a value of 0.3333....
                 </p>
               </dd>
-              <dt>Coolant allocations (bits 3.1-3.8, float array)</dt>
+              <dt>Coolant allocations (bits 3.1-3.8, byte array)</dt>
               <dd>
                 <p>
                   The units of coolant allocated to each system.
@@ -4134,20 +4134,28 @@
           <section id="object-player-ship-upgrades">
             <h3>Player Ship Upgrades</h3>
             <p>
-              New as of v2.1.5.
+              New as of v2.1.5. Indicates how many of each upgrade the player ship has on board.
             </p>
             <dl>
               <dt>Bit field (11 bytes)</dt>
               <dd>
-                Note that only 29 bits are needed for the available upgrades; it is unknown at this
-                time what the remaining bits are used for, if anything. Setting them does not seem
-                to add any more properties to the object entry.
+                <p>
+                  Note that there are far more bits in this field than would be needed to record
+                  all of the known upgrade types. It is unknown at this time what fields the
+                  remaining bits represent.
+                </p>
               </dd>
-              <dt>Upgrade count (bits 1.1-4.5, int array)</dt>
-              <dd>
-                The number of each type of <a href="#enum-upgrade">upgrade</a> held by the player
-                ship.
-              </dd>
+              <dt>Unknown (bits 1.1-4.4, byte)</dt>
+              <dt>Infusion P-coils (bit 4.5, byte)</dt>
+              <dt>Unknown (bit 4.6, byte)</dt>
+              <dt>Tauron focusers (bit 4.7, byte)</dt>
+              <dt>Carpaction coils (bit 4.8, byte)</dt>
+              <dt>Unknown (bit 5.1, byte)</dt>
+              <dt>Cetrocite crystals (bit 5.2, byte)</dt>
+              <dt>Lateral arrays (bit 5.3, byte)</dt>
+              <dt>Unknown (bit 5.4, byte)</dt>
+              <dt>Secret code cases (bit 5.5, byte)</dt>
+              <dt>Unknown (bits 5.6-11.4, unknown data types)</dt>
             </dl>
           </section>
 
@@ -4156,11 +4164,6 @@
             <dl>
               <dt>Bit field (1 byte)</dt>
               <dt>Unknown (byte)</dt>
-              <dd>
-                <p>
-                  The torpedo's location on the X axis.
-                </p>
-              </dd>
               <dt>X coordinate (bit 1.1, float)</dt>
               <dd>
                 <p>
