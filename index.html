@@ -2011,25 +2011,52 @@
                         The X coordinate of the team's current node. This value does not change while
                         the team in in transit; it is only updated when they arrive at a new node.
                       </p>
-                      <dt>Goal Y coordinate (int)</dt>
-                      <dt>Current Y coordinate (int)</dt>
-                      <dt>Goal Z coordinate (int)</dt>
-                      <dt>Current Z coordinate (int)</dt>
-                      <dt>Progress (float)</dt>
-                      <dd>
-                        <p>
-                          A value between 0.0 and 1.0 that expresses how close the team is in their
-                          progress towards the goal node. The value starts at 1.0 as the team begins
-                          moving towards the goal node, and gradually decreases until it reaches 0.0
-                          upon their arriving at the goal.
-                        </p>
-                      </dd>
-                      <dt>Number of team members (int)</dt>
-                      <dd>
-                        <p>
-                          The number of people on this DAMCON team.
-                        </p>
-                      </dd>
+                    </dd>
+                    <dt>Goal Y coordinate (int)</dt>
+                    <dd>
+                      <p>
+                        The Y coordinate of the node to which this team is currently moving. If the
+                        team does not want to move elsewhere, this will be the same as their current
+                        Y coordinate.
+                      </p>
+                    </dd>
+                    <dt>Current Y coordinate (int)</dt>
+                    <dd>
+                      <p>
+                        The Y coordinate of the team's current node. This value does not change while
+                        the team in in transit; it is only updated when they arrive at a new node.
+                      </p>
+                    </dd>
+                    <dt>Goal Z coordinate (int)</dt>
+                    <dd>
+                      <p>
+                        The Z coordinate of the node to which this team is currently moving. If the
+                        team does not want to move elsewhere, this will be the same as their current
+                        Z coordinate.
+                      </p>
+                    </dd>
+                    <dt>Current Z coordinate (int)</dt>
+                    <dd>
+                      <p>
+                        The Z coordinate of the team's current node. This value does not change while
+                        the team in in transit; it is only updated when they arrive at a new node.
+                      </p>
+                    </dd>
+                    <dt>Progress (float)</dt>
+                    <dd>
+                      <p>
+                        A value between 0.0 and 1.0 that expresses how close the team is in their
+                        progress towards the goal node. The value starts at 1.0 as the team begins
+                        moving towards the goal node, and gradually decreases until it reaches 0.0
+                        upon their arriving at the goal.
+                      </p>
+                    </dd>
+                    <dt>Number of team members (int)</dt>
+                    <dd>
+                      <p>
+                        The number of people on this DAMCON team.
+                      </p>
+                    </dd>
                   </dl>
                 </dd>
               </dl>
@@ -2271,27 +2298,16 @@
               </p>
               <h4>Payload</h4>
               <dl>
-                <dt><a href="#enum-console-type">Console type</a> (byte, enumeration)</dt>
+                <dt>Subtype (int)</dt>
                 <dd>
                   <p>
-                    If this value is <code>0x00</code>, the message is received by the
-                    communications officer as a normal COMM message. Otherwise, it is sent as a
-                    popup message at a particular console type. The console that receives the
-                    message is determined by subtracting 1 from the value; the result then matches
-                    the values for the console type enumeration.
+                    Always <code>0x12</code>.
                   </p>
                 </dd>
-                <dt>Sender (string)</dt>
+                <dt>Target ID</dt>
                 <dd>
                   <p>
-                    The name of the message's sender. This can be any arbitrary string; it doesn't
-                    have to match the name of an existing object.
-                  </p>
-                </dd>
-                <dt>Message (string)</dt>
-                <dd>
-                  <p>
-                    The message to send.
+                    ID of the selected object.
                   </p>
                 </dd>
               </dl>
