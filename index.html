@@ -42,6 +42,9 @@
               <li>string (variable length)</li>
             </ul>
           </p>
+          <p>
+            These types can be combined in <em>structs</em> or <em>arrays</em>.
+          </p>
           <section id="endianness">
             <h3>Endianness</h3>
             <p>
@@ -72,6 +75,14 @@
               &ldquo;bit <em>{byte}</em>.<em>{bit}</em>&rdquo;, where the <em>byte</em> and
               <em>bit</em> values are one-based, and the bits are counted in little-endian order
               (least-significant bits first).
+            </p>
+            <p>
+              The most common use for a bit field is to declare which properties are defined
+              in a struct. Each bit represents a property, with <code>1</code> indicating that the
+              property is defined, and <code>0</code> meaning it is undefined. When sending updates
+              to clients, the Artemis server typically omits properties which are unchanged since
+              the last update; these properties will be undefined when the updated struct is
+              transmitted.
             </p>
             <h4>Example</h4>
             <p>
@@ -120,6 +131,31 @@
               Decoded, this is <code>H</code>, <code>i</code>, <code>!</code> and <code>null</code>,
               which terminates the string. Thus, the byte sequence represents the string "Hi!"
             </p>
+            <h3>Array Format</h3>
+            <p>
+              Arrays consist of an ordered list of values. These values can be primitive types,
+              strings, structs or other arrays. There are two basic kinds of arrays: delimited and
+              undelimited. Delimited arrays are typically used in circumstances where the exact
+              number of elements in the array is not known in advance. Elements are transmitted one
+              after the other until a particular byte is encountered instead of more data. With
+              undelimited arrays, either the exact size or exact number of elements is known, so no
+              delimiter is needed. Instead, parsing continues until the desired number of elements
+              is read, or all the bytes that make up the array are consumed.
+            </p>
+            <h3>Structs</h3>
+            <p>
+              Structs are complex types composed of primitive types, strings, arrays or other
+              structs. These properties are always specified in a particular defined order, so that
+              it is unneccessary to declare each property's name when reading or writing a struct.
+              There are two type of structs: static structs and bit field structs. A static struct
+              always transmits all of its properties. A bit field struct has a bit field as its
+              first property. Each bit in the field corresponds to one of the remaining properties
+              in the struct. If a bit is <code>1</code>, that property is defined; if it's
+              <code>0</code>, it is undefined and is omitted from the struct. When the Artemis
+              server sends game object updates, it will typically use bit field structs to only send
+              properties which have changed and leave the rest undefined; this reduces the payload
+              size for update packets.
+            </p>
           </section>
         </section>
 
@@ -127,7 +163,8 @@
           <h2>Enumerations</h2>
           <p>
             When <em>Artemis</em> needs to refer to an item from a static list (enumeration), it
-            will use a predefined value to represent it. This section documents these enumerations.
+            will use a predefined numeric value to represent it. This section documents these
+            enumerations.
           </p>
           <section id="enum-alert-status">
             <h3>Alert Status</h3>
@@ -1701,12 +1738,57 @@
               </p>
               <h4>Payload</h4>
               <dl>
-                <dt>Priority (int)</dt>
+                <dt>Channel (int)</dt>
                 <dd>
                   <p>
-                    Values appear to range from <code>0x00</code> (high priority) to <code>0x08</code>
-                    (low priority). In the stock client, this affects the message's background color.
+                    Indicates the channel on which the message was received. Values range from
+                    <code>0x00</code> to <code>0x08</code>. In the stock client, this affects the
+                    message's background color; the lower the channel number, the more red the
+                    background color. While this would seem to indicate priority, in practice, the
+                    channel number doesn't seem to correlate with message importance. Below is a
+                    list of message types received on each channel; note that this list may be
+                    incomplete and custom scenarios may send messages on any channel:
                   </p>
+                  <table>
+                    <tbody>
+                      <tr>
+                        <td><code>0x00</code></td>
+                        <td>Enemy taunts</td>
+                      </tr>
+                      <tr>
+                        <td><code>0x01</code></td>
+                        <td>?</td>
+                      </tr>
+                      <tr>
+                        <td><code>0x02</code></td>
+                        <td>?</td>
+                      </tr>
+                      <tr>
+                        <td><code>0x03</code></td>
+                        <td>Base destroyed</td>
+                      </tr>
+                      <tr>
+                        <td><code>0x04</code></td>
+                        <td>Base is under attack, docking complete, ship refuses orders</td>
+                      </tr>
+                      <tr>
+                        <td><code>0x05</code></td>
+                        <td>Base acknowledges build order or docking request</td>
+                      </tr>
+                      <tr>
+                        <td><code>0x06</code></td>
+                        <td>Ship accepts orders, base status response, ordnance built notice</td>
+                      </tr>
+                      <tr>
+                        <td><code>0x07</code></td>
+                        <td>Mission notification, mission transfer complete</td>
+                      </tr>
+                      <tr>
+                        <td><code>0x08</code></td>
+                        <td>Messages sent from player ships</td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </dd>
                 <dt>Sender (string)</dt>
                 <dd>
