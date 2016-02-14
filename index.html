@@ -1086,7 +1086,7 @@
             names for the packets in
             <a href="https://github.com/rjwut/ArtClientLib" target="_new">ArtClientLib</a>.
           </p>
-          <table class="table-striped">
+          <table id="packet-table" class="table-striped">
             <thead>
               <tr>
                 <th>Name</th>
@@ -1095,385 +1095,7 @@
                 <th>Subtype(s)</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td><a href="#allshipsettingspacket">AllShipSettingsPacket</a></td>
-                <td>server</td>
-                <td><code>0xf754c8fe</code></td>
-                <td><code>0x0f</code></td>
-              </tr>
-              <tr>
-                <td><a href="#audiocommandpacket">AudioCommandPacket</a></td>
-                <td>client</td>
-                <td><code>0x6aadc57f</code></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td><a href="#beamfiredpacket">BeamFiredPacket</a></td>
-                <td>server</td>
-                <td><code>0xb83fd2c4</code></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td><a href="#captainselectpacket">CaptainSelectPacket</a></td>
-                <td>client</td>
-                <td><code>0x4c821d3c</code></td>
-                <td><code>0x11</code></td>
-              </tr>
-              <tr>
-                <td><a href="#climbdivepacket">ClimbDivePacket</a></td>
-                <td>client</td>
-                <td><code>0x4c821d3c</code></td>
-                <td><code>0x1b</code></td>
-              </tr>
-              <tr>
-                <td><a href="#commsincomingpacket">CommsIncomingPacket</a></td>
-                <td>server</td>
-                <td><code>0xd672c35f</code></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td><a href="#commsoutgoingpacket">CommsOutgoingPacket</a></td>
-                <td>client</td>
-                <td><code>0x574c4c4b</code></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td><a href="#consolestatuspacket">ConsoleStatusPacket</a></td>
-                <td>server</td>
-                <td><code>0x19c6e2d4</code></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td><a href="#converttorpedopacket">ConvertTorpedoPacket</a></td>
-                <td>client</td>
-                <td><code>0x69cc01d9</code></td>
-                <td><code>0x03</code></td>
-              </tr>
-              <tr>
-                <td><a href="#destroyobjectpacket">DestroyObjectPacket</a></td>
-                <td>server</td>
-                <td><code>0xcc5a3e30</code></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td><a href="#difficultypacket">DifficultyPacket</a></td>
-                <td>server</td>
-                <td><code>0x3de66711</code></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td><a href="#dmxmessagepacket">DmxMessagePacket</a></td>
-                <td>server</td>
-                <td><code>0xf754c8fe</code></td>
-                <td><code>0x10</code></td>
-              </tr>
-              <tr>
-                <td><a href="#engautodamconupdatespacket">EngAutoDamconUpdatePacket</a></td>
-                <td>server</td>
-                <td><code>0xf754c8fe</code></td>
-                <td><code>0x0b</code></td>
-              </tr>
-              <tr>
-                <td><a href="#enggridupdatepacket">EngGridUpdatePacket</a></td>
-                <td>server</td>
-                <td><code>0x077e9f3c</code></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td><a href="#engsenddamconpacket">EngSendDamconPacket</a></td>
-                <td>client</td>
-                <td><code>0x69cc01d9</code></td>
-                <td><code>0x04</code></td>
-              </tr>
-              <tr>
-                <td><a href="#engsetautodamconpacket">EngSetAutoDamconPacket</a></td>
-                <td>client</td>
-                <td><code>0x4c821d3c</code></td>
-                <td><code>0x0c</code></td>
-              </tr>
-              <tr>
-                <td><a href="#engsetcoolantpacket">EngSetCoolantPacket</a></td>
-                <td>client</td>
-                <td><code>0x69cc01d9</code></td>
-                <td><code>0x00</code></td>
-              </tr>
-              <tr>
-                <td><a href="#engsetenergypacket">EngSetEnergyPacket</a></td>
-                <td>client</td>
-                <td><code>0x0351a5ac</code></td>
-                <td><code>0x04</code></td>
-              </tr>
-              <tr>
-                <td><a href="#firebeampacket">FireBeamPacket</a></td>
-                <td>client</td>
-                <td><code>0xc2bee72e</code></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td><a href="#firetubepacket">FireTubePacket</a></td>
-                <td>client</td>
-                <td><code>0x4c821d3c</code></td>
-                <td><code>0x08</code></td>
-              </tr>
-              <tr>
-                <td><a href="#gamemastermessagepacket">GameMasterMessagePacket</a></td>
-                <td>client</td>
-                <td><code>0x809305a7</code></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td><a href="#gamemasterselectpacket">GameMasterSelectPacket</a></td>
-                <td>client</td>
-                <td><code>0x4c821d3c</code></td>
-                <td><code>0x12</code></td>
-              </tr>
-              <tr>
-                <td><a href="#gamemessagepacket">GameMessagePacket</a></td>
-                <td>server</td>
-                <td><code>0xf754c8fe</code></td>
-                <td><code>0x0a</code></td>
-              </tr>
-              <tr>
-                <td><a href="#gameoverpacket">GameOverPacket</a></td>
-                <td>server</td>
-                <td><code>0xf754c8fe</code></td>
-                <td><code>0x06</code></td>
-              </tr>
-              <tr>
-                <td><a href="#gameoverreasonpacket">GameOverReasonPacket</a></td>
-                <td>server</td>
-                <td><code>0xf754c8fe</code></td>
-                <td><code>0x14</code></td>
-              </tr>
-              <tr>
-                <td><a href="#gameoverstatspacket">GameOverStatsPacket</a></td>
-                <td>server</td>
-                <td><code>0xf754c8fe</code></td>
-                <td><code>0x15</code></td>
-              </tr>
-              <tr>
-                <td><a href="#gamestartpacket" class="removed">GameStartPacket</a></td>
-                <td>server</td>
-                <td><code>0xf754c8fe</code></td>
-                <td><code>0x00</code></td>
-              </tr>
-              <tr>
-                <td><a href="#helmjumppacket">HelmJumpPacket</a></td>
-                <td>client</td>
-                <td><code>0x0351a5ac</code></td>
-                <td><code>0x05</code></td>
-              </tr>
-              <tr>
-                <td><a href="#helmrequestdockpacket">HelmRequestDockPacket</a></td>
-                <td>client</td>
-                <td><code>0x4c821d3c</code></td>
-                <td><code>0x07</code></td>
-              </tr>
-              <tr>
-                <td><a href="#helmsetimpulsepacket">HelmSetImpulsePacket</a></td>
-                <td>client</td>
-                <td><code>0x0351a5ac</code></td>
-                <td><code>0x00</code></td>
-              </tr>
-              <tr>
-                <td><a href="#helmsetpitchpacket">HelmSetPitchPacket</a></td>
-                <td>client</td>
-                <td><code>0x0351a5ac</code></td>
-                <td><code>0x02</code></td>
-              </tr>
-              <tr>
-                <td><a href="#helmsetsteeringpacket">HelmSetSteeringPacket</a></td>
-                <td>client</td>
-                <td><code>0x0351a5ac</code></td>
-                <td><code>0x01</code></td>
-              </tr>
-              <tr>
-                <td><a href="#helmsetwarppacket">HelmSetWarpPacket</a></td>
-                <td>client</td>
-                <td><code>0x4c821d3c</code></td>
-                <td><code>0x00</code></td>
-              </tr>
-              <tr>
-                <td><a href="#helmtogglereversepacket">HelmToggleReversePacket</a></td>
-                <td>client</td>
-                <td><code>0x4c821d3c</code></td>
-                <td><code>0x18</code></td>
-              </tr>
-              <tr>
-                <td><a href="#incomingaudiopacket">IncomingAudioPacket</a></td>
-                <td>server</td>
-                <td><code>0xae88e058</code></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td><a href="#intelpacket">IntelPacket</a></td>
-                <td>server</td>
-                <td><code>0xee665279</code></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td><a href="#jumpstatuspacket">JumpStatusPacket</a></td>
-                <td>server</td>
-                <td><code>0xf754c8fe</code></td>
-                <td><code>0x0c</code>-<code>0d</code></td>
-              </tr>
-              <tr>
-                <td><a href="#keycapturetogglepacket">KeyCaptureTogglePacket</a></td>
-                <td>server</td>
-                <td><code>0xf754c8fe</code></td>
-                <td><code>0x11</code></td>
-              </tr>
-              <tr>
-                <td><a href="#keystrokepacket">KeystrokePacket</a></td>
-                <td>client</td>
-                <td><code>0x4c821d3c</code></td>
-                <td><code>0x14</code></td>
-              </tr>
-              <tr>
-                <td><a href="#loadtubepacket">LoadTubePacket</a></td>
-                <td>client</td>
-                <td><code>0x69cc01d9</code></td>
-                <td><code>0x02</code></td>
-              </tr>
-              <tr>
-                <td><a href="#objectupdatepacket">ObjectUpdatePacket</a></td>
-                <td>server</td>
-                <td><code>0x80803df9</code></td>
-              </tr>
-              <tr>
-                <td><a href="#pausepacket">PausePacket</a></td>
-                <td>server</td>
-                <td><code>0xf754c8fe</code></td>
-                <td><code>0x04</code></td>
-              </tr>
-              <tr>
-                <td><a href="#perspectivepacket">PerspectivePacket</a></td>
-                <td>server</td>
-                <td><code>0xf754c8fe</code></td>
-                <td><code>0x12</code></td>
-              </tr>
-              <tr>
-                <td><a href="#playershipdamagepacket">PlayerShipDamagePacket</a></td>
-                <td>server</td>
-                <td><code>0xf754c8fe</code></td>
-                <td><code>0x05</code></td>
-              </tr>
-              <tr>
-                <td><a href="#readypacket">ReadyPacket</a></td>
-                <td>client</td>
-                <td><code>0x4c821d3c</code></td>
-                <td><code>0x0f</code></td>
-              </tr>
-              <tr>
-                <td><a href="#readypacket2">ReadyPacket2</a></td>
-                <td>client</td>
-                <td><code>0x4c821d3c</code></td>
-                <td><code>0x19</code></td>
-              </tr>
-              <tr>
-                <td><a href="#sciscanpacket">SciScanPacket</a></td>
-                <td>client</td>
-                <td><code>0x4c821d3c</code></td>
-                <td><code>0x13</code></td>
-              </tr>
-              <tr>
-                <td><a href="#sciselectpacket">SciSelectPacket</a></td>
-                <td>client</td>
-                <td><code>0x4c821d3c</code></td>
-                <td><code>0x10</code></td>
-              </tr>
-              <tr>
-                <td><a href="#setbeamfreqpacket">SetBeamFreqPacket</a></td>
-                <td>client</td>
-                <td><code>0x4c821d3c</code></td>
-                <td><code>0x0b</code></td>
-              </tr>
-              <tr>
-                <td><a href="#setmainscreenpacket">SetMainScreenPacket</a></td>
-                <td>client</td>
-                <td><code>0x4c821d3c</code></td>
-                <td><code>0x01</code></td>
-              </tr>
-              <tr>
-                <td><a href="#setshippacket">SetShipPacket</a></td>
-                <td>client</td>
-                <td><code>0x4c821d3c</code></td>
-                <td><code>0x0d</code></td>
-              </tr>
-              <tr>
-                <td><a href="#setshipsettingspacket">SetShipSettingsPacket</a></td>
-                <td>client</td>
-                <td><code>0x4c821d3c</code></td>
-                <td><code>0x16</code></td>
-              </tr>
-              <tr>
-                <td><a href="#setconsolepacket">SetConsolePacket</a></td>
-                <td>client</td>
-                <td><code>0x4c821d3c</code></td>
-                <td><code>0x0e</code></td>
-              </tr>
-              <tr>
-                <td><a href="#setweaponstargetpacket">SetWeaponsTargetPacket</a></td>
-                <td>client</td>
-                <td><code>0x4c821d3c</code></td>
-                <td><code>0x02</code></td>
-              </tr>
-              <tr>
-                <td><a href="#skyboxpacket">SkyboxPacket</a></td>
-                <td>server</td>
-                <td><code>0xf754c8fe</code></td>
-                <td><code>0x09</code></td>
-              </tr>
-              <tr>
-                <td><a href="#soundeffectpacket">SoundEffectPacket</a></td>
-                <td>server</td>
-                <td><code>0xf754c8fe</code></td>
-                <td><code>0x03</code></td>
-              </tr>
-              <tr>
-                <td><a href="#toggleautobeamspacket">ToggleAutoBeamsPacket</a></td>
-                <td>client</td>
-                <td><code>0x4c821d3c</code></td>
-                <td><code>0x03</code></td>
-              </tr>
-              <tr>
-                <td><a href="#toggleperspectivepacket">TogglePerspectivePacket</a></td>
-                <td>client</td>
-                <td><code>0x4c821d3c</code></td>
-                <td><code>0x1a</code></td>
-              </tr>
-              <tr>
-                <td><a href="#toggleredalertpacket">ToggleRedAlertPacket</a></td>
-                <td>client</td>
-                <td><code>0x4c821d3c</code></td>
-                <td><code>0x0a</code></td>
-              </tr>
-              <tr>
-                <td><a href="#toggleshieldspacket">ToggleShieldsPacket</a></td>
-                <td>client</td>
-                <td><code>0x4c821d3c</code></td>
-                <td><code>0x04</code></td>
-              </tr>
-              <tr>
-                <td><a href="#unloadtubepacket">UnloadTubePacket</a></td>
-                <td>client</td>
-                <td><code>0x4c821d3c</code></td>
-                <td><code>0x09</code></td>
-              </tr>
-              <tr>
-                <td><a href="#versionpacket">VersionPacket</a></td>
-                <td>server</td>
-                <td><code>0xe548e74a</code></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td><a href="#welcomepacket">WelcomePacket</a></td>
-                <td>server</td>
-                <td><code>0x6d04b3da</code></td>
-                <td></td>
-              </tr>
-            </tbody>
+            <tbody></tbody>
           </table>
           <p>
             Below is a list of packets whose purpose is unknown:
@@ -1521,7 +1143,7 @@
             <h3>A</h3>
             <section id="allshipsettingspacket">
               <h3>AllShipSettingsPacket</h3>
-              <div class="pkt-props">Type: <code>0xf754c8fe</code>:<code>0x0f</code> [from server]</div>
+              <div class="pkt-props">Type: <code>0xf754c8fe</code>:<code>0x0f</code> [from <span>server</span>]</div>
               <p>
                 Provides the list of available player ships.
               </p>
@@ -1553,7 +1175,7 @@
             </section>
             <section id="audiocommandpacket">
               <h3>AudioCommandPacket</h3>
-              <div class="pkt-props">Type: <code>0x6aadc57f</code> [from client]</div>
+              <div class="pkt-props">Type: <code>0x6aadc57f</code> [from <span>client</span>]</div>
               <p>
                 Instructs the server to play or dismiss an audio message.
               </p>
@@ -1577,7 +1199,7 @@
             <h3>B</h3>
             <section id="beamfiredpacket">
               <h3>BeamFiredPacket</h3>
-              <div class="pkt-props">Type: <code>0xb83fd2c4</code> [from server]</div>
+              <div class="pkt-props">Type: <code>0xb83fd2c4</code> [from <span>server</span>]</div>
               <p>
                 Notifies the client that a beam weapon has been fired.
               </p>
@@ -1675,7 +1297,7 @@
             <h3>C</h3>
             <section id="captainselectpacket">
               <h3>CaptainSelectPacket</h3>
-              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x11</code> [from client]</div>
+              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x11</code> [from <span>client</span>]</div>
               <p>
                 Notifies the server that a new target has been selected on the captain's map.
               </p>
@@ -1697,7 +1319,7 @@
             </section>
             <section id="climbdivepacket">
               <h3>ClimbDivePacket</h3>
-              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x1b</code> [from client]</div>
+              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x1b</code> [from <span>client</span>]</div>
               <p>
                 Causes the ship to climb or dive. This differs from
                 <a href="#helmsetpitchpacket">HelmSetPitchPacket</a> in that it indicates a
@@ -1726,7 +1348,7 @@
             </section>
             <section id="commsincomingpacket">
               <h3>CommsIncomingPacket</h3>
-              <div class="pkt-props">Type: <code>0xd672c35f</code> [from server]</div>
+              <div class="pkt-props">Type: <code>0xd672c35f</code> [from <span>server</span>]</div>
               <p>
                   Contains a single incoming text message to display at the COMMS station.
               </p>
@@ -1805,7 +1427,7 @@
             </section>
             <section id="commsoutgoingpacket">
               <h3>CommsOutgoingPacket</h3>
-              <div class="pkt-props">Type: <code>0x574c4c4b</code> [from client]</div>
+              <div class="pkt-props">Type: <code>0x574c4c4b</code> [from <span>client</span>]</div>
               <p>
                 Sends a COMMs message to the server.
               </p>
@@ -1852,7 +1474,7 @@
             </section>
             <section id="consolestatuspacket">
               <h3>ConsoleStatusPacket</h3>
-              <div class="pkt-props">Type: <code>0x19c6e2d4</code> [from server]</div>
+              <div class="pkt-props">Type: <code>0x19c6e2d4</code> [from <span>server</span>]</div>
               <p>
                 Indicates that a change has occurred in the availability status of one or more bridge
                 consoles.
@@ -1883,7 +1505,7 @@
             </section>
             <section id="converttorpedopacket">
               <h3>ConvertTorpedoPacket</h3>
-              <div class="pkt-props">Type: <code>0x69cc01d9</code>:<code>0x03</code> [from client]</div>
+              <div class="pkt-props">Type: <code>0x69cc01d9</code>:<code>0x03</code> [from <span>client</span>]</div>
               <p>
                 Converts a homing torpedo to energy or vice versa.
               </p>
@@ -1912,7 +1534,7 @@
             <h3>D</h3>
             <section id="destroyobjectpacket">
               <h3>DestroyObjectPacket</h3>
-              <div class="pkt-props">Type: <code>0xcc5a3e30</code> [from server]</div>
+              <div class="pkt-props">Type: <code>0xcc5a3e30</code> [from <span>server</span>]</div>
               <p>
                 Notifies the client that an object has been removed from play.
               </p>
@@ -1934,7 +1556,7 @@
             </section>
             <section id="difficultypacket">
               <h3>DifficultyPacket</h3>
-              <div class="pkt-props">Type: <code>0x3de66711</code> [from server]</div>
+              <div class="pkt-props">Type: <code>0x3de66711</code> [from <span>server</span>]</div>
               <p>
                 Informs clients of the difficulty level when starting or connecting to a game.
               </p>
@@ -1957,7 +1579,7 @@
             </section>
             <section id="dmxmessagepacket">
               <h3>DmxMessagePacket</h3>
-              <div class="pkt-props">Type: <code>0xf754c8fe</code>:<code>0x10</code> [from server]</div>
+              <div class="pkt-props">Type: <code>0xf754c8fe</code>:<code>0x10</code> [from <span>server</span>]</div>
               <p>
                 Sends DMX messages. This packet is only sent to main screen consoles for ships other
                 than the first.
@@ -1989,7 +1611,7 @@
             <h3>E</h3>
             <section id="engautodamconupdatepacket">
               <h3>EngAutoDamconUpdatePacket</h3>
-              <div class="pkt-props">Type: <code>0xf754c8fe</code>:<code>0x0b</code> [from server]</div>
+              <div class="pkt-props">Type: <code>0xf754c8fe</code>:<code>0x0b</code> [from <span>server</span>]</div>
               <p>
                 Informs the client of changes to DAMCON team autonomy status. Triggered by the
                 &ldquo;Autonomous&rdquo; button in the engineering console.
@@ -2012,7 +1634,7 @@
             </section>
             <section id="enggridupdatepacket">
               <h3>EngGridUpdatePacket</h3>
-              <div class="pkt-props">Type: <code>0x077e9f3c</code> [from server]</div>
+              <div class="pkt-props">Type: <code>0x077e9f3c</code> [from <span>server</span>]</div>
               <p>
                 Updates damage to the various system grids on the ship and DAMCON team locations and
                 status.
@@ -2139,7 +1761,7 @@
             </section>
             <section id="engsenddamconpacket">
               <h3>EngSendDamconPacket</h3>
-              <div class="pkt-props">Type: <code>0x69cc01d9</code>:<code>0x04</code> [from client]</div>
+              <div class="pkt-props">Type: <code>0x69cc01d9</code>:<code>0x04</code> [from <span>client</span>]</div>
               <p>
                 Directs a DAMCON team to go to a particular grid location on the ship.
               </p>
@@ -2179,7 +1801,7 @@
             </section>
             <section id="engsetautodamconpacket">
               <h3>EngSetAutoDamconPacket</h3>
-              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x0c</code> [from client]</div>
+              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x0c</code> [from <span>client</span>]</div>
               <p>
                 Notifies the server that DAMCON team autonomy has been togged on/off.
               </p>
@@ -2201,7 +1823,7 @@
             </section>
             <section id="engsetcoolantpacket">
               <h3>EngSetCoolantPacket</h3>
-              <div class="pkt-props">Type: <code>0x69cc01d9</code>:<code>0x00</code> [from client]</div>
+              <div class="pkt-props">Type: <code>0x69cc01d9</code>:<code>0x00</code> [from <span>client</span>]</div>
               <p>
                 Sets the amount of coolant to be allocated to a system.
               </p>
@@ -2241,7 +1863,7 @@
             </section>
             <section id="engsetenergypacket">
               <h3>EngSetEnergyPacket</h3>
-              <div class="pkt-props">Type: <code>0x0351a5ac</code>:<code>0x04</code> [from client]</div>
+              <div class="pkt-props">Type: <code>0x0351a5ac</code>:<code>0x04</code> [from <span>client</span>]</div>
               <p>
                 Sets the amount of energy to be allocated to a system.
               </p>
@@ -2274,7 +1896,7 @@
             <h3>F</h3>
             <section id="firebeampacket">
               <h3>FireBeamPacket</h3>
-              <div class="pkt-props">Type: <code>0xc2bee72e</code> [from client]</div>
+              <div class="pkt-props">Type: <code>0xc2bee72e</code> [from <span>client</span>]</div>
               <p>
                 Notifies the server that the weapons officer wants to manually fire beam weapons.
               </p>
@@ -2308,7 +1930,7 @@
             </section>
             <section id="firetubepacket">
               <h3>FireTubePacket</h3>
-              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x08</code> [from client]</div>
+              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x08</code> [from <span>client</span>]</div>
               <p>
                 Notifies the server that the weapons officer wants to fire whatever's loaded in a
                 certain tube.
@@ -2334,7 +1956,7 @@
             <h3>G</h3>
             <section id="gamemastermessagepacket">
               <h3>GameMasterMessagePacket</h3>
-              <div class="pkt-props">Type: <code>0x809305a7</code> [from client]</div>
+              <div class="pkt-props">Type: <code>0x809305a7</code> [from <span>client</span>]</div>
               <p>
                 A packet sent by the game master console to the server which causes a message to be
                 displayed on a client.
@@ -2368,7 +1990,7 @@
             </section>
             <section id="gamemasterselectpacket">
               <h3>GameMasterSelectPacket</h3>
-              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x12</code> [from client]</div>
+              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x12</code> [from <span>client</span>]</div>
               <p>
                 Notifies the server that a new target has been selected on the game master's map.
               </p>
@@ -2390,7 +2012,7 @@
             </section>
             <section id="gamemessagepacket">
               <h3>GameMessagePacket</h3>
-              <div class="pkt-props">Type: <code>0xf754c8fe</code>:<code>0x0a</code> [from server]</div>
+              <div class="pkt-props">Type: <code>0xf754c8fe</code>:<code>0x0a</code> [from <span>server</span>]</div>
               <p>
                 Contains a message to be displayed on the screen. The stock client displays the
                 message in a &ldquo;popup&rdquo; box in the lower-right corner.
@@ -2413,7 +2035,7 @@
             </section>
             <section id="gameoverpacket">
               <h3>GameOverPacket</h3>
-              <div class="pkt-props">Type: <code>0xf754c8fe</code>:<code>0x06</code> [from server]</div>
+              <div class="pkt-props">Type: <code>0xf754c8fe</code>:<code>0x06</code> [from <span>server</span>]</div>
               <p>
                 Informs the client that the game is over. Transmitted when the &ldquo;End
                 Game&rdquo; button on the statistics page is clicked.
@@ -2430,7 +2052,7 @@
             </section>
             <section id="gameoverreasonpacket">
               <h3>GameOverReasonPacket</h3>
-              <div class="pkt-props">Type: <code>0xf754c8fe</code>:<code>0x14</code> [from server]</div>
+              <div class="pkt-props">Type: <code>0xf754c8fe</code>:<code>0x14</code> [from <span>server</span>]</div>
               <p>
                 Provides the reason why the game ended.
               </p>
@@ -2452,7 +2074,7 @@
             </section>
             <section id="gameoverstatspacket">
               <h3>GameOverStatsPacket</h3>
-              <div class="pkt-props">Type: <code>0xf754c8fe</code>:<code>0x15</code> [from server]</div>
+              <div class="pkt-props">Type: <code>0xf754c8fe</code>:<code>0x15</code> [from <span>server</span>]</div>
               <p>
                 Provides endgame statistics.
               </p>
@@ -2499,7 +2121,7 @@
             </section>
             <section id="gamestartpacket">
               <h3 class="removed">GameStartPacket</h3>
-              <div class="pkt-props">Type: <code>0xf754c8fe</code>:<code>0x00</code> [from server]</div>
+              <div class="pkt-props">Type: <code>0xf754c8fe</code>:<code>0x00</code> [from <span>server</span>]</div>
               <p>
                 Sent when the simulation starts. This packet appears to have been discontinued as of
                 v2.1.1.
@@ -2533,7 +2155,7 @@
             <h3>H</h3>
             <section id="helmjumppacket">
               <h3>HelmJumpPacket</h3>
-              <div class="pkt-props">Type: <code>0x0351a5ac</code>:<code>0x04</code> [from client]</div>
+              <div class="pkt-props">Type: <code>0x0351a5ac</code>:<code>0x04</code> [from <span>client</span>]</div>
               <p>
                 Initiates a jump. Note that the stock client
                 <a href="https://en.wikipedia.org/wiki/Big_red_button#Molly-guard" target="_new">&ldquo;molly-guards&rdquo;</a>
@@ -2566,7 +2188,7 @@
             </section>
             <section id="helmrequestdockpacket">
               <h3>HelmRequestDockPacket</h3>
-              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x07</code> [from client]</div>
+              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x07</code> [from <span>client</span>]</div>
               <p>
                 Request docking with the nearest station.
               </p>
@@ -2588,7 +2210,7 @@
             </section>
             <section id="helmsetimpulsepacket">
               <h3>HelmSetImpulsePacket</h3>
-              <div class="pkt-props">Type: <code>0x0351a5ac</code>:<code>0x00</code> [from client]</div>
+              <div class="pkt-props">Type: <code>0x0351a5ac</code>:<code>0x00</code> [from <span>client</span>]</div>
               <p>
                 Sets the throttle for impulse engines.
               </p>
@@ -2612,7 +2234,7 @@
             </section>
             <section id="helmsetpitchpacket">
               <h3>HelmSetPitchPacket</h3>
-              <div class="pkt-props">Type: <code>0x0351a5ac</code>:<code>0x02</code> [from client]</div>
+              <div class="pkt-props">Type: <code>0x0351a5ac</code>:<code>0x02</code> [from <span>client</span>]</div>
               <p>
                 Sets the desired pitch for the player ship. This differs from
                 <a href="#climbdivepacket">ClimbDivePacket</a> in that it sets a precise pitch value
@@ -2639,7 +2261,7 @@
             </section>
             <section id="helmsetsteeringpacket">
               <h3>HelmSetSteeringPacket</h3>
-              <div class="pkt-props">Type: <code>0x0351a5ac</code>:<code>0x01 </code> [from client]</div>
+              <div class="pkt-props">Type: <code>0x0351a5ac</code>:<code>0x01 </code> [from <span>client</span>]</div>
               <p>
                 Sets the position of the ship's &ldquo;rudder&rdquo;, controlling its turn rate.
               </p>
@@ -2664,7 +2286,7 @@
             </section>
             <section id="helmsetwarppacket">
               <h3>HelmSetWarpPacket</h3>
-              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x00</code> [from client]</div>
+              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x00</code> [from <span>client</span>]</div>
               <p>
                 Sets the ship's warp factor. Actual velocity will depend on the power allocated to
                 warp by engineering.
@@ -2688,7 +2310,7 @@
             </section>
             <section id="helmtogglereversepacket">
               <h3>HelmToggleReversePacket</h3>
-              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x18</code> [from client]</div>
+              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x18</code> [from <span>client</span>]</div>
               <p>
                 Toggles the impulse engines between forward and reverse drive.
               </p>
@@ -2713,7 +2335,7 @@
             <h3>I</h3>
             <section id="incomingaudiopacket">
               <h3>IncomingAudioPacket</h3>
-              <div class="pkt-props">Type: <code>0xae88e058</code> [from server]</div>
+              <div class="pkt-props">Type: <code>0xae88e058</code> [from <span>server</span>]</div>
               <p>
                 Informs the client of incoming audio messages (used in custom scenarios).
               </p>
@@ -2753,7 +2375,7 @@
             </section>
             <section id="intelpacket">
               <h3>IntelPacket</h3>
-              <div class="pkt-props">Type: <code>0xee665279</code> [from server]</div>
+              <div class="pkt-props">Type: <code>0xee665279</code> [from <span>server</span>]</div>
               <p>
                 Contains intel about another ship. Intel on allied ships (and biomechs, for some
                 reason) is sent right away. Intel for enemy ships is sent after undergoing a level 2
@@ -2788,7 +2410,7 @@
             <h3>J</h3>
             <section id="jumpstatuspacket">
               <h3>JumpStatusPacket</h3>
-              <div class="pkt-props">Type: <code>0xf754c8fe</code>:<code>0x0c</code>-<code>0d</code> [from server]</div>
+              <div class="pkt-props">Type: <code>0xf754c8fe</code>:<code>0x0c</code>-<code>0d</code> [from <span>server</span>]</div>
               <p>
                 Notifies the client that a jump has started or completed.
               </p>
@@ -2809,7 +2431,7 @@
             <h3>K</h3>
             <section id="keycapturetogglepacket">
               <h3>KeyCaptureTogglePacket</h3>
-              <div class="pkt-props">Type: <code>0xf754c8fe</code>:<code>0x11</code> [from server]</div>
+              <div class="pkt-props">Type: <code>0xf754c8fe</code>:<code>0x11</code> [from <span>server</span>]</div>
               <p>
                 Sent to all consoles when key capture is enabled or disabled for any console.
               </p>
@@ -2834,7 +2456,7 @@
             </section>
             <section id="keystrokepacket">
               <h3>KeystrokePacket</h3>
-              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x14</code> [from client]</div>
+              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x14</code> [from <span>client</span>]</div>
               <p>
                 Informs the server that the player at this console pressed a particular key. This is
                 used for custom mission scripts to allow keystrokes to trigger events. This packet
@@ -2869,7 +2491,7 @@
             <h3>L</h3>
             <section id="loadtubepacket">
               <h3>LoadTubePacket</h3>
-              <div class="pkt-props">Type: <code>0x69cc01d9</code>:<code>0x02</code> [from client]</div>
+              <div class="pkt-props">Type: <code>0x69cc01d9</code>:<code>0x02</code> [from <span>client</span>]</div>
               <p>
                 Loads a tube with a particular type of ordnance.
               </p>
@@ -2902,7 +2524,7 @@
             <h3>O</h3>
             <section id="objectupdatepacket">
               <h3>ObjectUpdatePacket</h3>
-              <div class="pkt-props">Type: <code>0x80803df9</code> [from server]</div>
+              <div class="pkt-props">Type: <code>0x80803df9</code> [from <span>server</span>]</div>
               <p>
                 Updates the status of one or more objects in the game world.
               </p>
@@ -2962,7 +2584,7 @@
             <h3>P</h3>
             <section id="pausepacket">
               <h3>PausePacket</h3>
-              <div class="pkt-props">Type: <code>0xf754c8fe</code>:<code>0x04</code> [from server]</div>
+              <div class="pkt-props">Type: <code>0xf754c8fe</code>:<code>0x04</code> [from <span>server</span>]</div>
               <p>
                 Sent by the server when the simulation is paused or resumed.
               </p>
@@ -2984,7 +2606,7 @@
             </section>
             <section id="perspectivepacket">
               <h3>PerspectivePacket</h3>
-              <div class="pkt-props">Type: <code>0xf754c8fe</code>:<code>0x12</code> [from server]</div>
+              <div class="pkt-props">Type: <code>0xf754c8fe</code>:<code>0x12</code> [from <span>server</span>]</div>
               <p>
                 Sent by the server when the main viewscreen perspective has changed.
               </p>
@@ -3006,7 +2628,7 @@
             </section>
             <section id="playershipdamagepacket">
               <h3>PlayerShipDamagePacket</h3>
-              <div class="pkt-props">Type: <code>0xf754c8fe</code>:<code>0x05</code> [from server]</div>
+              <div class="pkt-props">Type: <code>0xf754c8fe</code>:<code>0x05</code> [from <span>server</span>]</div>
               <p>
                 Appears to be sent when the player ship is hit by enemy fire. Has been observed when
                 fired upon by enemy beams. Information about this packet is still uncertain and the
@@ -3041,7 +2663,7 @@
             <h3>R</h3>
             <section id="readypacket">
               <h3>ReadyPacket</h3>
-              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x0f</code> [from client]</div>
+              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x0f</code> [from <span>client</span>]</div>
               <p>
                 Sent by the client when they click the &ldquo;Ready&rdquo; button to indicate that
                 it is ready to join the game. The client must select at least one station before
@@ -3067,7 +2689,7 @@
             </section>
             <section id="readypacket2">
               <h3>ReadyPacket2</h3>
-              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x19</code> [from client]</div>
+              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x19</code> [from <span>client</span>]</div>
               <p>
                 Believed to have something to do with a client's ready state, but it's currently
                 unknown exactly what this packet means. The server doesn't appear to care if you
@@ -3094,7 +2716,7 @@
             <h3>S</h3>
             <section id="sciscanpacket">
               <h3>SciScanPacket</h3>
-              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x13</code> [from client]</div>
+              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x13</code> [from <span>client</span>]</div>
               <p>
                 Starts a science scan.
               </p>
@@ -3116,7 +2738,7 @@
             </section>
             <section id="sciselectpacket">
               <h3>SciSelectPacket</h3>
-              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x10</code> [from client]</div>
+              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x10</code> [from <span>client</span>]</div>
               <p>
                 Notifies the server that a new target has been selected on the science map.
               </p>
@@ -3138,7 +2760,7 @@
             </section>
             <section id="setbeamfreqpacket">
               <h3>SetBeamFreqPacket</h3>
-              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x0b</code> [from client]</div>
+              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x0b</code> [from <span>client</span>]</div>
               <p>
                 Sets the beam frequency.
               </p>
@@ -3160,7 +2782,7 @@
             </section>
             <section id="setconsolepacket">
               <h3>SetConsolePacket</h3>
-              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x0e</code> [from client]</div>
+              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x0e</code> [from <span>client</span>]</div>
               <p>
                 Sets whether or not this client will use a particular console. A single client may
                 use multiple consoles, and some consoles allow multiple clients to use them. Clients
@@ -3190,7 +2812,7 @@
             </section>
             <section id="setmainscreenpacket">
               <h3>SetMainScreenPacket</h3>
-              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x01</code> [from client]</div>
+              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x01</code> [from <span>client</span>]</div>
               <p>
                 Sets the view to display on the main screen.
               </p>
@@ -3212,7 +2834,7 @@
             </section>
             <section id="setshippacket">
               <h3>SetShipPacket</h3>
-              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x0d</code> [from client]</div>
+              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x0d</code> [from <span>client</span>]</div>
               <p>
                 Sets which ship the client will be on. This should be sent before
                 <a href="#setconsolepacket">SetConsolePacket</a>.
@@ -3235,7 +2857,7 @@
             </section>
             <section id="setshipsettingspacket">
               <h3>SetShipSettingsPacket</h3>
-              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x16</code> [from client]</div>
+              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x16</code> [from <span>client</span>]</div>
               <p>
                 Sets the name, ship type and drive type for the currently-selected ship.
               </p>
@@ -3275,7 +2897,7 @@
             </section>
             <section id="setconsolespacket">
               <h3>SetConsolePacket</h3>
-              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x0e</code> [from client]</div>
+              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x0e</code> [from <span>client</span>]</div>
               <p>
                 Sets whether or not this client will serve at a particular bridge console.
               </p>
@@ -3303,7 +2925,7 @@
             </section>
             <section id="setconsolespacket">
               <h3>SetWeaponsTargetPacket</h3>
-              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x02</code> [from client]</div>
+              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x02</code> [from <span>client</span>]</div>
               <p>
                 Notifies the server that a new target has been selected on the weapons console.
               </p>
@@ -3325,7 +2947,7 @@
             </section>
             <section id="skyboxpacket">
               <h3>SkyboxPacket</h3>
-              <div class="pkt-props">Type: <code>0xf754c8fe</code>:<code>0x09</code> [from server]</div>
+              <div class="pkt-props">Type: <code>0xf754c8fe</code>:<code>0x09</code> [from <span>server</span>]</div>
               <p>
                 Sent to change the displayed skybox image on the client. The server will send this
                 packet at the start of a mission. The server will also send it any time a custom
@@ -3357,7 +2979,7 @@
             </section>
             <section id="soundeffectpacket">
               <h3>SoundEffectPacket</h3>
-              <div class="pkt-props">Type: <code>0xf754c8fe</code>:<code>0x03</code> [from server]</div>
+              <div class="pkt-props">Type: <code>0xf754c8fe</code>:<code>0x03</code> [from <span>server</span>]</div>
               <p>
                 Causes the client to play a sound effect file.
               </p>
@@ -3382,7 +3004,7 @@
             <h3>T</h3>
             <section id="toggleautobeamspacket">
               <h3>ToggleAutoBeamsPacket</h3>
-              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x03</code> [from client]</div>
+              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x03</code> [from <span>client</span>]</div>
               <p>
                 Informs the server that the auto beams setting has been toggled.
               </p>
@@ -3404,7 +3026,7 @@
             </section>
             <section id="toggleperspectivepacket">
               <h3>TogglePerspectivePacket</h3>
-              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x1a</code> [from client]</div>
+              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x1a</code> [from <span>client</span>]</div>
               <p>
                 Toggles between first- and third-person perspective on the main screen.
               </p>
@@ -3426,7 +3048,7 @@
             </section>
             <section id="toggleredalertpacket">
               <h3>ToggleRedAlertPacket</h3>
-              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x0a</code> [from client]</div>
+              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x0a</code> [from <span>client</span>]</div>
               <p>
                 Toggles the ship's red alert status.
               </p>
@@ -3448,7 +3070,7 @@
             </section>
             <section id="toggleredalertpacket">
               <h3>ToggleShieldsPacket</h3>
-              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x04</code> [from client]</div>
+              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x04</code> [from <span>client</span>]</div>
               <p>
                 Toggles the shields up or down.
               </p>
@@ -3473,7 +3095,7 @@
             <h3>U</h3>
             <section id="unloadtubepacket">
               <h3>UnloadTubePacket</h3>
-              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x09</code> [from client]</div>
+              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x09</code> [from <span>client</span>]</div>
               <p>
                 Removes whatever ordnance is loaded in a tube.
               </p>
@@ -3498,7 +3120,7 @@
             <h3>V</h3>
             <section id="versionpacket">
               <h3>VersionPacket</h3>
-              <div class="pkt-props">Type: <code>0xe548e74a</code> [from server]</div>
+              <div class="pkt-props">Type: <code>0xe548e74a</code> [from <span>server</span>]</div>
               <p>
                 Gives the server version number. This packet is sent immediately after the
                 <a href="#welcomepacket">WelcomePacket</a>.
@@ -3536,7 +3158,7 @@
             <h3>W</h3>
             <section id="welcomepacket">
               <h3>WelcomePacket</h3>
-              <div class="pkt-props">Type: <code>0x6d04b3da</code> [from server]</div>
+              <div class="pkt-props">Type: <code>0x6d04b3da</code> [from <span>server</span>]</div>
               <p>
                 Indicates a successful connection to the Artemis server. This is the first packet
                 sent upon connection.
