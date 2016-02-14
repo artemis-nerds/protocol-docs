@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
     <title>Artemis Protocols</title>
@@ -497,7 +497,8 @@
                 <tr>
                   <th></th>
                   <th>&lt; v2.1</th>
-                  <th>&ge; v2.1</th>
+                  <th>&ge; v2.1, &lt; v2.3</th>
+                  <th>&ge; v2.3</th>
                 </tr>
               </thead>
               <tbody>
@@ -505,9 +506,11 @@
                   <td><code>0x00</code></td>
                   <td>main screen</td>
                   <td>main screen</td>
+                  <td>main screen</td>
                 </tr>
                 <tr>
                   <td><code>0x01</code></td>
+                  <td>helm</td>
                   <td>helm</td>
                   <td>helm</td>
                 </tr>
@@ -515,9 +518,11 @@
                   <td><code>0x02</code></td>
                   <td>weapons</td>
                   <td>weapons</td>
+                  <td>weapons</td>
                 </tr>
                 <tr>
                   <td><code>0x03</code></td>
+                  <td>engineering</td>
                   <td>engineering</td>
                   <td>engineering</td>
                 </tr>
@@ -525,9 +530,11 @@
                   <td><code>0x04</code></td>
                   <td>science</td>
                   <td>science</td>
+                  <td>science</td>
                 </tr>
                 <tr>
                   <td><code>0x05</code></td>
+                  <td>communications</td>
                   <td>communications</td>
                   <td>communications</td>
                 </tr>
@@ -535,19 +542,29 @@
                   <td><code>0x06</code></td>
                   <td>observer</td>
                   <td>data</td>
+                  <td>fighter</td>
                 </tr>
                 <tr>
                   <td><code>0x07</code></td>
                   <td>captain's map</td>
                   <td>observer</td>
+                  <td>data</td>
                 </tr>
                 <tr>
                   <td><code>0x08</code></td>
                   <td>game master</td>
                   <td>captain's map</td>
+                  <td>observer</td>
                 </tr>
                 <tr>
                   <td><code>0x09</code></td>
+                  <td><em>unused</em></td>
+                  <td>game master</td>
+                  <td>captain's map</td>
+                </tr>
+                <tr>
+                  <td><code>0x0a</code></td>
+                  <td><em>unused</em></td>
                   <td><em>unused</em></td>
                   <td>game master</td>
                 </tr>
@@ -1484,9 +1501,9 @@
                 <dt>Ship number (int)</dt>
                 <dd>
                   <p>
-                    The number of the ship whose consoles are being described. This value is
-                    one-based, so by default the ship identified by <code>0x01</code> is named
-                    <em>Artemis</em>.
+                    The number of the ship whose consoles are being described. Before v2.3.0, this
+                    value was one-based, so by default the ship identified by <code>0x01</code> was
+                    <em>Artemis</em>. As of v2.3.0 it is now zero-based.
                   </p>
                 </dd>
                 <dt><a href="#enum-console-status">Console status</a> (array)</dt>
@@ -1894,6 +1911,29 @@
           </section>
           <section id="pkt-f">
             <h3>F</h3>
+            <section id="fighterbaystatuspacket">
+              <h3>FighterBayStatusPacket</h3>
+              <div class="pkt-props">Type: <code>0x9ad1f23b</code> [from <span>server</span>]</div>
+              <p>
+                Updates the client of the current status of the ship's fighter bays.
+              </p>
+              <h4>Payload</h4>
+              <p>
+                The payload consists of an array of structs, each one describing a single fighter, and
+                terminated with <code>0x00000000</code>. The struct's properties are as follows:
+              </p>
+              <dl>
+                <dt>Object ID? (int)</dt>
+                <dt>Fighter name (string)</dt>
+                <dt>Fighter class name (string)</dt>
+                <dt>Unknown (int)</dt>
+                <dd>
+                  <p>
+                    Possibly refuel time remaining.
+                  </p>
+                </dd>
+              </dl>
+            </section>
             <section id="firebeampacket">
               <h3>FireBeamPacket</h3>
               <div class="pkt-props">Type: <code>0xc2bee72e</code> [from <span>client</span>]</div>
@@ -3646,7 +3686,7 @@
 
           <section id="object-player-ship">
             <h3>Player Ship</h3>
-            <dt>Bit field (5 bytes)</dt>
+            <dt>Bit field (6 bytes, 5 bytes before v2.3.0)</dt>
             <dt>Unknown (bit 1.1, int)</dt>
             <dd>
               <p>
@@ -3812,7 +3852,7 @@
                 The ID of the object currently being scanned by the science officer.
               </p>
             </dd>
-            <dt>Scanning ID (bit 5.3, float)</dt>
+            <dt>Scanning progress (bit 5.3, float)</dt>
             <dd>
               <p>
                 A value from 0.0 to 1.0 inclusive indicating the current progress of the active
@@ -3837,12 +3877,14 @@
                 <code>0x02</code> has been observed.
               </p>
             </dd>
-            <dt>Unknown (bit 5.7, byte)</dt>
+            <dt>Unknown (bit 5.7, 4 bytes)</dt>
+            <dt>Unknown (bit 5.8, byte, new as of v2.3.0)</dt>
             <dd>
               <p>
-                -1 has been observed.
+                0 has been observed.
               </p>
             </dd>
+            <dt>Unknown (bit 6.1, int?, new as of v2.3.0)</dt>
           </section>
 
           <section id="object-player-ship-upgrades">
