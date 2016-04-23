@@ -1181,6 +1181,7 @@
                     <dt><a href="#enum-drive-type">Drive type</a> (int, enumeration)</dt>
                     <dd>Whether the ship has warp or jump drive</dd>
                     <dt>Ship type (int)</dt>
+                    <dt>Accent Color (int) (v2.4 or later)</dt>
                     <dd>ID from vesselData.xml</dd>
                     <dt>Unknown (int) (v2.0 or later)</dt>
                     <dd>Only <code>0x01</code> has been observed thus far.</dd>
@@ -3935,6 +3936,13 @@
                 The object ID of the associated capital ship, if this ship is a fighter.
               </p>
             </dd>
+            <dt>Accent Color (bit 6.2, int, new as of v2.4.0)</dt>
+            <dd>
+              <p>
+                The accent color of the ship.
+              </p>
+            </dd>
+            <dt>Unknown (bit 6.3, 4 bytes, new as of v2.4.0)</dt>
           </section>
 
           <section id="object-player-ship-upgrades">
