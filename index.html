@@ -2159,12 +2159,12 @@
                 </dd>
               </dl>
             </section>
-            <section id="gamestartpacket">
-              <h3 class="removed">GameStartPacket</h3>
+            <section id="destroyobjectpacket2">
+              <h3>DestroyObjectPacket2</h3>
               <div class="pkt-props">Type: <code>0xf754c8fe</code>:<code>0x00</code> [from <span>server</span>]</div>
               <p>
-                Sent when the simulation starts. This packet appears to have been discontinued as of
-                v2.1.1.
+                In earlier versions, sent when the simulation starts, but this appears to have been discontinued as of
+                v2.1.1.  Starting in v2.3, this packet indicates that an object was destroyed.
               </p>
               <h4>Payload</h4>
               <dl>
@@ -2174,18 +2174,16 @@
                     Always <code>0x00</code>.
                   </p>
                 </dd>
-                <dt>Unknown (int)</dt>
+                <dt><a href="#enum-object-type">Object type</a> (byte, enumeration)</dt>
                 <dd>
                   <p>
-                    Observed values of 10 and 4 in one solo game. Observed value of 6 at the
-                    conclusion of the simulation (player ship destroyed).
+                    The type of object destroyed.
                   </p>
                 </dd>
-                <dt>Unknown (int)</dt>
+                <dt>Object ID (int)</dt>
                 <dd>
                   <p>
-                    Speculated to be the starting offset value for ship IDs. Observed
-                    <code>0x03f6</code> at the conclusion of the simulation (player ship destroyed).
+                    The ID of the object destroyed.
                   </p>
                 </dd>
               </dl>
@@ -3884,7 +3882,12 @@
                 0 has been observed.
               </p>
             </dd>
-            <dt>Unknown (bit 6.1, int?, new as of v2.3.0)</dt>
+            <dt>Capital ship object ID (bit 6.1, int, new as of v2.3.0)</dt>
+            <dd>
+              <p>
+                The object ID of the associated capital ship, if this ship is a fighter.
+              </p>
+            </dd>
           </section>
 
           <section id="object-player-ship-upgrades">
