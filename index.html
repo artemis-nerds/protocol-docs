@@ -1181,8 +1181,8 @@
                     <dt><a href="#enum-drive-type">Drive type</a> (int, enumeration)</dt>
                     <dd>Whether the ship has warp or jump drive</dd>
                     <dt>Ship type (int)</dt>
-                    <dt>Accent Color (int) (v2.4 or later)</dt>
                     <dd>ID from vesselData.xml</dd>
+                    <dt>Accent Color (int) (v2.4 or later)</dt>
                     <dt>Unknown (int) (v2.0 or later)</dt>
                     <dd>Only <code>0x01</code> has been observed thus far.</dd>
                     <dt>Name (string)</dt>
@@ -2981,35 +2981,7 @@
                 </dd>
               </dl>
             </section>
-            <section id="setconsolespacket">
-              <h3>SetConsolePacket</h3>
-              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x0e</code> [from <span>client</span>]</div>
-              <p>
-                Sets whether or not this client will serve at a particular bridge console.
-              </p>
-              <h4>Payload</h4>
-              <dl>
-                <dt>Subtype (int)</dt>
-                <dd>
-                  <p>
-                    Always <code>0x0e</code>.
-                  </p>
-                </dd>
-                <dt><a href="#enum-console-type">Console type</a> (int, enumeration)</dt>
-                <dd>
-                  <p>
-                    The console whose status is being set.
-                  </p>
-                </dd>
-                <dt>Selected boolean (boolean, 4 bytes)</dt>
-                <dd>
-                  <p>
-                    Whether or not the console is selected by this client.
-                  </p>
-                </dd>
-              </dl>
-            </section>
-            <section id="setconsolespacket">
+            <section id="setweaponstargetpacket">
               <h3>SetWeaponsTargetPacket</h3>
               <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x02</code> [from <span>client</span>]</div>
               <p>
