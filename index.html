@@ -1251,28 +1251,34 @@
                   value is zero-based; thus, vessels that only have one beam port will always give 0
                   for this value.
                 </dd>
-                <dt>Unknown (int)</dt>
+                <dt><a href="#enum-object-type">Origin object type</a> (int)</dt>
                 <dd>
                   <p>
-                    Values of 1 and 4 have been observed.
+                    Indicates the type of object that fired the beam.
                   </p>
                 </dd>
-                <dt>Unknown (int)</dt>
+                <dt><a href="#enum-object-type">Target object type</a> (int)</dt>
                 <dd>
                   <p>
-                    Values of 1 and 4 have been observed.
+                    Indicates the type of object that was struck by the beam.
+                  </p>
+                </dd>
+                <dt>Unknown (int) (v2.3 or later)</dt>
+                <dd>
+                  <p>
+                    This field is present in v2.3 and later.  A value of 0 has been observed.
                   </p>
                 </dd>
                 <dt>Origin object ID (int)</dt>
                 <dd>
                   <p>
-                    The ID of the object which fired the beam.
+                    The ID of the object that fired the beam.
                   </p>
                 </dd>
                 <dt>Target object ID (int)</dt>
                 <dd>
                   <p>
-                    The ID of the object which was struck by the beam.
+                    The ID of the object that was struck by the beam.
                   </p>
                 </dd>
                 <dt>Target X coordinate (float)</dt>
@@ -3838,10 +3844,10 @@
                 The frequency to which the beams are currently tuned.
               </p>
             </dd>
-            <dt>Available coolant (bit 4.6, byte)</dt>
+            <dt>Available coolant or missiles (bit 4.6, byte)</dt>
             <dd>
               <p>
-                The total amount of coolant on the ship.
+                The total amount of coolant if a capital ship, or the number of missiles if a fighter.
               </p>
             </dd>
             <dt>Science target (bit 4.7, int)</dt>
@@ -3854,7 +3860,7 @@
             <dt>Captain target (bit 4.8, int)</dt>
             <dd>
               <p>
-                The ID of the object selected by the science officer, or 1 if the selection was
+                The ID of the object selected by the captain, or 1 if the selection was
                 cleared.
               </p>
             </dd>
