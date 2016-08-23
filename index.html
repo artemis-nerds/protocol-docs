@@ -2118,6 +2118,35 @@
                 </dd>
               </dl>
             </section>
+            <section id="gamemasterinstructionspacket">
+              <h3>GameMasterInstructionsPacket</h3>
+              <div class="pkt-props">Type: <code>0x809305a7</code>:<code>0x63</code> [from <span>server</span>]</div>
+              <p>
+                Sent by the server to the game master console to provide instructions to be displayed
+                on request.
+              </p>
+              <h4>Payload</h4>
+              <dl>
+                <dt>Subtype (byte)</dt>
+                <dd>
+                  <p>
+                    Always <code>0x63</code>.
+                  </p>
+                </dd>
+                <dt>Title (string)</dt>
+                <dd>
+                  <p>
+                    A title to display above the instructions.
+                  </p>
+                </dd>
+                <dt>Content (string)</dt>
+                <dd>
+                  <p>
+                    The body content for the help screen.
+                  </p>
+                </dd>
+              </dl>
+            </section>
             <section id="gamemastermessagepacket">
               <h3>GameMasterMessagePacket</h3>
               <div class="pkt-props">Type: <code>0x809305a7</code> [from <span>client</span>]</div>
@@ -2148,35 +2177,6 @@
                 <dd>
                   <p>
                     The message to send.
-                  </p>
-                </dd>
-              </dl>
-            </section>
-            <section id="gamemasterinstructionspacket">
-              <h3>GameMasterInstructionsPacket</h3>
-              <div class="pkt-props">Type: <code>0x809305a7</code>:<code>0x63</code> [from <span>server</span>]</div>
-              <p>
-                Sent by the server to the game master console to provide instructions to be displayed
-                on request.
-              </p>
-              <h4>Payload</h4>
-              <dl>
-                <dt>Subtype (byte)</dt>
-                <dd>
-                  <p>
-                    Always <code>0x63</code>.
-                  </p>
-                </dd>
-                <dt>Title (string)</dt>
-                <dd>
-                  <p>
-                    A title to display above the instructions.
-                  </p>
-                </dd>
-                <dt>Content (string)</dt>
-                <dd>
-                  <p>
-                    The body content for the help screen.
                   </p>
                 </dd>
               </dl>
