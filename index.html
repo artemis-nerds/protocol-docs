@@ -2048,12 +2048,82 @@
           </section>
           <section id="pkt-g">
             <h3>G</h3>
+            <section id="gamemasterbuttonpacket">
+              <h3>GameMasterButtonPacket</h3>
+              <div class="pkt-props">Type: <code>0x26faacb9</code>:<code>0x00</code>-<code>02</code> [from <span>server</span>]</div>
+              <p>
+                New as of v2.4.0. Sent by the server to indicate that a button should be added to
+                or removed from the game master console.
+              </p>
+              <h4>Payload</h4>
+              <dl>
+                <dt>Action (byte)</dt>
+                <dd>
+                  <p>
+                    Indicates what action is desired:
+                    <table>
+                      <tbody>
+                        <tr>
+                          <td><code>0x00</code></td>
+                          <td>
+                            Create a button. Its position and size are up to the client.
+                          </td>
+                        </tr>
+                        <tr>
+                          <td><code>0x01</code></td>
+                          <td>
+                            Create a button with a specified position and size.
+                          </td>
+                        </tr>
+                        <tr>
+                          <td><code>0x02</code></td>
+                          <td>
+                            Remove a previously-created button.
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </p>
+                </dd>
+                <dt>Label (string)</dt>
+                <dd>
+                  <p>
+                    The button's label. This doubles as an identifier for the button and must
+                    therefore be unique.
+                  </p>
+                </dd>
+                <dt>width (int, subtype <code>0x02</code> only)</dt>
+                <dd>
+                  <p>
+                    The width of the button to create.
+                  </p>
+                </dd>
+                <dt>height (int, subtype <code>0x02</code> only)</dt>
+                <dd>
+                  <p>
+                    The height of the button to create.
+                  </p>
+                </dd>
+                <dt>x (int, subtype <code>0x02</code> only)</dt>
+                <dd>
+                  <p>
+                    The X-coordinate of the button's location.
+                  </p>
+                </dd>
+                <dt>y (int, subtype <code>0x02</code> only)</dt>
+                <dd>
+                  <p>
+                    The Y-coordinate of the button's location.
+                  </p>
+                </dd>
+              </dl>
+            </section>
             <section id="gamemastermessagepacket">
               <h3>GameMasterMessagePacket</h3>
               <div class="pkt-props">Type: <code>0x809305a7</code> [from <span>client</span>]</div>
               <p>
-                A packet sent by the game master console to the server which causes a message to be
-                displayed on a client.
+                New as of v2.4.0. A packet sent by the game master console to the server which
+                causes a message to be displayed on a client.
               </p>
               <h4>Payload</h4>
               <dl>
@@ -2078,6 +2148,35 @@
                 <dd>
                   <p>
                     The message to send.
+                  </p>
+                </dd>
+              </dl>
+            </section>
+            <section id="gamemasterinstructionspacket">
+              <h3>GameMasterInstructionsPacket</h3>
+              <div class="pkt-props">Type: <code>0x809305a7</code>:<code>0x63</code> [from <span>server</span>]</div>
+              <p>
+                Sent by the server to the game master console to provide instructions to be displayed
+                on request.
+              </p>
+              <h4>Payload</h4>
+              <dl>
+                <dt>Subtype (byte)</dt>
+                <dd>
+                  <p>
+                    Always <code>0x63</code>.
+                  </p>
+                </dd>
+                <dt>Title (string)</dt>
+                <dd>
+                  <p>
+                    A title to display above the instructions.
+                  </p>
+                </dd>
+                <dt>Content (string)</dt>
+                <dd>
+                  <p>
+                    The body content for the help screen.
                   </p>
                 </dd>
               </dl>
