@@ -2077,6 +2077,37 @@
           </section>
           <section id="pkt-g">
             <h3>G</h3>
+            <section id="gamemasterbuttonclickpacket">
+              <h3>GameMasterButtonClickPacket</h3>
+              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x15</code> [from <span>client</span>]</div>
+              <p>
+                New as of v2.4.0. Sent by the client when the game master clicks on a button
+                created by <a href="#gamemasterbuttonpacket">GameMasterButtonPacket</a>.
+              </p>
+              <h4>Payload</h4>
+              <dl>
+                <dt>Subtype (int)</dt>
+                <dd>
+                  <p>
+                    Always <code>0x15</code>.
+                  </p>
+                </dd>
+                <dt>Unknown (int)</dt>
+                <dd>
+                  <p>
+                    Appears to always be <code>0x0d</code>.
+                  </p>
+                </dd>
+                <dt>Hash (int)</dt>
+                <dd>
+                  <p>
+                    A hash value identifying the button. It has been determined that this is a hash
+                    of the button's label string, but it is currently unknown how this hash is
+                    computed.
+                  </p>
+                </dd>
+              </dl>
+            </section>
             <section id="gamemasterbuttonpacket">
               <h3>GameMasterButtonPacket</h3>
               <div class="pkt-props">Type: <code>0x26faacb9</code>:<code>0x00</code>-<code>02</code> [from <span>server</span>]</div>
