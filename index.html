@@ -2664,20 +2664,34 @@
           </section>
           <section id="pkt-j">
             <h3>J</h3>
-            <section id="jumpstatuspacket">
-              <h3>JumpStatusPacket</h3>
-              <div class="pkt-props">Type: <code>0xf754c8fe</code>:<code>0x0c</code>-<code>0d</code> [from <span>server</span>]</div>
+            <section id="jumpstatusbeginpacket">
+              <h3>JumpStatusBeginPacket</h3>
+              <div class="pkt-props">Type: <code>0xf754c8fe</code>:<code>0x0c</code> [from <span>server</span>]</div>
               <p>
-                Notifies the client that a jump has started or completed.
+                Notifies the client that a jump has started.
               </p>
               <h4>Payload</h4>
               <dl>
                 <dt>Subtype (int)</dt>
                 <dd>
                   <p>
-                    Indicates whether this is the start (<code>0x0c</code>) or end
-                    (<code>0x0d</code>) of the jump. Other subtypes are handled by other packet
-                    types.
+                    Always <code>0x0c</code>.
+                  </p>
+                </dd>
+              </dl>
+            </section>
+            <section id="jumpstatusendpacket">
+              <h3>JumpStatusEndPacket</h3>
+              <div class="pkt-props">Type: <code>0xf754c8fe</code>:<code>0x0d</code> [from <span>server</span>]</div>
+              <p>
+                Notifies the client that a jump has completed.
+              </p>
+              <h4>Payload</h4>
+              <dl>
+                <dt>Subtype (int)</dt>
+                <dd>
+                  <p>
+                    Always <code>0x0d</code>.
                   </p>
                 </dd>
               </dl>
