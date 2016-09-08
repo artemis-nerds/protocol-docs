@@ -2820,7 +2820,11 @@
                     more objects in the array.
                   </p>
                   <p>
-                    Prior to v2.1.5, this property was transmitted as an int rather than a byte.
+                    In earlier protocol versions, this property was
+                    transmitted as an int rather than a byte. At least
+                    version 2.1.1 and onwards use the single byte
+                    encoding, but it is not verified if version 2.1.1
+                    is the first version to do so.
                   </p>
                 </dd>
                 <dt>Object ID (int)</dt>
