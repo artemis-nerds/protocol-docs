@@ -776,8 +776,8 @@
               <tbody>
                 <tr>
                   <td><code>0x00</code></td>
-                  <td><em>unused</em></td>
-                  <td><em>unused</em></td>
+                  <td><em>end of ObjectUpdatePacket</em></td>
+                  <td><em>end of ObjectUpdatePacket</em></td>
                 </tr>
                 <tr>
                   <td><code>0x01</code></td>
@@ -2786,15 +2786,34 @@
               <h3>ObjectUpdatePacket</h3>
               <div class="pkt-props">Type: <code>0x80803df9</code> [from <span>server</span>]</div>
               <p>
-                Updates the status of one or more objects in the game world.
+                Updates the status of one or more objects in the game
+                world. Each type of object update has its own encoding
+                within this package, which makes this packet both the
+                single most important server packet type, as well as
+                the most complicated one to implement.
+              </p>
+              <p>
+                Whereas other packet types that have many subtypes
+                (for example, 0x4c821d3c) are documented for each
+                subtype, that is not possible for this packet type,
+                since it can contain more than one object update type
+                in each packet.
+              </p>
+              <p>
+                <em>Note</em>: The official Artemis server always
+                seems to send objects of only one type in a single
+                packet. If other types of objects need to be updated,
+                they'll be transmitted in separate packets. However,
+                keep in mind that the protocol does not require this,
+                so it might change in the future.
               </p>
               <h4>Payload</h4>
               <p>
-                The payload consists of an array of object entries. Parsing continues in a loop
-                until the end of the packet is reached, or the object type byte is
-                <code>0x00</code>. Note that the array may be empty. All objects in the array are of
-                the same type; if other types of objects need to be updated, they'll be transmitted
-                in separate packets. Each entry in the array is structured as follows:
+                The payload consists of an array of object update
+                entries. Parsing continues in a loop until the end of
+                the packet is reached, or the object type byte is
+                <code>0x00</code>. Note that the array may be empty.
+                Each entry in the array is structured as follows:
               </p>
               <dl>
                 <dt><a href="#enum-object-type">Object type</a> (byte, enumeration)</dt>
@@ -2805,7 +2824,11 @@
                     more objects in the array.
                   </p>
                   <p>
-                    Prior to v2.1.5, this property was transmitted as an int rather than a byte.
+                    In earlier protocol versions, this property was
+                    transmitted as an int rather than a byte. At least
+                    version 2.1.1 and onwards use the single byte
+                    encoding, but it is not verified if version 2.1.1
+                    is the first version to do so.
                   </p>
                 </dd>
                 <dt>Object ID (int)</dt>
