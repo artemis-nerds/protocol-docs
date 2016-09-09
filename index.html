@@ -1694,10 +1694,14 @@
               </p>
               <h4>Payload</h4>
               <dl>
-                <dt>Unknown (byte)</dt>
+                <dt>Reqested</dt>
                 <dd>
                   <p>
-                    Values of 0 and 1 have been observed.
+                    This field is <code>0</code> on normal engineering
+                    update from the server, but will be set
+                    to <code>1</code> when in response to
+                    the <a href="#requestenggridupdate">RequestEngGridUpdate</a>
+                    packet.
                   </p>
                 </dd>
                 <dt>System grid status (array)</dt>
@@ -2943,13 +2947,14 @@
                 </dd>
               </dl>
             </section>
-            <section id="readypacket2">
-              <h3>ReadyPacket2</h3>
+            <section id="requestenggridupdate">
+              <h3>RequestEngGridUpdate</h3>
               <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x19</code> [from <span>client</span>]</div>
               <p>
-                Believed to have something to do with a client's ready state, but it's currently
-                unknown exactly what this packet means. The server doesn't appear to care if you
-                don't send it.
+                Sent from the engineering station, to request a full
+                update for all values. This causes the server to send
+                a full update, instead of the normal update type where
+                only changes are sent.
               </p>
               <h4>Payload</h4>
               <dl>
