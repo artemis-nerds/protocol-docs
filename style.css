@@ -48,7 +48,7 @@ h1 {
 }
 h2 {
   color: #333;
-  border-bottom: solid #555 2px;
+  border-bottom: solid #090 2px;
 }
 h3 {
   color: #555;
@@ -85,4 +85,8 @@ dd {
 }
 .removed {
   text-decoration: line-through;
+}
+
+section#packet-types section section {
+    border-top: 2px solid #cfc;
 }
