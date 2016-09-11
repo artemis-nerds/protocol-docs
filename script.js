@@ -31,8 +31,8 @@ $(function() {
   });
 
   // build packet table of contents
-  var $packetTable = $('#packet-table tbody');
-  $('#packet-types section >section').each(function(i, $el) {
+  var rows = [];
+  $('#packet-types section > section').each(function(i, $el) {
     if ($el.id) {
       var $titleEl = $('h3', $el).eq(0);
       var $props = $('.pkt-props', $el);
@@ -64,7 +64,20 @@ $(function() {
         }
       } else $row.append('<td />');
 
-      $packetTable.append($row);
+      rows.push($row);
     }
+  });
+
+  // sort packet list by (direction, major, minor)
+  rows.sort(function(a, b) {
+    var text_a = a[0].cells[1].innerText + a[0].cells[2].innerText + a[0].cells[3].innerText;
+    var text_b = b[0].cells[1].innerText + b[0].cells[2].innerText + b[0].cells[3].innerText;
+    return text_a.localeCompare(text_b);
+  });
+
+  // add sorted packet list to body
+  var $packetTable = $('#packet-table tbody');
+  $(rows).each(function(i, el) {
+    $packetTable.append(el);
   });
 });
