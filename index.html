@@ -1272,7 +1272,7 @@
               </dl>
             </section>
 
-            <section id="__unknwon__0xf754c8fe_0x07">
+            <section id="__unknown__0xf754c8fe_0x07">
               <h3>__unknown__4</h3>
               <div class="pkt-props">Type: <code>0xf754c8fe</code>:<code>0x07</code> [from <span>server</span>]</div>
               <p>
@@ -1313,7 +1313,9 @@
               <p>
                 This packet type has been observed, and its payload
                 structure is believed to be understood. However, its
-                function is as of yet completely unknown.
+                function is as of yet completely unknown. Has been
+                hypothesized as having some relation
+                to <a href="#soundeffectpacket">SoundEffectPacket</a>.
               </p>
               <h4>Payload</h4>
               <dl>
@@ -1325,7 +1327,44 @@
                 </dd>
                 <dt>Unknown (float)</dt>
                 <dd>
-                  Values of 0.0, 50.0 and 100.0 has been observed.
+                  Values of 0.0, 50.0 and 100.0 has been observed. It
+                  is unclear if other values have been observed.
+                </dd>
+              </dl>
+            </section>
+
+            <section id="__unknown__0xf754c8fe_0x13">
+              <h3>__unknown__6</h3>
+              <div class="pkt-props">Type: <code>0xf754c8fe</code>:<code>0x13</code> [from <span>server</span>]</div>
+              <p>
+                This packet type has been observed, and its payload
+                structure is believed to be understood. However, its
+                function is as of yet completely unknown.
+
+                Seems to happen immediately before DestroyObject(Mine,
+                objID) or DestroyObject(Torpedo, objID).
+
+                Speculated to have some relation to
+                detonations.
+              </p>
+              <h4>Payload</h4>
+              <dl>
+                <dt>Subtype (int)</dt>
+                <dd>
+                  <p>
+                    Always <code>0x13</code>.
+                  </p>
+                </dd>
+                <dt>Unknown (int)</dt>
+                <dd>
+                  Only the value 7 has been observed so far. Unknown
+                  function or significance.
+                </dd>
+                <dt>object_id (int)</dt>
+                <dd>
+                  In the observed packets, the object ids correspond
+                  to a mixture of torpedos and mines, destroyed in the
+                  very next packet.
                 </dd>
               </dl>
             </section>
