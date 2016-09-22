@@ -4750,6 +4750,24 @@
               <li><a href="#keycapturetogglepacket">KeyCaptureTogglePacket</a></li>
             </ol>
           </section>
+          <section>
+            <h3>Fighter is launched</h3>
+            <ol>
+              <li><a href="#fighterlaunchpacket">FighterLaunchPacket</a></li>
+              <li><a href="#fighterlaunchedpacket">FighterLaunchedPacket</a></li>
+              <li><a href="#fighterbaystatuspacket">FighterBayStatusPacket</a> (informing that the fighter is no longer in the bay)</li>
+              <li><a href="#objectupdatepacket">ObjectUpdatePacket</a> (fighters are now updated as separate ship objects)</li>
+            </ol>
+          </section>
+          <section>
+            <h3>Fighter is docked</h3>
+            <ol>
+              <li><a href="#helmrequestdockpacket">HelmRequestDockPacket</a> (sent by the fighter)</li>
+              <li><a href="#destroyobjectpacket">DestroyObjectPacket</a> (destroys the fighter's ship object)</li>
+              <li><a href="#fighterbaystatuspacket">FighterBayStatusPacket</a> (informating that the fighter is now in the bay)</li>
+              <li><a href="#objectupdatepacket">ObjectUpdatePacket</a> (the docked fighter is no longer a separate ship object)</li>
+            </ol>
+          </section>
         </section>
 
         <section id="ship-internals">
