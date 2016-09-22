@@ -970,6 +970,7 @@
               </tbody>
             </table>
           </section>
+
           <section id="enum-tube-status">
             <h3>Tube Status</h3>
             <table>
@@ -993,49 +994,67 @@
               </tbody>
             </table>
           </section>
+
           <section id="enum-upgrade">
-            <h3>Upgrade</h3>
+            <h3>Upgrades</h3>
             <p>
-              New as of v.2.1.5.
+              New as of v2.1.5. Upgrades marked with (*) can be
+              activated by client consoles, meaning they can occur in
+              the ActivateUpgrade packet.
             </p>
             <table>
+              <thead>
+                <tr><th>Index</th><th>In-game name</th><th>Type</th><th>Description</th></tr>
+              </thead>
               <tbody>
-                <tr>
-                  <td><code>0x00</code></td>
-                  <td>energy boost</td>
-                </tr>
-                <tr>
-                  <td><code>0x01</code></td>
-                  <td>vigoranium nodule</td>
-                </tr>
-                <tr>
-                  <td><code>0x02</code></td>
-                  <td>cetrocite crystal</td>
-                </tr>
-                <tr>
-                  <td><code>0x03</code></td>
-                  <td>lateral array</td>
-                </tr>
-                <tr>
-                  <td><code>0x04</code></td>
-                  <td>tauron focuser</td>
-                </tr>
-                <tr>
-                  <td><code>0x05</code></td>
-                  <td>infusion p-coils</td>
-                </tr>
-                <tr>
-                  <td><code>0x06</code></td>
-                  <td>carapaction coils</td>
-                </tr>
-                <tr>
-                  <td><code>0x07</code></td>
-                  <td>secret code case</td>
-                </tr>
-                <tr>
-                  <td><code>0x08</code>-<code>0x28</code></td>
-                  <td>unknown at this time</td>
-                </tr>
+                <tr><td><code>0x00</code>*</td><td>Infusion P-Coils             </td><td>Engine Boost       </td><td>5 Minute 10% Impulse and Warp Speed Boost</td></tr>
+                <tr><td><code>0x01</code>*</td><td>Hydrogen Ram                 </td><td>Maneuver Boost     </td><td>5 Minute 10% Turn Speed Boost</td></tr>
+                <tr><td><code>0x02</code>*</td><td>Tauron Focusers              </td><td>Weapons Boost      </td><td>5 Minute 10% Beam and Reload Speed Boost</td></tr>
+                <tr><td><code>0x03</code>*</td><td>Carapaction Coils            </td><td>Shield Boost       </td><td>5 Minute 10% Shield Recharge Boost</td></tr>
+                <tr><td><code>0x04</code>*</td><td>Polyphasic Capacitors        </td><td>Energy Boost       </td><td>5 Minute 10% Energy Recharge Boost</td></tr>
+                <tr><td><code>0x05</code>*</td><td>Coolant Reserves             </td><td>Heat Reduction     </td><td>5 Minute 10% Faster Heat Reduction</td></tr>
+                <tr><td><code>0x06</code>*</td><td>Lateral Array                </td><td>Scanner Boost      </td><td>5 Minute Target Scan Triple Speed</td></tr>
+                <tr><td><code>0x07</code>*</td><td>ECM Starpulse                </td><td>Jammer Boost       </td><td>5 Minute Enemy Cannot Lock</td></tr>
+                <tr><td><code>0x08</code>*</td><td>Double Agent                 </td><td>Auto-Surrender     </td><td>Can force one ship to auto surrender</td></tr>
+                <tr><td><code>0x09</code></td><td>Wartime Production           </td><td>Prod Boost         </td><td>10% (min +1) boost to all starting base munitions</td></tr>
+                <tr><td><code>0x0a</code></td><td>Infusion P-Coils PERM        </td><td>Engine Refit       </td><td>Permanent 10% Impulse and Warp Speed Boost</td></tr>
+                <tr><td><code>0x0b</code></td><td>Protonic Verniers            </td><td>Maneuver Refit     </td><td>Permanent 10% Turn Speed Boost</td></tr>
+                <tr><td><code>0x0c</code></td><td>Tauron Focusers PERM         </td><td>Weapons Refit      </td><td>Permanent 10% Reload and Beam Speed</td></tr>
+                <tr><td><code>0x0d</code></td><td>Regenerative Pau-Grids       </td><td>Shield Refit       </td><td>Permanent 10% Shield Recharge Speed</td></tr>
+                <tr><td><code>0x0e</code></td><td>Veteran DamCon Teams         </td><td>Faster DamCon      </td><td>Damcon teams move/repair 10% faster</td></tr>
+                <tr><td><code>0x0f</code></td><td>Cetrocite Heatsinks          </td><td>Heatsink Refit     </td><td>Heat builds 10% slower</td></tr>
+                <tr><td><code>0x10</code></td><td>Tachyon Scanners             </td><td>Scanner Refit      </td><td>Permanent 10% Scan Speed Boost</td></tr>
+                <tr><td><code>0x11</code></td><td>Gridscan Overload            </td><td>Sensor Refit       </td><td>Permanent 10% Range Booster</td></tr>
+                <tr><td><code>0x12</code></td><td>Override Authorization       </td><td>Improved Prod      </td><td>All bases produce 10% faster</td></tr>
+                <tr><td><code>0x13</code></td><td>Resupply Imperatives         </td><td>Mission Enhance    </td><td>10% More missions</td></tr>
+                <tr><td><code>0x14</code></td><td>Patrol Group                 </td><td>Allied Combat      </td><td>Additional TSN Escort Ship in-sector</td></tr>
+                <tr><td><code>0x15</code></td><td>Fast Supply                  </td><td>Allied Supply      </td><td>Additional TSN Cargo Ship in-sector</td></tr>
+                <tr><td><code>0x16</code></td><td>Vanguard Refit               </td><td>Improved Console   </td><td>Perm 10% Boost to Impulse, Warp, and Turn Speed</td></tr>
+                <tr><td><code>0x17</code></td><td>Vanguard Refit               </td><td>Improved Console   </td><td>Perm 10% Boost to Beam, Shield and Reload Speeds</td></tr>
+                <tr><td><code>0x18</code></td><td>Vanguard Refit               </td><td>Improved Console   </td><td>Perm 10% Boost to Scan speed and Sensor Range</td></tr>
+                <tr><td><code>0x19</code></td><td>Vanguard Refit               </td><td>Improved Console   </td><td>Perm 10% Boost to Station production</td></tr>
+                <tr><td><code>0x1a</code></td><td>Vanguard Refit               </td><td>Improved Console   </td><td>Perm 10% Boost to all Engineering Systems</td></tr>
+                <tr><td><code>0x1b</code></td><td>Vanguard Refit               </td><td>Systems Overhaul   </td><td>Permanent 10% Boost to all Ship Systems</td></tr>
+              </tbody>
+            </table>
+
+            <h3>Game world upgrades</h3>
+            <p>
+              New as of v2.1.5.
+            </p>
+            <table>
+              <thead>
+                <tr><th>Index</th><th>Internal name</th><th>Known names</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><code>0x00</code></td><td>ITEMTYPE_ENERGY</td>        <td>Anomaly / HiDens Power Cell</td></tr>
+                <tr><td><code>0x01</code></td><td>ITEMTYPE_RESTORE_DAMCON</td><td>Vigoranium Nodule</td></tr>
+                <tr><td><code>0x02</code></td><td>ITEMTYPE_HEAT_BUFF</td>     <td>Cetrocite Crystal</td></tr>
+                <tr><td><code>0x03</code></td><td>ITEMTYPE_SCAN_BUFF</td>     <td>Lateral Array</td></tr>
+                <tr><td><code>0x04</code></td><td>ITEMTYPE_WEAP_BUFF</td>     <td>Tauron Focusers</td></tr>
+                <tr><td><code>0x05</code></td><td>ITEMTYPE_SPEED_BUFF</td>    <td>Infusion P-Coils</td></tr>
+                <tr><td><code>0x06</code></td><td>ITEMTYPE_SHIELD_BUFF</td>   <td>Carapaction Coils</td></tr>
+                <tr><td><code>0x07</code></td><td>ITEMTYPE_COMM_BUFF</td>     <td>Secret code case / Double agent</td></tr>
               </tbody>
             </table>
           </section>
@@ -4420,28 +4439,125 @@
           <section id="object-player-ship-upgrades">
             <h3>Player Ship Upgrades</h3>
             <p>
-              New as of v2.1.5. Indicates how many of each upgrade the player ship has on board.
+              New as of v2.1.5. Indicates how many of each upgrade the
+              player ship has on board, which ones are active, and how
+              many seconds are left of each type of activation.
             </p>
             <dl>
               <dt>Bit field (11 bytes)</dt>
               <dd>
                 <p>
-                  Note that there are far more bits in this field than would be needed to record
-                  all of the known upgrade types. It is unknown at this time what fields the
-                  remaining bits represent.
+                  There are 28 upgrade types available, each of which
+                  are described in this packet type. First, every
+                  upgrade is described with an 8-bit boolean value. If
+                  this value is true, the upgrade is currently
+                  activated. Secondly, every upgrade is described with
+                  a i8 (signed 8-bit integer), that determines how
+                  many of that type of upgrade the ship has
+                  available. Finally, every upgrade is described with
+                  a u16, that detmines how many more seconds the
+                  upgrade is active for.
                 </p>
               </dd>
-              <dt>Unknown (bits 1.1-4.4, byte)</dt>
-              <dt>Infusion P-coils (bit 4.5, byte)</dt>
-              <dt>Unknown (bit 4.6, byte)</dt>
-              <dt>Tauron focusers (bit 4.7, byte)</dt>
-              <dt>Carpaction coils (bit 4.8, byte)</dt>
-              <dt>Unknown (bit 5.1, byte)</dt>
-              <dt>Cetrocite crystals (bit 5.2, byte)</dt>
-              <dt>Lateral arrays (bit 5.3, byte)</dt>
-              <dt>Unknown (bit 5.4, byte)</dt>
-              <dt>Secret code cases (bit 5.5, byte)</dt>
-              <dt>Unknown (bits 5.6-11.4, unknown data types)</dt>
+
+              <dt>Activation flags (bits 1.1-4.4, bool8)</dt>
+              <dd>(bit 1.1) active_infusion_p_coils</dd>
+              <dd>(bit 1.2) active_hydrogen_ram</dd>
+              <dd>(bit 1.3) active_tauron_focusers</dd>
+              <dd>(bit 1.4) active_carapaction_coils</dd>
+              <dd>(bit 1.5) active_polyphasic_capacitors</dd>
+              <dd>(bit 1.6) active_cetrocite_crystals</dd>
+              <dd>(bit 1.7) active_lateral_array</dd>
+              <dd>(bit 1.8) active_ecm_starpulse</dd>
+
+              <dd>(bit 2.1) active_double_agent</dd>
+              <dd>(bit 2.2) active_wartime_production</dd>
+              <dd>(bit 2.3) active_infusion_p_coils_perm</dd>
+              <dd>(bit 2.4) active_protonic_verniers</dd>
+              <dd>(bit 2.5) active_tauron_focusers_perm</dd>
+              <dd>(bit 2.6) active_regenerative_pau_grids</dd>
+              <dd>(bit 2.7) active_veteran_damcon_teams</dd>
+              <dd>(bit 2.8) active_cetrocite_heatsinks</dd>
+
+              <dd>(bit 3.1) active_tachyon_scanners</dd>
+              <dd>(bit 3.2) active_gridscan_overload</dd>
+              <dd>(bit 3.3) active_override_authorization</dd>
+              <dd>(bit 3.4) active_resupply_imperatives</dd>
+              <dd>(bit 3.5) active_patrol_group</dd>
+              <dd>(bit 3.6) active_fast_supply</dd>
+              <dd>(bit 3.7) active_vanguard_refit_helm</dd>
+              <dd>(bit 3.8) active_vanguard_refit_weap</dd>
+
+              <dd>(bit 4.1) active_vanguard_refit_comm</dd>
+              <dd>(bit 4.2) active_vanguard_refit_station</dd>
+              <dd>(bit 4.3) active_vanguard_refit_eng</dd>
+              <dd>(bit 4.4) active_vanguard_refit_systems</dd>
+
+              <dt>Available upgrades (bits 4.5-7.8, i8)</dt>
+              <dd>(bit 4.5) count_infusion_p_coils</dd>
+              <dd>(bit 4.6) count_hydrogen_ram</dd>
+              <dd>(bit 4.7) count_tauron_focusers</dd>
+              <dd>(bit 4.8) count_carapaction_coils</dd>
+
+              <dd>(bit 5.1) count_polyphasic_capacitors</dd>
+              <dd>(bit 5.2) count_cetrocite_crystals</dd>
+              <dd>(bit 5.3) count_lateral_array</dd>
+              <dd>(bit 5.4) count_ecm_starpulse</dd>
+              <dd>(bit 5.5) count_double_agent</dd>
+              <dd>(bit 5.6) count_wartime_production</dd>
+              <dd>(bit 5.7) count_infusion_p_coils_perm</dd>
+              <dd>(bit 5.8) count_protonic_verniers</dd>
+
+              <dd>(bit 6.1) count_tauron_focusers_perm</dd>
+              <dd>(bit 6.2) count_regenerative_pau_grids</dd>
+              <dd>(bit 6.3) count_veteran_damcon_teams</dd>
+              <dd>(bit 6.4) count_cetrocite_heatsinks</dd>
+              <dd>(bit 6.5) count_tachyon_scanners</dd>
+              <dd>(bit 6.6) count_gridscan_overload</dd>
+              <dd>(bit 6.7) count_override_authorization</dd>
+              <dd>(bit 6.8) count_resupply_imperatives</dd>
+
+              <dd>(bit 7.1) count_patrol_group</dd>
+              <dd>(bit 7.2) count_fast_supply</dd>
+              <dd>(bit 7.3) count_vanguard_refit_helm</dd>
+              <dd>(bit 7.4) count_vanguard_refit_weap</dd>
+              <dd>(bit 7.5) count_vanguard_refit_comm</dd>
+              <dd>(bit 7.6) count_vanguard_refit_station</dd>
+              <dd>(bit 7.7) count_vanguard_refit_eng</dd>
+              <dd>(bit 7.8) count_vanguard_refit_systems</dd>
+
+              <dt>Activation time (bits 8.1-11.4, u16)</dt>
+              <dd>(bit 8.1) time_infusion_p_coils</dd>
+              <dd>(bit 8.2) time_hydrogen_ram</dd>
+              <dd>(bit 8.3) time_tauron_focusers</dd>
+              <dd>(bit 8.4) time_carapaction_coils</dd>
+              <dd>(bit 8.5) time_polyphasic_capacitors</dd>
+              <dd>(bit 8.6) time_cetrocite_crystals</dd>
+              <dd>(bit 8.7) time_lateral_array</dd>
+              <dd>(bit 8.8) time_ecm_starpulse</dd>
+
+              <dd>(bit 9.1) time_double_agent</dd>
+              <dd>(bit 9.2) time_wartime_production</dd>
+              <dd>(bit 9.3) time_infusion_p_coils_perm</dd>
+              <dd>(bit 9.4) time_protonic_verniers</dd>
+              <dd>(bit 9.5) time_tauron_focusers_perm</dd>
+              <dd>(bit 9.6) time_regenerative_pau_grids</dd>
+              <dd>(bit 9.7) time_veteran_damcon_teams</dd>
+              <dd>(bit 9.8) time_cetrocite_heatsinks</dd>
+
+              <dd>(bit 10.1) time_tachyon_scanners</dd>
+              <dd>(bit 10.2) time_gridscan_overload</dd>
+              <dd>(bit 10.3) time_override_authorization</dd>
+              <dd>(bit 10.4) time_resupply_imperatives</dd>
+              <dd>(bit 10.5) time_patrol_group</dd>
+              <dd>(bit 10.6) time_fast_supply</dd>
+              <dd>(bit 10.7) time_vanguard_refit_helm</dd>
+              <dd>(bit 10.8) time_vanguard_refit_weap</dd>
+
+              <dd>(bit 11.1) time_vanguard_refit_comm</dd>
+              <dd>(bit 11.2) time_vanguard_refit_station</dd>
+              <dd>(bit 11.3) time_vanguard_refit_eng</dd>
+              <dd>(bit 11.4) time_vanguard_refit_systems</dd>
             </dl>
           </section>
 
