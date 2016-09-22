@@ -4439,28 +4439,125 @@
           <section id="object-player-ship-upgrades">
             <h3>Player Ship Upgrades</h3>
             <p>
-              New as of v2.1.5. Indicates how many of each upgrade the player ship has on board.
+              New as of v2.1.5. Indicates how many of each upgrade the
+              player ship has on board, which ones are active, and how
+              many seconds are left of each type of activation.
             </p>
             <dl>
               <dt>Bit field (11 bytes)</dt>
               <dd>
                 <p>
-                  Note that there are far more bits in this field than would be needed to record
-                  all of the known upgrade types. It is unknown at this time what fields the
-                  remaining bits represent.
+                  There are 28 upgrade types available, each of which
+                  are described in this packet type. First, every
+                  upgrade is described with an 8-bit boolean value. If
+                  this value is true, the upgrade is currently
+                  activated. Secondly, every upgrade is described with
+                  a i8 (signed 8-bit integer), that determines how
+                  many of that type of upgrade the ship has
+                  available. Finally, every upgrade is described with
+                  a u16, that detmines how many more seconds the
+                  upgrade is active for.
                 </p>
               </dd>
-              <dt>Unknown (bits 1.1-4.4, byte)</dt>
-              <dt>Infusion P-coils (bit 4.5, byte)</dt>
-              <dt>Unknown (bit 4.6, byte)</dt>
-              <dt>Tauron focusers (bit 4.7, byte)</dt>
-              <dt>Carpaction coils (bit 4.8, byte)</dt>
-              <dt>Unknown (bit 5.1, byte)</dt>
-              <dt>Cetrocite crystals (bit 5.2, byte)</dt>
-              <dt>Lateral arrays (bit 5.3, byte)</dt>
-              <dt>Unknown (bit 5.4, byte)</dt>
-              <dt>Secret code cases (bit 5.5, byte)</dt>
-              <dt>Unknown (bits 5.6-11.4, unknown data types)</dt>
+
+              <dt>Activation flags (bits 1.1-4.4, bool8)</dt>
+              <dd>(bit 1.1) active_infusion_p_coils</dd>
+              <dd>(bit 1.2) active_hydrogen_ram</dd>
+              <dd>(bit 1.3) active_tauron_focusers</dd>
+              <dd>(bit 1.4) active_carapaction_coils</dd>
+              <dd>(bit 1.5) active_polyphasic_capacitors</dd>
+              <dd>(bit 1.6) active_cetrocite_crystals</dd>
+              <dd>(bit 1.7) active_lateral_array</dd>
+              <dd>(bit 1.8) active_ecm_starpulse</dd>
+
+              <dd>(bit 2.1) active_double_agent</dd>
+              <dd>(bit 2.2) active_wartime_production</dd>
+              <dd>(bit 2.3) active_infusion_p_coils_perm</dd>
+              <dd>(bit 2.4) active_protonic_verniers</dd>
+              <dd>(bit 2.5) active_tauron_focusers_perm</dd>
+              <dd>(bit 2.6) active_regenerative_pau_grids</dd>
+              <dd>(bit 2.7) active_veteran_damcon_teams</dd>
+              <dd>(bit 2.8) active_cetrocite_heatsinks</dd>
+
+              <dd>(bit 3.1) active_tachyon_scanners</dd>
+              <dd>(bit 3.2) active_gridscan_overload</dd>
+              <dd>(bit 3.3) active_override_authorization</dd>
+              <dd>(bit 3.4) active_resupply_imperatives</dd>
+              <dd>(bit 3.5) active_patrol_group</dd>
+              <dd>(bit 3.6) active_fast_supply</dd>
+              <dd>(bit 3.7) active_vanguard_refit_helm</dd>
+              <dd>(bit 3.8) active_vanguard_refit_weap</dd>
+
+              <dd>(bit 4.1) active_vanguard_refit_comm</dd>
+              <dd>(bit 4.2) active_vanguard_refit_station</dd>
+              <dd>(bit 4.3) active_vanguard_refit_eng</dd>
+              <dd>(bit 4.4) active_vanguard_refit_systems</dd>
+
+              <dt>Available upgrades (bits 4.5-7.8, i8)</dt>
+              <dd>(bit 4.5) count_infusion_p_coils</dd>
+              <dd>(bit 4.6) count_hydrogen_ram</dd>
+              <dd>(bit 4.7) count_tauron_focusers</dd>
+              <dd>(bit 4.8) count_carapaction_coils</dd>
+
+              <dd>(bit 5.1) count_polyphasic_capacitors</dd>
+              <dd>(bit 5.2) count_cetrocite_crystals</dd>
+              <dd>(bit 5.3) count_lateral_array</dd>
+              <dd>(bit 5.4) count_ecm_starpulse</dd>
+              <dd>(bit 5.5) count_double_agent</dd>
+              <dd>(bit 5.6) count_wartime_production</dd>
+              <dd>(bit 5.7) count_infusion_p_coils_perm</dd>
+              <dd>(bit 5.8) count_protonic_verniers</dd>
+
+              <dd>(bit 6.1) count_tauron_focusers_perm</dd>
+              <dd>(bit 6.2) count_regenerative_pau_grids</dd>
+              <dd>(bit 6.3) count_veteran_damcon_teams</dd>
+              <dd>(bit 6.4) count_cetrocite_heatsinks</dd>
+              <dd>(bit 6.5) count_tachyon_scanners</dd>
+              <dd>(bit 6.6) count_gridscan_overload</dd>
+              <dd>(bit 6.7) count_override_authorization</dd>
+              <dd>(bit 6.8) count_resupply_imperatives</dd>
+
+              <dd>(bit 7.1) count_patrol_group</dd>
+              <dd>(bit 7.2) count_fast_supply</dd>
+              <dd>(bit 7.3) count_vanguard_refit_helm</dd>
+              <dd>(bit 7.4) count_vanguard_refit_weap</dd>
+              <dd>(bit 7.5) count_vanguard_refit_comm</dd>
+              <dd>(bit 7.6) count_vanguard_refit_station</dd>
+              <dd>(bit 7.7) count_vanguard_refit_eng</dd>
+              <dd>(bit 7.8) count_vanguard_refit_systems</dd>
+
+              <dt>Activation time (bits 8.1-11.4, u16)</dt>
+              <dd>(bit 8.1) time_infusion_p_coils</dd>
+              <dd>(bit 8.2) time_hydrogen_ram</dd>
+              <dd>(bit 8.3) time_tauron_focusers</dd>
+              <dd>(bit 8.4) time_carapaction_coils</dd>
+              <dd>(bit 8.5) time_polyphasic_capacitors</dd>
+              <dd>(bit 8.6) time_cetrocite_crystals</dd>
+              <dd>(bit 8.7) time_lateral_array</dd>
+              <dd>(bit 8.8) time_ecm_starpulse</dd>
+
+              <dd>(bit 9.1) time_double_agent</dd>
+              <dd>(bit 9.2) time_wartime_production</dd>
+              <dd>(bit 9.3) time_infusion_p_coils_perm</dd>
+              <dd>(bit 9.4) time_protonic_verniers</dd>
+              <dd>(bit 9.5) time_tauron_focusers_perm</dd>
+              <dd>(bit 9.6) time_regenerative_pau_grids</dd>
+              <dd>(bit 9.7) time_veteran_damcon_teams</dd>
+              <dd>(bit 9.8) time_cetrocite_heatsinks</dd>
+
+              <dd>(bit 10.1) time_tachyon_scanners</dd>
+              <dd>(bit 10.2) time_gridscan_overload</dd>
+              <dd>(bit 10.3) time_override_authorization</dd>
+              <dd>(bit 10.4) time_resupply_imperatives</dd>
+              <dd>(bit 10.5) time_patrol_group</dd>
+              <dd>(bit 10.6) time_fast_supply</dd>
+              <dd>(bit 10.7) time_vanguard_refit_helm</dd>
+              <dd>(bit 10.8) time_vanguard_refit_weap</dd>
+
+              <dd>(bit 11.1) time_vanguard_refit_comm</dd>
+              <dd>(bit 11.2) time_vanguard_refit_station</dd>
+              <dd>(bit 11.3) time_vanguard_refit_eng</dd>
+              <dd>(bit 11.4) time_vanguard_refit_systems</dd>
             </dl>
           </section>
 
