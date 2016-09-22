@@ -998,22 +998,24 @@
           <section id="enum-upgrade">
             <h3>Upgrades</h3>
             <p>
-              New as of v2.1.5.
+              New as of v2.1.5. Upgrades marked with (*) can be
+              activated by client consoles, meaning they can occur in
+              the ActivateUpgrade packet.
             </p>
             <table>
               <thead>
                 <tr><th>Index</th><th>In-game name</th><th>Type</th><th>Description</th></tr>
               </thead>
               <tbody>
-                <tr><td><code>0x00</code></td><td>Infusion P-Coils             </td><td>Engine Boost       </td><td>5 Minute 10% Impulse and Warp Speed Boost</td></tr>
-                <tr><td><code>0x01</code></td><td>Hydrogen Ram                 </td><td>Maneuver Boost     </td><td>5 Minute 10% Turn Speed Boost</td></tr>
-                <tr><td><code>0x02</code></td><td>Tauron Focusers              </td><td>Weapons Boost      </td><td>5 Minute 10% Beam and Reload Speed Boost</td></tr>
-                <tr><td><code>0x03</code></td><td>Carapaction Coils            </td><td>Shield Boost       </td><td>5 Minute 10% Shield Recharge Boost</td></tr>
-                <tr><td><code>0x04</code></td><td>Polyphasic Capacitors        </td><td>Energy Boost       </td><td>5 Minute 10% Energy Recharge Boost</td></tr>
-                <tr><td><code>0x05</code></td><td>Coolant Reserves             </td><td>Heat Reduction     </td><td>5 Minute 10% Faster Heat Reduction</td></tr>
-                <tr><td><code>0x06</code></td><td>Lateral Array                </td><td>Scanner Boost      </td><td>5 Minute Target Scan Triple Speed</td></tr>
-                <tr><td><code>0x07</code></td><td>ECM Starpulse                </td><td>Jammer Boost       </td><td>5 Minute Enemy Cannot Lock</td></tr>
-                <tr><td><code>0x08</code></td><td>Double Agent                 </td><td>Auto-Surrender     </td><td>Can force one ship to auto surrender</td></tr>
+                <tr><td><code>0x00</code>*</td><td>Infusion P-Coils             </td><td>Engine Boost       </td><td>5 Minute 10% Impulse and Warp Speed Boost</td></tr>
+                <tr><td><code>0x01</code>*</td><td>Hydrogen Ram                 </td><td>Maneuver Boost     </td><td>5 Minute 10% Turn Speed Boost</td></tr>
+                <tr><td><code>0x02</code>*</td><td>Tauron Focusers              </td><td>Weapons Boost      </td><td>5 Minute 10% Beam and Reload Speed Boost</td></tr>
+                <tr><td><code>0x03</code>*</td><td>Carapaction Coils            </td><td>Shield Boost       </td><td>5 Minute 10% Shield Recharge Boost</td></tr>
+                <tr><td><code>0x04</code>*</td><td>Polyphasic Capacitors        </td><td>Energy Boost       </td><td>5 Minute 10% Energy Recharge Boost</td></tr>
+                <tr><td><code>0x05</code>*</td><td>Coolant Reserves             </td><td>Heat Reduction     </td><td>5 Minute 10% Faster Heat Reduction</td></tr>
+                <tr><td><code>0x06</code>*</td><td>Lateral Array                </td><td>Scanner Boost      </td><td>5 Minute Target Scan Triple Speed</td></tr>
+                <tr><td><code>0x07</code>*</td><td>ECM Starpulse                </td><td>Jammer Boost       </td><td>5 Minute Enemy Cannot Lock</td></tr>
+                <tr><td><code>0x08</code>*</td><td>Double Agent                 </td><td>Auto-Surrender     </td><td>Can force one ship to auto surrender</td></tr>
                 <tr><td><code>0x09</code></td><td>Wartime Production           </td><td>Prod Boost         </td><td>10% (min +1) boost to all starting base munitions</td></tr>
                 <tr><td><code>0x0a</code></td><td>Infusion P-Coils PERM        </td><td>Engine Refit       </td><td>Permanent 10% Impulse and Warp Speed Boost</td></tr>
                 <tr><td><code>0x0b</code></td><td>Protonic Verniers            </td><td>Maneuver Refit     </td><td>Permanent 10% Turn Speed Boost</td></tr>
@@ -1036,23 +1038,25 @@
               </tbody>
             </table>
 
-            <h3>Upgrades</h3>
+            <h3>Game world upgrades</h3>
             <p>
               New as of v2.1.5.
             </p>
             <table>
+              <thead>
+                <tr><th>Index</th><th>Internal name</th><th>Known names</th></tr>
+              </thead>
               <tbody>
-                <tr><td><code>0x00</code></td><td>energy boost</td></tr>
-                <tr><td><code>0x01</code></td><td>vigoranium nodule</td></tr>
-                <tr><td><code>0x02</code></td><td>cetrocite crystal</td></tr>
-                <tr><td><code>0x03</code></td><td>lateral array</td></tr>
-                <tr><td><code>0x04</code></td><td>tauron focuser</td></tr>
-                <tr><td><code>0x05</code></td><td>infusion p-coils</td></tr>
-                <tr><td><code>0x06</code></td><td>carapaction coils</td></tr>
-                <tr><td><code>0x07</code></td><td>double agent</td></tr>
+                <tr><td><code>0x00</code></td><td>ITEMTYPE_ENERGY</td>        <td>Anomaly / HiDens Power Cell</td></tr>
+                <tr><td><code>0x01</code></td><td>ITEMTYPE_RESTORE_DAMCON</td><td>Vigoranium Nodule</td></tr>
+                <tr><td><code>0x02</code></td><td>ITEMTYPE_HEAT_BUFF</td>     <td>Cetrocite Crystal</td></tr>
+                <tr><td><code>0x03</code></td><td>ITEMTYPE_SCAN_BUFF</td>     <td>Lateral Array</td></tr>
+                <tr><td><code>0x04</code></td><td>ITEMTYPE_WEAP_BUFF</td>     <td>Tauron Focusers</td></tr>
+                <tr><td><code>0x05</code></td><td>ITEMTYPE_SPEED_BUFF</td>    <td>Infusion P-Coils</td></tr>
+                <tr><td><code>0x06</code></td><td>ITEMTYPE_SHIELD_BUFF</td>   <td>Carapaction Coils</td></tr>
+                <tr><td><code>0x07</code></td><td>ITEMTYPE_COMM_BUFF</td>     <td>Secret code case / Double agent</td></tr>
               </tbody>
             </table>
-
           </section>
         </section>
 
