@@ -1448,7 +1448,21 @@
                     <dd>Whether the ship has warp or jump drive</dd>
                     <dt>Ship type (int)</dt>
                     <dd>ID from vesselData.xml</dd>
-                    <dt>Accent Color (int) (v2.4 or later)</dt>
+                    <dt>Hue (float) (v2.4 or later)</dt>
+                    <dd>
+                      Ship hue from 0.0 to 1.1, multiply by 360 to get <a href="https://en.wikipedia.org/wiki/Hue">Hue as described on Wikipedia</a>.
+                      Default hue values for ships are:
+                      <ul>
+                        <li><div class="hue-box" style="background-color:#ff0000"></div> Artemis - <code>0</code></li>
+                        <li><div class="hue-box" style="background-color:#ffbf00"></div> Intrepid - <code>0.125</code></li>
+                        <li><div class="hue-box" style="background-color:#80ff00"></div> Aegis - <code>0.25</code></li>
+                        <li><div class="hue-box" style="background-color:#00ff40"></div> Horatio - <code>0.375</code></li>
+                        <li><div class="hue-box" style="background-color:#00ffff"></div> Excalibur - <code>0.5</code></li>
+                        <li><div class="hue-box" style="background-color:#0040ff"></div> Hera - <code>0.625</code></li>
+                        <li><div class="hue-box" style="background-color:#8000ff"></div> Ceres - <code>0.75</code></li>
+                        <li><div class="hue-box" style="background-color:#ff00bf"></div> Diana - <code>0.875</code></li>
+                      </ul>
+                    </dd>
                     <dt>Unknown (int) (v2.0 or later)</dt>
                     <dd>Only <code>0x01</code> has been observed thus far.</dd>
                     <dt>Name (string)</dt>
