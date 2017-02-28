@@ -1448,9 +1448,9 @@
                     <dd>Whether the ship has warp or jump drive</dd>
                     <dt>Ship type (int)</dt>
                     <dd>ID from vesselData.xml</dd>
-                    <dt>Hue (float) (v2.4 or later)</dt>
+                    <dt>Accent color (float) (v2.4 or later)</dt>
                     <dd>
-                      Ship hue from 0.0 to 1.0, multiply by 360 to get <a href="https://en.wikipedia.org/wiki/Hue">Hue as described on Wikipedia</a>.
+                      Ship accent color hue in the range 0.0 to 1.0. Multiply by 360 to get a <a href="https://en.wikipedia.org/wiki/Hue">Hue as described on Wikipedia</a>.
                       Default hue values for ships are:
                       <ul>
                         <li><div class="hue-box" style="background-color:#ff0000"></div> Artemis - <code>0</code></li>
@@ -4427,10 +4427,13 @@
                 The object ID of the associated capital ship, if this ship is a fighter.
               </p>
             </dd>
-            <dt>Accent Color (bit 6.2, int, new as of v2.4.0)</dt>
+            <dt>Accent color (bit 6.2, float, new as of v2.4.0)</dt>
             <dd>
               <p>
-                The accent color of the ship.
+                Ship accent color hue in the range 0.0 to 1.0. Multiply by 360 to get a
+                <a href="https://en.wikipedia.org/wiki/Hue">Hue as described on Wikipedia</a>.
+                The ship accent color is the same value as was sent in
+                <a href="#allshipsettingspacket">AllShipSettingsPacket</a>.
               </p>
             </dd>
             <dt>Unknown (bit 6.3, 4 bytes, new as of v2.4.0)</dt>
