@@ -2328,6 +2328,89 @@
                 </dd>
               </dl>
             </section>
+            <section id="fighterpilotpacket">
+              <h3>FighterPilotPacket</h3>
+              <div class="pkt-props">Type: <code>0x0351a5ac</code>:<code>0x07</code> [from <span>client</span>]</div>
+              <p>
+                Notifies the server of a fighter's trajectory.
+              </p>
+              <h4>Payload</h4>
+              <dl>
+                <dt>Subtype (int)</dt>
+                <dd>
+                  <p>
+                    Always <code>0x07</code>.
+                  </p>
+                </dd>
+                <dt>Rudder (float)</dt>
+                <dd>
+                  <p>
+                    Any value between 0.0 and 1.0 inclusive, where 0.0 is hard to port (left), 0.5
+                    is rudder amidships (straight), and 1.0 is a hard to starboard (right). Actual
+                    turn rate will depend on the ship's maximum turn rate.
+                  </p>
+                </dd>
+                <dt>Object ID (int)</dt>
+                <dd>
+                  <p>
+                    The ID of the fighter, as shown in
+                    <a href="#fighterbaystatuspacket">FighterBayStatusPacket</a>.
+                  </p>
+                </dd>
+                <dt>Unknown (int)</dt>
+                <dt>X coordinate (float)</dt>
+                <dd>
+                  <p>
+                    The ship's location on the X axis.
+                  </p>
+                </dd>
+                <dt>Y coordinate (float)</dt>
+                <dd>
+                  <p>
+                    The ship's location on the Y axis.
+                  </p>
+                </dd>
+                <dt>Z coordinate (float)</dt>
+                <dd>
+                  <p>
+                    The ship's location on the Z axis.
+                  </p>
+                </dd>
+                <dt>Orientation x component(float)</dt>
+                <dd>
+                  <p>
+                    The x component of the
+                    <a href="https://en.wikipedia.org/wiki/Quaternions_and_spatial_rotation">quaternion</a>
+                    representing the ship's orientation.
+                  </p>
+                </dd>
+                <dt>Orientation y component(float)</dt>
+                <dd>
+                  <p>
+                    The y component of the
+                    <a href="https://en.wikipedia.org/wiki/Quaternions_and_spatial_rotation">quaternion</a>
+                    representing the ship's orientation.
+                  </p>
+                </dd>
+                <dt>Orientation z component(float)</dt>
+                <dd>
+                  <p>
+                    The z component of the
+                    <a href="https://en.wikipedia.org/wiki/Quaternions_and_spatial_rotation">quaternion</a>
+                    representing the ship's orientation.
+                  </p>
+                </dd>
+                <dt>Orientation w component(float)</dt>
+                <dd>
+                  <p>
+                    The w component of the
+                    <a href="https://en.wikipedia.org/wiki/Quaternions_and_spatial_rotation">quaternion</a>
+                    representing the ship's orientation.
+                  </p>
+                </dd>
+                <dt>Unknown (int)</dt>
+              </dl>
+            </section>
             <section id="firebeampacket">
               <h3>FireBeamPacket</h3>
               <div class="pkt-props">Type: <code>0xc2bee72e</code> [from <span>client</span>]</div>
