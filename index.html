@@ -4307,10 +4307,11 @@
           <section id="object-player-ship">
             <h3>Player Ship</h3>
             <dt>Bit field (6 bytes, 5 bytes before v2.3.0)</dt>
-            <dt>Unknown (bit 1.1, int)</dt>
+            <dt>Weapons target (bit 1.1, int)</dt>
             <dd>
               <p>
-                This might be the ship targeted by the weapons console.
+                The ID of the object selected by the weapons officer, or 0 if the selection was
+                cleared.
               </p>
             </dd>
             <dt>Impulse (bit 1.2, float)</dt>
@@ -4449,7 +4450,7 @@
             <dt>Science target (bit 4.7, int)</dt>
             <dd>
               <p>
-                The ID of the object selected by the science officer, or 1 if the selection was
+                The ID of the object selected by the science officer, or 0 if the selection was
                 cleared.
               </p>
             </dd>
