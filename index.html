@@ -3317,9 +3317,7 @@
               <h3>PlayerShipDamagePacket</h3>
               <div class="pkt-props">Type: <code>0xf754c8fe</code>:<code>0x05</code> [from <span>server</span>]</div>
               <p>
-                Appears to be sent when the player ship is hit by enemy fire. Has been observed when
-                fired upon by enemy beams. Information about this packet is still uncertain and the
-                documentation for it should not be considered reliable at this time.
+                Sent when the player ship is hit.
               </p>
               <h4>Payload</h4>
               <dl>
@@ -3329,18 +3327,25 @@
                     Always <code>0x05</code>.
                   </p>
                 </dd>
-                <dt>Unknown (int)</dt>
+                <dt>Ship index (int)</dt>
                 <dd>
                   <p>
-                    Value of 1 observed.
+                    The index of the damaged ship; valid values are 0 through 7 inclusive.
                   </p>
                 </dd>
-                <dt>Unknown (float?)</dt>
+                <dt>Unknown (float)</dt>
                 <dd>
                   <p>
                     Appears to have values of 1.0 or less for hits against shields, and values
                     greater than 1.0 and less than or equal to 2.0 for hits that pass through the
-                    shields and strike the hull.
+                    shields and strike the hull, except that a value of 3.0 has been observed when
+                    a drone hits regardless of whether it hits shields or hull.
+                  </p>
+                </dd>
+                <dt>Unknown (int)</dt>
+                <dd>
+                  <p>
+                    Values of 0, 103, 108, and 114 observed.
                   </p>
                 </dd>
               </dl>
