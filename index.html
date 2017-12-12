@@ -2509,10 +2509,9 @@
             </section>
             <section id="gamemasterbuttonpacket">
               <h3>GameMasterButtonPacket</h3>
-              <div class="pkt-props">Type: <code>0x26faacb9</code>:<code>0x00</code>-<code>02</code> [from <span>server</span>]</div>
+              <div class="pkt-props">Type: <code>0x26faacb9</code>:<code>0x00</code>-<code>02</code>,<code>64</code> [from <span>server</span>]</div>
               <p>
-                New as of v2.4.0. Sent by the server to indicate that a button should be added to
-                or removed from the game master console.
+                New as of v2.4.0. Sent by the server to update buttons on the game master UI.
               </p>
               <h4>Payload</h4>
               <dl>
@@ -2525,42 +2524,36 @@
                         <tr>
                           <td><code>0x00</code></td>
                           <td>
-                            Create a button. Its position and size are up to the client.
+                            Remove a previously-created button.
                           </td>
                         </tr>
                         <tr>
                           <td><code>0x01</code></td>
                           <td>
-                            Create a button with a specified position and size.
+                            Create a button. Its position and size are up to the client.
                           </td>
                         </tr>
                         <tr>
                           <td><code>0x02</code></td>
                           <td>
-                            Remove a previously-created button.
+                            Create a button with a specified position and size.
+                          </td>
+                        </tr>
+                        <tr>
+                          <td><code>0x64</code></td>
+                          <td>
+                            Remove all buttons on the game master screen.
                           </td>
                         </tr>
                       </tbody>
                     </table>
                   </p>
                 </dd>
-                <dt>Label (string)</dt>
+                <dt>Label (string, subtypes <code>0x00</code>-<code>02</code>)</dt>
                 <dd>
                   <p>
                     The button's label. This doubles as an identifier for the button and must
                     therefore be unique.
-                  </p>
-                </dd>
-                <dt>width (int, subtype <code>0x02</code> only)</dt>
-                <dd>
-                  <p>
-                    The width of the button to create.
-                  </p>
-                </dd>
-                <dt>height (int, subtype <code>0x02</code> only)</dt>
-                <dd>
-                  <p>
-                    The height of the button to create.
                   </p>
                 </dd>
                 <dt>x (int, subtype <code>0x02</code> only)</dt>
@@ -2573,6 +2566,18 @@
                 <dd>
                   <p>
                     The Y-coordinate of the button's location.
+                  </p>
+                </dd>
+                <dt>width (int, subtype <code>0x02</code> only)</dt>
+                <dd>
+                  <p>
+                    The width of the button to create.
+                  </p>
+                </dd>
+                <dt>height (int, subtype <code>0x02</code> only)</dt>
+                <dd>
+                  <p>
+                    The height of the button to create.
                   </p>
                 </dd>
               </dl>
