@@ -636,36 +636,6 @@
               </tbody>
             </table>
           </section>
-          <section id="enum-special-ability">
-            <h3>Special Ability</h3>
-            <p>
-              Note: Special abilities can stack, in which case the values are ORed together. For
-              example, cloak and warp would be <code>0x14</code>. A ship with no special abilities
-              would have a special ability value of <code>0x00</code>.
-
-              Special abilities used to be called <emph>elite
-              abilities</emph> in earlier versions of the game.
-            </p>
-            <table>
-              <thead>
-                <tr><th>Flag</th><th>Internal name</th><th>Alt name</th><th>Description</th></tr>
-              </thead>
-              <tbody>
-                <tr><td><code>0x0001</code></td><td>ELITE_INVIS_TO_MAIN_SCREEN</td><td>Stealth</td><td>Cannot be seen on main screen</td></tr>
-                <tr><td><code>0x0002</code></td><td>ELITE_INVIS_TO_TACTICAL   </td><td>LowVis</td><td>Cannot be seen on tactical map</td></tr>
-                <tr><td><code>0x0004</code></td><td>ELITE_CLOAKING            </td><td>Cloak</td><td>Can become completely invisible</td></tr>
-                <tr><td><code>0x0008</code></td><td>ELITE_HET                 </td><td>HET</td><td>?</td></tr>
-                <tr><td><code>0x0010</code></td><td>ELITE_WARP                </td><td>Warp</td><td>?</td></tr>
-                <tr><td><code>0x0020</code></td><td>ELITE_TELEPORT            </td><td>Teleport</td><td>?</td></tr>
-                <tr><td><code>0x0040</code></td><td>ELITE_TRACTOR_BEAM        </td><td>Tractor</td><td>Can lock player ships in, preventing them from escaping</td></tr>
-                <tr><td><code>0x0080</code></td><td>ELITE_DRONE_LAUNCHER      </td><td>Drones</td><td>Can launch drones</td></tr>
-                <tr><td><code>0x0100</code></td><td>ELITE_ANTI_MINE_BEAMS     </td><td>Anti-mines</td><td>?</td></tr>
-                <tr><td><code>0x0200</code></td><td>ELITE_ANTI_TORP_BEAMS     </td><td>Anti-torp</td><td>?</td></tr>
-                <tr><td><code>0x0400</code></td><td>ELITE_ANTI_SHIELD         </td><td>Shield-drain</td><td>Can drain the energy of player ship shields</td></tr>
-                <tr><td><code>0x0800</code></td><td>ELITE_?                   </td><td>ShldVamp</td><td>Can steal energy from player ship shields (unconfirmed)</td></tr>
-              </tbody>
-            </table>
-          </section>
           <section id="enum-game-type">
             <h3>Game Type</h3>
             <table>
@@ -950,6 +920,36 @@
               </tbody>
             </table>
           </section>
+          <section id="enum-special-ability">
+            <h3>Special Ability</h3>
+            <p>
+              Note: Special abilities can stack, in which case the values are ORed together. For
+              example, cloak and warp would be <code>0x14</code>. A ship with no special abilities
+              would have a special ability value of <code>0x00</code>.
+
+              Special abilities used to be called <emph>elite
+              abilities</emph> in earlier versions of the game.
+            </p>
+            <table>
+              <thead>
+                <tr><th>Flag</th><th>Internal name</th><th>Alt name</th><th>Description</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><code>0x0001</code></td><td>ELITE_INVIS_TO_MAIN_SCREEN</td><td>Stealth</td><td>Cannot be seen on main screen</td></tr>
+                <tr><td><code>0x0002</code></td><td>ELITE_INVIS_TO_TACTICAL   </td><td>LowVis</td><td>Cannot be seen on tactical map</td></tr>
+                <tr><td><code>0x0004</code></td><td>ELITE_CLOAKING            </td><td>Cloak</td><td>Can become completely invisible</td></tr>
+                <tr><td><code>0x0008</code></td><td>ELITE_HET                 </td><td>HET</td><td>?</td></tr>
+                <tr><td><code>0x0010</code></td><td>ELITE_WARP                </td><td>Warp</td><td>?</td></tr>
+                <tr><td><code>0x0020</code></td><td>ELITE_TELEPORT            </td><td>Teleport</td><td>?</td></tr>
+                <tr><td><code>0x0040</code></td><td>ELITE_TRACTOR_BEAM        </td><td>Tractor</td><td>Can lock player ships in, preventing them from escaping</td></tr>
+                <tr><td><code>0x0080</code></td><td>ELITE_DRONE_LAUNCHER      </td><td>Drones</td><td>Can launch drones</td></tr>
+                <tr><td><code>0x0100</code></td><td>ELITE_ANTI_MINE_BEAMS     </td><td>Anti-mines</td><td>?</td></tr>
+                <tr><td><code>0x0200</code></td><td>ELITE_ANTI_TORP_BEAMS     </td><td>Anti-torp</td><td>?</td></tr>
+                <tr><td><code>0x0400</code></td><td>ELITE_ANTI_SHIELD         </td><td>Shield-drain</td><td>Can drain the energy of player ship shields</td></tr>
+                <tr><td><code>0x0800</code></td><td>ELITE_?                   </td><td>ShldVamp</td><td>Can steal energy from player ship shields (unconfirmed)</td></tr>
+              </tbody>
+            </table>
+          </section>
           <section id="enum-targeting-mode">
             <h3>Targeting Mode</h3>
             <table>
@@ -965,7 +965,6 @@
               </tbody>
             </table>
           </section>
-
           <section id="enum-tube-status">
             <h3>Tube Status</h3>
             <table>
@@ -989,7 +988,6 @@
               </tbody>
             </table>
           </section>
-
           <section id="enum-upgrade">
             <h3>Upgrades</h3>
             <p>
