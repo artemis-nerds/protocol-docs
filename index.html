@@ -2744,7 +2744,7 @@
                 <dt>Unknown (4 bytes)</dt>
                 <dd>
                   <p>
-                    Seems to always be `0x00000000`.
+                    Seems to always be <code>0x00000000</code>.
                   </p>
                 </dd>
                 <dt>X-coordinate (float)</dt>
@@ -4963,6 +4963,659 @@
               <li><a href="#fighterbaystatuspacket">FighterBayStatusPacket</a> (informating that the fighter is now in the bay)</li>
               <li><a href="#objectupdatepacket">ObjectUpdatePacket</a> (the docked fighter is no longer a separate ship object)</li>
             </ol>
+          </section>
+        </section>
+
+        <section id="vessel-data">
+          <h2>Vessel Data</h2>
+          <p>
+            Information about vessels are stored in <code>dat/vesselData.xml</code>. This section provides
+            documentation for the tags used in this file.
+          </p>
+          <section id="vessel-data-art">
+            <h3>art</h3>
+            <p>
+              parent: &lt;vessel&gt;, count: 1
+            </p>
+            <p>
+              Provides paths to files used to create the 3D models seen in the game.
+            </p>
+            <h4>Attributes</h4>
+            <dl>
+              <dt>diffuseFile (string)</dt>
+              <dd>
+                <p>
+                  The base texture file.
+                </p>
+              </dd>
+              <dt>glowFile (string)</dt>
+              <dd>
+                <p>
+                  Replaces the base texture in shadowed areas of the vessel.
+                </p>
+              </dd>
+              <dt>meshFile (string)</dt>
+              <dd>
+                <p>
+                  The actual 3D model, must be a .dxs file.
+                </p>
+              </dd>
+              <dt>pushRadius (float)</dt>
+              <dd>
+                <p>
+                  The collision distance for the vessel. Other vessel models will be kept out of
+                  this range.
+                </p>
+              </dd>
+              <dt>scale (float)</dt>
+              <dd>
+                <p>
+                  Scales the 3D model.
+                </p>
+              </dd>
+              <dt>specularFile (string)</dt>
+              <dd>
+                <p>
+                  Defines how shiny surfaces are.
+                </p>
+              </dd>
+            </dl>
+          </section>
+          <section id="vessel-data-beam_port">
+            <h3>beam_port</h3>
+            <p>
+              parent: &lt;vessel&gt;, count: 0-n
+            </p>
+            <p>
+              Represents a beam port on the vessel.
+            </p>
+            <h4>Attributes</h4>
+            <dl>
+              <dt>arcwidth (float)</dt>
+              <dd>
+                <p>
+                  The (in radians) width of the beam arc.
+                </p>
+              </dd>
+              <dt>cycletime (integer, 0-n)</dt>
+              <dd>
+                <p>
+                  The time (in seconds) this port requires to cool down between shots.
+                </p>
+              </dd>
+              <dt>damage (integer, 0-n)</dt>
+              <dd>
+                <p>
+                  How much damage is inflicted per shot by this beam port.
+                </p>
+              </dd>
+              <dt>range (integer, 0-n)</dt>
+              <dd>
+                <p>
+                  The maximum distance this beam can fire.
+                </p>
+              </dd>
+              <dt>x, y, z</dt>
+              <dd>
+                <p>
+                  Coordinates for the beam port's location on the 3D model. The position of this
+                  point relative to the origin determines the center of this port's beam arc.
+                </p>
+              </dd>
+            </dl>
+          </section>
+          <section id="vessel-data-carrierload">
+            <h3>carrierload</h3>
+            <p>
+              parent: &lt;vessel&gt;, count: 0-1
+            </p>
+            <p>
+              Information about the fighters and bombers carried by this vessel. Only permitted
+              for vessels with both the <code>player</code> and <code>carrier</code> broadTypes.
+            </p>
+            <h4>Attributes</h4>
+            <dl>
+              <dt>bomber (integer, 0-n)</dt>
+              <dd>
+                <p>
+                  The number of bombers carried by this vessel.
+                </p>
+              </dd>
+              <dt>fighter (integer, 0-n)</dt>
+              <dd>
+                <p>
+                  The number of fighters carried by this vessel.
+                </p>
+              </dd>
+            </dl>
+          </section>
+          <section id="vessel-data-drone_port">
+            <h3>drone_port</h3>
+            <p>
+              parent: &lt;vessel&gt;, count: 0-n
+            </p>
+            <p>
+              Represents a drone port on the vessel. Not supported for vessels with the
+              <code>player</code> broadType.
+            </p>
+            <h4>Attributes</h4>
+            <dl>
+              <dt>cycletime (integer, 0-n)</dt>
+              <dd>
+                <p>
+                  The time (in seconds) this port requires to cool down between shots.
+                </p>
+              </dd>
+              <dt>damage (integer, 0-n)</dt>
+              <dd>
+                <p>
+                  How much damage is inflicted per shot by this drone port.
+                </p>
+              </dd>
+              <dt>range (integer, 0-n)</dt>
+              <dd>
+                <p>
+                  The distance to the enemy at which this port will start firing drones.
+                </p>
+              </dd>
+              <dt>x, y, z (float)</dt>
+              <dd>
+                <p>
+                  Coordinates for the drone port's location on the 3D model.
+                </p>
+              </dd>
+            </dl>
+          </section>
+          <section id="vessel-data-engine_port">
+            <h3>engine_port</h3>
+            <p>
+              parent: &lt;vessel&gt;, count: 0-n
+            </p>
+            <p>
+              Represents a engine port on the vessel. This is where the glowing engine trails
+              are emitted.
+            </p>
+            <h4>Attributes</h4>
+            <dl>
+              <dt>x, y, z (float)</dt>
+              <dd>
+                <p>
+                  Coordinates for the engine port's location on the 3D model.
+                </p>
+              </dd>
+            </dl>
+          </section>
+          <section id="vessel-data-fleet_ai">
+            <h3>fleet_ai</h3>
+            <p>
+              parent: &lt;vessel&gt;, count: 0-1
+            </p>
+            <p>
+              Not supported for vessels with the <code>player</code> broadType.
+            </p>
+            <h4>Attributes</h4>
+            <dl>
+              <dt>commonality (integer)</dt>
+            </dl>
+          </section>
+          <section id="vessel-data-hullRace">
+            <h3>hullRace</h3>
+            <p>
+              parent: &lt;vessel_data&gt;, count: 2-n
+            </p>
+            <p>
+              Represents a single game faction.
+            </p>
+            <h4>Attributes</h4>
+            <dl>
+               ID="0" name="TSN" keys="player"
+              <dt>ID (integer)</dt>
+              <dt>name (string)</dt>
+              <dd>
+                <p>
+                  Display name for this faction.
+                </p>
+              </dd>
+              <dt>keys (string)</dt>
+              <dd>
+                <p>
+                  A space-delimited list of attributes for this faction. There are three categories
+                  of keys:
+                </p>
+                <ul>
+                  <li>
+                    <strong>Stance</strong>
+                    <ul>
+                      <li><code>enemy</code>: Enemies use these vessels</li>
+                      <li><code>friendly</code>: Allies use these vessels</li>  
+                      <li><code>player</code>: Can be controlled by player</li>
+                    </ul>
+                  </li>
+                  <li>
+                    <strong>Fleet organization</strong> (<code>enemy</code> only)
+                    <ul>
+                      <li><code>loner</code>: Flies alone outside of a fleet</li>
+                      <li><code>standard</code>: Form the core of fleets</li>
+                      <li><code>support</code>: Accompanies <code>standard</code> enemies</li>
+                    </ul>
+                  </li>
+                  <li>
+                    <strong>Behavior</strong>
+                    <ul>
+                      <li><code>biomech</code>: Has hive mind, eats asteroids</li>
+                      <li><code>hasspecials</code>: Will have special abilities</li>
+                      <li><code>jumpmaster</code>: (<code>player</code> only) Has reduced jump
+                        cooldown and the combat jump</li>
+                      <li><code>whalehater</code>: Gets distracted with hunting whales</li>
+                      <li><code>whalelover</code>: Will attack anyone who shoots whales</li>
+                    </ul>
+                  </li>
+                </ul>
+                <p>
+                  Some additional notes:
+                </p>
+                <ul>
+                  <li>Every faction must have at least one stance key, and every <code>enemy</code>
+                    must have exactly one fleet organization key.</li>
+                  <li>There must be at least one faction with the <code>player</code> stance and at
+                    least one with the <code>enemy</code> stance.</li>
+                  <li>The <code>whalehater</code> and <code>whalelover</code> keys are mutually
+                    exclusive.</li>
+                  <li>At least one faction must have the <code>biomech</code> key, and at least one
+                    must have the <code>hasspecials</code> key.</li>
+                </ul>
+              </dd>
+            </dl>
+          </section>
+          <section id="vessel-data-impulse_point">
+            <h3>impulse_point</h3>
+            <p>
+              parent: &lt;vessel&gt;, count: 0-n
+            </p>
+            <p>
+              Represents an impulse point on the vessel. Only applicable to vessels from
+              <code>enemy</code> factions.
+            </p>
+            <h4>Attributes</h4>
+            <dl>
+              <dt>x, y, z (float)</dt>
+              <dd>
+                <p>
+                  Coordinates for the impulse point's location on the 3D model.
+                </p>
+              </dd>
+            </dl>
+          </section>
+          <section id="vessel-data-internal-data">
+            <h3>impulse_point</h3>
+            <p>
+              parent: &lt;vessel&gt;, count: 0-1
+            </p>
+            <p>
+              References an .snt file for ship internals. Only applicable for ships with the
+              <code>player</code> broadType. See the <a href="#ship-internals">Ship Internals</a>
+              section for details about the .snt format.
+            </p>
+            <h4>Attributes</h4>
+            <dl>
+              <dt>file (string)</dt>
+              <dd>
+                <p>
+                  Path to the .snt file.
+                </p>
+              </dd>
+            </dl>
+          </section>
+          <section id="vessel-data-long_desc">
+            <h3>long_desc</h3>
+            <p>
+              parent: &lt;vessel&gt;, count: 1
+            </p>
+            <p>
+              An on-screen description of the vessel. Carats (<code>^</code>) are converted to
+              newlines.
+            </p>
+            <h4>Attributes</h4>
+            <dl>
+              <dt>text (string)</dt>
+              <dd>
+                <p>
+                  The description to display.
+                </p>
+              </dd>
+            </dl>
+          </section>
+          <section id="vessel-data-maneuver_point">
+            <h3>maneuver_point</h3>
+            <p>
+              parent: &lt;vessel&gt;, count: 0-n
+            </p>
+            <p>
+              Represents an maneuver point on the vessel. Only applicable to vessels from
+              <code>enemy</code> factions.
+            </p>
+            <h4>Attributes</h4>
+            <dl>
+              <dt>x, y, z (float)</dt>
+              <dd>
+                <p>
+                  Coordinates for the maneuver point's location on the 3D model.
+                </p>
+              </dd>
+            </dl>
+          </section>
+          <section id="vessel-data-performance">
+            <h3>performance</h3>
+            <p>
+              parent: &lt;vessel&gt;, count: 0-1
+            </p>
+            <p>
+              The vessel's performance specs. Not applicable to vessels with the <code>base</code>
+              broadType.
+            </p>
+            <h4>Attributes</h4>
+            <dl>
+              <dt>jumpefficiency (float, 0-n)</dt>
+              <dd>
+                <p>
+                  A multiplier on the jump drive's energy usage: less than 1.0 decreases energy usage,
+                  greater than 1.0 increases it.
+                </p>
+              </dd>
+              <dt>shipefficiency (float, 0-n)</dt>
+              <dd>
+                <p>
+                  A multiplier on the vessel's energy usage: less than 1.0 decreases energy usage,
+                  greater than 1.0 increases it.
+                </p>
+              </dd>
+              <dt>turnrate (float, 0-n)</dt>
+              <dd>
+                <p>
+                  How fast the ship turns. This number is in degrees per second divided by 2500.
+                </p>
+              </dd>
+              <dt>warpefficiency (float, 0-n)</dt>
+              <dd>
+                <p>
+                  A multiplier on the warp drive's energy usage: less than 1.0 decreases energy usage,
+                  greater than 1.0 increases it.
+                </p>
+              </dd>
+            </dl>
+          </section>
+          <section id="vessel-data-production">
+            <h3>production</h3>
+            <p>
+              parent: &lt;vessel&gt;, count: 0-1
+            </p>
+            <p>
+              Only applicable to vessels with the <code>base</code> broadType. Controls how quickly the
+              base produces weapons.
+            </p>
+            <h4>Attributes</h4>
+            <dl>
+              <dt>coeff (float, 0-n)</dt>
+              <dd>
+                <p>
+                  The base's production speed; higher numbers mean faster production. Artemis spawns bases
+                  until the side has a total production of 4.0, so if you make a base with more than 4.0
+                  production, it will never spawn.
+                </p>
+              </dd>
+            </dl>
+          </section>
+          <section id="vessel-data-shields">
+            <h3>shields</h3>
+            <p>
+              parent: &lt;vessel&gt;, count: 1
+            </p>
+            <p>
+              Declares shield strength for the vessel.
+            </p>
+            <h4>Attributes</h4>
+            <dl>
+              <dt>back (integer, 0-n)</dt>
+              <dd>
+                <p>
+                  The maximum strength of the back shield. Bases always have <code>0</code> for
+                  this attribute, since they only have one shield.
+                </p>
+              </dd>
+              <dt>front (integer, 0-n)</dt>
+              <dd>
+                <p>
+                  The maximum strength of the front shield.
+                </p>
+              </dd>
+              <dt>player (integer, 0-n)</dt>
+              <dd>
+                <p>
+                  Only applicable to vessels with the <code>fighter</code> broadType. This is the
+                  shield strength used when the fighter is flown by a player (as opposed to an NPC).
+                </p>
+              </dd>
+            </dl>
+          </section>
+          <section id="vessel-data-taunt">
+            <h3>taunt</h3>
+            <p>
+              parent: &lt;hullRace&gt;, count: 1-n
+            </p>
+            <p>
+              Declares a single taunt for a faction.
+            </p>
+            <h4>Attributes</h4>
+            <dl>
+              <dt>immunity (string)</dt>
+              <dd>
+                <p>
+                  The captain trait that makes them immune to this taunt.
+                </p>
+              </dd>
+              <dt>text (string)</dt>
+              <dd>
+                <p>
+                  The taunt itself.
+                </p>
+              </dd>
+            </dl>
+          </section>
+          <section id="vessel-data-torpedo_station_port">
+            <h3>torpedo_station_port</h3>
+            <p>
+              parent: &lt;vessel&gt;, count: 0-n
+            </p>
+            <p>
+              Torpedo ports for friendly bases. Only applicable for vessels with the <code>base</code>
+              broadType belonging to a faction with the <code>friendly</code> key.
+            </p>
+            <h4>Attributes</h4>
+            <dl>
+              <dt>cycletime (integer, 0-n)</dt>
+              <dd>
+                <p>
+                  The time (in seconds) this port requires to cool down between shots.
+                </p>
+              </dd>
+              <dt>damage (integer, 0-n)</dt>
+              <dd>
+                <p>
+                  How much damage is inflicted per shot by this port.
+                </p>
+              </dd>
+              <dt>range (integer, 0-n)</dt>
+              <dd>
+                <p>
+                  The distance to the enemy at which this port will start firing torpedoes.
+                </p>
+              </dd>
+              <dt>x, y, z (float)</dt>
+              <dd>
+                <p>
+                  Coordinates for the drone port's location on the 3D model.
+                </p>
+              </dd>
+            </dl>
+          </section>
+          <section id="vessel-data-torpedo_storage">
+            <h3>torpedo_storage</h3>
+            <p>
+              parent: &lt;vessel&gt;, count: 0,5
+            </p>
+            <p>
+              How many of each torpedo type can be stored. Only applicable to vessels with the
+              <code>player</code> broadType.
+            </p>
+            <h4>Attributes</h4>
+            <dl>
+              <dt>amount (integer, 0-n)</dt>
+              <dd>
+                <p>
+                  The maximum number of torpedoes of this type that the vessel can store.
+                </p>
+              </dd>
+              <dt>type (<a href="#enum-ordnance-type">Ordnance type</a>)</dt>
+              <dd>
+                <p>
+                  What type of ordnance is being declared.
+                </p>
+              </dd>
+            </dl>
+          </section>
+          <section id="vessel-data-torpedo_station_port">
+            <h3>torpedo_tube</h3>
+            <p>
+              parent: &lt;vessel&gt;, count: 0-6
+            </p>
+            <p>
+              Declares the locations of torpedo tubes. Only applicable for vessels with the <code>player</code>
+              broadType.
+            </p>
+            <h4>Attributes</h4>
+            <dl>
+              <dt>cycletime (integer, 0-n)</dt>
+              <dd>
+                <p>
+                  The time (in seconds) this port requires to cool down between shots.
+                </p>
+              </dd>
+              <dt>range (integer, 0-n)</dt>
+              <dd>
+                <p>
+                  The maximum range of torpedoes fired by this port.
+                </p>
+              </dd>
+              <dt>x, y, z (float)</dt>
+              <dd>
+                <p>
+                  Coordinates for the drone port's location on the 3D model.
+                </p>
+              </dd>
+            </dl>
+          </section>
+          <section id="vessel-data-vessel">
+            <h3>vessel</h3>
+            <p>
+              parent: &lt;vessel_data&gt;, count: 0-n
+            </p>
+            <p>
+              The parent tag for each vessel.
+            </p>
+            <h4>Attributes</h4>
+            <dl>
+              <dt>broadType (string)</dt>
+              <dd>
+                <p>
+                  A space-delimite list of attributes for this vessel. There are three categories
+                  of broadTypes:
+                </p>
+                <ul>
+                  <li>
+                    <strong>Vessel class</strong>
+                    <ul>
+                      <li><code>base</code>: Immovable vessels that can resupply other vessels</li>
+                      <li><code>carrier</code></li>: Can launch fighters
+                      <li><code>fighter</code>: Vessels launched from carriers</li>
+                      <li><code>large</code>: Large non-player vessels</li>
+                      <li><code>medium</code>: Medium non-player vessels</li>
+                      <li><code>player</code>: Vessels which players can control</li>
+                      <li><code>small</code>: Small non-player vessels</li>
+                    </ul>
+                  </li>
+                  <li>
+                    <strong>Friendly type</strong>
+                    <ul>
+                      <li>cargo</li>: Has no weapons
+                      <li>luxury</li>: Has no weapons
+                      <li>science</li>: Has no weapons
+                      <li>transport</li>: Has no weapons
+                      <li>warship</li>: Has weapons and can assist players in combat
+                    </ul>
+                  </li>
+                  <li>
+                    <strong>Biomech traits</strong>
+                    <ul>
+                      <li>anomalyeater</li>: Eats anomalies
+                      <li>asteroideater</li>: Eats asteroids
+                      <li>sentient</li>: Can respond to hails and calm the tribe
+                    </ul>
+                  </li>
+                  <p>
+                    Additional notes:
+                  </p>
+                  <ul>
+                    <li>Some broadTypes are mutually exclusive: <code>base</code> and all other
+                      broadTypes except <code>carrier</code>; <code>carrier</code> and
+                      <code>fighter</code>; <code>small</code>, <code>medium</code>,
+                      <code>large</code>, and <code>fighter</code>.
+                    <li>The friendly type broadTypes can only be used by vessels belonging to
+                      factions with the <code>friendly</code> key.</li>
+                    <li>The <code>anomalyeater</code>, <code>asteroideater</code> and <code>sentient</code>
+                      broadTypes are only applicable to vessels belonging to a faction with the
+                      <code>biomech</code> key.</li>
+                  </ul>
+                </ul>
+              </dd>
+              <dt>classname (string)</dt>
+              <dd>
+                <p>
+                  The name of the vessel type, as it appears in science scans.
+                </p>
+              </dd>
+              <dt>side (integer, 0-n)</dt>
+              <dd>
+                <p>
+                  The faction to which the ship belongs, corresponding to the <code>&lt;hullRace
+                  ID&gt;</code> attribute.
+                </p>
+              </dd>
+              <dt>uniqueID (integer, 0-n)</dt>
+              <dd>
+                <p>
+                  An ID assigned to this vessel. Player ships must start at 0 and increase sequentially;
+                  others can use whatever ID they like.
+                </p>
+              </dd>
+            </dl>
+          </section>
+          <section id="vessel-data-vessel_data">
+            <h3>vessel_data</h3>
+            <p>
+              parent: none, count: 1
+            </p>
+            <p>
+              The root tag for the <code>vesselData.xml</code> file.
+            </p>
+            <h4>Attributes</h4>
+            <dl>
+              <dt>version (string)</dt>
+              <dd>
+                <p>
+                  The version of the <code>vesselData.xml</code> schema used.
+                </p>
+              </dd>
+            </dl>
           </section>
         </section>
 
