@@ -161,6 +161,26 @@
               size for update packets.
             </p>
           </section>
+          <section id="coordinates">
+            <h3>Coordinates</h3>
+            <p>
+              Coordinates are expressed in three-dimensional Cartesian space as three float values
+              (X, Y, Z).  The simulation space is defined as a rectangular cuboid. The X- and
+              Z-dimensions range from 0 to 100000, while the Y-dimension ranges from -100000 to
+              100000. In the standard siege game mode, the ship starts at (50000,0,50000). Another
+              way of thinking of it is that the space is two cubes of size 100000 stacked on top of
+              one another, with the ship starting out resting at the center of the plane that divides
+              them.
+            </p>
+            <p>
+              From the point of view of the ship when oriented at a bearing of 0&deg;, the X-axis
+              increases toward starboard ("right"), the Y-axis increases toward the ventral side of
+              the ship ("down"), and the Z-axis increases toward aft ("back", or toward the viewer).
+              In the top-down view (as seen on most consoles), the X-axis increases toward the right
+              (90&deg; or "east"), the Y-axis increases "into" the screen (away from the viewer), and
+              the Z-axis increase toward the bottom (180&deg; or "south").
+            </p>
+          </section>
         </section>
 
         <section id="enums">
