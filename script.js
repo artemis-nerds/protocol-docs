@@ -1,4 +1,29 @@
 $(function() {
+  var INTERNAL_NAMES = {
+    '0351a5ac': 'valueFloat',
+    '077e9f3c': 'shipSystemSync',
+    '19c6e2d4': 'clientConsoles',
+    '26faacb9': 'gmButton',
+    '3de66711': 'startGame',
+    '4c821d3c': 'valueInt',
+    '574c4c4b': 'commsMessage',
+    '69cc01d9': 'valueFourInts',
+    '6aadc57f': 'controlMessage',
+    '6d04b3da': 'plainTextGreeting',
+    '80803df9': 'objectBitStream',
+    '809305a7': 'gmText',
+    '902f0b1a': 'bigMess',
+    '9ad1f23b': 'carrierRecord',
+    'ae88e058': 'incomingMessage',
+    'b83fd2c4': 'attack',
+    'c2bee72e': 'beamRequest',
+    'cc5a3e30': 'objectDelete',
+    'd672c35f': 'commText',
+    'e548e74a': 'connected',
+    'ee665279': 'objectText',
+    'f5821226': 'heartbeat',
+    'f754c8fe': 'simpleEvent'
+  };
   // build navigation
   var $navRoot = $('#sidebar'), $navParent = null;
   $('content > section, content > section > section').each(function(i, $el) {
@@ -48,9 +73,12 @@ $(function() {
         $('<td />').text(whoFrom),
         $('<td />').append(
           $('<code />').text(mainType)
-        )
+        ),
+        $('<td />').append(
+          $('<code />').text(INTERNAL_NAMES[mainType.substr(2)])
+        ),
       );
-      
+
       if ($types.length > 1) {
         var $subTypeCode = $('<code />').text($types.eq(1).text());
         $row.append(

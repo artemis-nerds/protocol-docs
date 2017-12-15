@@ -1186,6 +1186,7 @@
                 <th>Name</th>
                 <th>Origin</th>
                 <th>Type</th>
+                <th>Internal Type Name</th>
                 <th>Subtype(s)</th>
               </tr>
             </thead>
@@ -1387,20 +1388,6 @@
                   So far, no payload apart from subtype has been observed.
                 </dd>
               </dl>
-            </section>
-
-
-            <section id="__unknown__0xf5821226">
-              <h3>__server_unknown__1</h3>
-              <div class="pkt-props">Type: <code>0xf5821226</code> [from <span>server</span>]</div>
-              <p>
-                This packet is seen regularly from the server, in
-                every game type. It is speculated to be a heartbeat
-                packet, that simply serves to ensure the clients that
-                the server is still alive and well-connected.
-              </p>
-              <h4>Payload</h4>
-              <p>This packet has no payload.</p>
             </section>
 
             <section id="__unknown__0xf754c8fe_0x07">
@@ -2889,6 +2876,19 @@
           </section>
           <section id="pkt-h">
             <h3>H</h3>
+            <section id="heartbeatpacket">
+              <h3>HeartbeatPacket</h3>
+              <div class="pkt-props">Type: <code>0xf5821226</code> [from <span>server</span>]</div>
+              <p>
+                This packet is transmitted regularly by the server to
+                demonstrate that it's still alive. If a client does not receive
+                a heartbeat packet within a reasonable amount of time, it can
+                assume that the server is not functioning.
+              </p>
+              <h4>Payload</h4>
+              <p>This packet has no payload.</p>
+            </section>
+
             <section id="helmjumppacket">
               <h3>HelmJumpPacket</h3>
               <div class="pkt-props">Type: <code>0x0351a5ac</code>:<code>0x05</code> [from <span>client</span>]</div>
@@ -5187,7 +5187,7 @@
                     <strong>Stance</strong>
                     <ul>
                       <li><code>enemy</code>: Enemies use these vessels</li>
-                      <li><code>friendly</code>: Allies use these vessels</li>  
+                      <li><code>friendly</code>: Allies use these vessels</li>
                       <li><code>player</code>: Can be controlled by player</li>
                     </ul>
                   </li>
