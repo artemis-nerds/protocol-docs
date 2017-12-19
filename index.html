@@ -1180,7 +1180,8 @@
               This value identifies the type of this packet. Refer to the
               <a href="#packet-types">packet types table</a> to find the values that correspond to
               the various packet types. Note that many packets also have a subtype value; for those
-              packets, the subtype will be the first value transmitted in the payload.
+              packets, the subtype will be the first value transmitted in the payload. This value
+              is a JamCRC hash of the internal name of the packet type.
             </p>
           </section>
           <section id="packet-structure-payload">
@@ -2583,9 +2584,9 @@
                 <dt>Hash (int)</dt>
                 <dd>
                   <p>
-                    A hash value identifying the button. It has been determined that this is a hash
-                    of the button's label string, but it is currently unknown how this hash is
-                    computed.
+                    A hash value identifying the button. This is a hash of the button's label
+                    computed using the JamCRC hash algorithm.
+                    (<a href="https://github.com/artemis-nerds/protocol-docs/issues/36#issuecomment-247130607">Java implementation</a>)
                   </p>
                 </dd>
               </dl>
