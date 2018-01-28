@@ -1390,7 +1390,7 @@
 
             <section id="__unknown__0x4c821d3c_0x17">
               <h3>__client_unknown__3</h3>
-              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x17</code> [from <span>client</span>]</div>
+              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x17 (&lt; v2.4), 0x18 (&ge; v2.4))</code> [from <span>client</span>]</div>
               <p>
                 This packet type has been observed, and is known to
                 exist, but its function is as of yet completely
@@ -1512,6 +1512,31 @@
 
           <section id="pkt-a">
             <h3>A</h3>
+            <section id="activateupgradepacket">
+              <h3>ActivateUpgradePacket</h3>
+              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x1b (v2.2-2.3), 0x1c (&ge; v2.4)</code> [from <span>client</span>]</div>
+              <p>
+                This packet is sent whenever a client wishes to activate a ship upgrade from the "upgrades" menu.
+              </p>
+              <h4>Payload</h4>
+              <dl>
+                <dt>Subtype (int)</dt>
+                <dd>
+                  <p>
+                    Always <code>0x1c</code>.
+                  </p>
+                </dd>
+                <dt>Target (upgrade type, enum32)</dt>
+                <dd>
+                  <p>
+                    The upgrades that can be activated seem to be
+                    the ones between <code>0x00</code>
+                    (InfusionPCoils) and <code>0x08</code>
+                    (DoubleAgent / Secret Code Case), both inclusive.
+                  </p>
+                </dd>
+              </dl>
+            </section>
             <section id="allshipsettingspacket">
               <h3>AllShipSettingsPacket</h3>
               <div class="pkt-props">Type: <code>0xf754c8fe</code>:<code>0x0f</code> [from <span>server</span>]</div>
@@ -1711,7 +1736,7 @@
             </section>
             <section id="climbdivepacket">
               <h3>ClimbDivePacket</h3>
-              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x1b</code> [from <span>client</span>]</div>
+              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x1b (&lt; v2.2), 0x1c (v2.2-2.3), 0x1d (&ge; v2.4)</code> [from <span>client</span>]</div>
               <p>
                 Causes the ship to climb or dive. This differs from
                 <a href="#helmsetpitchpacket">HelmSetPitchPacket</a> in that it indicates a
@@ -1734,32 +1759,6 @@
                     down, <code>0xffffffff</code> (-1) for up. For example, if the ship is diving when
                     the instruction to go up is received, the ship will level out. If a second up
                     command is received, the ship will start climbing.
-                  </p>
-                </dd>
-              </dl>
-            </section>
-
-            <section id="activateupgradepacket">
-              <h3>ActivateUpgradePacket</h3>
-              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x1c</code> [from <span>client</span>]</div>
-              <p>
-                This packet is sent whenever a client wishes to activate a ship upgrade from the "upgrades" menu.
-              </p>
-              <h4>Payload</h4>
-              <dl>
-                <dt>Subtype (int)</dt>
-                <dd>
-                  <p>
-                    Always <code>0x1c</code>.
-                  </p>
-                </dd>
-                <dt>Target (upgrade type, enum32)</dt>
-                <dd>
-                  <p>
-                    The upgrades that can be activated seem to be
-                    the ones between <code>0x00</code>
-                    (InfusionPCoils) and <code>0x08</code>
-                    (DoubleAgent / Secret Code Case), both inclusive.
                   </p>
                 </dd>
               </dl>
@@ -2395,7 +2394,7 @@
             </section>
             <section id="fighterlaunchpacket">
               <h3>FighterLaunchPacket</h3>
-              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x1d</code> [from <span>client</span>]</div>
+              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x1d (v2.3), 0x1e (&ge; v2.4)</code> [from <span>client</span>]</div>
               <p>
                 Notifies the server that a fighter is being launched. The server will send back a
                 <a href="#fighterlaunchedpacket">FighterLaunchedPacket</a> in response.
@@ -3072,7 +3071,7 @@
             </section>
             <section id="helmtogglereversepacket">
               <h3>HelmToggleReversePacket</h3>
-              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x18</code> [from <span>client</span>]</div>
+              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x18 (&lt; v2.4), 0x19 (&ge; v2.4)</code> [from <span>client</span>]</div>
               <p>
                 Toggles the impulse engines between forward and reverse drive.
               </p>
@@ -3493,7 +3492,7 @@
             </section>
             <section id="requestenggridupdate">
               <h3>RequestEngGridUpdate</h3>
-              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x19</code> [from <span>client</span>]</div>
+              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x19 (&lt; v2.4), 0x1a (&ge; v2.4)</code> [from <span>client</span>]</div>
               <p>
                 Sent from the engineering station, to request a full
                 update for all values. This causes the server to send
@@ -3662,7 +3661,7 @@
             </section>
             <section id="setshipsettingspacket">
               <h3>SetShipSettingsPacket</h3>
-              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x16</code> [from <span>client</span>]</div>
+              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x16 (&lt; v2.4), 0x17 (&ge; v2.4)</code> [from <span>client</span>]</div>
               <p>
                 Sets the name, ship type and drive type for the currently-selected ship.
               </p>
@@ -3803,7 +3802,7 @@
             </section>
             <section id="toggleperspectivepacket">
               <h3>TogglePerspectivePacket</h3>
-              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x1a</code> [from <span>client</span>]</div>
+              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x1a (&lt; v2.4), 0x1b (&ge; v2.4)</code> [from <span>client</span>]</div>
               <p>
                 Toggles between first- and third-person perspective on the main screen.
               </p>
