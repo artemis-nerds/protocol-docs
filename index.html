@@ -1537,6 +1537,79 @@
                 </dd>
               </dl>
             </section>
+            <section id="addgmbuttonpacket">
+              <h3>AddGMButtonPacket</h3>
+              <div class="pkt-props">Type: <code>0x26faacb9</code>:<code>0x01</code> [from <span>server</span>]</div>
+              <p>
+                New as of v2.4.0. Sent by the server to create a button on the game master UI.
+                Unlike <a href="#addgmbuttonatpositionpacket">AddGMButtonAtPositionPacket</a>,
+                the button's position and size are up to the client.
+              </p>
+              <h4>Payload</h4>
+              <dl>
+                <dt>Subtype (byte)</dt>
+                <dd>
+                  <p>
+                    Always <code>0x01</code>
+                  </p>
+                </dd>
+                <dt>Label (string)</dt>
+                <dd>
+                  <p>
+                    The button's label. This doubles as an identifier for the button and must
+                    therefore be unique.
+                  </p>
+                </dd>
+              </dl>
+            </section>
+            <section id="addgmbuttonatpositionpacket">
+              <h3>AddGMButtonAtPositionPacket</h3>
+              <div class="pkt-props">Type: <code>0x26faacb9</code>:<code>0x02</code> [from <span>server</span>]</div>
+              <p>
+                New as of v2.4.0. Sent by the server to add a button with a specified
+                position and size on the game master UI.
+              </p>
+              <h4>Payload</h4>
+              <dl>
+                <dt>Subtype (byte)</dt>
+                <dd>
+                  <p>
+                    Always <code>0x02</code>.
+                  </p>
+                </dd>
+                <dt>Label (string)</dt>
+                <dd>
+                  <p>
+                    The button's label. This doubles as an identifier for the button and must
+                    therefore be unique.
+                  </p>
+                </dd>
+                <dt>x (int)</dt>
+                <dd>
+                  <p>
+                    The X-coordinate of the button's location.
+                  </p>
+                </dd>
+                <dt>y (int)</dt>
+                <dd>
+                  <p>
+                    The Y-coordinate of the button's location.
+                  </p>
+                </dd>
+                <dt>width (int)</dt>
+                <dd>
+                  <p>
+                    The width of the button to create.
+                  </p>
+                </dd>
+                <dt>height (int)</dt>
+                <dd>
+                  <p>
+                    The height of the button to create.
+                  </p>
+                </dd>
+              </dl>
+            </section>
             <section id="allshipsettingspacket">
               <h3>AllShipSettingsPacket</h3>
               <div class="pkt-props">Type: <code>0xf754c8fe</code>:<code>0x0f</code> [from <span>server</span>]</div>
@@ -1763,7 +1836,6 @@
                 </dd>
               </dl>
             </section>
-
             <section id="commsincomingpacket">
               <h3>CommsIncomingPacket</h3>
               <div class="pkt-props">Type: <code>0xd672c35f</code> [from <span>server</span>]</div>
@@ -2569,7 +2641,8 @@
               <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x15</code> [from <span>client</span>]</div>
               <p>
                 New as of v2.4.0. Sent by the client when the game master clicks on a button
-                created by <a href="#gamemasterbuttonpacket">GameMasterButtonPacket</a>.
+                created by <a href="#addgmbuttonpacket">AddGMButtonPacket</a> or
+                <a href="#addgmbuttonatpositionpacket">AddGMButtonAtPositionPacket</a>.
               </p>
               <h4>Payload</h4>
               <dl>
@@ -2591,81 +2664,6 @@
                     A hash value identifying the button. This is a hash of the button's label
                     computed using the JamCRC hash algorithm.
                     (<a href="https://github.com/artemis-nerds/protocol-docs/issues/36#issuecomment-247130607">Java implementation</a>)
-                  </p>
-                </dd>
-              </dl>
-            </section>
-            <section id="gamemasterbuttonpacket">
-              <h3>GameMasterButtonPacket</h3>
-              <div class="pkt-props">Type: <code>0x26faacb9</code>:<code>0x00</code>-<code>02</code>,<code>64</code> [from <span>server</span>]</div>
-              <p>
-                New as of v2.4.0. Sent by the server to update buttons on the game master UI.
-              </p>
-              <h4>Payload</h4>
-              <dl>
-                <dt>Action (byte)</dt>
-                <dd>
-                  <p>
-                    Indicates what action is desired:
-                    <table>
-                      <tbody>
-                        <tr>
-                          <td><code>0x00</code></td>
-                          <td>
-                            Remove a previously-created button.
-                          </td>
-                        </tr>
-                        <tr>
-                          <td><code>0x01</code></td>
-                          <td>
-                            Create a button. Its position and size are up to the client.
-                          </td>
-                        </tr>
-                        <tr>
-                          <td><code>0x02</code></td>
-                          <td>
-                            Create a button with a specified position and size.
-                          </td>
-                        </tr>
-                        <tr>
-                          <td><code>0x64</code></td>
-                          <td>
-                            Remove all buttons on the game master screen.
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </p>
-                </dd>
-                <dt>Label (string, subtypes <code>0x00</code>-<code>02</code>)</dt>
-                <dd>
-                  <p>
-                    The button's label. This doubles as an identifier for the button and must
-                    therefore be unique.
-                  </p>
-                </dd>
-                <dt>x (int, subtype <code>0x02</code> only)</dt>
-                <dd>
-                  <p>
-                    The X-coordinate of the button's location.
-                  </p>
-                </dd>
-                <dt>y (int, subtype <code>0x02</code> only)</dt>
-                <dd>
-                  <p>
-                    The Y-coordinate of the button's location.
-                  </p>
-                </dd>
-                <dt>width (int, subtype <code>0x02</code> only)</dt>
-                <dd>
-                  <p>
-                    The width of the button to create.
-                  </p>
-                </dd>
-                <dt>height (int, subtype <code>0x02</code> only)</dt>
-                <dd>
-                  <p>
-                    The height of the button to create.
                   </p>
                 </dd>
               </dl>
@@ -3486,6 +3484,46 @@
                 <dd>
                   <p>
                     Always 0.
+                  </p>
+                </dd>
+              </dl>
+            </section>
+            <section id="removeallgmbuttonspacket">
+              <h3>RemoveAllGMButtonsPacket</h3>
+              <div class="pkt-props">Type: <code>0x26faacb9</code>:<code>0x64</code> [from <span>server</span>]</div>
+              <p>
+                New as of v2.4.0. Sent by the server to remove all buttons on the game master UI.
+              </p>
+              <h4>Payload</h4>
+              <dl>
+                <dt>Subtype (byte)</dt>
+                <dd>
+                  <p>
+                    Always <code>0x64</code>.
+                  </p>
+                </dd>
+              </dl>
+            </section>
+            <section id="removegmbuttonpacket">
+              <h3>RemoveGMButtonPacket</h3>
+              <div class="pkt-props">Type: <code>0x26faacb9</code>:<code>0x00</code> [from <span>server</span>]</div>
+              <p>
+                New as of v2.4.0. Sent by the server to remove a previously-created button
+                on the game master UI.
+              </p>
+              <h4>Payload</h4>
+              <dl>
+                <dt>Subtype (byte)</dt>
+                <dd>
+                  <p>
+                    Always <code>0x00</code>.
+                  </p>
+                </dd>
+                <dt>Label (string)</dt>
+                <dd>
+                  <p>
+                    The button's label. This doubles as an identifier for the button and must
+                    therefore be unique.
                   </p>
                 </dd>
               </dl>
