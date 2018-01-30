@@ -1543,7 +1543,8 @@
               <p>
                 New as of v2.4.0. Sent by the server to create a button on the game master UI.
                 Unlike <a href="#addgmbuttonatpositionpacket">AddGMButtonAtPositionPacket</a>,
-                the button's position and size are up to the client.
+                the button's position and size are up to the client.  The client will use the
+                default width set with <a href="#setdefaultgmbuttonwidthpacket">SetDefaultGMButtonWidthPacket</a>, if any.
               </p>
               <h4>Payload</h4>
               <dl>
@@ -2670,7 +2671,7 @@
             </section>
             <section id="gamemasterinstructionspacket">
               <h3>GameMasterInstructionsPacket</h3>
-              <div class="pkt-props">Type: <code>0x809305a7</code>:<code>0x63</code> [from <span>server</span>]</div>
+              <div class="pkt-props">Type: <code>0x26faacb9</code>:<code>0x63</code> [from <span>server</span>]</div>
               <p>
                 Sent by the server to the game master console to provide instructions to be displayed
                 on request.
@@ -3648,6 +3649,29 @@
                 <dd>
                   <p>
                     True if this client is using the indicated console, false otherwise.
+                  </p>
+                </dd>
+              </dl>
+            </section>
+            <section id="setdefaultgmbuttonwidthpacket">
+              <h3>SetDefaultGMButtonWidthPacket</h3>
+              <div class="pkt-props">Type: <code>0x26faacb9</code>:<code>0x03</code> [from <span>server</span>]</div>
+              <p>
+                Sets the width of buttons on the game master UI that are 
+                added with <a href="#addgmbuttonpacket">AddGMButtonPacket</a>.
+              </p>
+              <h4>Payload</h4>
+              <dl>
+                <dt>Subtype (byte)</dt>
+                <dd>
+                  <p>
+                    Always <code>0x01</code>
+                  </p>
+                </dd>
+                <dt>Width (int)</dt>
+                <dd>
+                  <p>
+                    The default width in pixels.
                   </p>
                 </dd>
               </dl>
