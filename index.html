@@ -2184,14 +2184,12 @@
               </p>
               <h4>Payload</h4>
               <dl>
-                <dt>Reqested</dt>
+                <dt>Reqested (boolean, 1 byte)</dt>
                 <dd>
                   <p>
-                    This field is <code>0</code> on normal engineering
-                    update from the server, but will be set
-                    to <code>1</code> when in response to
-                    the <a href="#requestenggridupdate">RequestEngGridUpdate</a>
-                    packet.
+                    This field is <code>0</code> for a normal engineering update from the server,
+                    but will be set to <code>1</code> when the packet is sent in response to the
+                    <a href="#requestenggridupdate">RequestEngGridUpdate</a> packet.
                   </p>
                 </dd>
                 <dt>System grid status (array)</dt>
