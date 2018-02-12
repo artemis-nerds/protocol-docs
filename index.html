@@ -239,6 +239,21 @@
               </tbody>
             </table>
           </section>
+          <section id="enum-beacon-mode">
+            <h3>Beacon Mode</h3>
+            <table>
+              <tbody>
+                <tr>
+                  <td><code>0x00</code></td>
+                  <td>attract</td>
+                </tr>
+                <tr>
+                  <td><code>0x01</code></td>
+                  <td>repel</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
           <section id="enum-beam-frequency">
             <h3>Beam Frequency</h3>
             <table>
@@ -4549,7 +4564,12 @@
             <dt>Warp factor (bit 1.7, byte)</dt>
             <dt>Energy reserves (bit 1.8, float)</dt>
             <dt>Shields up/down (bit 2.1, boolean, 2 bytes)</dt>
-            <dt>Ship number (bit 2.2, int)</dt>
+            <dt>Unknown (was ship number?) (bit 2.2, int)</dt>
+            <dd>
+              <p>
+                Was previously believed to be ship number.
+              </p>
+            </dd>
             <dt>Ship type? (bit 2.3, int)</dt>
             <dt>X coordinate (bit 2.4, float)</dt>
             <dd>
@@ -4600,7 +4620,13 @@
                 A value of 0.0 corresponds to a heading of 180&deg; (or &ldquo;south&rdquo;).
               </p>
             </dd>
-            <dt>Unknown (bit 3.3, short)</dt>
+            <dt>In a nebula (bit 3.3, boolean, 2 bytes)</dt>
+            <dd>
+              <p>
+                It should be noted that values other than 0 and 1 have been noted. It seems that
+                any non-zero value should be treated as <code>true</code>.
+              </p>
+            </dd>
             <dt>Ship name (bit 3.4, string)</dt>
             <dt>Forward shields (bit 3.5, float)</dt>
             <dd>
@@ -4713,10 +4739,16 @@
               </p>
             </dd>
             <dt>Unknown (bit 5.7, 4 bytes)</dt>
+            <dd>
+              <p>
+                Appears to affect visibility on science/captain's map (0 for invisible,
+                -1 for visible, other values observed).
+              </p>
+            </dd>
             <dt>Unknown (bit 5.8, byte, new as of v2.3.0)</dt>
             <dd>
               <p>
-                0 has been observed.
+                Appears to be ship index (zero-based, so 0=Artemis, etc.), research ongoing.
               </p>
             </dd>
             <dt>Capital ship object ID (bit 6.1, int, new as of v2.3.0)</dt>
@@ -4735,6 +4767,20 @@
               </p>
             </dd>
             <dt>Unknown (bit 6.3, 4 bytes, new as of v2.4.0)</dt>
+            <dt>Beacon <a href="#enum-creature-type">creature type</a> (bit 6.4, 4 bytes, new as of v2.6.3)</dt>
+            <dd>
+              <p>
+                The weapons console's setting for the type of creature that will be
+                attracted/repelled by a launched beacon.
+              </p>
+            </dd>
+            <dt><a href="#enum-beacon-mode">Beacon mode</a> (bit 6.4, byte, new as of v2.6.3)</dt>
+            <dd>
+              <p>
+                The weapons console's setting for what a launched beacon will do to
+                the configured type of creature.
+              </p>
+            </dd>
           </section>
 
           <section id="object-player-ship-upgrades">
