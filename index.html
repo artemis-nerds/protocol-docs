@@ -4865,8 +4865,7 @@
           <section id="object-torpedo">
             <h3>Torpedo</h3>
             <dl>
-              <dt>Bit field (1 byte)</dt>
-              <dt>Unknown (byte)</dt>
+              <dt>Bit field (2 bytes)</dt>
               <dt>X coordinate (bit 1.1, float)</dt>
               <dd>
                 <p>
@@ -4885,16 +4884,37 @@
                   The torpedo's location on the Z axis.
                 </p>
               </dd>
-              <dt>Unknown (bit 1.4, float?)</dt>
+              <dt>Delta X (bit 1.4, float)</dt>
               <dd>
                 <p>
-                  Appears to range from -1.0 to 1.0.
+                  Ranges from -1.0 to 1.0.
                 </p>
               </dd>
-              <dt>Unknown (bit 1.5, float)</dt>
-              <dt>Unknown (bit 1.6, float)</dt>
+              <dt>Delta Y (bit 1.5, float)</dt>
+              <dd>
+                <p>
+                  Ranges from -1.0 to 1.0.
+                </p>
+              </dd>
+              <dt>Delta Z (bit 1.6, float)</dt>
+              <dd>
+                <p>
+                  Ranges from -1.0 to 1.0.
+                </p>
+              </dd>
               <dt>Unknown (bit 1.7, int)</dt>
-              <dt>Unknown (bit 1.8, int)</dt>
+              <dd>
+                <p>
+                  Seems to always be 0x0b, which is the object ID for a torpedo, although this
+                  seems redundant.
+                </p>
+              </dd>
+              <dt><a href="#enum-ordnance-type">Ordnance type</a> (bit 1.8, int)</dt>
+              <dd>
+                <p>
+                  The ordnance type of this torpedo.
+                </p>
+              </dd>
             </dl>
           </section>
 
