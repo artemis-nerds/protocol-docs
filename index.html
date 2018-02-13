@@ -1396,51 +1396,6 @@
           <section id="pkg-unknown">
             <h3>Unknown</h3>
 
-            <section id="__unknown__0x4c821d3c_0x05">
-              <h3>__client_unknown__1</h3>
-              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x05</code> [from <span>client</span>]</div>
-              <p>
-                This packet type has been observed, and is known to
-                exist, but its function is as of yet completely
-                unknown. All examples so far have seen was sent from
-                Helm to Server.
-              </p>
-              <h4>Payload</h4>
-              <dl>
-                <dt>Subtype (int)</dt>
-                <dd>
-                  <p>
-                    Always <code>0x05</code>.
-                  </p>
-                </dd>
-              </dl>
-            </section>
-
-            <section id="__unknown__0x4c821d3c_0x06">
-              <h3>__client_unknown__2</h3>
-              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x06</code> [from <span>client</span>]</div>
-              <p>
-                This packet type has been observed, and is known to
-                exist, but its function is as of yet completely
-                unknown. All examples so far have seen was sent from
-                Helm to Server.
-              </p>
-              <h4>Payload</h4>
-              <dl>
-                <dt>Subtype (int)</dt>
-                <dd>
-                  <p>
-                    Always <code>0x06</code>.
-                  </p>
-                </dd>
-                <dt>Observed payload</dt>
-                <dd>
-                  So far, only 0x00000000 (4 bytes) has been observed.
-                </dd>
-              </dl>
-            </section>
-
-
             <section id="__unknown__0x4c821d3c_0x17">
               <h3>__client_unknown__3</h3>
               <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x17 (&lt; v2.4), 0x18 (&ge; v2.4))</code> [from <span>client</span>]</div>
@@ -3834,6 +3789,50 @@
                 </dd>
               </dl>
             </section>
+            <section id="shieldsuppacket">
+              <h3>ShieldsUpPacket</h3>
+              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x05</code> [from <span>client</span>]</div>
+              <p>
+                Raises shields.
+              </p>
+              <h4>Payload</h4>
+              <dl>
+                <dt>Subtype (int)</dt>
+                <dd>
+                  <p>
+                    Always <code>0x05</code>.
+                  </p>
+                </dd>
+                <dt>Unused (int)</dt>
+                <dd>
+                  <p>
+                    Always 0.
+                  </p>
+                </dd>
+              </dl>
+            </section>
+            <section id="shieldsdownpacket">
+              <h3>ShieldsDownPacket</h3>
+              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x06</code> [from <span>client</span>]</div>
+              <p>
+                Lowers shields.
+              </p>
+              <h4>Payload</h4>
+              <dl>
+                <dt>Subtype (int)</dt>
+                <dd>
+                  <p>
+                    Always <code>0x06</code>.
+                  </p>
+                </dd>
+                <dt>Unused (int)</dt>
+                <dd>
+                  <p>
+                    Always 0.
+                  </p>
+                </dd>
+              </dl>
+            </section>
             <section id="skyboxpacket">
               <h3>SkyboxPacket</h3>
               <div class="pkt-props">Type: <code>0xf754c8fe</code>:<code>0x09</code> [from <span>server</span>]</div>
@@ -3957,7 +3956,7 @@
                 </dd>
               </dl>
             </section>
-            <section id="toggleredalertpacket">
+            <section id="toggleshieldspacket">
               <h3>ToggleShieldsPacket</h3>
               <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x04</code> [from <span>client</span>]</div>
               <p>
