@@ -24,6 +24,17 @@ $(function() {
     'f5821226': 'heartbeat',
     'f754c8fe': 'simpleEvent'
   };
+  var PACKET_SORTS = {
+    type: function(a, b) {
+      var text_a = a[0].cells[1].innerText + a[0].cells[2].innerText + a[0].cells[4].innerText;
+      var text_b = b[0].cells[1].innerText + b[0].cells[2].innerText + b[0].cells[4].innerText;
+      return text_a.localeCompare(text_b);
+    },
+    name: function(a, b) {
+      return a[0].cells[0].innerText.localeCompare(b[0].cells[0].innerText);
+    }
+  };
+
   // build navigation
   var $navRoot = $('#sidebar'), $navParent = null;
   $('content > section, content > section > section').each(function(i, $el) {
@@ -96,16 +107,15 @@ $(function() {
     }
   });
 
-  // sort packet list by (direction, major, minor)
-  rows.sort(function(a, b) {
-    var text_a = a[0].cells[1].innerText + a[0].cells[2].innerText + a[0].cells[3].innerText;
-    var text_b = b[0].cells[1].innerText + b[0].cells[2].innerText + b[0].cells[3].innerText;
-    return text_a.localeCompare(text_b);
-  });
+  sortPacketTable();
+  $('#packet-sort input').click(sortPacketTable);
 
-  // add sorted packet list to body
-  var $packetTable = $('#packet-table tbody');
-  $(rows).each(function(i, el) {
-    $packetTable.append(el);
-  });
+  function sortPacketTable() {
+    var key = $('#packet-sort input:checked').val();
+    rows.sort(PACKET_SORTS[key]);
+    var $packetTable = $('#packet-table tbody').empty();
+    $(rows).each(function(i, el) {
+      $packetTable.append(el);
+    });
+  }
 });
