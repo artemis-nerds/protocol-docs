@@ -91,6 +91,18 @@ dd {
 section#packet-types section section {
     border-top: 2px solid #4c4;
 }
+#packet-sort {
+  font-size: 9pt;
+  margin-left: 3em;
+}
+label {
+  font-weight: normal;
+  padding: 0 0.5em;
+  cursor: pointer;
+}
+#packet-sort input {
+  cursor: pointer;
+}
 
 .hue-box {
   display: inline-block;
