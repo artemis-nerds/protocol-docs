@@ -69,39 +69,70 @@
           <section id="bit-field-format">
             <h3>Bit Field Format</h3>
             <p>
-              A bit field is one or more bytes that encodes a series of on/off switches. Each bit in
-              the binary representation of each byte in the field represents a single switch. In
-              this documentation, an individual bit in a bit field is represented with the notation
-              &ldquo;bit <em>{byte}</em>.<em>{bit}</em>&rdquo;, where the <em>byte</em> and
-              <em>bit</em> values are one-based, and the bits are counted in little-endian order
-              (least-significant bits first).
+              A bit field is one or more bytes that encodes a series of on/off switches. Each bit
+              in the binary representation of each byte in the field represents a single switch.
+              In this documentation, an individual bit in a bit field is represented with the
+              notation &ldquo;bit <em>{byte}</em>.<em>{bit}</em>&rdquo;, where the <em>byte</em>
+              and <em>bit</em> values are one-based, and the bits are counted in little-endian
+              order (least-significant bits first). Artemis bit fields do not completely utilize
+              the final byte; if the number of bits needed is divisble by 8, an extra byte will
+              be allocated. So a seven-bit field will be one byte wide, but an eight-bit field will
+              be two bytes wide, with the second byte always <code>0x00</code>.
             </p>
             <p>
-              The most common use for a bit field is to declare which properties are defined
-              in a struct. Each bit represents a property, with <code>1</code> indicating that the
-              property is defined, and <code>0</code> meaning it is undefined. When sending updates
-              to clients, the Artemis server typically omits properties which are unchanged since
-              the last update; these properties will be undefined when the updated struct is
-              transmitted.
+              Currently, the only way a bit field is used is to declare which properties are
+              defined in a struct. Each bit represents a property, with <code>1</code> indicating
+              that the property is defined, and <code>0</code> meaning it is undefined. When
+              sending updates to clients, the Artemis server typically omits properties which are
+              unchanged since the last update; these properties will be undefined when the updated
+              struct is transmitted.
             </p>
             <h4>Example</h4>
             <p>
-              A single-byte bit field with the value <code>0x42</code> is represented in
-              little-endian binary as <code>01000010</code>. Bits 1.2 and 1.7 are on, the rest are
-              off.
+              The table below shows a bit field value of <code>0x93</code> represented in
+              little-endian binary, with the bits labelled:
             </p>
+            <table>
+              <thead>
+                <tr>
+                  <th>1.1</th>
+                  <th>1.2</th>
+                  <th>1.3</th>
+                  <th>1.4</th>
+                  <th>1.5</th>
+                  <th>1.6</th>
+                  <th>1.7</th>
+                  <th>1.8</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>1</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>1</td>
+                </tr>
+              </tbody>
+            </table>
           </section>
           <section id="boolean-format">
             <h3>Boolean Format</h3>
             <p>
-              Boolean values are simply expressed as an integer value 0 (false) or 1 (true). This
-              value may be transmitted as a byte, short or int. In this documentation, a field is
-              considered to be a boolean if all the following conditions are met:
+              Boolean values are simply expressed as an integer value 0 (<code>false</code>) or 1
+              (<code>true</code>). (When coercing an integer to a boolean, any non-zero value is
+              interpreted as <code>true</code>.) Although a byte is sufficient for this purpose, in
+              practice this value may be transmitted as a byte, short or int. In this
+              documentation, a field is considered to be a boolean if all the following conditions
+              are met:
             </p>
             <ol>
-              <li>There are only two possible values.</li>
+              <li>There are only two possible logical values.</li>
               <li>The values are exact opposites (true/false, on/off, etc.).</li>
-              <li>They are represented by 0 and 1.</li>
+              <li>Those values are represented numerically as zero and non-zero.</li>
               <li>It does not seem that other values could be added in the future. (If other values
                 are deemed possible, the field's value is documented as an
                 <a href="#enums">enumeration</a> instead.)</li>
@@ -600,7 +631,7 @@
                   <td><code>0x06</code></td>
                   <td>observer</td>
                   <td>data</td>
-                  <td>fighter</td>
+                  <td>single-seat craft</td>
                 </tr>
                 <tr>
                   <td><code>0x07</code></td>
@@ -638,7 +669,7 @@
               <tbody>
                 <tr>
                   <td><code>0x00</code></td>
-                  <td>classic monster</td>
+                  <td>typhon (crystalline entity)</td>
                 </tr>
                 <tr>
                   <td><code>0x01</code></td>
@@ -1250,10 +1281,17 @@
         <section id="packet-types">
           <h2>Packet Types</h2>
           <p>
-            The table below lists the known packet types. The type names are derived from the class
-            names for the packets in
-            <a href="https://github.com/rjwut/ArtClientLib" target="_new">ArtClientLib</a>.
+            The table below lists the known packet types.
           </p>
+          <div id="packet-sort">
+            Sort by:
+            <label>
+              <input type="radio" name="packet-sort" value="type" checked /> origin/type/subtype
+            </label>
+            <label>
+              <input type="radio" name="packet-sort" value="name" /> name
+            </label>
+          </div>
           <table id="packet-table" class="table-striped">
             <thead>
               <tr>
@@ -1290,7 +1328,6 @@
               </dl>
             </section>
 
-
             <section id="__hypothetical__0x69cc01d9_0x01">
               <h3>__client_hypothetical__3</h3>
               <div class="pkt-props">Type: <code>0x69cc01d9</code>:<code>0x01</code> [from <span>client</span>]</div>
@@ -1311,9 +1348,9 @@
               </dl>
             </section>
 
-            <section id="__hypothetical__0xf754c8fe_0x01">
-              <h3>__server_hypothetical__1</h3>
-              <div class="pkt-props">Type: <code>0xf754c8fe</code>:<code>0x01</code> [from <span>server</span>]</div>
+            <section id="__hypothetical_0x4c821d3c_0x16">
+              <h3>__client_hypothetical__4</h3>
+              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x16</code> [from <span>client</span>]</div>
               <p>
                 This packet has not been observed, but has been
                 hypothesized to exist based on the numeric range of
@@ -1325,7 +1362,7 @@
                 <dt>Subtype (int)</dt>
                 <dd>
                   <p>
-                    Always <code>0x01</code>.
+                    Always <code>0x16</code>.
                   </p>
                 </dd>
               </dl>
@@ -1398,58 +1435,26 @@
 
             <section id="__unknown__0x4c821d3c_0x17">
               <h3>__client_unknown__3</h3>
-              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x17 (&lt; v2.4), 0x18 (&ge; v2.4))</code> [from <span>client</span>]</div>
+              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x18</code> [from <span>client</span>]</div>
               <p>
                 This packet type has been observed, and is known to
                 exist, but its function is as of yet completely
                 unknown.
               </p>
-              <h4>Payload</h4>
-              <dl>
-                <dt>Subtype (int)</dt>
-                <dd>
-                  <p>
-                    Always <code>0x17</code>.
-                  </p>
-                </dd>
-                <dt>Observed payload</dt>
-                <dd>
-                  So far, no payload apart from subtype has been observed.
-                </dd>
-              </dl>
-            </section>
-
-            <section id="__unknown__0xf754c8fe_0x07">
-              <h3>__server_unknown__2</h3>
-              <div class="pkt-props">Type: <code>0xf754c8fe</code>:<code>0x07</code> [from <span>server</span>]</div>
               <p>
-                This packet type has been observed, and its payload
-                structure is believed to be understood. However, its
-                function has not determined with certainty.
-
-                Contains three floats which seem to correspond to map
-                coordinates of ships with special abilities. Could
-                relate to cloak/decloak graphical effects.
+                Before v2.4, this was subtype <code>0x17</code>.
               </p>
               <h4>Payload</h4>
               <dl>
                 <dt>Subtype (int)</dt>
                 <dd>
                   <p>
-                    Always <code>0x07</code>.
+                    Always <code>0x18</code>.
                   </p>
                 </dd>
-                <dt>x_coordinate (float)</dt>
+                <dt>Observed payload</dt>
                 <dd>
-                  Unknown
-                </dd>
-                <dt>y_coordinate (float)</dt>
-                <dd>
-                  Unknown
-                </dd>
-                <dt>z_coordinate (float)</dt>
-                <dd>
-                  Unknown
+                  So far, no payload apart from subtype has been observed.
                 </dd>
               </dl>
             </section>
@@ -1522,9 +1527,12 @@
             <h3>A</h3>
             <section id="activateupgradepacket">
               <h3>ActivateUpgradePacket</h3>
-              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x1b (v2.2-2.3), 0x1c (&ge; v2.4)</code> [from <span>client</span>]</div>
+              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x1c</code> [from <span>client</span>]</div>
               <p>
                 This packet is sent whenever a client wishes to activate a ship upgrade from the "upgrades" menu.
+              </p>
+              <p>
+                Before v2.4, this was subtype <code>0x1b</code>.
               </p>
               <h4>Payload</h4>
               <dl>
@@ -1534,7 +1542,7 @@
                     Always <code>0x1c</code>.
                   </p>
                 </dd>
-                <dt>Target (upgrade type, enum32)</dt>
+                <dt><a href="#enum-upgrade">Upgrade</a> (int)</dt>
                 <dd>
                   <p>
                     The upgrades that can be activated seem to be
@@ -1640,13 +1648,23 @@
                   </p>
                   <dl>
                     <dt><a href="#enum-drive-type">Drive type</a> (int, enumeration)</dt>
-                    <dd>Whether the ship has warp or jump drive</dd>
+                    <dd>
+                      <p>
+                        Whether the ship has warp or jump drive
+                      </p>
+                    </dd>
                     <dt>Ship type (int)</dt>
-                    <dd>ID from vesselData.xml</dd>
+                    <dd>
+                      <p>
+                        ID from vesselData.xml
+                      </p>
+                    </dd>
                     <dt>Accent color (float) (v2.4 or later)</dt>
                     <dd>
-                      Ship accent color hue in the range 0.0 to 1.0. Multiply by 360 to get a <a href="https://en.wikipedia.org/wiki/Hue">Hue as described on Wikipedia</a>.
-                      Default hue values for ships are:
+                      <p>
+                        Ship accent color hue in the range 0.0 to 1.0. Multiply by 360 to get a <a href="https://en.wikipedia.org/wiki/Hue">Hue as described on Wikipedia</a>.
+                        Default hue values for ships are:
+                      </p>
                       <ul>
                         <li><div class="hue-box" style="background-color:#ff0000"></div> Artemis - <code>0</code></li>
                         <li><div class="hue-box" style="background-color:#ffbf00"></div> Intrepid - <code>0.125</code></li>
@@ -1659,9 +1677,17 @@
                       </ul>
                     </dd>
                     <dt>Unknown (int) (v2.0 or later)</dt>
-                    <dd>Only <code>0x01</code> has been observed thus far.</dd>
+                    <dd>
+                      <p>
+                        Only <code>0x01</code> has been observed thus far.
+                      </p>
+                    </dd>
                     <dt>Name (string)</dt>
-                    <dd>The name of the ship</dd>
+                    <dd>
+                      <p>
+                        The name of the ship.
+                      </p>
+                    </dd>
                   </dl>
                 </dd>
               </dl>
@@ -1791,6 +1817,39 @@
                 </dd>
               </dl>
             </section>
+            <section id="beaconconfigpacket">
+              <h3>BeaconConfigPacket</h3>
+              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x22</code> [from <span>server</span>]</div>
+              <p>
+                <em>(new as of v2.6.204)</em> Programs beacons prior to launch.
+              </p>
+              <h4>Payload</h4>
+              <dl>
+                <dt>Subtype (int)</dt>
+                <dd>
+                  <p>
+                    Always <code>0x22</code>.
+                  </p>
+                </dd>
+                <dt>Unknown (int)</dt>
+                <dd>
+                  <p>
+                    Appears to always be 12345.
+                  </p>
+                </dd>
+                <dt><a href="#enum-creature-type">Creature type</a> (byte)</dt>
+                <dd>
+                  <p>
+                    The creature for which this beacon is programmed. Presumably
+                    <code>WRECK</code> is invalid.
+                  </p>
+                </dd>
+                <dt><a href="#enum-beacon-mode">Mode</a> (byte)</dt>
+                <dd>
+                  The effect this beacon will have on the indicated creature.
+                </dd>
+              </dl>
+            </section>
           </section>
           <section id="pkt-c">
             <h3>C</h3>
@@ -1818,7 +1877,7 @@
             </section>
             <section id="climbdivepacket">
               <h3>ClimbDivePacket</h3>
-              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x1b (&lt; v2.2), 0x1c (v2.2-2.3), 0x1d (&ge; v2.4)</code> [from <span>client</span>]</div>
+              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x1d</code> [from <span>client</span>]</div>
               <p>
                 Causes the ship to climb or dive. This differs from
                 <a href="#helmsetpitchpacket">HelmSetPitchPacket</a> in that it indicates a
@@ -1826,12 +1885,16 @@
                 pitch value. The circumstances in which one type of packet might be sent versus the
                 other are not fully understood at this time.
               </p>
+              <p>
+                This subtype was <code>0x1b</code> before v2.2, <code>0x1c</code> starting with
+                v2.2 and before v2.4), and <code>0x1d</code> from v2.4 on.
+              </p>
               <h4>Payload</h4>
               <dl>
                 <dt>Subtype (int)</dt>
                 <dd>
                   <p>
-                    Always <code>0x1b</code>.
+                    Always <code>0x1d</code>.
                   </p>
                 </dd>
                 <dt>Direction (int)</dt>
@@ -1843,6 +1906,26 @@
                     command is received, the ship will start climbing.
                   </p>
                 </dd>
+              </dl>
+            </section>
+            <section id="cloakdecloakpacket">
+              <h3>CloakDecloakPacket</h3>
+              <div class="pkt-props">Type: <code>0xf754c8fe</code>:<code>0x07</code> [from <span>server</span>]</div>
+              <p>
+                Renders a green "poof" graphical effect. Artemis does this when a ship cloaks or
+                decloaks.
+              </p>
+              <h4>Payload</h4>
+              <dl>
+                <dt>Subtype (int)</dt>
+                <dd>
+                  <p>
+                    Always <code>0x07</code>.
+                  </p>
+                </dd>
+                <dt>X-coordinate (float)</dt>
+                <dt>Y-coordinate (float)</dt>
+                <dt>Z-coordinate (float)</dt>
               </dl>
             </section>
             <section id="commsincomingpacket">
@@ -2035,7 +2118,9 @@
               <h3>DestroyObjectPacket</h3>
               <div class="pkt-props">Type: <code>0xcc5a3e30</code> [from <span>server</span>]</div>
               <p>
-                Notifies the client that an object has been removed from play.
+                Notifies the client that an object has been removed from play. This does not
+                imply any particular graphical or sound effect; that is handled by other packets.
+                This packet just means that the client can discard the indicated object.
               </p>
               <h4>Payload</h4>
               <dl>
@@ -2101,6 +2186,28 @@
                 <dd>
                   <p>
                     The DMX flag's current state.
+                  </p>
+                </dd>
+              </dl>
+            </section>
+            <section id="dockedpacket">
+              <h3>DockedPacket</h3>
+              <div class="pkt-props">Type: <code>0xf754c8fe</code>:<code>0x1a</code> [from <span>server</span>]</div>
+              <p>
+                Sent by the server when a player ship is fully docked at a base.
+              </p>
+              <h4>Payload</h4>
+              <dl>
+                <dt>Subtype (int)</dt>
+                <dd>
+                  <p>
+                    Always <code>0x1a</code>.
+                  </p>
+                </dd>
+                <dt>Object ID (int)</dt>
+                <dd>
+                  <p>
+                    The ID of the ship that has docked.
                   </p>
                 </dd>
               </dl>
@@ -2429,11 +2536,11 @@
               <h3>FighterBayStatusPacket</h3>
               <div class="pkt-props">Type: <code>0x9ad1f23b</code> [from <span>server</span>]</div>
               <p>
-                Updates the client of the current status of the ship's fighter bays.
+                Updates the client of the current status of the single-seat craft bays.
               </p>
               <h4>Payload</h4>
               <p>
-                The payload consists of an array of structs, each one describing a single fighter, and
+                The payload consists of an array of structs, each one describing a single bay, and
                 terminated with <code>0x00000000</code>. The struct's properties are as follows:
               </p>
               <dl>
@@ -2449,11 +2556,41 @@
                 </dd>
               </dl>
             </section>
+            <section id="fighterdamagepacket">
+              <h3>FighterDamagePacket</h3>
+              <div class="pkt-props">Type: <code>0xf754c8fe</code>:<code>0x18</code> [from <span>server</span>]</div>
+              <p>
+                Causes the client for a single-seat craft to present an interface screw as a result
+                of an impact. By default, this causes the screen to shake and break up.
+              </p>
+              <h4>Payload</h4>
+              <dl>
+                <dt>Subtype (int)</dt>
+                <dd>
+                  <p>
+                    Always <code>0x18</code>.
+                  </p>
+                </dd>
+                <dt>Object ID (int)</dt>
+                <dd>
+                  <p>
+                    The ID of the impacted single-seat craft.
+                  </p>
+                </dd>
+                <dt>Duration (float)</dt>
+                <dd>
+                  <p>
+                    Length of time (in seconds) that the damage visualization
+                    should last.
+                  </p>
+                </dd>
+              </dl>
+            </section>
             <section id="fighterlaunchedpacket">
               <h3>FighterLaunchedPacket</h3>
               <div class="pkt-props">Type: <code>0xf754c8fe</code>:<code>0x17</code> [from <span>server</span>]</div>
               <p>
-                Notifies the client that a fighter was just launched.
+                Notifies the client that a single-seat craft was just launched.
               </p>
               <h4>Payload</h4>
               <dl>
@@ -2466,7 +2603,7 @@
                 <dt>Object ID (int)</dt>
                 <dd>
                   <p>
-                    The ID of the fighter, as shown in
+                    The ID of the single-seat craft, as shown in
                     <a href="#fighterbaystatuspacket">FighterBayStatusPacket</a>.
                   </p>
                 </dd>
@@ -2474,10 +2611,14 @@
             </section>
             <section id="fighterlaunchpacket">
               <h3>FighterLaunchPacket</h3>
-              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x1d (v2.3), 0x1e (&ge; v2.4)</code> [from <span>client</span>]</div>
+              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x1e</code> [from <span>client</span>]</div>
               <p>
-                Notifies the server that a fighter is being launched. The server will send back a
-                <a href="#fighterlaunchedpacket">FighterLaunchedPacket</a> in response.
+                Notifies the server that a single-seat craft is being launched. The server will
+                send back a <a href="#fighterlaunchedpacket">FighterLaunchedPacket</a> in
+                response.
+              </p>
+              <p>
+                Before v2.4, this was subtype <code>0x1e</code>.
               </p>
               <h4>Payload</h4>
               <dl>
@@ -2490,7 +2631,7 @@
                 <dt>Object ID (int)</dt>
                 <dd>
                   <p>
-                    The ID of the fighter, as shown in
+                    The ID of the single-seat craft, as shown in
                     <a href="#fighterbaystatuspacket">FighterBayStatusPacket</a>.
                   </p>
                 </dd>
@@ -2500,7 +2641,7 @@
               <h3>FighterPilotPacket</h3>
               <div class="pkt-props">Type: <code>0x0351a5ac</code>:<code>0x07</code> [from <span>client</span>]</div>
               <p>
-                Notifies the server of a fighter's trajectory.
+                Notifies the server of a single-seat craft's trajectory.
               </p>
               <h4>Payload</h4>
               <dl>
@@ -2521,7 +2662,7 @@
                 <dt>Object ID (int)</dt>
                 <dd>
                   <p>
-                    The ID of the fighter, as shown in
+                    The ID of the single-seat craft, as shown in
                     <a href="#fighterbaystatuspacket">FighterBayStatusPacket</a>.
                   </p>
                 </dd>
@@ -2581,7 +2722,6 @@
                     representing the ship's orientation.
                   </p>
                 </dd>
-                <dt>Unknown (int)</dt>
               </dl>
             </section>
             <section id="firebeampacket">
@@ -2957,7 +3097,8 @@
               <h3>HelmRequestDockPacket</h3>
               <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x07</code> [from <span>client</span>]</div>
               <p>
-                Request docking with the nearest station, or, in the case of a fighter, with its mothership.
+                Request docking with the nearest station, or, in the case of a single-seat craft,
+                with its mothership.
               </p>
               <h4>Payload</h4>
               <dl>
@@ -2967,10 +3108,11 @@
                     Always <code>0x07</code>.
                   </p>
                 </dd>
-                <dt>Fighter ID (int)</dt>
+                <dt>Single-seat craft ID (int)</dt>
                 <dd>
                   <p>
-                    The ID of the fighter that is docking with its mothership, or <code>0x00</code> if helm is docking with a station.
+                    The ID of the single-seat craft that is docking with its mothership, or
+                    <code>0x00</code> if helm is docking with a station.
                   </p>
                 </dd>
               </dl>
@@ -3077,16 +3219,19 @@
             </section>
             <section id="helmtogglereversepacket">
               <h3>HelmToggleReversePacket</h3>
-              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x18 (&lt; v2.4), 0x19 (&ge; v2.4)</code> [from <span>client</span>]</div>
+              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x19</code> [from <span>client</span>]</div>
               <p>
                 Toggles the impulse engines between forward and reverse drive.
+              </p>
+              <p>
+                Before v2.4, this was subtype <code>0x18</code>.
               </p>
               <h4>Payload</h4>
               <dl>
                 <dt>Subtype (int)</dt>
                 <dd>
                   <p>
-                    Always <code>0x18</code>.
+                    Always <code>0x19</code>.
                   </p>
                 </dd>
                 <dt>Unused (int)</dt>
@@ -3266,6 +3411,22 @@
                 </dd>
               </dl>
             </section>
+            <section id="klaxonpacket">
+              <h3>KlaxonPacket</h3>
+              <div class="pkt-props">Type: <code>0xf754c8fe</code>:<code>0x01</code> [from <span>server</span>]</div>
+              <p>
+                Plays a klaxon sound. Artemis sends this packet when red alert is activated.
+              </p>
+              <h4>Payload</h4>
+              <dl>
+                <dt>Subtype (int)</dt>
+                <dd>
+                  <p>
+                    Always <code>0x01</code>.
+                  </p>
+                </dd>
+              </dl>
+            </section>
           </section>
           <section id="pkt-l">
             <h3>L</h3>
@@ -3433,7 +3594,8 @@
               <h3>PlayerShipDamagePacket</h3>
               <div class="pkt-props">Type: <code>0xf754c8fe</code>:<code>0x05</code> [from <span>server</span>]</div>
               <p>
-                Sent when the player ship is hit.
+                Causes the client to present an interface screw as a result of an impact on the
+                ship. By default, this causes the screen to shake and break up.
               </p>
               <h4>Payload</h4>
               <dl>
@@ -3446,22 +3608,14 @@
                 <dt>Ship index (int)</dt>
                 <dd>
                   <p>
-                    The index of the damaged ship; valid values are 0 through 7 inclusive.
+                    The index of the impacted ship; valid values are 0 through 7 inclusive.
                   </p>
                 </dd>
-                <dt>Unknown (float)</dt>
+                <dt>Duration (float)</dt>
                 <dd>
                   <p>
-                    Appears to have values of 1.0 or less for hits against shields, and values
-                    greater than 1.0 and less than or equal to 2.0 for hits that pass through the
-                    shields and strike the hull, except that a value of 3.0 has been observed when
-                    a drone hits regardless of whether it hits shields or hull.
-                  </p>
-                </dd>
-                <dt>Unknown (int)</dt>
-                <dd>
-                  <p>
-                    Values of 0, 103, 108, and 114 observed.
+                    Length of time (in seconds) that the damage visualization
+                    should last.
                   </p>
                 </dd>
               </dl>
@@ -3537,12 +3691,15 @@
             </section>
             <section id="requestenggridupdate">
               <h3>RequestEngGridUpdate</h3>
-              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x19 (&lt; v2.4), 0x1a (&ge; v2.4)</code> [from <span>client</span>]</div>
+              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x1a</code> [from <span>client</span>]</div>
               <p>
                 Sent from the engineering station, to request a full
                 update for all values. This causes the server to send
                 a full update, instead of the normal update type where
                 only changes are sent.
+              </p>
+              <p>
+                Before v2.4, this was subtype <code>0x19</code>.
               </p>
               <h4>Payload</h4>
               <dl>
@@ -3663,7 +3820,7 @@
               <h3>SetDefaultGMButtonWidthPacket</h3>
               <div class="pkt-props">Type: <code>0x26faacb9</code>:<code>0x03</code> [from <span>server</span>]</div>
               <p>
-                Sets the width of buttons on the game master UI that are 
+                Sets the width of buttons on the game master UI that are
                 added with <a href="#addgmbuttonpacket">AddGMButtonPacket</a>.
               </p>
               <h4>Payload</h4>
@@ -3679,6 +3836,70 @@
                   <p>
                     The default width in pixels.
                   </p>
+                </dd>
+              </dl>
+            </section>
+            <section id="setfightersettingspacket">
+              <h3>SetFighterSettingsPacket</h3>
+              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x21</code> [from <span>client</span>]</div>
+              <p>
+                <em>(new as of v2.6.0)</em> Sets the details of the single-seat craft on a ship.
+                This is transmitted by the client when you click the "Back" button from the
+                "Customize Ship" screen.
+              </p>
+              <h4>Payload</h4>
+              <dl>
+                <dt>Subtype (int)</dt>
+                <dd>
+                  <p>
+                    Always <code>0x21</code>.
+                  </p>
+                </dd>
+                <dt>Unknown (int)</dt>
+                <dd>
+                  <p>
+                    Always seems to be 0.
+                  </p>
+                </dd>
+                <dt>Craft array</dt>
+                <dd>
+                  <p>
+                    An array of single-seat craft, terminated by <code>0x00000000</code>. Each
+                    entry is a struct as follows:
+                  </p>
+                  <dl>
+                    <dt>Vessel type (int)</dt>
+                    <dd>
+                      <p>
+                        The ID of the vessel from <code>vesselData.xml</code>.
+                      </p>
+                    </dd>
+                    <dt>Bay index (int)</dt>
+                    <dd>
+                      <p>
+                        The index of the bay where this craft is located, ranging from 0 to the
+                        ship's bay count - 1.
+                      </p>
+                    </dd>
+                    <dt>Name (string)</dt>
+                    <dd>
+                      <p>
+                        The name of this craft.
+                      </p>
+                    </dd>
+                    <dt>Hull race (string)</dt>
+                    <dd>
+                      <p>
+                        As specified in <code>vesselData.xml</code>: "TSN", "Ximni", "Pirate", etc.
+                      </p>
+                    </dd>
+                    <dt>Broad type (string)</dt>
+                    <dd>
+                      <p>
+                        As specified in <code>vesselData.xml</code>.
+                      </p>
+                    </dd>
+                  </dl>
                 </dd>
               </dl>
             </section>
@@ -3729,16 +3950,19 @@
             </section>
             <section id="setshipsettingspacket">
               <h3>SetShipSettingsPacket</h3>
-              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x16 (&lt; v2.4), 0x17 (&ge; v2.4)</code> [from <span>client</span>]</div>
+              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x17</code> [from <span>client</span>]</div>
               <p>
                 Sets the name, ship type and drive type for the currently-selected ship.
+              </p>
+              <p>
+                Before v2.4, this was subtype <code>0x16</code>.
               </p>
               <h4>Payload</h4>
               <dl>
                 <dt>Subtype (int)</dt>
                 <dd>
                   <p>
-                    Always <code>0x16</code>.
+                    Always <code>0x17</code>.
                   </p>
                 </dd>
                 <dt><a href="#enum-drive-type">Drive type</a> (int, enumeration)</dt>
@@ -3751,6 +3975,13 @@
                 <dd>
                   <p>
                     The ID of the desired type of vessel, as given in <code>vesselData.xml</code>.
+                  </p>
+                </dd>
+                <dt>Accent color (float, new as of v2.4.0)</dt>
+                <dd>
+                  <p>
+                    Ship accent color hue in the range 0.0 to 1.0. Multiply by 360 to get a
+                    <a href="https://en.wikipedia.org/wiki/Hue">Hue as described on Wikipedia</a>.
                   </p>
                 </dd>
                 <dt>Unknown (int)</dt>
@@ -3789,28 +4020,6 @@
                 </dd>
               </dl>
             </section>
-            <section id="shieldsuppacket">
-              <h3>ShieldsUpPacket</h3>
-              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x05</code> [from <span>client</span>]</div>
-              <p>
-                Raises shields.
-              </p>
-              <h4>Payload</h4>
-              <dl>
-                <dt>Subtype (int)</dt>
-                <dd>
-                  <p>
-                    Always <code>0x05</code>.
-                  </p>
-                </dd>
-                <dt>Unused (int)</dt>
-                <dd>
-                  <p>
-                    Always 0.
-                  </p>
-                </dd>
-              </dl>
-            </section>
             <section id="shieldsdownpacket">
               <h3>ShieldsDownPacket</h3>
               <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x06</code> [from <span>client</span>]</div>
@@ -3823,6 +4032,28 @@
                 <dd>
                   <p>
                     Always <code>0x06</code>.
+                  </p>
+                </dd>
+                <dt>Unused (int)</dt>
+                <dd>
+                  <p>
+                    Always 0.
+                  </p>
+                </dd>
+              </dl>
+            </section>
+            <section id="shieldsuppacket">
+              <h3>ShieldsUpPacket</h3>
+              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x05</code> [from <span>client</span>]</div>
+              <p>
+                Raises shields.
+              </p>
+              <h4>Payload</h4>
+              <dl>
+                <dt>Subtype (int)</dt>
+                <dd>
+                  <p>
+                    Always <code>0x05</code>.
                   </p>
                 </dd>
                 <dt>Unused (int)</dt>
@@ -3914,9 +4145,12 @@
             </section>
             <section id="toggleperspectivepacket">
               <h3>TogglePerspectivePacket</h3>
-              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x1a (&lt; v2.4), 0x1b (&ge; v2.4)</code> [from <span>client</span>]</div>
+              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x1b</code> [from <span>client</span>]</div>
               <p>
                 Toggles between first- and third-person perspective on the main screen.
+              </p>
+              <p>
+                Before v2.4, this was subtype <code>0x1b</code>.
               </p>
               <h4>Payload</h4>
               <dl>
@@ -3956,7 +4190,7 @@
                 </dd>
               </dl>
             </section>
-            <section id="toggleshieldspacket">
+            <section id="toggleredalertpacket">
               <h3>ToggleShieldsPacket</h3>
               <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x04</code> [from <span>client</span>]</div>
               <p>
@@ -4617,8 +4851,9 @@
             <dt>In a nebula (bit 3.3, boolean, 2 bytes)</dt>
             <dd>
               <p>
-                It should be noted that values other than 0 and 1 have been noted. It seems that
-                any non-zero value should be treated as <code>true</code>.
+                Player ships in nebulae cannot go faster than warp 1. It should be noted that
+                values other than 0 and 1 have been observed. It seems that any non-zero value
+                should be treated as <code>true</code>.
               </p>
             </dd>
             <dt>Ship name (bit 3.4, string)</dt>
@@ -4678,7 +4913,8 @@
             <dt>Available coolant or missiles (bit 4.6, byte)</dt>
             <dd>
               <p>
-                The total amount of coolant if a capital ship, or the number of missiles if a fighter.
+                The total amount of coolant if a capital ship, or the number of missiles if a
+                single-seat craft.
               </p>
             </dd>
             <dt>Science target (bit 4.7, int)</dt>
@@ -4748,7 +4984,7 @@
             <dt>Capital ship object ID (bit 6.1, int, new as of v2.3.0)</dt>
             <dd>
               <p>
-                The object ID of the associated capital ship, if this ship is a fighter.
+                The object ID of the associated capital ship, if this ship is a single-seater.
               </p>
             </dd>
             <dt>Accent color (bit 6.2, float, new as of v2.4.0)</dt>
@@ -4756,8 +4992,6 @@
               <p>
                 Ship accent color hue in the range 0.0 to 1.0. Multiply by 360 to get a
                 <a href="https://en.wikipedia.org/wiki/Hue">Hue as described on Wikipedia</a>.
-                The ship accent color is the same value as was sent in
-                <a href="#allshipsettingspacket">AllShipSettingsPacket</a>.
               </p>
             </dd>
             <dt>Unknown (bit 6.3, 4 bytes, new as of v2.4.0)</dt>
@@ -4961,45 +5195,58 @@
           <section id="object-weapons-console">
             <h3>Weapons Console</h3>
             <p>
-              Note: The plasma shock torpedo type was added in v2.1.5. It was inserted at bit 1.5,
-              and all subsequent bits were shifted by one bit. Before this addition, the bit field
-              was only three bytes long instead of four.
+              Version notes:
             </p>
+            <ul>
+              <li>
+                There used to be an unknown byte between the ordnance counts array and the tube
+                (un)load times array. It always seemed to be <code>0x00</code>. Before v2.1.5, it
+                was located at bit 1.5. Starting with v2.1.5 it moved to bit 1.6 as a result of the
+                introduction of the plasma shock torpedo. It was removed starting at v2.6.0.
+              </li>
+              <li>
+                The plasma shock torpedo type was added in v2.1.5. It was inserted at bit 1.5, and all
+                subsequent bits were shifted by one bit. Before this addition, the bit field was only
+                three bytes long instead of four.
+              </li>
+              <li>
+                Beacons, probes, and tags were introduced in v2.6.0. These were inserted at bits
+                1.6, 1.7, and 1.8 (with the unknown byte removed), and the remaining properties were
+                shifted accordingly.
+              </li>
+            </ul>
             <dl>
               <dt>Bit field (4 bytes)</dt>
-              <dt>Ordnance counts (bits 1.1-1.5, byte array)</dt>
+              <dt>Ordnance counts (bits 1.1-1.8, byte array)</dt>
               <dd>
                 <p>
-                  This array contains up to five byte elements. Each element gives how many of a
-                  particular ordinance are stored on the ship, in the following order: homing
-                  missiles, nukes, mines, EMPs, plasma shocks.
+                  Each element of this array indicates how many of a particular ordinance type are
+                  stored on the ship, in the order given in the
+                  <a href="#enum-ordnance-type">ordnance type</a> enumeration.
                 </p>
               </dd>
-              <dt>Unknown (bit 1.6, byte)</dt>
-              <dt>Tube (un)load times (bits 1.7-2.4, float array)</dt>
+              <dt>Tube (un)load times (bits 2.1-2.6, float array)</dt>
               <dd>
                 <p>
-                  This array contains up to six float elements. Each element gives the (un)load
-                  time for the corresponding tube. This field should be ignored (even when
-                  present) if the tube's status is not loading or unloading.
+                  Each element of this array gives the (un)load time for the corresponding tube.
+                  This field should be ignored (even when present) if the tube's status is not
+                  loading or unloading.
                 </p>
               </dd>
-              <dt><a href="#enum-tube-status">Tube status</a> (bits 2.5-3.2, byte array)</dt>
+              <dt><a href="#enum-tube-status">Tube status</a> (bits 2.7-3.4, byte array)</dt>
               <dd>
                 <p>
-                  This array contains up to six byte elements. Each element indicates the
-                  occupation status of each tube.
+                  Each element of this array indicates the occupation status of each tube.
                 </p>
               </dd>
-              <dt><a href="#enum-ordnance-type">Ordnance type</a> (bits 3.3-3.8, byte array)
+              <dt><a href="#enum-ordnance-type">Ordnance type</a> (bits 3.5-4.2, byte array)
               <dd>
                 <p>
-                  This array contains up to six byte elements. Each element indicates the type of
-                  ordnance in each tube. If the tube's status is unloaded, the tube is empty, and
-                  this field should be ignored even when present.
+                  Each element of this array indicates the type of ordnance in each tube. If the
+                  tube's status is unloaded, the tube is empty, and this field should be ignored
+                  even when present.
                 </p>
               </dd>
-              <dt>Unused (bits 4.1-4.8)</dt>
             </dl>
           </section>
 
@@ -5130,21 +5377,27 @@
             </ol>
           </section>
           <section>
-            <h3>Fighter is launched</h3>
+            <h3>Single-seat carft is launched</h3>
             <ol>
               <li><a href="#fighterlaunchpacket">FighterLaunchPacket</a></li>
               <li><a href="#fighterlaunchedpacket">FighterLaunchedPacket</a></li>
-              <li><a href="#fighterbaystatuspacket">FighterBayStatusPacket</a> (informing that the fighter is no longer in the bay)</li>
-              <li><a href="#objectupdatepacket">ObjectUpdatePacket</a> (fighters are now updated as separate ship objects)</li>
+              <li><a href="#fighterbaystatuspacket">FighterBayStatusPacket</a> (informing that the
+                craft is no longer in the bay)</li>
+              <li><a href="#objectupdatepacket">ObjectUpdatePacket</a> (single-seat craft are now
+                updated as separate ship objects)</li>
             </ol>
           </section>
           <section>
-            <h3>Fighter is docked</h3>
+            <h3>Single-seat craft is docked</h3>
             <ol>
-              <li><a href="#helmrequestdockpacket">HelmRequestDockPacket</a> (sent by the fighter)</li>
-              <li><a href="#destroyobjectpacket">DestroyObjectPacket</a> (destroys the fighter's ship object)</li>
-              <li><a href="#fighterbaystatuspacket">FighterBayStatusPacket</a> (informating that the fighter is now in the bay)</li>
-              <li><a href="#objectupdatepacket">ObjectUpdatePacket</a> (the docked fighter is no longer a separate ship object)</li>
+              <li><a href="#helmrequestdockpacket">HelmRequestDockPacket</a> (sent by the
+                single-seat craft)</li>
+              <li><a href="#destroyobjectpacket">DestroyObjectPacket</a> (destroys the single-seat
+                craft object)</li>
+              <li><a href="#fighterbaystatuspacket">FighterBayStatusPacket</a> (informing that the
+                single-seat craft is now in the bay)</li>
+              <li><a href="#objectupdatepacket">ObjectUpdatePacket</a> (the docked single-seat
+                craft is no longer a separate ship object)</li>
             </ol>
           </section>
         </section>
@@ -5253,8 +5506,8 @@
               parent: &lt;vessel&gt;, count: 0-1
             </p>
             <p>
-              Information about the fighters and bombers carried by this vessel. Only permitted
-              for vessels with both the <code>player</code> and <code>carrier</code> broadTypes.
+              Information about the single-seat craft carried by this vessel. Only permitted for
+              vessels with both the <code>player</code> and <code>carrier</code> broadTypes.
             </p>
             <h4>Attributes</h4>
             <dl>
@@ -5574,7 +5827,8 @@
               <dd>
                 <p>
                   Only applicable to vessels with the <code>fighter</code> broadType. This is the
-                  shield strength used when the fighter is flown by a player (as opposed to an NPC).
+                  shield strength used when the single-seat craft is flown by a player (as opposed
+                  to an NPC).
                 </p>
               </dd>
             </dl>
@@ -5717,8 +5971,8 @@
                     <strong>Vessel class</strong>
                     <ul>
                       <li><code>base</code>: Immovable vessels that can resupply other vessels</li>
-                      <li><code>carrier</code>: Can launch fighters</li>
-                      <li><code>fighter</code>: Vessels launched from carriers</li>
+                      <li><code>carrier</code>: Can launch single-seat craft</li>
+                      <li><code>fighter</code>: Single-seat craft launched from carriers</li>
                       <li><code>large</code>: Large non-player vessels</li>
                       <li><code>medium</code>: Medium non-player vessels</li>
                       <li><code>player</code>: Vessels which players can control</li>
