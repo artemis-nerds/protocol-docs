@@ -74,18 +74,19 @@
               In this documentation, an individual bit in a bit field is represented with the
               notation &ldquo;bit <em>{byte}</em>.<em>{bit}</em>&rdquo;, where the <em>byte</em>
               and <em>bit</em> values are one-based, and the bits are counted in little-endian
-              order (least-significant bits first). Artemis bit fields do not completely utilize
-              the final byte; if the number of bits needed is divisble by 8, an extra byte will
-              be allocated. So a seven-bit field will be one byte wide, but an eight-bit field will
-              be two bytes wide, with the second byte always <code>0x00</code>.
+              order (least-significant bits first).
             </p>
             <p>
-              Currently, the only way a bit field is used is to declare which properties are
-              defined in a struct. Each bit represents a property, with <code>1</code> indicating
-              that the property is defined, and <code>0</code> meaning it is undefined. When
-              sending updates to clients, the Artemis server typically omits properties which are
-              unchanged since the last update; these properties will be undefined when the updated
-              struct is transmitted.
+              The objects in an <a href="#objectupdatepacket">ObjectUpdatePacket</a> use bit fields
+              declare which properties are defined in the object's struct. Each bit represents a
+              property, with <code>1</code> indicating that the property is defined, and
+              <code>0</code> meaning it is undefined. When sending updates to clients, the Artemis
+              server typically omits properties which are unchanged since the last update; these
+              properties will be undefined when the updated struct is transmitted. Artemis bit
+              fields do not completely utilize the final byte; if the number of bits needed is
+              divisble by 8, an extra byte will be allocated. So a seven-bit field will be one byte
+              wide, but an eight-bit field will be two bytes wide, with the second byte always
+              <code>0x00</code>.
             </p>
             <h4>Example</h4>
             <p>
@@ -1819,7 +1820,7 @@
             </section>
             <section id="beaconconfigpacket">
               <h3>BeaconConfigPacket</h3>
-              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x22</code> [from <span>server</span>]</div>
+              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x22</code> [from <span>client</span>]</div>
               <p>
                 <em>(new as of v2.6.204)</em> Programs beacons prior to launch.
               </p>
@@ -1840,8 +1841,8 @@
                 <dt><a href="#enum-creature-type">Creature type</a> (byte)</dt>
                 <dd>
                   <p>
-                    The creature for which this beacon is programmed. Presumably
-                    <code>WRECK</code> is invalid.
+                    The creature for which this beacon is programmed. Presumably <code>0x07</code>
+                    (wreck) is invalid.
                   </p>
                 </dd>
                 <dt><a href="#enum-beacon-mode">Mode</a> (byte)</dt>
@@ -4331,6 +4332,31 @@
                   pickups.
                 </p>
               </dd>
+              <dt>Unknown (byte 1.5, int, new as of 2.3.0)</dt>
+              <dd>
+                <p>
+                  Values of 0 and 4 observed.
+                </p>
+              </dd>
+              <dt>Unknown (byte 1.6, int, new as of 2.3.0)</dt>
+              <dd>
+                <p>
+                  Values of 0 observed.
+                </p>
+              </dd>
+              <dt>Beacon <a href="#enum-creature-type">creature type</a> (byte 1.7, byte, new as of 2.6.3)</dt>
+              <dd>
+                <p>
+                  If this anomaly represents a deployed beacon, this is the type of creature
+                  affected by it. Presumably <code>0x07</code> (wreck) is invalid.
+                </p>
+              </dd>
+              <dt><a href="#enum-beacon-mode">Beacon mode</a> (byte 1.8, byte, new as of 2.6.3)</dt>
+              <dd>
+                <p>
+                  If this anomaly represents a deployed beacon, this is the beacon's mode.
+                </p>
+              </dd>
             </dl>
           </section>
 
@@ -4632,8 +4658,13 @@
 
           <section id="object-npc-ship">
             <h3>NPC Ship</h3>
+            <p>
+              The "Tagged" property was added in v2.6.204, and the unknown byte
+              after it was added in v2.6.3. The subsequent properties shifted
+              accordingly.
+            </p>
             <dl>
-              <dt>Bit field (6 bytes)</dt>
+              <dt>Bit field (7 bytes)</dt>
               <dt>Name (bit 1.1, string)</dt>
               <dd>
                 <p>
@@ -4738,15 +4769,17 @@
             <dt>Unknown (bit 4.5, byte)</dt>
             <dt>Unknown (bit 4.6, byte)</dt>
             <dt>Unknown (bit 4.7, byte)</dt>
-            <dt>Unknown (bit 4.8, float)</dt>
+            <dt>Target X (bit 4.8, float)</dt>
+            <dt>Target Y (bit 5.1, int)</dt>
+            <dt>Target Z (bit 5.2, int)</dt>
+            <dt>Tagged (bit 5.3, bit, new as of v2.6.204)</dt>
+            <dt>Unknown (bit 5.4, byte, new as of v2.6.3)</dt>
             <dd>
               <p>
-                Values of 0.0 and -100000.0 have been observed.
+                Only 0 observed so far.
               </p>
             </dd>
-            <dt>Unknown (bit 5.1, int)</dt>
-            <dt>Unknown (bit 5.2, int)</dt>
-            <dt><a href="#enum-ship-system">Ship system</a> damage (bit 5.3 - 6.2, float array)</dt>
+            <dt><a href="#enum-ship-system">Ship system</a> damage (bit 5.5 - 6.4, float array)</dt>
             <dd>
               <p>
                 Damage to various ship systems, in the order specified in the enumeration. A
@@ -4757,7 +4790,7 @@
                 return to 0.0.
               </p>
             </dd>
-            <dt><a href="#enum-beam-frequency">Beam frequency</a> resistance (bit 6.3 - 6.7, float array)</dt>
+            <dt><a href="#enum-beam-frequency">Beam frequency</a> resistance (bit 6.5 - 7.1, float array)</dt>
             <dd>
               <p>
                 The ship's resistance to the five beam frequencies. Higher values indicate greater
