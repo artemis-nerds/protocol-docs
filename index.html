@@ -2368,6 +2368,48 @@
                 </dd>
               </dl>
             </section>
+            <section id="engresetcoolantpacket">
+              <h3>EngResetCoolantPacket</h3>
+              <div class="pkt-props">Type: <code>0x4c821d9c</code>:<code>0x18</code> [from <span>client</span>]</div>
+              <p>
+                Resets the coolant levels to 0 on all systems. This is sent by the stock client in
+                response to pressing double <kbd>spacebar</kbd> or <kbd>enter</kbd> on the
+                engineering console.
+              </p>
+              <h4>Payload</h4>
+              <dl>
+                <dt>Subtype (int)</dt>
+                <dd>
+                  <p>
+                    Always <code>0x04</code>.
+                  </p>
+                </dd>
+                <dt>Team number (int)</dt>
+                <dd>
+                  <p>
+                    The number assigned to the team (0 to 2 inclusive).
+                  </p>
+                </dd>
+                <dt>X coordinate (int)</dt>
+                <dd>
+                  <p>
+                    The X coordinate of the grid location that is the team's destination.
+                  </p>
+                </dd>
+                <dt>Y coordinate (int)</dt>
+                <dd>
+                  <p>
+                    The Y coordinate of the grid location that is the team's destination.
+                  </p>
+                </dd>
+                <dt>Z coordinate (int)</dt>
+                <dd>
+                  <p>
+                    The Z coordinate of the grid location that is the team's destination.
+                  </p>
+                </dd>
+              </dl>
+            </section>
             <section id="engsenddamconpacket">
               <h3>EngSendDamconPacket</h3>
               <div class="pkt-props">Type: <code>0x69cc01d9</code>:<code>0x04</code> [from <span>client</span>]</div>
@@ -4122,6 +4164,35 @@
           </section>
           <section id="pkt-t">
             <h3>T</h3>
+            <section id="titlepacket">
+              <h3>TitlePacket</h3>
+              <div class="pkt-props">Type: <code>0x902f0b1a</code> [from <span>server</span>]</div>
+              <p>
+                Transmits a large title to display on the main screen. This occurs in response to
+                the <code>&lt;big_message&gt;</code> tag in a scripted mission.
+              </p>
+              <h4>Payload</h4>
+              <dl>
+                <dt>Title (string)</dt>
+                <dd>
+                  <p>
+                    The title text to display
+                  </p>
+                </dd>
+                <dt>Subtitle 1 (string)</dt>
+                <dd>
+                  <p>
+                    The first line of the subtitle
+                  </p>
+                </dd>
+                <dt>Subtitle 2 (string)</dt>
+                <dd>
+                  <p>
+                    The second line of the subtitle
+                  </p>
+                </dd>
+              </dl>
+            </section>
             <section id="toggleautobeamspacket">
               <h3>ToggleAutoBeamsPacket</h3>
               <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x03</code> [from <span>client</span>]</div>
@@ -4602,42 +4673,56 @@
               <dt>Unknown (bit 1.4, int)</dt>
               <dt>Unknown (bit 1.5, int)</dt>
               <dt>Unknown (bit 1.6, long)</dt>
-              <dt>Unknown (bit 1.7, int)</dt>
-              <dt>Unknown (bit 1.8, int)</dt>
-              <dt>Unknown (bit 2.1, int)</dt>
-              <dt>Unknown (bit 2.2, long)</dt>
-              <dt>Name (bit 2.3, string)</dt>
+              <dt>Roll (bit 1.7, float)</dt>
+              <dt>Pitch (bit 1.8, float)</dt>
+              <dt>Heading (bit 2.1, float)</dt>
+              <dt>Roll delta (bit 2.2, float)</dt>
+              <dt>Pitch delta (bit 2.3, float)</dt>
+              <dt>Heading delta (bit 2.4, float)</dt>
+              <dt>Name (bit 2.5, string)</dt>
               <dd>
                 <p>
                   The name of this object.
                 </p>
               </dd>
-              <dt>Mesh file (bit 2.4, string)</dt>
+              <dt>Mesh file (bit 2.6, string)</dt>
               <dd>
                 <p>
                   The name of the file containing the 3D mesh data.
                 </p>
               </dd>
-              <dt>Texture file (bit 2.4, string)</dt>
+              <dt>Texture file (bit 2.7, string)</dt>
               <dd>
                 <p>
-                  The name of the file containing the texture to apply to the mesh. Note that this
-                  uses the same bit as the mesh name, and that bit 2.5 is unused.
+                  The name of the file containing the texture to apply to the mesh.
                 </p>
               </dd>
-              <dt>Unknown (bit 2.6, int)</dt>
-              <dt>Unknown (bit 2.7, short)</dt>
-              <dt>Unknown (bit 2.8, byte)</dt>
-              <dt>Red color channel (bit 3.1, float)</dt>
-              <dt>Green color channel (bit 3.2, float)</dt>
-              <dt>Blue color channel (bit 3.3, float)</dt>
-              <dt>Fore shields (bit 3.4, float)</dt>
-              <dt>Aft shields (bit 3.5, float)</dt>
-              <dt>Unknown (bit 3.6, int)</dt>
-              <dt>Unknown (bit 3.7, int)</dt>
-              <dt>Unknown (bit 3.8, int)</dt>
-              <dt>Unknown (bit 4.1, int)</dt>
-              <dt>Unknown (bit 4.2, int)</dt>
+              <dt>Push radius (bit 2.8, float)</dt>
+              <dd>
+                <p>
+                  The distance to maintain from other objects.
+                </p>
+              </dd>
+              <dt>Block shots (bit 3.1, boolean, byte)</dt>
+              <dd>
+                <p>
+                  Whether this object blocks weapons fire.
+                </p>
+              </dd>
+              <dt>Scale (bit 3.2, float)</dt>
+              <dd>
+                <p>
+                  Scale factor of the model
+                </p>
+              </dd>
+              <dt>Red color channel (bit 3.3, float)</dt>
+              <dt>Green color channel (bit 3.4, float)</dt>
+              <dt>Blue color channel (bit 3.5, float)</dt>
+              <dt>Fore shields (bit 3.6, float)</dt>
+              <dt>Aft shields (bit 3.7, float)</dt>
+              <dt>Unknown (bit 3.8, byte)</dt>
+              <dt>Unknown (bit 4.1, string)</dt>
+              <dt>Unknown (bit 4.2, string)</dt>
             </dl>
           </section>
 
@@ -5359,18 +5444,6 @@
                   The object's location on the Z axis.
                 </p>
               </dd>
-              <dt>Name (bit 1.4, string)</dt>
-              <dd>
-                <p>
-                  The object's name. In standard missions, this property is never used, but there
-                  may be named asteroids, black holes or mines in custom missions.
-                </p>
-              </dd>
-              <dt>Unknown (bit 1.4, float?)</dt>
-              <dt>Unknown (bit 1.5, float)</dt>
-              <dt>Unknown (bit 1.6, float)</dt>
-              <dt>Unknown (bit 1.7, int)</dt>
-              <dt>Unknown (bit 1.8, int)</dt>
             </dl>
           </section>
         </section>
