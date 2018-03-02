@@ -1937,16 +1937,25 @@
               </p>
               <h4>Payload</h4>
               <dl>
-                <dt>Channel (int)</dt>
+                <dt>Channel (short, int before v2.6.0)</dt>
                 <dd>
                   <p>
-                    Indicates the channel on which the message was received. Values range from
-                    <code>0x00</code> to <code>0x08</code>. In the stock client, this affects the
-                    message's background color; the lower the channel number, the more red the
-                    background color. While this would seem to indicate priority, in practice, the
-                    channel number doesn't seem to correlate with message importance. Below is a
-                    list of message types received on each channel; note that this list may be
-                    incomplete and custom scenarios may send messages on any channel:
+                    Indicates the channel on which the message was received.
+                    Starting with v2.6.0, this value is a short and appears to
+                    possibly be some sort of bit field, though additional
+                    research is required.
+                  </p>
+                  <p>
+                    Before v2.6.0, this property was an int, and values ranged
+                    from <code>0x00</code> to <code>0x08</code>. In the stock
+                    client, this affected the message's background color; the
+                    lower the channel number, the more red the background
+                    color. While this would seem to indicate priority, in
+                    practice, the channel number didn't seem to correlate with
+                    message importance. Below is a list of message types
+                    received on each channel; note that this list may be
+                    incomplete and custom scenarios could send messages on any
+                    channel:
                   </p>
                   <table>
                     <tbody>
