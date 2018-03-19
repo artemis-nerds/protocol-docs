@@ -4545,7 +4545,12 @@
               structure, and <a href="#object-whale">space whales</a> had their own structure.
             </p>
             <dl>
-              <dt>Bit field (2 bytes)</dt>
+              <dt>Bit field (3 bytes)</dt>
+              <dd>
+                <p>
+                  Note: Before v2.3.0, the bit field was 2 bytes.
+                </p>
+              </dd>
               <dt>X (bit 1.1, float)</dt>
               <dd>
                 <p>
@@ -4595,11 +4600,40 @@
                 </p>
               </dd>
               <dt>Unknown (bit 2.1, 4 bytes)</dt>
+              <dd>
+                <p>
+                  Scanned bitmask?
+                </p>
+              </dd>
               <dt>Unknown (bit 2.2, 4 bytes)</dt>
+              <dd>
+                <p>
+                  Side?
+                </p>
+              </dd>
               <dt>Unknown (bit 2.3, 4 bytes)</dt>
               <dt>Unknown (bit 2.4, 4 bytes)</dt>
               <dt>Unknown (bit 2.5, 4 bytes)</dt>
               <dt>Unknown (bit 2.6, 4 bytes)</dt>
+              <dt>Health (bit 2.7, float, since 2.3.0)</dt>
+              <dd>
+                <p>
+                  The creature's current health.
+                </p>
+              </dd>
+              <dt>Max health (bit 2.8, float, since 2.3.0)</dt>
+              <dd>
+                <p>
+                  The creature's maximum health.
+                </p>
+              </dd>
+              <dt>Unknown (bit 3.1, byte, since v2.6.3)</dt>
+              <dd>
+                <p>
+                  Related to tags?
+                </p>
+              </dd>
+              <dt>Unknown (bit 3.2, 4 bytes, since v2.7.0)</dt>
             </dl>
           </section>
 
