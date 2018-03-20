@@ -2225,6 +2225,30 @@
           </section>
           <section id="pkt-e">
             <h3>E</h3>
+            <section id="emergencyjumppacket">
+              <h3>EmergencyJumpPacket</h3>
+              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x20</code> [from <span>client</span>]</div>
+              <p>
+                (since v.2.3.109) Sent by the helm console to request an
+                emergency jump. Only usable by ships equipped with jump drive,
+                obviously.
+              </p>
+              <h4>Payload</h4>
+              <dl>
+                <dt>Subtype (int)</dt>
+                <dd>
+                  <p>
+                    Always <code>0x20</code>.
+                  </p>
+                </dd>
+                <dt>Direction (int)</dt>
+                <dd>
+                  <p>
+                    Direction to jump: 0 means foward and 1 means backward.
+                  </p>
+                </dd>
+              </dl>
+            </section>
             <section id="engautodamconupdatepacket">
               <h3>EngAutoDamconUpdatePacket</h3>
               <div class="pkt-props">Type: <code>0xf754c8fe</code>:<code>0x0b</code> [from <span>server</span>]</div>
