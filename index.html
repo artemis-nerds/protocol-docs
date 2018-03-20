@@ -2197,29 +2197,6 @@
                 </dd>
               </dl>
             </section>
-            <section id="difficultypacket">
-              <h3>DifficultyPacket</h3>
-              <div class="pkt-props">Type: <code>0x3de66711</code> [from <span>server</span>]</div>
-              <p>
-                Informs clients of the difficulty level when starting or connecting to a game.
-              </p>
-              <h4>Payload</h4>
-              <dl>
-                <dt>Difficulty (int)</dt>
-                <dd>
-                  <p>
-                    The difficulty level (a value from 1 to 11).
-                  </p>
-                </dd>
-                <dt><a href="#enum-game-type">Game type</a> (int, enumeration)</dt>
-                <dd>
-                  <p>
-                    A value indicating the type of game. This applies only to solo and co-op games;
-                    the field is present but its value is undefined for PvP and scripted games.
-                  </p>
-                </dd>
-              </dl>
-            </section>
             <section id="dmxmessagepacket">
               <h3>DmxMessagePacket</h3>
               <div class="pkt-props">Type: <code>0xf754c8fe</code>:<code>0x10</code> [from <span>server</span>]</div>
@@ -3190,6 +3167,33 @@
                         </p>
                       </dd>
                     </dl>
+                  </p>
+                </dd>
+              </dl>
+            </section>
+            <section id="gamestartpacket">
+              <h3>GameStartPacket</h3>
+              <div class="pkt-props">Type: <code>0x3de66711</code> [from <span>server</span>]</div>
+              <p>
+                Informs clients that the game has started. Clients that do not
+                receive this packet will not render beam arcs on the helm and
+                weapons consoles. This is probably because difficulty level
+                affects beam range.
+              </p>
+              <h4>Payload</h4>
+              <dl>
+                <dt>Difficulty (int)</dt>
+                <dd>
+                  <p>
+                    The difficulty level (a value from 1 to 11).
+                  </p>
+                </dd>
+                <dt><a href="#enum-game-type">Game type</a> (int, enumeration)</dt>
+                <dd>
+                  <p>
+                    A value indicating the type of game. This applies only to
+                    solo and co-op games; the field is present but its value is
+                    undefined for PvP and scripted games.
                   </p>
                 </dd>
               </dl>
@@ -5766,7 +5770,7 @@
             <ol>
               <li><a href="#skyboxpacket">SkyboxPacket</a></li>
               <li>Unknown packet: type=<code>0xf754c8fe</code> subtype=<code>0x08</code></li>
-              <li><a href="#difficultypacket">DifficultyPacket</a></li>
+              <li><a href="#gamestartpacket">GameStartPacket</a></li>
               <li><a href="#allshipsettingspacket">AllShipSettingsPacket</a></li>
             </ol>
           </section>
@@ -5775,7 +5779,7 @@
             <ol>
               <li><a href="#pausepacket">PausePacket</a></li>
               <li><a href="#skyboxpacket">SkyboxPacket</a></li>
-              <li><a href="#difficultypacket">DifficultyPacket</a></li>
+              <li><a href="#gamestartpacket">GameStartPacket</a></li>
               <li><a href="#allshipsettingspacket">AllShipSettingsPacket</a></li>
               <li><a href="#keycapturetogglepacket">KeyCaptureTogglePacket</a></li>
             </ol>
