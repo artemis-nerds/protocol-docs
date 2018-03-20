@@ -5637,6 +5637,49 @@
           </section>
         </section>
 
+        <section id="udp-server-discovery">
+          <h2>UDP Server Discovery</h2>
+          <p>
+            Starting in v2.7.0, the game supports auto-discovery of servers on
+            the LAN.
+          </p>
+          <section id="udp-request">
+            <h3>Request</h3>
+            <p>
+              A client requests that servers announce themselves by broadcasting
+              from an ephermal UDP port to 255.255.255.255:3100, sending a
+              single byte: <code>0x05</code>
+              (<a href="https://en.wikipedia.org/wiki/Enquiry_character" target="_new">ENQ</a>).
+              It should then listen for responses from servers.
+            </p>
+          </section>
+          <section id="udp-response">
+            <h3>Response</h3>
+            <p>
+              A server that receives an ENQ on UDP port 3100 responds with the
+              following:
+            </p>
+            <ol>
+              <li><code>0x06</code> (<a href="https://en.wikipedia.org/wiki/Acknowledgement_(data_networks)" target="_new">ACK</a>)</li>
+              <li>the host's IP address (string)</li>
+              <li>the host's name (string)</li>
+              <li><code>0x00</code> (<a href="https://en.wikipedia.org/wiki/Null_character" target="_new">NUL</a>)</li>
+            </ol>
+            <p>
+              A string is transmitted by first sending the length of the string
+              in bytes as a 16-bit integer, followed by the ASCII-encoded string
+              itself. The string is not null-terminated.
+            </p>
+            <p>
+              The IP address of the host does <em>not</em> include the port
+              number. If the server and client do not have the same port number
+              configured in <code>artemis.ini</code>, the client will discover
+              the server but fail to connect to it.
+              <a href="https://artemis.forumchitchat.com/post/2-7-0-bugs-and-issues-9655622?trail=45" target="_new">This has been reported as a bug in the Artemis forums.</a>
+            </p>
+          </section>
+        </section>
+
         <section id="game-events">
           <h2>Game Events</h2>
           <p>
