@@ -5105,11 +5105,26 @@
                 </p>
               </dd>
               <dt>Unknown (bit 2.8, short)</dt>
+              <dd>
+                <p>
+                  Sample observed values: <code>0x0000</code>,
+                  <code>0x0100</code>, <code>0x01ff</code>, <code>0x02ff</code>,
+                  <code>0x03ff</code>, <code>0x16ff</code>, <code>0x2bff</code>,
+                  <code>0x32ff</code>, <code>0x43ff</code>, <code>0x46ff</code>,
+                  <code>0x47ff</code>, <code>0x51ff</code>, <code>0x57ff</code>,
+                  <code>0xc6ff</code>
+                </p>
+              </dd>
               <dt>Forward shields (bit 3.1, float)</dt>
               <dt>Forward shields max (bit 3.2, float)</dt>
               <dt>Aft shields (bit 3.3, float)</dt>
               <dt>Aft shields (bit 3.4, float)</dt>
               <dt>Unknown (bit 3.5, short)</dt>
+              <dd>
+                <p>
+                  <code>0x0100</code> observed
+                </p>
+              </dd>
               <dt>Fleet number (bit 3.6, byte)</dt>
               <dd>
                 <p>
@@ -5144,10 +5159,40 @@
               </dd>
             </dl>
             <dt>Unknown (bit 4.3, int)</dt>
+            <dd>
+              <p>
+                Values of 0 and -1 observed.
+              </p>
+            </dd>
             <dt>Unknown (bit 4.4, byte)</dt>
+            <dd>
+              <p>
+                Sample observed values: <code>0x01</code>, <code>0x02</code>,
+                <code>0x1e</code>
+              </p>
+            </dd>
             <dt>Unknown (bit 4.5, byte)</dt>
+            <dd>
+              <p>
+                Observed values include <code>0x00</code> through
+                <code>0x02</code> and <code>0xfa</code> through
+                <code>0xff</code>.
+              </p>
+            </dd>
             <dt>Unknown (bit 4.6, byte)</dt>
+            <dd>
+              <p>
+                Observed values include <code>0x00</code> through
+                <code>0x05</code>, <code>0xfa</code>, and <code>0xfc</code>
+                through <code>0xff</code>.
+              </p>
+            </dd>
             <dt>Unknown (bit 4.7, byte)</dt>
+            <dd>
+              <p>
+                <code>0x01</code> observed
+              </p>
+            </dd>
             <dt>Target X (bit 4.8, float)</dt>
             <dt>Target Y (bit 5.1, int)</dt>
             <dt>Target Z (bit 5.2, int)</dt>
@@ -5310,6 +5355,11 @@
             </dd>
             <dt><a href="#enum-alert-status">Alert status</a> (bit 4.2, byte, enumeration)</dt>
             <dt>Unknown (bit 4.3, float)</dt>
+            <dd>
+              <p>
+                Value of 200000 observed
+              </p>
+            </dd>
             <dt><a href="#enum-main-screen-view">Main screen view</a> (bit 4.4, byte, enumeration)</dt>
             <dd>
               <p>
@@ -5380,7 +5430,7 @@
                 <code>0x02</code> has been observed.
               </p>
             </dd>
-            <dt>Unknown (bit 5.7, 4 bytes)</dt>
+            <dt>Unknown (bit 5.7, int)</dt>
             <dd>
               <p>
                 Appears to affect visibility on science/captain's map (0 for invisible,
@@ -5390,7 +5440,9 @@
             <dt>Ship index? (bit 5.8, byte, new as of v2.3.0)</dt>
             <dd>
               <p>
-                Note that it's zero-based instead of one-based (0=Artemis, etc.), research ongoing.
+                Note that it's zero-based instead of one-based
+                (0=Artemis, etc.), although <code>0xff</code> has also been
+                observed. Research ongoing.
               </p>
             </dd>
             <dt>Capital ship object ID (bit 6.1, int, new as of v2.3.0)</dt>
@@ -5407,6 +5459,11 @@
               </p>
             </dd>
             <dt>Unknown (bit 6.3, 4 bytes, new as of v2.4.0)</dt>
+            <dd>
+              <p>
+                <code>0x00000000</code> observed
+              </p>
+            </dd>
             <dt>Beacon <a href="#enum-creature-type">creature type</a> (bit 6.4, 4 bytes, new as of v2.6.3)</dt>
             <dd>
               <p>
@@ -5612,9 +5669,9 @@
             <ul>
               <li>
                 There used to be an unknown byte between the ordnance counts array and the tube
-                (un)load times array. It always seemed to be <code>0x00</code>. Before v2.1.5, it
-                was located at bit 1.5. Starting with v2.1.5 it moved to bit 1.6 as a result of the
-                introduction of the plasma shock torpedo. It was removed starting at v2.6.0.
+                (un)load times array. Before v2.1.5, it was located at bit 1.5. Starting with
+                v2.1.5 it moved to bit 1.6 as a result of the introduction of the plasma shock
+                torpedo. It was removed starting at v2.6.0.
               </li>
               <li>
                 The plasma shock torpedo type was added in v2.1.5. It was inserted at bit 1.5, and all
