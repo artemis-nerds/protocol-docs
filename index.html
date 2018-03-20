@@ -2223,6 +2223,25 @@
                 </dd>
               </dl>
             </section>
+            <section id="endgamepacket">
+              <h3>EndGamePacket</h3>
+              <div class="pkt-props">Type: <code>0xf754c8fe</code>:<code>0x06</code> [from <span>server</span>]</div>
+              <p>
+                Informs the client that the game is over. Distinct from
+                <a href="#gameoverpacket">GameOverPacket</a> in that it is
+                transmitted when the &ldquo;End Game&rdquo; button on the
+                statistics page is clicked.
+              </p>
+              <h4>Payload</h4>
+              <dl>
+                <dt>Subtype (int)</dt>
+                <dd>
+                  <p>
+                    Always <code>0x06</code>.
+                  </p>
+                </dd>
+              </dl>
+            </section>
             <section id="engautodamconupdatepacket">
               <h3>EngAutoDamconUpdatePacket</h3>
               <div class="pkt-props">Type: <code>0xf754c8fe</code>:<code>0x0b</code> [from <span>server</span>]</div>
@@ -3044,10 +3063,14 @@
             </section>
             <section id="gameoverpacket">
               <h3>GameOverPacket</h3>
-              <div class="pkt-props">Type: <code>0xf754c8fe</code>:<code>0x06</code> [from <span>server</span>]</div>
+              <div class="pkt-props">Type: <code>0xf754c8fe</code>:<code>0x1e</code> [from <span>server</span>]</div>
               <p>
-                Informs the client that the game is over. Transmitted when the &ldquo;End
-                Game&rdquo; button on the statistics page is clicked.
+                (since v2.6.3) Informs the client that the game is over.
+                Distinct from <a href="#endgamepacket">EndGamePacket</a> in that
+                this is sent when the end game condition is met or "End
+                Simulation" is clicked on the server, right before
+                <a href="#gameoverreasonpacket">GameOverReasonPacket</a> and
+                <a href="#gameoverstatspacket">GameOverStatsPacket</a> are sent.
               </p>
               <h4>Payload</h4>
               <dl>
