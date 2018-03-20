@@ -1982,29 +1982,64 @@
               <h3>CommsIncomingPacket</h3>
               <div class="pkt-props">Type: <code>0xd672c35f</code> [from <span>server</span>]</div>
               <p>
-                  Contains a single incoming text message to display at the COMMS station.
+                  Contains a single incoming text message to display at the
+                  COMMS station.
               </p>
               <h4>Payload</h4>
               <dl>
-                <dt>Channel (short, int before v2.6.0)</dt>
+                <dt>Filters (bit field, 2 bytes, since v2.6.0)</dt>
                 <dd>
                   <p>
-                    Indicates the channel on which the message was received.
-                    Starting with v2.6.0, this value is a short and appears to
-                    possibly be some sort of bit field, though additional
-                    research is required.
+                    Indicates the channel(s) on which the message was received.
+                    The bits in the field correspond to filters on the comms
+                    console: a set bit means that the message matches the
+                    corresponding filter.
                   </p>
+                  <table>
+                    <tbody>
+                      <tr>
+                        <th><code>0x01</code></th>
+                        <td>alert</td>
+                      </tr>
+                      <tr>
+                        <th><code>0x02</code></th>
+                        <td>side</td>
+                      </tr>
+                      <tr>
+                        <th><code>0x04</code></th>
+                        <td>status</td>
+                      </tr>
+                      <tr>
+                        <th><code>0x08</code></th>
+                        <td>player</td>
+                      </tr>
+                      <tr>
+                        <th><code>0x10</code></th>
+                        <td>station</td>
+                      </tr>
+                      <tr>
+                        <th><code>0x20</code></th>
+                        <td>enemy</td>
+                      </tr>
+                      <tr>
+                        <th><code>0x40</code></th>
+                        <td>friend</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </dd>
+                <dt>Channel (int, before v2.6.0)</dt>
+                <dd>
                   <p>
-                    Before v2.6.0, this property was an int, and values ranged
-                    from <code>0x00</code> to <code>0x08</code>. In the stock
-                    client, this affected the message's background color; the
-                    lower the channel number, the more red the background
-                    color. While this would seem to indicate priority, in
-                    practice, the channel number didn't seem to correlate with
-                    message importance. Below is a list of message types
-                    received on each channel; note that this list may be
-                    incomplete and custom scenarios could send messages on any
-                    channel:
+                    Values ranged from <code>0x00</code> to <code>0x08</code>.
+                    In the stock client, this affected the message's background
+                    color; the lower the channel number, the more red the
+                    background color. While this would seem to indicate
+                    priority, in practice, the channel number didn't seem to
+                    correlate with message importance. Below is a list of
+                    message types received on each channel; note that this list
+                    may be incomplete and custom scenarios could send messages
+                    on any channel:
                   </p>
                   <table>
                     <tbody>
