@@ -1825,6 +1825,40 @@
                 </dd>
               </dl>
             </section>
+            <section id="buttonclickpacket">
+              <h3>ButtonClickPacket</h3>
+              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x15</code> [from <span>client</span>]</div>
+              <p>
+                (since v2.4.0) Sent by the client when a custom button is
+                clicked. The buttons are created by
+                <a href="#addgmbuttonpacket">AddGMButtonPacket</a>,
+                <a href="#addgmbuttonatpositionpacket">AddGMButtonAtPositionPacket</a>, or
+                <a href="#commsbuttonpacket">CommsButtonPacket</a>.
+              </p>
+              <h4>Payload</h4>
+              <dl>
+                <dt>Subtype (int)</dt>
+                <dd>
+                  <p>
+                    Always <code>0x15</code>.
+                  </p>
+                </dd>
+                <dt>Unknown (int)</dt>
+                <dd>
+                  <p>
+                    Appears to always be <code>0x0d</code>.
+                  </p>
+                </dd>
+                <dt>Hash (int)</dt>
+                <dd>
+                  <p>
+                    A hash value identifying the button. This is a hash of the button's label
+                    computed using the JamCRC hash algorithm.
+                    (<a href="https://github.com/rjwut/ian/blob/3.2.0/src/main/java/com/walkertribe/ian/util/JamCrc.java" target="_new">sample Java implementation</a>)
+                  </p>
+                </dd>
+              </dl>
+            </section>
           </section>
           <section id="pkt-c">
             <h3>C</h3>
@@ -1901,6 +1935,47 @@
                 <dt>X-coordinate (float)</dt>
                 <dt>Y-coordinate (float)</dt>
                 <dt>Z-coordinate (float)</dt>
+              </dl>
+            </section>
+            <section id="commsbuttonpacket">
+              <h3>CommsButtonPacket</h3>
+              <div class="pkt-props">Type: <code>0xca88f050</code> [from <span>server</span>]</div>
+              <p>
+                (since v2.5.106) Instructs the comms console to display or
+                remove a button. Clicking the button results in the client
+                transmitting a
+                <a href="#buttonclickpacket">ButtonClickPacket</a>.
+              </p>
+              <h4>Payload</h4>
+              <dl>
+                <dt>Action (byte)</dt>
+                <dd>
+                  <p>
+                    Indicates the action being performed:
+                  </p>
+                  <table>
+                    <tbody>
+                      <tr>
+                        <th><code>0x00</code></th>
+                        <td>Remove</td>
+                      </tr>
+                      <tr>
+                        <th><code>0x02</code></th>
+                        <td>Add</td>
+                      </tr>
+                      <tr>
+                        <th><code>0x64</code></th>
+                        <td>Remove all</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </dd>
+                <dt>Label (string, omitted if action is <code>0x64</code>)</dt>
+                <dd>
+                  <p>
+                    The label of the button being added or removed.
+                  </p>
+                </dd>
               </dl>
             </section>
             <section id="commsincomingpacket">
@@ -2887,38 +2962,6 @@
           </section>
           <section id="pkt-g">
             <h3>G</h3>
-            <section id="gamemasterbuttonclickpacket">
-              <h3>GameMasterButtonClickPacket</h3>
-              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x15</code> [from <span>client</span>]</div>
-              <p>
-                New as of v2.4.0. Sent by the client when the game master clicks on a button
-                created by <a href="#addgmbuttonpacket">AddGMButtonPacket</a> or
-                <a href="#addgmbuttonatpositionpacket">AddGMButtonAtPositionPacket</a>.
-              </p>
-              <h4>Payload</h4>
-              <dl>
-                <dt>Subtype (int)</dt>
-                <dd>
-                  <p>
-                    Always <code>0x15</code>.
-                  </p>
-                </dd>
-                <dt>Unknown (int)</dt>
-                <dd>
-                  <p>
-                    Appears to always be <code>0x0d</code>.
-                  </p>
-                </dd>
-                <dt>Hash (int)</dt>
-                <dd>
-                  <p>
-                    A hash value identifying the button. This is a hash of the button's label
-                    computed using the JamCRC hash algorithm.
-                    (<a href="https://github.com/artemis-nerds/protocol-docs/issues/36#issuecomment-247130607">Java implementation</a>)
-                  </p>
-                </dd>
-              </dl>
-            </section>
             <section id="gamemasterinstructionspacket">
               <h3>GameMasterInstructionsPacket</h3>
               <div class="pkt-props">Type: <code>0x26faacb9</code>:<code>0x63</code> [from <span>server</span>]</div>

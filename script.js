@@ -18,6 +18,7 @@ $(function() {
     'b83fd2c4': 'attack',
     'be991309': 'idleText',
     'c2bee72e': 'beamRequest',
+    'ca88f050': 'commsButton',
     'cc5a3e30': 'objectDelete',
     'd672c35f': 'commText',
     'e548e74a': 'connected',
