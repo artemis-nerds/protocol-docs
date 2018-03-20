@@ -4258,6 +4258,43 @@
           </section>
           <section id="pkt-t">
             <h3>T</h3>
+            <section id="tagpacket">
+              <h3>TagPacket</h3>
+              <div class="pkt-props">Type: <code>0xf754c8fe</code>:<code>0x1d</code> [from <span>server</span>]</div>
+              <p>
+                Sent by the server when a player ship has detected a tag.
+                Introduced in v2.6.204.
+              </p>
+              <h4>Payload</h4>
+              <dl>
+                <dt>Subtype (int)</dt>
+                <dd>
+                  <p>
+                    Always <code>0x1d</code>.
+                  </p>
+                </dd>
+                <dt>Unknown (int)</dt>
+                <dd>
+                  <p>
+                    Values of 0 and occasionally 3 observed.
+                  </p>
+                </dd>
+                <dt>Tagger (string)</dt>
+                <dd>
+                  <p>
+                    The ship that launched the tag. This is not neccessarily the
+                    name of a ship that exists in the game.
+                  </p>
+                </dd>
+                <dt>Date (string)</dt>
+                <dd>
+                  <p>
+                    The date the tag was applied, in YYYY-M-D format. (Month and
+                    day do <em>not</em> have leading 0s.)
+                  </p>
+                </dd>
+              </dl>
+            </section>
             <section id="titlepacket">
               <h3>TitlePacket</h3>
               <div class="pkt-props">Type: <code>0x902f0b1a</code> [from <span>server</span>]</div>
