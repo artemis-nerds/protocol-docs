@@ -1434,32 +1434,6 @@
           <section id="pkg-unknown">
             <h3>Unknown</h3>
 
-            <section id="__unknown__0x4c821d3c_0x17">
-              <h3>__client_unknown__3</h3>
-              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x18</code> [from <span>client</span>]</div>
-              <p>
-                This packet type has been observed, and is known to
-                exist, but its function is as of yet completely
-                unknown.
-              </p>
-              <p>
-                Before v2.3.109, this was subtype <code>0x17</code>.
-              </p>
-              <h4>Payload</h4>
-              <dl>
-                <dt>Subtype (int)</dt>
-                <dd>
-                  <p>
-                    Always <code>0x18</code>.
-                  </p>
-                </dd>
-                <dt>Observed payload</dt>
-                <dd>
-                  So far, no payload apart from subtype has been observed.
-                </dd>
-              </dl>
-            </section>
-
             <section id="__unknown__0xf754c8fe_0x08">
               <h3>__server_unknown__3</h3>
               <div class="pkt-props">Type: <code>0xf754c8fe</code>:<code>0x08</code> [from <span>server</span>]</div>
@@ -2403,11 +2377,14 @@
             </section>
             <section id="engresetcoolantpacket">
               <h3>EngResetCoolantPacket</h3>
-              <div class="pkt-props">Type: <code>0x4c821d9c</code>:<code>0x18</code> [from <span>client</span>]</div>
+              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x18</code> [from <span>client</span>]</div>
               <p>
                 Resets the coolant levels to 0 on all systems. This is sent by the stock client in
                 response to pressing double <kbd>spacebar</kbd> or <kbd>enter</kbd> on the
                 engineering console.
+              </p>
+              <p>
+                Before v2.3.109, this was subtype <code>0x17</code>.
               </p>
               <h4>Payload</h4>
               <dl>
