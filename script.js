@@ -16,6 +16,7 @@ $(function() {
     '9ad1f23b': 'carrierRecord',
     'ae88e058': 'incomingMessage',
     'b83fd2c4': 'attack',
+    'be991309': 'idleText',
     'c2bee72e': 'beamRequest',
     'cc5a3e30': 'objectDelete',
     'd672c35f': 'commText',

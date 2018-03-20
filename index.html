@@ -3352,6 +3352,29 @@
           </section>
           <section id="pkt-i">
             <h3>I</h3>
+            <section id="idletextpacket">
+              <h3>IdleTextPacket</h3>
+              <div class="pkt-props">Type: <code>0xbe991309</code> [from <span>server</span>]</div>
+              <p>
+                (since v2.7.0) Informs the client of an incoming text message
+                displayed on the console choice screen (pre-game).
+              </p>
+              <h4>Payload</h4>
+              <dl>
+                <dt>Ship name (string)</dt>
+                <dd>
+                  <p>
+                    The name of the ship sending the message.
+                  </p>
+                </dd>
+                <dt>Message (string)</dt>
+                <dd>
+                  <p>
+                    The message cotnent.
+                  </p>
+                </dd>
+              </dl>
+            </section>
             <section id="incomingaudiopacket">
               <h3>IncomingAudioPacket</h3>
               <div class="pkt-props">Type: <code>0xae88e058</code> [from <span>server</span>]</div>
