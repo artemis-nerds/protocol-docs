@@ -313,6 +313,46 @@
               </tbody>
             </table>
           </section>
+          <section id="enum-comm-filter">
+            <h3>COMM Filter</h3>
+            <p>
+              Note: COMM filter values can be ORed together. Thus,
+              <code>0x54</code> means that the message is a status update from a
+              friendly space station.
+            </p>
+            <table>
+              <tbody>
+                <tr>
+                  <th><code>0x01</code></th>
+                  <td>alert</td>
+                </tr>
+                <tr>
+                  <th><code>0x02</code></th>
+                  <td>side</td>
+                </tr>
+                <tr>
+                  <th><code>0x04</code></th>
+                  <td>status</td>
+                </tr>
+                <tr>
+                  <th><code>0x08</code></th>
+                  <td>player</td>
+                </tr>
+                <tr>
+                  <th><code>0x10</code></th>
+                  <td>station (base)</td>
+                </tr>
+                <tr>
+                  <th><code>0x20</code></th>
+                  <td>enemy</td>
+                </tr>
+                <tr>
+                  <th><code>0x40</code></th>
+                  <td>friend</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
           <section id="enum-comm-message">
             <h3>COMM Message</h3>
             <p>
@@ -1987,7 +2027,7 @@
               </p>
               <h4>Payload</h4>
               <dl>
-                <dt>Filters (bit field, 2 bytes, since v2.6.0)</dt>
+                <dt><a href="#enum-comm-filter">Filters</a> (bit field, 2 bytes, since v2.6.0)</dt>
                 <dd>
                   <p>
                     Indicates the channel(s) on which the message was received.
@@ -1995,38 +2035,6 @@
                     console: a set bit means that the message matches the
                     corresponding filter.
                   </p>
-                  <table>
-                    <tbody>
-                      <tr>
-                        <th><code>0x01</code></th>
-                        <td>alert</td>
-                      </tr>
-                      <tr>
-                        <th><code>0x02</code></th>
-                        <td>side</td>
-                      </tr>
-                      <tr>
-                        <th><code>0x04</code></th>
-                        <td>status</td>
-                      </tr>
-                      <tr>
-                        <th><code>0x08</code></th>
-                        <td>player</td>
-                      </tr>
-                      <tr>
-                        <th><code>0x10</code></th>
-                        <td>station</td>
-                      </tr>
-                      <tr>
-                        <th><code>0x20</code></th>
-                        <td>enemy</td>
-                      </tr>
-                      <tr>
-                        <th><code>0x40</code></th>
-                        <td>friend</td>
-                      </tr>
-                    </tbody>
-                  </table>
                 </dd>
                 <dt>Channel (int, before v2.6.0)</dt>
                 <dd>
@@ -3007,32 +3015,71 @@
               <h3>GameMasterMessagePacket</h3>
               <div class="pkt-props">Type: <code>0x809305a7</code> [from <span>client</span>]</div>
               <p>
-                New as of v2.4.0. A packet sent by the game master console to the server which
+                A packet sent by the game master console to the server which
                 causes a message to be displayed on a client.
               </p>
               <h4>Payload</h4>
               <dl>
-                <dt><a href="#enum-console-type">Console type</a> (byte, enumeration)</dt>
+                <dt>Recipients (since v2.4.0, array)</dt>
                 <dd>
                   <p>
-                    If this value is <code>0x00</code>, the message is received by the
-                    communications officer as a normal COMM message. Otherwise, it is sent as a
-                    popup message at a particular console type. The console that receives the
-                    message is determined by subtracting 1 from the value; the result then matches
-                    the values for the console type enumeration.
+                    Since v2.6.0, this is an array of int values giving the
+                    object IDs of the recipient ships. The array is terminated
+                    with an ID of 0.
                   </p>
+                  <p>
+                    When initially introduced in v2.4.0, this was instead an
+                    array of eight 1-byte booleans, one for each player ship in
+                    order of their ship index.
+                  </p>
+                </dd>
+                <dt>Presentation (int)</dt>
+                <dd>
+                  <p>
+                    Dictates how the message is displayed:
+                  </p>
+                  <dl>
+                    <dt>0</dt>
+                    <dd>
+                      Shown to the communications officer as a normal COMM
+                      message.
+                    </dd>
+                    <dt>3000</dt>
+                    <dd>
+                      (since v2.7.0) Displayed as a chat message on the ship
+                      selection screen before the game.
+                    </dd>
+                    <dt>(other)</dt>
+                    <dd>
+                      Shown as a popup message on a particular console. The
+                      console is identified by subtracting 1 from the value; the
+                      result then matches the values for the
+                      <a href="#enum-console-type">console type</a> enumeration.
+                    </dd>
+                  </dl>
                 </dd>
                 <dt>Sender (string)</dt>
                 <dd>
                   <p>
-                    The name of the message's sender. This can be any arbitrary string; it doesn't
-                    have to match the name of an existing object.
+                    The name of the message's sender. This can be any arbitrary
+                    string; it doesn't have to match the name of an existing
+                    object.
                   </p>
                 </dd>
                 <dt>Message (string)</dt>
                 <dd>
                   <p>
                     The message to send.
+                  </p>
+                </dd>
+                <dt><a href="#enum-comm-filter">Filter</a> (2 bytes, since v.2.7.0)</dt>
+                <dd>
+                  <p>
+                    Only present if the presentation field is not 3000. This
+                    indicates which COMM filter the message will match. This is
+                    not a bit field because only one filter can be specified. If
+                    the value is 0, it will be a "general" message not matching
+                    any of the filters.
                   </p>
                 </dd>
               </dl>
