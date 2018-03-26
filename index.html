@@ -4897,10 +4897,15 @@
               <dt>Unknown (bit 3.1, byte, since v2.6.3)</dt>
               <dd>
                 <p>
-                  Related to tags?
+                  Related to tags or possibly nebulae?
                 </p>
               </dd>
-              <dt>Unknown (bit 3.2, 4 bytes, since v2.7.0)</dt>
+              <dt>Unknown (bit 3.2, int, since v2.7.0)</dt>
+              <dd>
+                <p>
+                  Usually -1, but many other values observed, as well.
+                </p>
+              </dd>
             </dl>
           </section>
 
@@ -5064,6 +5069,7 @@
               <dt>Unknown (bit 3.8, byte)</dt>
               <dt>Unknown (bit 4.1, string)</dt>
               <dt>Unknown (bit 4.2, string)</dt>
+              <dt>Unknown (bit 4.3, int, since v.2.7.0)</dt>
             </dl>
           </section>
 
@@ -5077,8 +5083,7 @@
               <dt>Red color channel (bit 1.4, float)</dt>
               <dt>Green color channel (bit 1.5, float)</dt>
               <dt>Blue color channel (bit 1.6, float)</dt>
-              <dt>Unused? (bit 1.7, int)</dt>
-              <dt>Unused? (bit 1.8, int)</dt>
+              <dt>Flavor (bit 1.7, int)</dt>
             </dl>
           </section>
 
@@ -5151,15 +5156,19 @@
                   True if this ship has surrendered; false otherwise.
                 </p>
               </dd>
-              <dt>Unknown (bit 2.8, short)</dt>
+              <dt>Unknown (bit 2.8, byte)</dt>
               <dd>
                 <p>
-                  Sample observed values: <code>0x0000</code>,
-                  <code>0x0100</code>, <code>0x01ff</code>, <code>0x02ff</code>,
-                  <code>0x03ff</code>, <code>0x16ff</code>, <code>0x2bff</code>,
-                  <code>0x32ff</code>, <code>0x43ff</code>, <code>0x46ff</code>,
-                  <code>0x47ff</code>, <code>0x51ff</code>, <code>0x57ff</code>,
-                  <code>0xc6ff</code>
+                  Possibly indicates the type of nebula the ship is in, but this
+                  is unconfirmed at this time.
+                </p>
+                <p>
+                  Before v.2.7.0, this was two bytes long. Sample observed
+                  values: <code>0x0000</code>, <code>0x0100</code>,
+                  <code>0x01ff</code>, <code>0x02ff</code>, <code>0x03ff</code>,
+                  <code>0x16ff</code>, <code>0x2bff</code>, <code>0x32ff</code>,
+                  <code>0x43ff</code>, <code>0x46ff</code>, <code>0x47ff</code>,
+                  <code>0x51ff</code>, <code>0x57ff</code>, <code>0xc6ff</code>.
                 </p>
               </dd>
               <dt>Forward shields (bit 3.1, float)</dt>
@@ -5352,12 +5361,17 @@
                 A value of 0.0 corresponds to a heading of 180&deg; (or &ldquo;south&rdquo;).
               </p>
             </dd>
-            <dt>In a nebula (bit 3.3, boolean, 2 bytes)</dt>
+            <dt>Nebula "flavor" (bit 3.3, byte)</dt>
             <dd>
               <p>
-                Player ships in nebulae cannot go faster than warp 1. It should be noted that
-                values other than 0 and 1 have been observed. It seems that any non-zero value
-                should be treated as <code>true</code>.
+                The nebula "flavor" value (1, 2, or 3) that the player's ship is
+                in, or 0 if the ship is not in a nebula. Player ships in nebulae
+                cannot go faster than warp 1.
+              </p>
+              <p>
+                Before v2.7.0, this was two bytes, and nebula "flavors" did not
+                exist. The value was then treated as a boolean, where any
+                non-zero value meant "in a nebula."
               </p>
             </dd>
             <dt>Ship name (bit 3.4, string)</dt>
