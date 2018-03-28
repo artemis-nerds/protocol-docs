@@ -1659,7 +1659,8 @@
                 <dt>Ships (array)</dt>
                 <dd>
                   <p>
-                    A list of the eight available player ships. Each ship is structured as follows:
+                    A list of the eight available player ships. Each ship is a struct with the
+                    following properties:
                   </p>
                   <dl>
                     <dt><a href="#enum-drive-type">Drive type</a> (int, enumeration)</dt>
@@ -1681,26 +1682,27 @@
                         Default hue values for ships are:
                       </p>
                       <ul>
-                        <li><div class="hue-box" style="background-color:#ff0000"></div> Artemis - <code>0</code></li>
-                        <li><div class="hue-box" style="background-color:#ffbf00"></div> Intrepid - <code>0.125</code></li>
-                        <li><div class="hue-box" style="background-color:#80ff00"></div> Aegis - <code>0.25</code></li>
-                        <li><div class="hue-box" style="background-color:#00ff40"></div> Horatio - <code>0.375</code></li>
-                        <li><div class="hue-box" style="background-color:#00ffff"></div> Excalibur - <code>0.5</code></li>
-                        <li><div class="hue-box" style="background-color:#0040ff"></div> Hera - <code>0.625</code></li>
-                        <li><div class="hue-box" style="background-color:#8000ff"></div> Ceres - <code>0.75</code></li>
-                        <li><div class="hue-box" style="background-color:#ff00bf"></div> Diana - <code>0.875</code></li>
+                        <li><div class="hue-box" style="background-color:#ff0000"></div> Artemis (<code>0</code>)</li>
+                        <li><div class="hue-box" style="background-color:#ffbf00"></div> Intrepid (<code>0.125</code>)</li>
+                        <li><div class="hue-box" style="background-color:#80ff00"></div> Aegis (<code>0.25</code>)</li>
+                        <li><div class="hue-box" style="background-color:#00ff40"></div> Horatio (<code>0.375</code>)</li>
+                        <li><div class="hue-box" style="background-color:#00ffff"></div> Excalibur (<code>0.5</code>)</li>
+                        <li><div class="hue-box" style="background-color:#0040ff"></div> Hera (<code>0.625</code>)</li>
+                        <li><div class="hue-box" style="background-color:#8000ff"></div> Ceres (<code>0.75</code>)</li>
+                        <li><div class="hue-box" style="background-color:#ff00bf"></div> Diana (<code>0.875</code>)</li>
                       </ul>
                     </dd>
-                    <dt>Unknown (int) (v2.0 or later)</dt>
+                    <dt>Has name (boolean, 4 bytes) (v2.0 or later)</dt>
                     <dd>
                       <p>
-                        Only <code>0x01</code> has been observed thus far.
+                        Will be <code>true</code> if the name property is included.
                       </p>
                     </dd>
                     <dt>Name (string)</dt>
                     <dd>
                       <p>
-                        The name of the ship.
+                        The name of the ship. Omitted if the "has name" property
+                        is <code>false</code>.
                       </p>
                     </dd>
                   </dl>
@@ -4188,7 +4190,7 @@
               <h3>SetShipSettingsPacket</h3>
               <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x17</code> [from <span>client</span>]</div>
               <p>
-                Sets the name, ship type and drive type for the currently-selected ship.
+                Sets the properties for the currently-selected ship.
               </p>
               <p>
                 Before v2.3.109, this was subtype <code>0x16</code>.
@@ -4201,35 +4203,11 @@
                     Always <code>0x17</code>.
                   </p>
                 </dd>
-                <dt><a href="#enum-drive-type">Drive type</a> (int, enumeration)</dt>
+                <dt>Ship (struct)</dt>
                 <dd>
                   <p>
-                    The desired drive type.
-                  </p>
-                </dd>
-                <dt>Vessel ID (int)</dt>
-                <dd>
-                  <p>
-                    The ID of the desired type of vessel, as given in <code>vesselData.xml</code>.
-                  </p>
-                </dd>
-                <dt>Accent color (float, new as of v2.4.0)</dt>
-                <dd>
-                  <p>
-                    Ship accent color hue in the range 0.0 to 1.0. Multiply by 360 to get a
-                    <a href="https://en.wikipedia.org/wiki/Hue">Hue as described on Wikipedia</a>.
-                  </p>
-                </dd>
-                <dt>Unknown (int)</dt>
-                <dd>
-                  <p>
-                    Always seems to be 1.
-                  </p>
-                </dd>
-                <dt>Name (string)</dt>
-                <dd>
-                  <p>
-                    The ship's name.
+                    The updated ship properties. This is a struct as defined in
+                    <a href="#allshipsettingspacket">AllShipSettingsPacket</a>.
                   </p>
                 </dd>
               </dl>
