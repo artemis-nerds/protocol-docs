@@ -707,38 +707,60 @@
               New as of v2.1.5.
             </p>
             <table>
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>&lt;v2.7.0</th>
+                  <th>&ge;v2.7.0</th>
+                  <th>Note</th>
+              </thead>
               <tbody>
                 <tr>
                   <td><code>0x00</code></td>
-                  <td>typhon (crystalline entity)</td>
+                  <td>typhon</td>
+                  <td>typhon</td>
+                  <td>a.k.a. classic space monster or crystalline entity</td>
                 </tr>
                 <tr>
                   <td><code>0x01</code></td>
+                  <td>whale</td>
                   <td>whale</td>
                 </tr>
                 <tr>
                   <td><code>0x02</code></td>
                   <td>shark</td>
+                  <td>shark</td>
                 </tr>
                 <tr>
                   <td><code>0x03</code></td>
+                  <td>dragon</td>
                   <td>dragon</td>
                 </tr>
                 <tr>
                   <td><code>0x04</code></td>
                   <td>piranha</td>
+                  <td>piranha</td>
                 </tr>
                 <tr>
                   <td><code>0x05</code></td>
+                  <td>charybdis</td>
                   <td>charybdis</td>
                 </tr>
                 <tr>
                   <td><code>0x06</code></td>
                   <td>insect</td>
+                  <td>insect</td>
                 </tr>
                 <tr>
                   <td><code>0x07</code></td>
                   <td>wreck</td>
+                  <td>jelly</td>
+                </tr>
+                <tr>
+                  <td><code>0x08</code></td>
+                  <td><em>unused</em></td>
+                  <td>wreck</td>
+                  <td>can't be beaconed</td>
                 </tr>
               </tbody>
             </table>
@@ -4819,7 +4841,7 @@
                   The creature's current roll.
                 </p>
               </dd>
-              <dt><a href="#enum-creature-type">Creature type</a> (bit 1.8, enum)</dt>
+              <dt><a href="#enum-creature-type">Creature type</a> (bit 1.8, int, enumeration)</dt>
               <dd>
                 <p>
                   The type of creature.
