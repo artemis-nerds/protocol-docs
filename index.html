@@ -2923,6 +2923,29 @@
                 </dd>
               </dl>
             </section>
+            <section id="fightertextpacket">
+              <h3>FighterTextPacket</h3>
+              <div class="pkt-props">Type: <code>0xf754c8fe</code>:<code>0x1c</code> [from <span>server</span>]</div>
+              <p>
+                Sent to single-seat craft when comms or the GM sends them a free-form text message.
+              </p>
+              <h4>Payload</h4>
+              <dl>
+                <dt>Object ID (int)</dt>
+                <dd>
+                  <p>
+                    The ID of the craft receiving the message
+                  </p>
+                </dd>
+                <dt>Message (string)</dt>
+                <dd>
+                  <p>
+                    The content of the message.
+                  </p>
+                </dd>
+              </dl>
+            </section>
+            </section>
             <section id="firebeampacket">
               <h3>FireBeamPacket</h3>
               <div class="pkt-props">Type: <code>0xc2bee72e</code> [from <span>client</span>]</div>
@@ -4426,6 +4449,12 @@
                     Always <code>0x1d</code>.
                   </p>
                 </dd>
+                <dt>Object ID (int)</dt>
+                <dd>
+                  <p>
+                    The ID of the tagged object.
+                  </p>
+                </dd>
                 <dt>Unknown (int)</dt>
                 <dd>
                   <p>
@@ -5495,10 +5524,11 @@
                 True if the impulse drive is in reverse; false otherwise.
               </p>
             </dd>
-            <dt>Unknown (bit 5.5, float)</dt>
+            <dt>Climb/dive (bit 5.5, float)</dt>
             <dd>
               <p>
-                Usually 0.0, though -1.0 has been observed.
+                Whether the ship is climbing (-1), diving (1), or leveling out
+                (0).
               </p>
             </dd>
             <dt>Side (bit 5.6, byte)</dt>
@@ -5536,10 +5566,11 @@
                 <a href="https://en.wikipedia.org/wiki/Hue">Hue as described on Wikipedia</a>.
               </p>
             </dd>
-            <dt>Unknown (bit 6.3, 4 bytes, new as of v2.4.0)</dt>
+            <dt>Emergency jump cooldown (bit 6.3, float, new as of v2.4.0)</dt>
             <dd>
               <p>
-                <code>0x00000000</code> observed
+                When the ship is ready for an emergency jump, this value will be 0.0. After a jump,
+                it will go to 1.0, then gradually decrease back down to 0.0.
               </p>
             </dd>
             <dt>Beacon <a href="#enum-creature-type">creature type</a> (bit 6.4, byte, new as of v2.6.3)</dt>
