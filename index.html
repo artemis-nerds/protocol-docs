@@ -4773,11 +4773,15 @@
                   fore and aft shields. This value is therefore meaningless and should be ignored.
                 </p>
               </dd>
-              <dt>Index (bit 1.4, int)</dt>
+              <dt>Unknown (bit 1.4, int)</dt>
               <dd>
                 <p>
-                  The index of this base. Each base will have a unique index from 0 to (<em>number
-                  of bases</em>-1). In a standard solo game, DS1 is 0, DS2 is 1, etc.
+                  Since v2.3.0, this property is unknown, and appears to always have a value of 6.
+                </p>
+                <p>
+                  Before v2.3.0, this was the index of this base. Each base had a unique index from
+                  0 to (<em>number of bases</em>-1). In a standard solo game, DS1 was 0, DS2 was 1,
+                  etc.
                 </p>
               </dd>
               <dt>Vessel type (bit 1.5, int)</dt>
@@ -5029,7 +5033,7 @@
               </dd>
               <dt>Unknown (bit 1.4, int)</dt>
               <dt>Unknown (bit 1.5, int)</dt>
-              <dt>Unknown (bit 1.6, long)</dt>
+              <dt>Unknown (bit 1.6, int)</dt>
               <dt>Roll (bit 1.7, float)</dt>
               <dt>Pitch (bit 1.8, float)</dt>
               <dt>Heading (bit 2.1, float)</dt>
@@ -5078,8 +5082,8 @@
               <dt>Fore shields (bit 3.6, float)</dt>
               <dt>Aft shields (bit 3.7, float)</dt>
               <dt>Unknown (bit 3.8, byte)</dt>
-              <dt>Unknown (bit 4.1, string)</dt>
-              <dt>Unknown (bit 4.2, string)</dt>
+              <dt>Unknown (bit 4.1, 8 bytes)</dt>
+              <dt>Unknown (bit 4.2, 8 bytes)</dt>
               <dt>Unknown (bit 4.3, int, since v.2.7.0)</dt>
             </dl>
           </section>
@@ -5409,9 +5413,11 @@
             <dt>Nebula type (bit 3.3, byte)</dt>
             <dd>
               <p>
-                The type of nebula (1, 2, or 3) that the player's ship is in, or
-                0 if the ship is not in a nebula. Player ships in nebulae cannot
-                go faster than warp 1.
+                The type of nebula that the player's ship is in, or 0 if the
+                ship is not in a nebula. Nebulae types are 1, 2, and 3; but
+                other values for this property have been observed, such as 38
+                and -127. It is unknown what these other values mean. Player
+                ships in nebulae cannot go faster than warp 1.
               </p>
               <p>
                 Before v2.7.0, this was two bytes, and nebula types did not
