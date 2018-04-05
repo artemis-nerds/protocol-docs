@@ -4852,11 +4852,11 @@
               <dt>Scan (byte 1.5, int, new as of v2.3.0)</dt>
               <dd>
                 <p>
-                  This is a bitmask indicating which sides have scanned this anomaly. To determine
-                  whether a particular side has scanned the anomaly, compute
-                  <code>(1 &lt;&lt; sideIndex) &amp;&amp; scanValue</code>. If the result is
-                  non-zero, the anomaly has been scanned by that side. Note that there is no side
-                  0, and biomechs (side 30) don't do scans.
+                  This is a bitmask indicating which sides have scanned this
+                  anomaly. To determine whether a particular side has scanned
+                  the anomaly, compute <code>(1 &lt;&lt; sideIndex) &amp;&amp;
+                  scanValue</code>. If the result is non-zero, the anomaly has
+                  been scanned by that side. Note that there is no side 0.
                 </p>
               </dd>
               <dt>Unknown (byte 1.6, int, new as of v2.3.0)</dt>
@@ -5399,8 +5399,9 @@
             <dt>Side (bit 4.4, byte)</dt>
             <dd>
               <p>
-                The side index for this ship. Ships which have the same side index are friendly to
-                one another and share scan data. There is no side 0. Biomechs are on side 30.
+                The side index for this ship. Ships which have the same side
+                index are friendly to one another and share scan data. There is
+                no side 0.
               </p>
             </dd>
             <dt>Unknown (bit 4.5, byte)</dt>
