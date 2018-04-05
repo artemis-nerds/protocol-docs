@@ -1556,6 +1556,29 @@
                 </dd>
               </dl>
             </section>
+
+            <section id="0xf754c8fe_0x19">
+              <h3><code>0xf754c8fe</code>:<code>0x19</code></h3>
+              <div class="pkt-props">Type: <code>0xf754c8fe</code>:<code>0x19</code> [from <span>server</span>]</div>
+              <p>
+                This packet type has been observed, and its payload structure is
+                believed to be understood. However, its function is as of yet
+                uncertain.
+              </p>
+              <h4>Payload</h4>
+              <dl>
+                <dt>Subtype (int)</dt>
+                <dd>
+                  <p>
+                    Always <code>0x08</code>.
+                  </p>
+                </dd>
+                <dt>Unknown (int)</dt>
+                <dd>
+                  Values of 0, 2, 3, and 4 observed.
+                </dd>
+              </dl>
+            </section>
           </section>
 
           <section id="pkt-a">
@@ -1768,99 +1791,218 @@
                     fired, it gets its own ID.
                   </p>
                 </dd>
-                <dt>Unknown (int)</dt>
+                <dt>Struct type (int)</dt>
                 <dd>
                   <p>
-                    Before v2.3.0, observed values included 0, 1, 4, and 8. It
-                    appeared to relate to beams fired by different sides?
-                  </p>
-                  <p>
+                    Before v2.3.0, observed values included 0, 1, 4, and 8.
                     Starting with v2.3.0, the only observed value thus far is 9.
+                    The value of this property affects what other properties are
+                    present
                   </p>
                 </dd>
-                <dt>Damage? (int)</dt>
+                <dt>Struct type 0/1/4</dt>
                 <dd>
-                  <p>
-                    This is believed to be the amount of damage inflicted by the
-                    beam. Appears to always be a multiple of 100.
-                  </p>
+                  <dl>
+                    <dt>Damage? (int)</dt>
+                    <dd>
+                      <p>
+                        This is believed to be the amount of damage inflicted
+                        by the beam. Appears to always be a multiple of 100.
+                      </p>
+                    </dd>
+                    <dt>Beam port index (int)</dt>
+                    <dd>
+                      All ships that can fire beams have beam ports. These are
+                      defined in <code>vesselData.xml</code> as
+                      <code>&lt;beam_port&gt;</code> entries. This value gives
+                      the index of the beam port on the originating ship that
+                      fired the beam. This value is zero-based; thus, vessels
+                      that only have one beam port will always give 0 for this
+                      value.
+                    </dd>
+                    <dt><a href="#enum-object-type">Origin object type</a> (int)</dt>
+                    <dd>
+                      <p>
+                        Indicates the type of object that fired the beam.
+                      </p>
+                    </dd>
+                    <dt><a href="#enum-object-type">Target object type</a> (int)</dt>
+                    <dd>
+                      <p>
+                        Indicates the type of object that was struck by the
+                        beam.
+                      </p>
+                    </dd>
+                    <dt>Unknown (int) (v2.3 or later)</dt>
+                    <dd>
+                      <p>
+                        This field is present in v2.3 and later. A value of 0
+                        has been observed.
+                      </p>
+                    </dd>
+                    <dt>Origin object ID (int)</dt>
+                    <dd>
+                      <p>
+                        The ID of the object that fired the beam.
+                      </p>
+                    </dd>
+                    <dt>Target object ID (int)</dt>
+                    <dd>
+                      <p>
+                        The ID of the object that was struck by the beam.
+                      </p>
+                    </dd>
+                    <dt>Target X coordinate (float)</dt>
+                    <dd>
+                      <p>
+                        The X coordinate (relative to the center of the
+                        target) of the impact point. This is used to determine
+                        the endpoint for drawing the beam. A negative value
+                        means an impact on the target's starboard (right)
+                        side; a positive value means an impact on the target's
+                        port (left) side.
+                      </p>
+                    </dd>
+                    <dt>Target Y coordinate (float)</dt>
+                    <dd>
+                      <p>
+                        The Y coordinate (relative to the center of the
+                        target) of the impact point. This is used to determine
+                        the endpoint for drawing the beam. A negative value
+                        means an impact on the target's ventral (bottom) side;
+                        a positive value means an impact on the target's
+                        dorsal (top) side.
+                      </p>
+                    </dd>
+                    <dt>Target Z coordinate (float)</dt>
+                    <dd>
+                      <p>
+                        The Z coordinate (relative to the center of the
+                        target) of the impact point. This is used to determine
+                        the endpoint for drawing the beam. A negative value
+                        means an impact on the target's aft (rear) side; a
+                        positive value means an impact on the target's forward
+                        (front) side.
+                      </p>
+                    </dd>
+                    <dt><a href="#enum-targeting-mode">Targeting mode</a> (int)</dt>
+                    <dd>
+                      <p>
+                        Indicates whether the beam was auto- or
+                        manually-fired. If the beam was auto-fired, the target
+                        X/Y/Z will be 0,0,0.
+                      </p>
+                    </dd>
+                  </dl>
                 </dd>
-                <dt>Beam port index (int)</dt>
+                <dt>Struct type 8</dt>
                 <dd>
-                  All ships that can fire beams have beam ports. These are
-                  defined in <code>vesselData.xml</code> as
-                  <code>&lt;beam_port&gt;</code> entries. This value gives the
-                  index of the beam port on the originating ship that fired the
-                  beam. This value is zero-based; thus, vessels that only have
-                  one beam port will always give 0 for this value.
+                  <dl>
+                    <dt>Unknown (int)</dt>
+                    <dt>Unknown (short)</dt>
+                    <dt>Unknown (short)</dt>
+                    <dt>Unknown (short)</dt>
+                    <dt>Unknown (short)</dt>
+                    <dt>Unknown (short)</dt>
+                    <dt>Unknown (short)</dt>
+                    <dt>Unknown X coordinate (float)</dt>
+                    <dd>
+                      <p>
+                        Range indicates this is likely relative to the game
+                        world rather than the ship.
+                      </p>
+                    </dd>
+                    <dt>Unknown Y coordinate (float)</dt>
+                    <dd>
+                      <p>
+                        Range indicates this is likely relative to the game
+                        world rather than the ship.
+                      </p>
+                    </dd>
+                    <dt>Unknown Z coordinate (float)</dt>
+                    <dd>
+                      <p>
+                        Range indicates this is likely relative to the game
+                        world rather than the ship.
+                      </p>
+                    </dd>
+                    <dt>Unknown (int)</dt>
+                  </dl>
                 </dd>
-                <dt><a href="#enum-object-type">Origin object type</a> (int)</dt>
+                <dt>Struct type 9</dt>
                 <dd>
-                  <p>
-                    Indicates the type of object that fired the beam.
-                  </p>
-                </dd>
-                <dt><a href="#enum-object-type">Target object type</a> (int)</dt>
-                <dd>
-                  <p>
-                    Indicates the type of object that was struck by the beam.
-                  </p>
-                </dd>
-                <dt>Unknown (int) (v2.3 or later)</dt>
-                <dd>
-                  <p>
-                    This field is present in v2.3 and later.  A value of 0 has
-                    been observed.
-                  </p>
-                </dd>
-                <dt>Origin object ID (int)</dt>
-                <dd>
-                  <p>
-                    The ID of the object that fired the beam.
-                  </p>
-                </dd>
-                <dt>Target object ID (int)</dt>
-                <dd>
-                  <p>
-                    The ID of the object that was struck by the beam.
-                  </p>
-                </dd>
-                <dt>Target X coordinate (float)</dt>
-                <dd>
-                  <p>
-                    The X coordinate (relative to the center of the target) of
-                    the impact point. This is used to determine the endpoint for
-                    drawing the beam. A negative value means an impact on the
-                    target's starboard (right) side; a positive value means an
-                    impact on the target's port (left) side.
-                  </p>
-                </dd>
-                <dt>Target Y coordinate (float)</dt>
-                <dd>
-                  <p>
-                    The Y coordinate (relative to the center of the target) of
-                    the impact point. This is used to determine the endpoint for
-                    drawing the beam. A negative value means an impact on the
-                    target's ventral (bottom) side; a positive value means an
-                    impact on the target's dorsal (top) side.
-                  </p>
-                </dd>
-                <dt>Target Z coordinate (float)</dt>
-                <dd>
-                  <p>
-                    The Z coordinate (relative to the center of the target) of
-                    the impact point. This is used to determine the endpoint for
-                    drawing the beam. A negative value means an impact on the
-                    target's aft (rear) side; a positive value means an impact
-                    on the target's forward (front) side.
-                  </p>
-                </dd>
-                <dt><a href="#enum-targeting-mode">Targeting mode</a> (int)</dt>
-                <dd>
-                  <p>
-                    Indicates whether the beam was auto- or manually-fired. If
-                    the beam was auto-fired, the target X/Y/Z will be 0,0,0.
-                  </p>
+                  <dl>
+                    <dt>Subtype? (int)</dt>
+                    <dt>Beam port index? (int)</dt>
+                    <dt><a href="#enum-object-type">Origin object type</a> (int)</dt>
+                    <dt><a href="#enum-object-type">Target object type</a> (int)</dt>
+                    <dt>Unknown (int)</dt>
+                    <dt>Origin object ID (int)</dt>
+                    <dd>
+                      <p>
+                        The ID of the object that fired the beam.
+                      </p>
+                    </dd>
+                    <dt>Target object ID (int)</dt>
+                    <dd>
+                      <p>
+                        The ID of the object that was struck by the beam.
+                      </p>
+                    </dd>
+                    <dt>Target X coordinate (float)</dt>
+                    <dd>
+                      <p>
+                        If subtype? is any value other than 9, this is the X
+                        coordinate (relative to the center of the target) of the
+                        impact point. This is used to determine the endpoint for
+                        drawing the beam. A negative value means an impact on
+                        the target's starboard (right) side; a positive value
+                        means an impact on the target's port (left) side.
+                      </p>
+                      <p>
+                        If subtype? is 9, it is an unknown world X coordinate
+                        instead.
+                      </p>
+                    </dd>
+                    <dt>Target Y coordinate (float)</dt>
+                    <dd>
+                      <p>
+                        If subtype? is any value other than 9, this is the Y
+                        coordinate (relative to the center of the target) of the
+                        impact point. This is used to determine the endpoint for
+                        drawing the beam. A negative value means an impact on
+                        the target's ventral (bottom) side; a positive value
+                        means an impact on the target's dorsal (top) side.
+                      </p>
+                      <p>
+                        If subtype? is 9, it is an unknown world Y coordinate
+                        instead.
+                      </p>
+                    </dd>
+                    <dt>Target Z coordinate (float)</dt>
+                    <dd>
+                      <p>
+                        If subtype? is any value other than 9, this is the Z
+                        coordinate (relative to the center of the target) of the
+                        impact point. This is used to determine the endpoint for
+                        drawing the beam. A negative value means an impact on
+                        the target's aft (rear) side; a positive value means an
+                        impact on the target's forward (front) side.
+                      </p>
+                      <p>
+                        If subtype? is 9, it is an unknown world Z coordinate
+                        instead.
+                      </p>
+                    </dd>
+                    <dt><a href="#enum-targeting-mode">Targeting mode</a> (int)</dt>
+                    <dd>
+                      <p>
+                        Indicates whether the beam was auto- or
+                        manually-fired. If the beam was auto-fired, the target
+                        X/Y/Z will be 0,0,0.
+                      </p>
+                    </dd>
+                  </dl>
                 </dd>
               </dl>
             </section>
