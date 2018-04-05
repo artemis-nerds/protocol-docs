@@ -237,6 +237,58 @@
               </tbody>
             </table>
           </section>
+          <section id="enum-anomaly-type">
+            <h3>Anomaly Type</h3>
+            <p>
+              New as of v2.1.5.
+            </p>
+            <table>
+              <tbody>
+                <tr>
+                  <td><code>0x00</code></td>
+                  <td>HiDens Power Cell</td>
+                </tr>
+                <tr>
+                  <td><code>0x01</code></td>
+                  <td>Vigoranium Nodule</td>
+                </tr>
+                <tr>
+                  <td><code>0x02</code></td>
+                  <td>Cetrocite Crystal</td>
+                </tr>
+                <tr>
+                  <td><code>0x03</code></td>
+                  <td>Lateral Array</td>
+                </tr>
+                <tr>
+                  <td><code>0x04</code></td>
+                  <td>Tauron Focusers</td>
+                </tr>
+                <tr>
+                  <td><code>0x05</code></td>
+                  <td>Infusion P-Coils</td>
+                </tr>
+                <tr>
+                  <td><code>0x06</code></td>
+                  <td>Carapaction Coils</td>
+                </tr>
+                <tr>
+                  <td><code>0x07</code></td>
+                  <td>Secret code case</td>
+                </tr>
+                <tr>
+                  <td><code>0x08</code></td>
+                  <td>Beacon</td>
+                  <td>New as of v2.6.204</td>
+                </tr>
+                <tr>
+                  <td><code>0x09</code></td>
+                  <td>Space junk</td>
+                  <td>New as of v2.6.204</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
           <section id="enum-audio-command">
             <h3>Audio Command</h3>
             <table>
@@ -1261,26 +1313,6 @@
                 <tr><td><code>0x19</code></td><td>Vanguard Refit               </td><td>Improved Console   </td><td>Perm 10% Boost to Station production</td></tr>
                 <tr><td><code>0x1a</code></td><td>Vanguard Refit               </td><td>Improved Console   </td><td>Perm 10% Boost to all Engineering Systems</td></tr>
                 <tr><td><code>0x1b</code></td><td>Vanguard Refit               </td><td>Systems Overhaul   </td><td>Permanent 10% Boost to all Ship Systems</td></tr>
-              </tbody>
-            </table>
-
-            <h3>Game world upgrades</h3>
-            <p>
-              New as of v2.1.5.
-            </p>
-            <table>
-              <thead>
-                <tr><th>Index</th><th>Internal name</th><th>Known names</th></tr>
-              </thead>
-              <tbody>
-                <tr><td><code>0x00</code></td><td>ITEMTYPE_ENERGY</td>        <td>Anomaly / HiDens Power Cell</td></tr>
-                <tr><td><code>0x01</code></td><td>ITEMTYPE_RESTORE_DAMCON</td><td>Vigoranium Nodule</td></tr>
-                <tr><td><code>0x02</code></td><td>ITEMTYPE_HEAT_BUFF</td>     <td>Cetrocite Crystal</td></tr>
-                <tr><td><code>0x03</code></td><td>ITEMTYPE_SCAN_BUFF</td>     <td>Lateral Array</td></tr>
-                <tr><td><code>0x04</code></td><td>ITEMTYPE_WEAP_BUFF</td>     <td>Tauron Focusers</td></tr>
-                <tr><td><code>0x05</code></td><td>ITEMTYPE_SPEED_BUFF</td>    <td>Infusion P-Coils</td></tr>
-                <tr><td><code>0x06</code></td><td>ITEMTYPE_SHIELD_BUFF</td>   <td>Carapaction Coils</td></tr>
-                <tr><td><code>0x07</code></td><td>ITEMTYPE_COMM_BUFF</td>     <td>Secret code case / Double agent</td></tr>
               </tbody>
             </table>
           </section>
@@ -2323,7 +2355,7 @@
               <h3>EmergencyJumpPacket</h3>
               <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x20</code> [from <span>client</span>]</div>
               <p>
-                (since v.2.3.109) Sent by the helm console to request an
+                (since v2.3.109) Sent by the helm console to request an
                 emergency jump. Only usable by ships equipped with jump drive,
                 obviously.
               </p>
@@ -3096,7 +3128,7 @@
                     The message to send.
                   </p>
                 </dd>
-                <dt><a href="#enum-comm-filter">Filter</a> (2 bytes, since v.2.7.0)</dt>
+                <dt><a href="#enum-comm-filter">Filter</a> (2 bytes, since v2.7.0)</dt>
                 <dd>
                   <p>
                     Only present if the presentation field is not 3000. This
@@ -3750,48 +3782,37 @@
               <h3>ObjectUpdatePacket</h3>
               <div class="pkt-props">Type: <code>0x80803df9</code> [from <span>server</span>]</div>
               <p>
-                Updates the status of one or more objects in the game
-                world. Each type of object update has its own encoding
-                within this package, which makes this packet both the
-                single most important server packet type, as well as
-                the most complicated one to implement.
-              </p>
-              <p>
-                Whereas other packet types that have many subtypes
-                (for example, 0x4c821d3c) are documented for each
-                subtype, that is not possible for this packet type,
-                since it can contain more than one object update type
-                in each packet.
-              </p>
-              <p>
-                <em>Note</em>: The official Artemis server always
-                seems to send objects of only one type in a single
-                packet. If other types of objects need to be updated,
-                they'll be transmitted in separate packets. However,
-                keep in mind that the protocol does not require this,
-                so it might change in the future.
+                Updates the status of one or more objects in the game world.
+                Each type of object update has its own encoding within this
+                package, which makes this packet both the single most important
+                server packet type, as well as the most complicated one to
+                implement.
               </p>
               <h4>Payload</h4>
               <p>
-                The payload consists of an array of object update
-                entries. Parsing continues in a loop until the end of
-                the packet is reached, or the object type byte is
-                <code>0x00</code>. Note that the array may be empty.
-                Each entry in the array is structured as follows:
+                The payload consists of an array of object update entries,
+                terminated with <code>0x00000000</code>. Note that the array may
+                be empty. Each entry in the array is structured as follows:
               </p>
               <dl>
                 <dt><a href="#enum-object-type">Object type</a> (byte, enumeration)</dt>
                 <dd>
                   <p>
-                    The type of object represented by this entry. All objects in the same array will
-                    be of the same type. If you get <code>0x00</code> for this field, there are no
-                    more objects in the array.
+                    The type of object represented by this entry. If you get
+                    <code>0x00</code> for this field, there are no more objects
+                    in the array.
                   </p>
                   <p>
-                    In earlier protocol versions, this property was
-                    transmitted as an int rather than a byte. At least
-                    version 2.1.1 and onwards use the single byte
-                    encoding, but it is not verified if version 2.1.1
+                    Official <cite>Artemis</cite> servers only send "homogenous"
+                    <code>ObjectUpdatePacket</code>s (packets containing only
+                    objects of the same type). However, there is nothing in the
+                    protocol to require this, and the stock clients handle
+                    heterogeneous update packets just fine.
+                  </p>
+                  <p>
+                    In earlier protocol versions, this property was transmitted
+                    as an int rather than a byte. At least v2.1.1 and onward use
+                    the single byte encoding, but it is not verified if v2.1.1
                     is the first version to do so.
                   </p>
                 </dd>
@@ -4700,23 +4721,16 @@
           <section id="object-anomaly">
             <h3>Anomaly</h3>
             <p>
-              New as of v.2.1.5. Previously, anomalies were handled by the
+              New as of v2.1.5. Previously, anomalies were handled by the
               <a href="#object-other">&ldquo;other&rdquo;</a> property structure.
             </p>
             <dl>
-              <dt>Bit field (2 bytes)</dt>
+              <dt>Bit field (2 bytes, 1 byte before v2.6.3)</dt>
               <dt>X coordinate (byte 1.1, float)</dt>
               <dt>Y coordinate (byte 1.2, float)</dt>
               <dt>Z coordinate (byte 1.3, float)</dt>
-              <dt><a href="#enum-upgrade">Upgrade</a> (byte 1.4, enum, int)</dt>
-              <dd>
-                <p>
-                  Note that only the values <code>0x00</code> through <code>0x07</code> have been
-                  observed, as the built-in mission types do not put other upgrade types in anomaly
-                  pickups.
-                </p>
-              </dd>
-              <dt>Scan (byte 1.5, int, new as of 2.3.0)</dt>
+              <dt><a href="#enum-anomaly-type">Anomaly type</a> (byte 1.4, enumeration, int)</dt>
+              <dt>Scan (byte 1.5, int, new as of v2.3.0)</dt>
               <dd>
                 <p>
                   This is a bitmask indicating which sides have scanned this anomaly. To determine
@@ -4726,7 +4740,7 @@
                   0, and biomechs (side 30) don't do scans.
                 </p>
               </dd>
-              <dt>Unknown (byte 1.6, int, new as of 2.3.0)</dt>
+              <dt>Unknown (byte 1.6, int, new as of v2.3.0)</dt>
               <dd>
                 <p>
                   So far only 0 has been observed.
@@ -4820,10 +4834,12 @@
           <section id="object-creature">
             <h3>Creature</h3>
             <p>
-              Note that wrecks are also considered creatures, for some reason. This structure is new
-              as of v2.1.5. Previously, the only type of creature was the classic space monster,
-              which was handled by the <a href="#object-other">&ldquo;other&rdquo;</a> property
-              structure, and <a href="#object-whale">space whales</a> had their own structure.
+              Note that wrecks are also considered creatures, for some reason.
+              This structure is new as of v2.1.5. Previously, the only type of
+              creature was the classic space monster, which was handled by the
+              <a href="#object-other">&ldquo;other&rdquo;</a> property
+              structure, and <a href="#object-whale">space whales</a> had their
+              own structure.
             </p>
             <dl>
               <dt>Bit field (3 bytes)</dt>
@@ -4948,14 +4964,13 @@
               <dt>Heading (bit 1.7, float)</dt>
               <dt>Unknown (bit 1.8, int)</dt>
               <dt>Unknown (bit 2.1, float?, v2.1.5+)</dt>
-              <dt>Unused? (bits 2.2-2.8)</dt>
             </dl>
           </section>
 
           <section id="object-engineering-console">
             <h3>Engineering Console</h3>
             <dl>
-              <dt>Bit fields (3 bytes)</dt>
+              <dt>Bit fields (4 bytes)</dt>
               <dd>
                 <p>
                   Each byte of the field represents a category of values:
@@ -4970,13 +4985,6 @@
                   <a href="#enum-ship-system">ship system enumeration</a>. So for example, if the
                   first bit field is <code>0x01</code>, it means that this packet will contain a
                   single heat level value (beams).
-                </p>
-              </dd>
-              <dt>Unknown (byte)</dt>
-              <dd>
-                <p>
-                  This value always seems to be <code>0x00</code>. This might be a reserved bit
-                  field byte for future engineering settings.
                 </p>
               </dd>
               <dt>Heat levels (bits 1.1-1.8, float array)</dt>
@@ -5084,14 +5092,14 @@
               <dt>Unknown (bit 3.8, byte)</dt>
               <dt>Unknown (bit 4.1, string?)</dt>
               <dt>Unknown (bit 4.2, string?)</dt>
-              <dt>Unknown (bit 4.3, int, since v.2.7.0)</dt>
+              <dt>Unknown (bit 4.3, int, since v2.7.0)</dt>
             </dl>
           </section>
 
           <section id="object-nebula">
             <h3>Nebula</h3>
             <dl>
-              <dt>Bit field (1 bytes)</dt>
+              <dt>Bit field (1 byte)</dt>
               <dt>X coordinate (bit 1.1, float)</dt>
               <dt>Y coordinate (bit 1.2, float)</dt>
               <dt>Z coordinate (bit 1.3, float)</dt>
@@ -5113,7 +5121,7 @@
                   This affects the color shown on a 3D view, not in a map view.
                 </p>
               </dd>
-              <dt>Type (bit 1.7, byte)</dt>
+              <dt>Type (bit 1.7, byte, since v2.7.0)</dt>
               <dd>
                 <p>
                   Valid values are 1, 2, or 3. All nebulae limit ships within
@@ -5201,7 +5209,7 @@
                   is unconfirmed at this time.
                 </p>
                 <p>
-                  Before v.2.7.0, this was two bytes long. Sample observed
+                  Before v2.7.0, this was two bytes long. Sample observed
                   values: <code>0x0000</code>, <code>0x0100</code>,
                   <code>0x01ff</code>, <code>0x02ff</code>, <code>0x03ff</code>,
                   <code>0x16ff</code>, <code>0x2bff</code>, <code>0x32ff</code>,
