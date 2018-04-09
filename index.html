@@ -4047,7 +4047,7 @@
                 it is ready to join the game. The client must select at least one station before
                 sending this packet. When a game ends, the stock client typically sends this packet
                 again immediately, on the assumption that they will play again with the same
-                console(s).
+                console(s). Note that the server treats a ReadyPacket as a request to send the complete simulation state to the client, so ReadyPacket can be sent again during a simulation if you want a full update.
               </p>
               <h4>Payload</h4>
               <dl>
