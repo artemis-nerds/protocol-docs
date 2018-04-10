@@ -5474,7 +5474,12 @@
             <dt>Warp factor (bit 1.7, byte)</dt>
             <dt>Energy reserves (bit 1.8, float)</dt>
             <dt>Shields up/down (bit 2.1, boolean, 2 bytes)</dt>
-            <dt>Unknown (was ship number before v2.3.0) (bit 2.2, int)</dt>
+            <dt>Unknown (bit 2.2, int)</dt>
+            <dd>
+              <p>
+                 Was ship number before v2.3.0.
+              </p>
+            </dd>
             <dt>Ship type? (bit 2.3, int)</dt>
             <dt>X coordinate (bit 2.4, float)</dt>
             <dd>
@@ -5666,12 +5671,11 @@
                 -1 for visible, other values observed).
               </p>
             </dd>
-            <dt>Ship index? (bit 5.8, byte, new as of v2.3.0)</dt>
+            <dt>Ship index (bit 5.8, byte, new as of v2.3.0)</dt>
             <dd>
               <p>
-                Note that it's zero-based instead of one-based
-                (0=Artemis, etc.), although <code>0xff</code> has also been
-                observed. Research ongoing.
+                The index of the player ship (0=Artemis, etc.). If this ship is a single-seater,
+                this value is <code>0xff</code>.
               </p>
             </dd>
             <dt>Capital ship object ID (bit 6.1, int, new as of v2.3.0)</dt>
