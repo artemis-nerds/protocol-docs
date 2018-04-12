@@ -5480,7 +5480,12 @@
                  Was ship number before v2.3.0.
               </p>
             </dd>
-            <dt>Ship type? (bit 2.3, int)</dt>
+            <dt>Hull ID (bit 2.3, int)</dt>
+            <dd>
+              <p>
+                The ID of the vessel entry for this ship in <code>vesselData.xml</code>.
+              </p>
+            </dd>
             <dt>X coordinate (bit 2.4, float)</dt>
             <dd>
               <p>
@@ -5864,19 +5869,22 @@
               <dt>Delta X (bit 1.4, float)</dt>
               <dd>
                 <p>
-                  Ranges from -1.0 to 1.0.
+                  Ranges from -1.0 to 1.0 (though the client handles values outside this range
+                  fine).
                 </p>
               </dd>
               <dt>Delta Y (bit 1.5, float)</dt>
               <dd>
                 <p>
-                  Ranges from -1.0 to 1.0.
+                  Ranges from -1.0 to 1.0 (though the client handles values outside this range
+                  fine).
                 </p>
               </dd>
               <dt>Delta Z (bit 1.6, float)</dt>
               <dd>
                 <p>
-                  Ranges from -1.0 to 1.0.
+                  Ranges from -1.0 to 1.0 (though the client handles values outside this range
+                  fine).
                 </p>
               </dd>
               <dt>Unknown (bit 1.7, int)</dt>
