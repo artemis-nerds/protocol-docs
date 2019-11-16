@@ -4514,12 +4514,17 @@
                     The ID of the object emitting the smoke.
                   </p>
                 </dd>
-                <dt>Unknown (int)</dt>
+                <dt>Priority (int)</dt>
                 <dd>
                   <p>
-                    Values 0 through 7 observed. Does not appear to be related
-                    to duration or ship index. Maybe ship system index? Or type
-                    of smoke?
+                    The "priority" of the smoke. The game maintains a buffer
+					of smoke objects; this buffer is an array of size 8, and
+					smoke objects are inserted into the array at the index
+					indicated by this value (between 0 and 7 inclusive),
+					overwriting any previously-existing smoke object at that
+					index. Smoke objects with a low index in the buffer, if
+					they exist, will appear to emit more smoke than objects
+					with a higher index.
                   </p>
                 </dd>
                 <dt>X-coordinate (float)</dt>
