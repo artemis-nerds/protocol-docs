@@ -1362,6 +1362,7 @@
               the various packet types. Note that many packets also have a subtype value; for those
               packets, the subtype will be the first value transmitted in the payload. This value
               is a JamCRC hash of the internal name of the packet type.
+	      JamCRC is a bitwise not of a CRC32 hash.
             </p>
           </section>
           <section id="packet-structure-payload">
@@ -2033,7 +2034,8 @@
                   <p>
                     A hash value identifying the button. This is a hash of the button's label
                     computed using the JamCRC hash algorithm.
-                    (<a href="https://github.com/rjwut/ian/blob/3.2.0/src/main/java/com/walkertribe/ian/util/JamCrc.java" target="_new">sample Java implementation</a>)
+		    JamCRC is a bitwise not of a CRC32 hash.
+                    (<a href="https://github.com/rjwut/ian/blob/master/src/main/java/com/walkertribe/ian/util/JamCrc.java" target="_new">sample Java implementation</a>)
                   </p>
                 </dd>
               </dl>
