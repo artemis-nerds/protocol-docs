@@ -39,7 +39,7 @@ $(function() {
 
   // build navigation
   var $navRoot = $('#sidebar'), $navParent = null;
-  $('content > section, content > section > section').each(function(i, $el) {
+  $('#content > section, #content > section > section').each(function(i, $el) {
     if ($el.id) {
       var $titleEl = $('h2,h3', $el).eq(0);
       var $li = $('<li />').append(

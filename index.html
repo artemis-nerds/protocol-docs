@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
+    <meta charset="utf-8">
     <title>Artemis Protocols</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
@@ -14,13 +15,13 @@
       <nav class="navsidebar col-xs-3">
         <ul id="sidebar" class="nav nav-stacked"></ul>
       </nav>
-      <content class="col-xs-9">
+      <div class="col-xs-9" id="content">
         <h1>Artemis Protocols</h1>
         <section id="intro">
           <h2>Introduction</h2>
           <p>
             This is unoffical documentation of the network and file protocols used by
-            <a href="http://www.artemis.eochu.com/" target="_new"><cite>Artemis Spaceship Bridge Simulator</cite></a>.
+            <a href="http://www.artemis.eochu.com/" target="_blank"><cite>Artemis Spaceship Bridge Simulator</cite></a>.
             No official documentation exists, so the information in this document has been obtained
             through community reverse-engineering efforts. There will be parts of the protocols that
             are not completely documented because their purpose has not been determined, and some
@@ -32,16 +33,16 @@
           <h2>Data Types</h2>
           <p>
             The Artemis protocols use the following data types:
-            <ul>
-              <li>byte</li>
-              <li>short (2 bytes)</li>
-              <li>int (4 bytes)</li>
-              <li>float (4 bytes)</li>
-              <li>bit field (variable length)</li>
-              <li>boolean (variable length)</li>
-              <li>string (variable length)</li>
-            </ul>
           </p>
+          <ul>
+            <li>byte</li>
+            <li>short (2 bytes)</li>
+            <li>int (4 bytes)</li>
+            <li>float (4 bytes)</li>
+            <li>bit field (variable length)</li>
+            <li>boolean (variable length)</li>
+            <li>string (variable length)</li>
+          </ul>
           <p>
             These types can be combined in <em>structs</em> or <em>arrays</em>.
           </p>
@@ -49,7 +50,7 @@
             <h3>Endianness</h3>
             <p>
               All multi-byte data types are represented in
-              <a href="https://en.wikipedia.org/wiki/Endianness" target="_new">little-endian</a>
+              <a href="https://en.wikipedia.org/wiki/Endianness" target="_blank">little-endian</a>
               order (least-significant byte first). Numeric literals in this documentation, in order
               to follow the existing convention for many programming languages, are prefixed with
               <code>0x</code> and are written in big-endian order. For example, the four bytes that
@@ -61,9 +62,9 @@
             <h3>Numeric Format</h3>
             <p>
               Integral types (byte, short, int) use
-              <a href="https://en.wikipedia.org/wiki/Two%27s_complement" target="_new">two's complement</a>
+              <a href="https://en.wikipedia.org/wiki/Two%27s_complement" target="_blank">two's complement</a>
               representation in binary. Floats use
-              <a href="https://en.wikipedia.org/wiki/IEEE_floating_point" target="_new">IEEE 754 binary32 format</a>.
+              <a href="https://en.wikipedia.org/wiki/IEEE_floating_point" target="_blank">IEEE 754 binary32 format</a>.
             </p>
           </section>
           <section id="bit-field-format">
@@ -144,7 +145,7 @@
             <p>
               Strings are represented by an int giving the length of the string in characters,
               followed by the string itself encoded in
-              <a href="https://en.wikipedia.org/wiki/UTF-16" target="_new">UTF-16LE</a>.
+              <a href="https://en.wikipedia.org/wiki/UTF-16" target="_blank">UTF-16LE</a>.
               Because UTF-16 encodes each character in two bytes, the number of bytes to read after
               the length value is the number of characters times two. Strings are null-terminated
               (<code>0x0000</code>), and the length value includes the null. Under normal
@@ -247,34 +248,42 @@
                 <tr>
                   <td><code>0x00</code></td>
                   <td>HiDens Power Cell</td>
+                  <td></td>
                 </tr>
                 <tr>
                   <td><code>0x01</code></td>
                   <td>Vigoranium Nodule</td>
+                  <td></td>
                 </tr>
                 <tr>
                   <td><code>0x02</code></td>
                   <td>Cetrocite Crystal</td>
+                  <td></td>
                 </tr>
                 <tr>
                   <td><code>0x03</code></td>
                   <td>Lateral Array</td>
+                  <td></td>
                 </tr>
                 <tr>
                   <td><code>0x04</code></td>
                   <td>Tauron Focusers</td>
+                  <td></td>
                 </tr>
                 <tr>
                   <td><code>0x05</code></td>
                   <td>Infusion P-Coils</td>
+                  <td></td>
                 </tr>
                 <tr>
                   <td><code>0x06</code></td>
                   <td>Carapaction Coils</td>
+                  <td></td>
                 </tr>
                 <tr>
                   <td><code>0x07</code></td>
                   <td>Secret code case</td>
+                  <td></td>
                 </tr>
                 <tr>
                   <td><code>0x08</code></td>
@@ -778,36 +787,43 @@
                   <td><code>0x01</code></td>
                   <td>whale</td>
                   <td>whale</td>
+                  <td></td>
                 </tr>
                 <tr>
                   <td><code>0x02</code></td>
                   <td>shark</td>
                   <td>shark</td>
+                  <td></td>
                 </tr>
                 <tr>
                   <td><code>0x03</code></td>
                   <td>dragon</td>
                   <td>dragon</td>
+                  <td></td>
                 </tr>
                 <tr>
                   <td><code>0x04</code></td>
                   <td>piranha</td>
                   <td>piranha</td>
+                  <td></td>
                 </tr>
                 <tr>
                   <td><code>0x05</code></td>
                   <td>charybdis</td>
                   <td>charybdis</td>
+                  <td></td>
                 </tr>
                 <tr>
                   <td><code>0x06</code></td>
                   <td>insect</td>
                   <td>insect</td>
+                  <td></td>
                 </tr>
                 <tr>
                   <td><code>0x07</code></td>
                   <td>wreck</td>
                   <td>jelly</td>
+                  <td></td>
                 </tr>
                 <tr>
                   <td><code>0x08</code></td>
@@ -1059,7 +1075,7 @@
                   <td><code>0x01</code></td>
                   <td>nuke</td>
                 </tr>
-                </tr>
+                <tr>
                   <td><code>0x02</code></td>
                   <td>mine</td>
                 </tr>
@@ -1147,8 +1163,8 @@
               example, cloak and warp would be <code>0x14</code>. A ship with no special abilities
               would have a special ability value of <code>0x00</code>.
 
-              Special abilities used to be called <emph>elite
-              abilities</emph> in earlier versions of the game.
+              Special abilities used to be called <em>elite
+              abilities</em> in earlier versions of the game.
             </p>
             <table>
               <thead>
@@ -1893,6 +1909,7 @@
                       </p>
                     </dd>
                     <dt>Unknown (int)</dt>
+                    <dd></dd>
                   </dl>
                 </dd>
                 <dt>Struct type 9</dt>
@@ -2035,7 +2052,7 @@
                     A hash value identifying the button. This is a hash of the button's label
                     computed using the JamCRC hash algorithm.
 		    JamCRC is a bitwise not of a CRC32 hash.
-                    (<a href="https://github.com/rjwut/ian/blob/master/src/main/java/com/walkertribe/ian/util/JamCrc.java" target="_new">sample Java implementation</a>)
+                    (<a href="https://github.com/rjwut/ian/blob/master/src/main/java/com/walkertribe/ian/util/JamCrc.java" target="_blank">sample Java implementation</a>)
                   </p>
                 </dd>
               </dl>
@@ -2116,6 +2133,7 @@
                 <dt>X-coordinate (float)</dt>
                 <dt>Y-coordinate (float)</dt>
                 <dt>Z-coordinate (float)</dt>
+                <dd></dd>
               </dl>
             </section>
             <section id="commsbuttonpacket">
@@ -2352,6 +2370,7 @@
                   </p>
                 </dd>
                 <dt>Unknown (12 bytes)</dt>
+                <dd></dd>
               </dl>
             </section>
           </section>
@@ -3412,21 +3431,21 @@
                     row in the stats column. Each element is prefaced with <code>0x00</code>, and
                     the last element is followed by <code>0xce</code>. Each element contains the
                     following fields:
-                    <dl>
-                      <dt>Value (int)</dt>
-                      <dd>
-                        <p>
-                          The numeric value for this statistic.
-                        </p>
-                      </dd>
-                      <dt>Label (string)</dt>
-                      <dd>
-                        <p>
-                          The description for this statistic.
-                        </p>
-                      </dd>
-                    </dl>
                   </p>
+                  <dl>
+                    <dt>Value (int)</dt>
+                    <dd>
+                      <p>
+                        The numeric value for this statistic.
+                      </p>
+                    </dd>
+                    <dt>Label (string)</dt>
+                    <dd>
+                      <p>
+                        The description for this statistic.
+                      </p>
+                    </dd>
+                  </dl>
                 </dd>
               </dl>
             </section>
@@ -3478,7 +3497,7 @@
               <div class="pkt-props">Type: <code>0x0351a5ac</code>:<code>0x05</code> [from <span>client</span>]</div>
               <p>
                 Initiates a jump. Note that the stock client
-                <a href="https://en.wikipedia.org/wiki/Big_red_button#Molly-guard" target="_new">&ldquo;molly-guards&rdquo;</a>
+                <a href="https://en.wikipedia.org/wiki/Big_red_button#Molly-guard" target="_blank">&ldquo;molly-guards&rdquo;</a>
                 jumps, asking for confirmation from helm. This packet isn't sent until helm confirms the jump.
               </p>
               <h4>Payload</h4>
@@ -3839,10 +3858,10 @@
                 <dd>
                   <p>
                     The code identifying the key that was pressed. Microsoft has
-                    <a href="http://msdn.microsoft.com/en-us/library/aa243025.aspx" target="_new">a good reference page</a>
+                    <a href="http://msdn.microsoft.com/en-us/library/aa243025.aspx" target="_blank">a good reference page</a>
                     that documents the key codes. Many languages have constants for these values.
                     For example: in Java, they are defined in the
-                    <a href="http://docs.oracle.com/javase/6/docs/api/java/awt/event/KeyEvent.html" target="_new">KeyEvent class</a>.
+                    <a href="http://docs.oracle.com/javase/6/docs/api/java/awt/event/KeyEvent.html" target="_blank">KeyEvent class</a>.
                   </p>
                 </dd>
               </dl>
@@ -3894,6 +3913,7 @@
                 </dd>
                 <dt>Unknown (int)</dt>
                 <dt>Unknown (int)</dt>
+		<dd></dd>
               </dl>
             </section>
           </section>
@@ -4722,7 +4742,7 @@
                 </dd>
               </dl>
             </section>
-            <section id="toggleredalertpacket">
+            <section id="toggleshieldspacket">
               <h3>ToggleShieldsPacket</h3>
               <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x04</code> [from <span>client</span>]</div>
               <p>
@@ -5092,6 +5112,7 @@
               <dt>Heading (bit 1.7, float)</dt>
               <dt>Side (bit 1.8, int)</dt>
               <dt>Unknown (bit 2.1, float?, v2.1.5+)</dt>
+              <dd></dd>
             </dl>
           </section>
 
@@ -5221,6 +5242,7 @@
               <dt>Unknown (bit 4.1, string?)</dt>
               <dt>Unknown (bit 4.2, string?)</dt>
               <dt>Unknown (bit 4.3, int, since v2.7.0)</dt>
+              <dd></dd>
             </dl>
           </section>
 
@@ -5396,350 +5418,351 @@
                   the same format at the single scan property.
                 </p>
               </dd>
+              <dt>Map visibility (bit 4.3, int)</dt>
+              <dd>
+                <p>
+                  This is a bitmask indicating which sides are able to see this ship in their
+                  overhead map views (LRS, science, captain's map, etc.). It takes the same format as
+                  the previous two properties.
+                </p>
+              </dd>
+              <dt>Side (bit 4.4, byte)</dt>
+              <dd>
+                <p>
+                  The side index for this ship. Ships which have the same side
+                  index are friendly to one another and share scan data. There is
+                  no side 0.
+                </p>
+              </dd>
+              <dt>Unknown (bit 4.5, byte)</dt>
+              <dd>
+                <p>
+                  Observed values include <code>0x00</code> through
+                  <code>0x02</code> and <code>0xfa</code> through
+                  <code>0xff</code>.
+                </p>
+              </dd>
+              <dt>Unknown (bit 4.6, byte)</dt>
+              <dd>
+                <p>
+                  Observed values include <code>0x00</code> through
+                  <code>0x05</code>, <code>0xfa</code>, and <code>0xfc</code>
+                  through <code>0xff</code>.
+                </p>
+              </dd>
+              <dt>Unknown (bit 4.7, byte)</dt>
+              <dd>
+                <p>
+                  <code>0x01</code> observed
+                </p>
+              </dd>
+              <dt>Target X (bit 4.8, float)</dt>
+              <dt>Target Y (bit 5.1, float)</dt>
+              <dt>Target Z (bit 5.2, float)</dt>
+              <dt>Tagged (bit 5.3, byte, new as of v2.6.204)</dt>
+              <dt>Unknown (bit 5.4, byte, new as of v2.6.3)</dt>
+              <dd>
+                <p>
+                  Only 0 observed so far.
+                </p>
+              </dd>
+              <dt><a href="#enum-ship-system">Ship system</a> damage (bit 5.5 - 6.4, float array)</dt>
+              <dd>
+                <p>
+                  Damage to various ship systems, in the order specified in the enumeration. A
+                  system with a damage value of 0.0 is undamaged; a higher value (up to 1.0) means
+                  the system is damaged. In the stock client, damaged systems on NPC vessels can be
+                  seen via the science console. Barring further damage or actions by a custom
+                  script, damage values gradually decrease as the ship is repaired, until they
+                  return to 0.0.
+                </p>
+              </dd>
+              <dt><a href="#enum-beam-frequency">Beam frequency</a> resistance (bit 6.5 - 7.1, float array)</dt>
+              <dd>
+                <p>
+                  The ship's resistance to the five beam frequencies. Higher values indicate greater
+                  resistance to beams tuned to the corresponding frequency.
+                </p>
+              </dd>
             </dl>
-            <dt>Map visibility (bit 4.3, int)</dt>
-            <dd>
-              <p>
-                This is a bitmask indicating which sides are able to see this ship in their
-                overhead map views (LRS, science, captain's map, etc.). It takes the same format as
-                the previous two properties.
-              </p>
-            </dd>
-            <dt>Side (bit 4.4, byte)</dt>
-            <dd>
-              <p>
-                The side index for this ship. Ships which have the same side
-                index are friendly to one another and share scan data. There is
-                no side 0.
-              </p>
-            </dd>
-            <dt>Unknown (bit 4.5, byte)</dt>
-            <dd>
-              <p>
-                Observed values include <code>0x00</code> through
-                <code>0x02</code> and <code>0xfa</code> through
-                <code>0xff</code>.
-              </p>
-            </dd>
-            <dt>Unknown (bit 4.6, byte)</dt>
-            <dd>
-              <p>
-                Observed values include <code>0x00</code> through
-                <code>0x05</code>, <code>0xfa</code>, and <code>0xfc</code>
-                through <code>0xff</code>.
-              </p>
-            </dd>
-            <dt>Unknown (bit 4.7, byte)</dt>
-            <dd>
-              <p>
-                <code>0x01</code> observed
-              </p>
-            </dd>
-            <dt>Target X (bit 4.8, float)</dt>
-            <dt>Target Y (bit 5.1, float)</dt>
-            <dt>Target Z (bit 5.2, float)</dt>
-            <dt>Tagged (bit 5.3, byte, new as of v2.6.204)</dt>
-            <dt>Unknown (bit 5.4, byte, new as of v2.6.3)</dt>
-            <dd>
-              <p>
-                Only 0 observed so far.
-              </p>
-            </dd>
-            <dt><a href="#enum-ship-system">Ship system</a> damage (bit 5.5 - 6.4, float array)</dt>
-            <dd>
-              <p>
-                Damage to various ship systems, in the order specified in the enumeration. A
-                system with a damage value of 0.0 is undamaged; a higher value (up to 1.0) means
-                the system is damaged. In the stock client, damaged systems on NPC vessels can be
-                seen via the science console. Barring further damage or actions by a custom
-                script, damage values gradually decrease as the ship is repaired, until they
-                return to 0.0.
-              </p>
-            </dd>
-            <dt><a href="#enum-beam-frequency">Beam frequency</a> resistance (bit 6.5 - 7.1, float array)</dt>
-            <dd>
-              <p>
-                The ship's resistance to the five beam frequencies. Higher values indicate greater
-                resistance to beams tuned to the corresponding frequency.
-              </p>
-            </dd>
           </section>
 
           <section id="object-player-ship">
             <h3>Player Ship</h3>
-            <dt>Bit field (6 bytes, 5 bytes before v2.3.0)</dt>
-            <dt>Weapons target (bit 1.1, int)</dt>
-            <dd>
-              <p>
-                The ID of the object selected by the weapons officer, or 0 if the selection was
-                cleared.
-              </p>
-            </dd>
-            <dt>Impulse (bit 1.2, float)</dt>
-            <dd>
-              <p>
-                Current impulse power for this ship. Values range from 0.0 (all stop) to 1.0
-                (full speed) inclusive.
-              </p>
-            </dd>
-            <dt>Rudder (bit 1.3, float)</dt>
-            <dd>
-              <p>
-                Values range from 0.0 to 1.0 inclusive, with 0.0 meaning hard to port (left),
-                0.5 meaning rudder amidships (straight), and 1.0 meaning hard to starboard
-                (right).
-              </p>
-            </dd>
-            <dt>Top speed (bit 1.4, float)</dt>
-            <dt>Turn rate (bit 1.5, float)</dt>
-            <dt>Auto beams (bit 1.6, boolean, 1 byte)</dt>
-            <dt>Warp factor (bit 1.7, byte)</dt>
-            <dt>Energy reserves (bit 1.8, float)</dt>
-            <dt>Shields up/down (bit 2.1, boolean, 2 bytes)</dt>
-            <dt>Unknown (bit 2.2, int)</dt>
-            <dd>
-              <p>
-                 Was ship number before v2.3.0.
-              </p>
-            </dd>
-            <dt>Hull ID (bit 2.3, int)</dt>
-            <dd>
-              <p>
-                The ID of the vessel entry for this ship in <code>vesselData.xml</code>.
-              </p>
-            </dd>
-            <dt>X coordinate (bit 2.4, float)</dt>
-            <dd>
-              <p>
-                The ship's location on the X axis.
-              </p>
-            </dd>
-            <dt>Y coordinate (bit 2.5, float)</dt>
-            <dd>
-              <p>
-                The ship's location on the Y axis.
-              </p>
-            </dd>
-            <dt>Z coordinate (bit 2.6, float)</dt>
-            <dd>
-              <p>
-                The ship's location on the Z axis.
-              </p>
-            </dd>
-            <dt>Pitch (bit 2.7, float)</dt>
-            <dd>
-              <p>
-                (values still uncertain) Values range from -1.0 to 1.0 inclusive, where -1.0
-                means the port (left) side points straight &ldquo;up&rdquo; and 1.0 means it
-                points straight &ldquo;down.&rdquo;
-              </p>
-            </dd>
-            <dt>Roll (bit 2.8, float)</dt>
-            <dd>
-              <p>
-                (values still uncertain) Values range from -1.0 to 1.0 inclusive, where -1.0
-                means straight &ldquo;up&rdquo; and 1.0 means straight &ldquo;down.&rdquo;
-              </p>
-            </dd>
-            <dt>Heading (bit 3.1, float)</dt>
-            <dd>
-              <p>
-                A value from pi to negative pi. A value of pi corresponds to a heading of 0&deg;
-                (or &ldquo;north&rdquo;). The ship turns to port (left) as the value decreases.
-                A value of 0.0 corresponds to a heading of 180&deg; (or &ldquo;south&rdquo;).
-              </p>
-            </dd>
-            <dt>Velocity (bit 3.2, float)</dt>
-            <dd>
-              <p>
-                A value from pi to negative pi. A value of pi corresponds to a heading of 0&deg;
-                (or &ldquo;north&rdquo;). The ship turns to port (left) as the value decreases.
-                A value of 0.0 corresponds to a heading of 180&deg; (or &ldquo;south&rdquo;).
-              </p>
-            </dd>
-            <dt>Nebula type (bit 3.3, byte)</dt>
-            <dd>
-              <p>
-                The type of nebula that the player's ship is in, or 0 if the
-                ship is not in a nebula. Nebulae types are 1, 2, and 3; but
-                other values for this property have been observed, such as 38
-                and -127. It is unknown what these other values mean. Player
-                ships in nebulae cannot go faster than warp 1.
-              </p>
-              <p>
-                Before v2.7.0, this was two bytes, and nebula types did not
-                exist. The value was then treated as a boolean, where any
-                non-zero value meant "in a nebula."
-              </p>
-            </dd>
-            <dt>Ship name (bit 3.4, string)</dt>
-            <dt>Forward shields (bit 3.5, float)</dt>
-            <dd>
-              <p>
-                Current strength of forward shield. A value greater than 0.0 indicates that this
-                shield is up, while a value of 0.0 or less means it's down. If enemy fire
-                penetrates the shield, this value can go negative; it will climb back towards
-                0.0 as the shield recovers.
-              </p>
-            </dd>
-            <dt>Forward shields max (bit 3.6, float)</dt>
-            <dd>
-              <p>
-                The maximum strength of the forward shield.
-              </p>
-            </dd>
-            <dt>Aft shields (bit 3.7, float)</dt>
-            <dd>
-              <p>
-                Current strength of aft shield. A value greater than 0.0 indicates that this
-                shield is up, while a value of 0.0 or less means it's down. If enemy fire
-                penetrates the shield, this value can go negative; it will climb back towards
-                0.0 as the shield recovers.
-              </p>
-            </dd>
-            <dt>Aft shields max (bit 3.8, float)</dt>
-            <dd>
-              <p>
-                The maximum strength of the aft shield.
-              </p>
-            </dd>
-            <dt>Last docked base (bit 4.1, int)</dt>
-            <dd>
-              <p>
-                The ID of the base that most recently initiated docking with the ship. This
-                field updates when a base's tractor beam latches onto the ship. Undocking does
-                not change this field; to detect undocking, watch for the ship's impulse (bit
-                1.2) or warp factor (bit 1.7) fields to go above zero.
-              </p>
-            </dd>
-            <dt><a href="#enum-alert-status">Alert status</a> (bit 4.2, byte, enumeration)</dt>
-            <dt>Unknown (bit 4.3, float)</dt>
-            <dd>
-              <p>
-                Value of 200000 observed
-              </p>
-            </dd>
-            <dt><a href="#enum-main-screen-view">Main screen view</a> (bit 4.4, byte, enumeration)</dt>
-            <dd>
-              <p>
-                The view currently displayed on the ship's main screen.
-              </p>
-            </dd>
-            <dt><a href="#enum-beam-frequency">Beam frequency</a> (bit 4.5, byte, enumeration)</dt>
-            <dd>
-              <p>
-                The frequency to which the beams are currently tuned.
-              </p>
-            </dd>
-            <dt>Available coolant or missiles (bit 4.6, byte)</dt>
-            <dd>
-              <p>
-                The total amount of coolant if a capital ship, or the number of missiles if a
-                single-seat craft.
-              </p>
-            </dd>
-            <dt>Science target (bit 4.7, int)</dt>
-            <dd>
-              <p>
-                The ID of the object selected by the science officer, or 0 if the selection was
-                cleared.
-              </p>
-            </dd>
-            <dt>Captain target (bit 4.8, int)</dt>
-            <dd>
-              <p>
-                The ID of the object selected by the captain, or 1 if the selection was
-                cleared.
-              </p>
-            </dd>
-            <dt><a href="#enum-drive-type">Drive type</a> (bit 5.1, byte, enumeration)</dt>
-            <dd>
-              <p>
-                The type of drive system the ship has.
-              </p>
-            </dd>
-            <dt>Scanning ID (bit 5.2, int)</dt>
-            <dd>
-              <p>
-                The ID of the object currently being scanned by the science officer.
-              </p>
-            </dd>
-            <dt>Scanning progress (bit 5.3, float)</dt>
-            <dd>
-              <p>
-                A value from 0.0 to 1.0 inclusive indicating the current progress of the active
-                science scan.
-              </p>
-            </dd>
-            <dt>Reverse (bit 5.4, boolean, 1 byte)</dt>
-            <dd>
-              <p>
-                True if the impulse drive is in reverse; false otherwise.
-              </p>
-            </dd>
-            <dt>Climb/dive (bit 5.5, float)</dt>
-            <dd>
-              <p>
-                Whether the ship is climbing (-1), diving (1), or leveling out
-                (0).
-              </p>
-            </dd>
-            <dt>Side (bit 5.6, byte)</dt>
-            <dd>
-              <p>
-                What side this ship is on. Ships with the same side value are
-                allies and share scan data.
-              </p>
-            </dd>
-            <dt>Map visibility (bit 5.7, int)</dt>
-            <dd>
-              <p>
-                This is a bitmask indicating which sides are able to see this ship in their
-                overhead map views (LRS, science, captain's map, etc.). It takes the same format as
-                the NPC Map visibility / Single scan / Double scan bitmasks
-              </p>
-            </dd>
-            <dt>Ship index (bit 5.8, byte, new as of v2.3.0)</dt>
-            <dd>
-              <p>
-                The index of the player ship (0=Artemis, etc.). If this ship is a single-seater,
-                this value is <code>0xff</code>.
-              </p>
-            </dd>
-            <dt>Capital ship object ID (bit 6.1, int, new as of v2.3.0)</dt>
-            <dd>
-              <p>
-                The object ID of the associated capital ship, if this ship is a single-seater.
-              </p>
-            </dd>
-            <dt>Accent color (bit 6.2, float, new as of v2.4.0)</dt>
-            <dd>
-              <p>
-                Ship accent color hue in the range 0.0 to 1.0. Multiply by 360 to get a
-                <a href="https://en.wikipedia.org/wiki/Hue">Hue as described on Wikipedia</a>.
-              </p>
-            </dd>
-            <dt>Emergency jump cooldown (bit 6.3, float, new as of v2.4.0)</dt>
-            <dd>
-              <p>
-                When the ship is ready for an emergency jump, this value will be 0.0. After a jump,
-                it will go to 1.0, then gradually decrease back down to 0.0.
-              </p>
-            </dd>
-            <dt>Beacon <a href="#enum-creature-type">creature type</a> (bit 6.4, byte, new as of v2.6.3)</dt>
-            <dd>
-              <p>
-                The weapons console's setting for the type of creature that will be
-                attracted/repelled by a launched beacon.
-              </p>
-            </dd>
-            <dt><a href="#enum-beacon-mode">Beacon mode</a> (bit 6.4, byte, new as of v2.6.3)</dt>
-            <dd>
-              <p>
-                The weapons console's setting for what a launched beacon will do to
-                the configured type of creature.
-              </p>
-            </dd>
+	    <dl>
+              <dt>Bit field (6 bytes, 5 bytes before v2.3.0)</dt>
+              <dt>Weapons target (bit 1.1, int)</dt>
+              <dd>
+                <p>
+                  The ID of the object selected by the weapons officer, or 0 if the selection was
+                  cleared.
+                </p>
+              </dd>
+              <dt>Impulse (bit 1.2, float)</dt>
+              <dd>
+                <p>
+                  Current impulse power for this ship. Values range from 0.0 (all stop) to 1.0
+                  (full speed) inclusive.
+                </p>
+              </dd>
+              <dt>Rudder (bit 1.3, float)</dt>
+              <dd>
+                <p>
+                  Values range from 0.0 to 1.0 inclusive, with 0.0 meaning hard to port (left),
+                  0.5 meaning rudder amidships (straight), and 1.0 meaning hard to starboard
+                  (right).
+                </p>
+              </dd>
+              <dt>Top speed (bit 1.4, float)</dt>
+              <dt>Turn rate (bit 1.5, float)</dt>
+              <dt>Auto beams (bit 1.6, boolean, 1 byte)</dt>
+              <dt>Warp factor (bit 1.7, byte)</dt>
+              <dt>Energy reserves (bit 1.8, float)</dt>
+              <dt>Shields up/down (bit 2.1, boolean, 2 bytes)</dt>
+              <dt>Unknown (bit 2.2, int)</dt>
+              <dd>
+                <p>
+                   Was ship number before v2.3.0.
+                </p>
+              </dd>
+              <dt>Hull ID (bit 2.3, int)</dt>
+              <dd>
+                <p>
+                  The ID of the vessel entry for this ship in <code>vesselData.xml</code>.
+                </p>
+              </dd>
+              <dt>X coordinate (bit 2.4, float)</dt>
+              <dd>
+                <p>
+                  The ship's location on the X axis.
+                </p>
+              </dd>
+              <dt>Y coordinate (bit 2.5, float)</dt>
+              <dd>
+                <p>
+                  The ship's location on the Y axis.
+                </p>
+              </dd>
+              <dt>Z coordinate (bit 2.6, float)</dt>
+              <dd>
+                <p>
+                  The ship's location on the Z axis.
+                </p>
+              </dd>
+              <dt>Pitch (bit 2.7, float)</dt>
+              <dd>
+                <p>
+                  (values still uncertain) Values range from -1.0 to 1.0 inclusive, where -1.0
+                  means the port (left) side points straight &ldquo;up&rdquo; and 1.0 means it
+                  points straight &ldquo;down.&rdquo;
+                </p>
+              </dd>
+              <dt>Roll (bit 2.8, float)</dt>
+              <dd>
+                <p>
+                  (values still uncertain) Values range from -1.0 to 1.0 inclusive, where -1.0
+                  means straight &ldquo;up&rdquo; and 1.0 means straight &ldquo;down.&rdquo;
+                </p>
+              </dd>
+              <dt>Heading (bit 3.1, float)</dt>
+              <dd>
+                <p>
+                  A value from pi to negative pi. A value of pi corresponds to a heading of 0&deg;
+                  (or &ldquo;north&rdquo;). The ship turns to port (left) as the value decreases.
+                  A value of 0.0 corresponds to a heading of 180&deg; (or &ldquo;south&rdquo;).
+                </p>
+              </dd>
+              <dt>Velocity (bit 3.2, float)</dt>
+              <dd>
+                <p>
+                  A value from pi to negative pi. A value of pi corresponds to a heading of 0&deg;
+                  (or &ldquo;north&rdquo;). The ship turns to port (left) as the value decreases.
+                  A value of 0.0 corresponds to a heading of 180&deg; (or &ldquo;south&rdquo;).
+                </p>
+              </dd>
+              <dt>Nebula type (bit 3.3, byte)</dt>
+              <dd>
+                <p>
+                  The type of nebula that the player's ship is in, or 0 if the
+                  ship is not in a nebula. Nebulae types are 1, 2, and 3; but
+                  other values for this property have been observed, such as 38
+                  and -127. It is unknown what these other values mean. Player
+                  ships in nebulae cannot go faster than warp 1.
+                </p>
+                <p>
+                  Before v2.7.0, this was two bytes, and nebula types did not
+                  exist. The value was then treated as a boolean, where any
+                  non-zero value meant "in a nebula."
+                </p>
+              </dd>
+              <dt>Ship name (bit 3.4, string)</dt>
+              <dt>Forward shields (bit 3.5, float)</dt>
+              <dd>
+                <p>
+                  Current strength of forward shield. A value greater than 0.0 indicates that this
+                  shield is up, while a value of 0.0 or less means it's down. If enemy fire
+                  penetrates the shield, this value can go negative; it will climb back towards
+                  0.0 as the shield recovers.
+                </p>
+              </dd>
+              <dt>Forward shields max (bit 3.6, float)</dt>
+              <dd>
+                <p>
+                  The maximum strength of the forward shield.
+                </p>
+              </dd>
+              <dt>Aft shields (bit 3.7, float)</dt>
+              <dd>
+                <p>
+                  Current strength of aft shield. A value greater than 0.0 indicates that this
+                  shield is up, while a value of 0.0 or less means it's down. If enemy fire
+                  penetrates the shield, this value can go negative; it will climb back towards
+                  0.0 as the shield recovers.
+                </p>
+              </dd>
+              <dt>Aft shields max (bit 3.8, float)</dt>
+              <dd>
+                <p>
+                  The maximum strength of the aft shield.
+                </p>
+              </dd>
+              <dt>Last docked base (bit 4.1, int)</dt>
+              <dd>
+                <p>
+                  The ID of the base that most recently initiated docking with the ship. This
+                  field updates when a base's tractor beam latches onto the ship. Undocking does
+                  not change this field; to detect undocking, watch for the ship's impulse (bit
+                  1.2) or warp factor (bit 1.7) fields to go above zero.
+                </p>
+              </dd>
+              <dt><a href="#enum-alert-status">Alert status</a> (bit 4.2, byte, enumeration)</dt>
+              <dt>Unknown (bit 4.3, float)</dt>
+              <dd>
+                <p>
+                  Value of 200000 observed
+                </p>
+              </dd>
+              <dt><a href="#enum-main-screen-view">Main screen view</a> (bit 4.4, byte, enumeration)</dt>
+              <dd>
+                <p>
+                  The view currently displayed on the ship's main screen.
+                </p>
+              </dd>
+              <dt><a href="#enum-beam-frequency">Beam frequency</a> (bit 4.5, byte, enumeration)</dt>
+              <dd>
+                <p>
+                  The frequency to which the beams are currently tuned.
+                </p>
+              </dd>
+              <dt>Available coolant or missiles (bit 4.6, byte)</dt>
+              <dd>
+                <p>
+                  The total amount of coolant if a capital ship, or the number of missiles if a
+                  single-seat craft.
+                </p>
+              </dd>
+              <dt>Science target (bit 4.7, int)</dt>
+              <dd>
+                <p>
+                  The ID of the object selected by the science officer, or 0 if the selection was
+                  cleared.
+                </p>
+              </dd>
+              <dt>Captain target (bit 4.8, int)</dt>
+              <dd>
+                <p>
+                  The ID of the object selected by the captain, or 1 if the selection was
+                  cleared.
+                </p>
+              </dd>
+              <dt><a href="#enum-drive-type">Drive type</a> (bit 5.1, byte, enumeration)</dt>
+              <dd>
+                <p>
+                  The type of drive system the ship has.
+                </p>
+              </dd>
+              <dt>Scanning ID (bit 5.2, int)</dt>
+              <dd>
+                <p>
+                  The ID of the object currently being scanned by the science officer.
+                </p>
+              </dd>
+              <dt>Scanning progress (bit 5.3, float)</dt>
+              <dd>
+                <p>
+                  A value from 0.0 to 1.0 inclusive indicating the current progress of the active
+                  science scan.
+                </p>
+              </dd>
+              <dt>Reverse (bit 5.4, boolean, 1 byte)</dt>
+              <dd>
+                <p>
+                  True if the impulse drive is in reverse; false otherwise.
+                </p>
+              </dd>
+              <dt>Climb/dive (bit 5.5, float)</dt>
+              <dd>
+                <p>
+                  Whether the ship is climbing (-1), diving (1), or leveling out
+                  (0).
+                </p>
+              </dd>
+              <dt>Side (bit 5.6, byte)</dt>
+              <dd>
+                <p>
+                  What side this ship is on. Ships with the same side value are
+                  allies and share scan data.
+                </p>
+              </dd>
+              <dt>Unknown (bit 5.7, int)</dt>
+              <dd>
+                <p>
+                  Appears to affect visibility on science/captain's map (0 for invisible,
+                  -1 for visible, other values observed).
+                </p>
+              </dd>
+              <dt>Ship index (bit 5.8, byte, new as of v2.3.0)</dt>
+              <dd>
+                <p>
+                  The index of the player ship (0=Artemis, etc.). If this ship is a single-seater,
+                  this value is <code>0xff</code>.
+                </p>
+              </dd>
+              <dt>Capital ship object ID (bit 6.1, int, new as of v2.3.0)</dt>
+              <dd>
+                <p>
+                  The object ID of the associated capital ship, if this ship is a single-seater.
+                </p>
+              </dd>
+              <dt>Accent color (bit 6.2, float, new as of v2.4.0)</dt>
+              <dd>
+                <p>
+                  Ship accent color hue in the range 0.0 to 1.0. Multiply by 360 to get a
+                  <a href="https://en.wikipedia.org/wiki/Hue">Hue as described on Wikipedia</a>.
+                </p>
+              </dd>
+              <dt>Emergency jump cooldown (bit 6.3, float, new as of v2.4.0)</dt>
+              <dd>
+                <p>
+                  When the ship is ready for an emergency jump, this value will be 0.0. After a jump,
+                  it will go to 1.0, then gradually decrease back down to 0.0.
+                </p>
+              </dd>
+              <dt>Beacon <a href="#enum-creature-type">creature type</a> (bit 6.4, byte, new as of v2.6.3)</dt>
+              <dd>
+                <p>
+                  The weapons console's setting for the type of creature that will be
+                  attracted/repelled by a launched beacon.
+                </p>
+              </dd>
+              <dt><a href="#enum-beacon-mode">Beacon mode</a> (bit 6.4, byte, new as of v2.6.3)</dt>
+              <dd>
+                <p>
+                  The weapons console's setting for what a launched beacon will do to
+                  the configured type of creature.
+                </p>
+              </dd>
+	    </dl>
           </section>
 
           <section id="object-player-ship-upgrades">
@@ -6076,7 +6099,7 @@
               A client requests that servers announce themselves by broadcasting
               from an ephermal UDP port to 255.255.255.255:3100, sending a
               single byte: <code>0x05</code>
-              (<a href="https://en.wikipedia.org/wiki/Enquiry_character" target="_new">ENQ</a>).
+              (<a href="https://en.wikipedia.org/wiki/Enquiry_character" target="_blank">ENQ</a>).
               It should then listen for responses from servers.
             </p>
           </section>
@@ -6087,10 +6110,10 @@
               following:
             </p>
             <ol>
-              <li><code>0x06</code> (<a href="https://en.wikipedia.org/wiki/Acknowledgement_(data_networks)" target="_new">ACK</a>)</li>
+              <li><code>0x06</code> (<a href="https://en.wikipedia.org/wiki/Acknowledgement_(data_networks)" target="_blank">ACK</a>)</li>
               <li>the host's IP address (string)</li>
               <li>the host's name (string)</li>
-              <li><code>0x00</code> (<a href="https://en.wikipedia.org/wiki/Null_character" target="_new">NUL</a>)</li>
+              <li><code>0x00</code> (<a href="https://en.wikipedia.org/wiki/Null_character" target="_blank">NUL</a>)</li>
             </ol>
             <p>
               A string is transmitted by first sending the length of the string
@@ -6102,7 +6125,7 @@
               number. If the server and client do not have the same port number
               configured in <code>artemis.ini</code>, the client will discover
               the server but fail to connect to it.
-              <a href="https://artemis.forumchitchat.com/post/2-7-0-bugs-and-issues-9655622?trail=45" target="_new">This has been reported as a bug in the Artemis forums.</a>
+              <a href="https://artemis.forumchitchat.com/post/2-7-0-bugs-and-issues-9655622?trail=45" target="_blank">This has been reported as a bug in the Artemis forums.</a>
             </p>
           </section>
         </section>
@@ -6357,6 +6380,7 @@
             <h4>Attributes</h4>
             <dl>
               <dt>commonality (integer)</dt>
+	      <dd></dd>
             </dl>
           </section>
           <section id="vessel-data-hullRace">
@@ -6878,48 +6902,49 @@
             </thead>
             <tbody>
               <tr>
-                <td><a href="http://www.armidalesoftware.com/Artemis/DMXTools.htm" target="_new">Artemis Bridge Tools</a></td>
+                <td><a href="http://www.armidalesoftware.com/Artemis/DMXTools.htm" target="_blank">Artemis Bridge Tools</a></td>
                 <td>C++</td>
                 <td>closed source</td>
-                <td>n/a</td>
+                <td colspan="2">n/a</td>
               </tr>
               <tr>
-                <td><a href="https://github.com/artemis-nerds/node-asbs-lib" target="_new">node-asbs-lib</a></td>
+                <td><a href="https://github.com/artemis-nerds/node-asbs-lib" target="_blank">node-asbs-lib</a></td>
                 <td>JavaScript</td>
                 <td>"Beer-ware"</td>
-                <td><img src="https://img.shields.io/github/release/artemis-nerds/node-asbs-lib/all.svg" /></td>
-                <td><img src="https://img.shields.io/github/last-commit/artemis-nerds/node-asbs-lib.svg" /></td>
+                <td><img alt="release"     src="https://img.shields.io/github/release/artemis-nerds/node-asbs-lib/all.svg" /></td>
+                <td><img alt="last commit" src="https://img.shields.io/github/last-commit/artemis-nerds/node-asbs-lib.svg" /></td>
               </tr>
               <tr>
-                <td><a href="https://github.com/huin/artemis" target="_new">huin/artemis</a></td>
+                <td><a href="https://github.com/huin/artemis" target="_blank">huin/artemis</a></td>
                 <td>Go</td>
                 <td>BSD 2-Clause "Simplified"</td>
-                <td><img src="https://img.shields.io/github/release/huin/artemis/all.svg" /></td>
-                <td><img src="https://img.shields.io/github/last-commit/huin/artemis.svg" /></td>
+                <td><img alt="release"     src="https://img.shields.io/github/release/huin/artemis/all.svg" /></td>
+                <td><img alt="last commit" src="https://img.shields.io/github/last-commit/huin/artemis.svg" /></td>
               </tr>
               <tr>
-                <td><a href="https://github.com/rjwut/ian" target="_new">IAN</a></td>
+                <td><a href="https://github.com/rjwut/ian" target="_blank">IAN</a></td>
                 <td>Java</td>
                 <td>MIT</td>
-                <td><img src="https://img.shields.io/github/release/rjwut/ian/all.svg" /></td>
-                <td><img src="https://img.shields.io/github/last-commit/rjwut/ian.svg" /></td>
+                <td><img alt="release"     src="https://img.shields.io/github/release/rjwut/ian/all.svg" /></td>
+                <td><img alt="last commit" src="https://img.shields.io/github/last-commit/rjwut/ian.svg" /></td>
               </tr>
               <tr>
-                <td><a href="https://github.com/prophile/libdiana" target="_new">libdiana</a></td>
+                <td><a href="https://github.com/prophile/libdiana" target="_blank">libdiana</a></td>
                 <td>Python</td>
                 <td>MIT</td>
-                <td><img src="https://img.shields.io/github/release/prophile/libdiana/all.svg" /></td>
-                <td><img src="https://img.shields.io/github/last-commit/prophile/libdiana.svg" /></td>
+                <td><img alt="release"     src="https://img.shields.io/github/release/prophile/libdiana/all.svg" /></td>
+                <td><img alt="last commit" src="https://img.shields.io/github/last-commit/prophile/libdiana.svg" /></td>
               </tr>
               <tr>
-                <td><a href="http://noseynick.org/artemis/" target="_new">parser.pl</a></td>
+                <td><a href="http://noseynick.org/artemis/" target="_blank">parser.pl</a></td>
                 <td>Perl</td>
                 <td>none</td>
-                <td>n/a</td>
+                <td colspan="2">n/a</td>
               </tr>
             </tbody>
+          </table>
         </section>
-      </content>
+      </div>
     </div>
   </body>
 </html>
