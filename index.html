@@ -5322,11 +5322,11 @@
                   True if this ship has surrendered; false otherwise.
                 </p>
               </dd>
-              <dt>Unknown (bit 2.8, byte)</dt>
+              <dt>Nebula type (bit 2.8, byte)</dt>
               <dd>
                 <p>
-                  Possibly indicates the type of nebula the ship is in, but this
-                  is unconfirmed at this time.
+                  The type of nebula that the NPC ship is in, or 0 if the
+                  ship is not in a nebula. Nebulae types are typically 1, 2, and 3.
                 </p>
                 <p>
                   Before v2.7.0, this was two bytes long. Sample observed
