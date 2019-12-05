@@ -5714,11 +5714,12 @@
                   allies and share scan data.
                 </p>
               </dd>
-              <dt>Unknown (bit 5.7, int)</dt>
+              <dt>Map visibility (bit 5.7, int)</dt>
               <dd>
                 <p>
-                  Appears to affect visibility on science/captain's map (0 for invisible,
-                  -1 for visible, other values observed).
+		  This is a bitmask indicating which sides are able to see this ship in their
+		  overhead map views (LRS, science, captain's map, etc.). It takes the same format as
+		  the NPC Map visibility / Single scan / Double scan bitmasks
                 </p>
               </dd>
               <dt>Ship index (bit 5.8, byte, new as of v2.3.0)</dt>
