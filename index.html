@@ -2034,6 +2034,25 @@
                 </dd>
               </dl>
             </section>
+            <section id="clientheartbeatpacket">
+              <h3>ClientHeartbeatPacket</h3>
+              <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x24</code> [from <span>client</span>]</div>
+              <p>
+                This packet is transmitted regularly by the client (about every 3 seconds) to demonstrate that it's still
+                alive. If the server does not receive a heartbeat packet in a while, it will
+                forget the client and let a new client connect and control any
+                stations the old client previously had control of.
+              </p>
+              <h4>Payload</h4>
+              <dl>
+                <dt>Subtype (int)</dt>
+                <dd>
+                  <p>
+                    Always <code>0x24</code>.
+                  </p>
+                </dd>
+              </dl>
+            </section>
             <section id="buttonclickpacket">
               <h3>ButtonClickPacket</h3>
               <div class="pkt-props">Type: <code>0x4c821d3c</code>:<code>0x15</code> [from <span>client</span>]</div>
@@ -3491,11 +3510,11 @@
           </section>
           <section id="pkt-h">
             <h3>H</h3>
-            <section id="heartbeatpacket">
-              <h3>HeartbeatPacket</h3>
+            <section id="serverheartbeatpacket">
+              <h3>ServerHeartbeatPacket</h3>
               <div class="pkt-props">Type: <code>0xf5821226</code> [from <span>server</span>]</div>
               <p>
-                This packet is transmitted regularly by the server to demonstrate that it's still
+                This packet is transmitted regularly by the server (about every 3 seconds) to demonstrate that it's still
                 alive. If the stock client does not receive a heartbeat packet in a while, it will
                 display a message at the top-right of the console selection screen saying "Server
                 not running" but will otherwise still continue to act as though everything is fine.
