@@ -1390,7 +1390,7 @@
               the various packet types. Note that many packets also have a subtype value; for those
               packets, the subtype will be the first value transmitted in the payload. This value
               is a JamCRC hash of the internal name of the packet type.
-	      JamCRC is a bitwise not of a CRC32 hash.
+              JamCRC is a bitwise not of a CRC32 hash.
             </p>
           </section>
           <section id="packet-structure-payload">
@@ -1706,10 +1706,12 @@
                         Whether the ship has warp or jump drive
                       </p>
                     </dd>
-                    <dt>Ship type (int)</dt>
+                    <dt>Hull ID (int)</dt>
                     <dd>
                       <p>
-                        ID from vesselData.xml
+                        The <code>&lt;vessel uniqueID&gt;</code> for the
+                        ship as found in <code>vesselData.xml</code>,
+                        referred to as the <code>hullID</code> in mission scripts.
                       </p>
                     </dd>
                     <dt>Accent color (float) (v2.4 or later)</dt>
@@ -1921,7 +1923,6 @@
                       </p>
                     </dd>
                     <dt>Unknown (int)</dt>
-                    <dd></dd>
                   </dl>
                 </dd>
                 <dt>Struct type 9</dt>
@@ -2082,7 +2083,7 @@
                   <p>
                     A hash value identifying the button. This is a hash of the button's label
                     computed using the JamCRC hash algorithm.
-		    JamCRC is a bitwise not of a CRC32 hash.
+                    JamCRC is a bitwise not of a CRC32 hash.
                     (<a href="https://github.com/rjwut/ian/blob/master/src/main/java/com/walkertribe/ian/util/JamCrc.java" target="_blank">sample Java implementation</a>)
                   </p>
                 </dd>
@@ -2164,7 +2165,6 @@
                 <dt>X-coordinate (float)</dt>
                 <dt>Y-coordinate (float)</dt>
                 <dt>Z-coordinate (float)</dt>
-                <dd></dd>
               </dl>
             </section>
             <section id="commsbuttonpacket">
@@ -2401,7 +2401,6 @@
                   </p>
                 </dd>
                 <dt>Unknown (12 bytes)</dt>
-                <dd></dd>
               </dl>
             </section>
           </section>
@@ -3334,7 +3333,7 @@
                 <dd>
                   <p>
                     The coordinate of the selected location on the Y axis.
-					Always <code>0</code>.
+		    Always <code>0</code>.
                   </p>
                 </dd>
                 <dt>X-coordinate (float)</dt>
@@ -3944,7 +3943,6 @@
                 </dd>
                 <dt>Unknown (int)</dt>
                 <dt>Unknown (int)</dt>
-		<dd></dd>
               </dl>
             </section>
           </section>
@@ -4344,10 +4342,12 @@
                     entry is a struct as follows:
                   </p>
                   <dl>
-                    <dt>Vessel type (int)</dt>
+                    <dt>Hull ID (int)</dt>
                     <dd>
                       <p>
-                        The ID of the vessel from <code>vesselData.xml</code>.
+                        The <code>&lt;vessel uniqueID&gt;</code> for the
+                        single-seat craft as found in <code>vesselData.xml</code>,
+                        referred to as the <code>hullID</code> in mission scripts.
                       </p>
                     </dd>
                     <dt>Bay index (int)</dt>
@@ -4572,13 +4572,13 @@
                 <dd>
                   <p>
                     The "priority" of the smoke. The game maintains a buffer
-					of smoke objects; this buffer is an array of size 8, and
-					smoke objects are inserted into the array at the index
-					indicated by this value (between 0 and 7 inclusive),
-					overwriting any previously-existing smoke object at that
-					index. Smoke objects with a low index in the buffer, if
-					they exist, will appear to emit more smoke than objects
-					with a higher index.
+                    of smoke objects; this buffer is an array of size 8, and
+                    smoke objects are inserted into the array at the index
+                    indicated by this value (between 0 and 7 inclusive),
+                    overwriting any previously-existing smoke object at that
+                    index. Smoke objects with a low index in the buffer, if
+                    they exist, will appear to emit more smoke than objects
+                    with a higher index.
                   </p>
                 </dd>
                 <dt>X-coordinate (float)</dt>
@@ -4975,10 +4975,12 @@
                   etc.
                 </p>
               </dd>
-              <dt>Vessel type (bit 1.5, int)</dt>
+              <dt>Hull ID (bit 1.5, int)</dt>
               <dd>
                 <p>
-                  The vessel type ID, as found in <code>vesselData.xml</code>.
+                  The <code>&lt;vessel uniqueID&gt;</code> for the
+                  base as found in <code>vesselData.xml</code>,
+                  referred to as the <code>hullID</code> in mission scripts.
                 </p>
               </dd>
               <dt>X coordinate (bit 1.6, float)</dt>
@@ -5005,14 +5007,14 @@
               <dt>Unknown (bit 2.4, 4 bytes)</dt>
               <dt>Unknown (bit 2.5, byte)</dt>
               <dt>Side (bit 2.6, byte)</dt>
-	      <dd>
-	        <p>
+              <dd>
+                <p>
                   The side index for this base. Ships / bases which
-		  have the same side index are friendly to one another.
-		  There is no side 0.
-		  The default friendly side is 2.
-		</p>
-	      </dd>
+                  have the same side index are friendly to one another.
+                  There is no side 0.
+                  The default friendly side is 2.
+                </p>
+              </dd>
             </dl>
           </section>
 
@@ -5143,7 +5145,6 @@
               <dt>Heading (bit 1.7, float)</dt>
               <dt>Side (bit 1.8, int)</dt>
               <dt>Unknown (bit 2.1, float?, v2.1.5+)</dt>
-              <dd></dd>
             </dl>
           </section>
 
@@ -5273,7 +5274,6 @@
               <dt>Unknown (bit 4.1, string?)</dt>
               <dt>Unknown (bit 4.2, string?)</dt>
               <dt>Unknown (bit 4.3, int, since v2.7.0)</dt>
-              <dd></dd>
             </dl>
           </section>
 
@@ -5363,11 +5363,12 @@
                   not.
                 </p>
               </dd>
-              <dt>Vessel type (bit 1.7, int)</dt>
+              <dt>Hull ID (bit 1.7, int)</dt>
               <dd>
                 <p>
-                  The ID corresponding to the <code>&lt;vessel&gt;</code> entry in
-                  <code>vesselData.xml</code> that describes the vessel type for this ship.
+                  The <code>&lt;vessel uniqueID&gt;</code> for the
+                  ship as found in <code>vesselData.xml</code>,
+                  referred to as the <code>hullID</code> in mission scripts.
                 </p>
               </dd>
               <dt>X coordinate (bit 1.8, float)</dt>
@@ -5520,7 +5521,7 @@
 
           <section id="object-player-ship">
             <h3>Player Ship</h3>
-	    <dl>
+            <dl>
               <dt>Bit field (6 bytes, 5 bytes before v2.3.0)</dt>
               <dt>Weapons target (bit 1.1, int)</dt>
               <dd>
@@ -5559,7 +5560,9 @@
               <dt>Hull ID (bit 2.3, int)</dt>
               <dd>
                 <p>
-                  The ID of the vessel entry for this ship in <code>vesselData.xml</code>.
+                  The <code>&lt;vessel uniqueID&gt;</code> for the
+                  ship as found in <code>vesselData.xml</code>,
+                  referred to as the <code>hullID</code> in mission scripts.
                 </p>
               </dd>
               <dt>X coordinate (bit 2.4, float)</dt>
@@ -5794,7 +5797,7 @@
                   the configured type of creature.
                 </p>
               </dd>
-	    </dl>
+            </dl>
           </section>
 
           <section id="object-player-ship-upgrades">
@@ -6412,7 +6415,6 @@
             <h4>Attributes</h4>
             <dl>
               <dt>commonality (integer)</dt>
-	      <dd></dd>
             </dl>
           </section>
           <section id="vessel-data-hullRace">
@@ -6856,7 +6858,9 @@
               <dt>uniqueID (integer, 0-n)</dt>
               <dd>
                 <p>
-                  An ID assigned to this vessel. Player ships must start at 0 and increase sequentially;
+                  An ID assigned to this vessel,
+                  referred to as the <code>hullID</code> in mission scripts.
+                  Player ships must start at 0 and increase sequentially,
                   others can use whatever ID they like.
                 </p>
               </dd>
